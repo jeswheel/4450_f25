@@ -25,7 +25,7 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 ## Class notes
 
-1. [Introduction](01/index.html)
+1. [Chapter 1: Probability](01/index.html)
 
 <!--
 

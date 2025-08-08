@@ -9,7 +9,6 @@ output: html_document
 | &nbsp;          | &nbsp;                          |
 |:-----------------------|:------------------------:|
 | Lecture slides  | [pdf](slides.pdf) |
-<!-- | Annotated slides   | [pdf](slides-annotated.pdf) | -->
 | Lecture notes   | [pdf](notes.pdf) |
 ----------------------
 

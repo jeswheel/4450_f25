@@ -1,5 +1,5 @@
 ---
-title: "Math 3350 (Fall 2025) 'Statistical Methods'"
+title: "Math 4450 (Fall 2025) 'Mathematical Statistics I'"
 author: "Instructor: Jesse Wheeler"
 output:
   html_document:
@@ -10,8 +10,9 @@ output:
 
 ## Course description
 
-A calculus-based introduction to statistical procedures, including simple regression, basic experimental design, and non-parametric methods. 
-PREREQ: MATH 1160 or MATH 1170.
+The first of a two-part sequence on:
+Probability, random variables, discrete and continuous distributions, order statistics, limit theorems, point and interval estimation, uniformly most powerful tests, likelihood ratio tests, chi-square and F tests, nonparametric tests. 
+PREREQ: MATH 3326 and MATH 3352. Offered Odd Years in the Fall Semester.
 
 - [Course Syllabus](syllabus.pdf)
 

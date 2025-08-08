@@ -14,11 +14,16 @@ The first of a two-part sequence on:
 Probability, random variables, discrete and continuous distributions, order statistics, limit theorems, point and interval estimation, uniformly most powerful tests, likelihood ratio tests, chi-square and F tests, nonparametric tests. 
 PREREQ: MATH 3326 and MATH 3352. Offered Odd Years in the Fall Semester.
 
+For this sequence of courses, we will stick closely to Chapters 1-10 of the third edition of ``Mathematical Statistics and Data Analysis", by John A. Rice.
+This is a well-known textbook to use as an introduction to mathematical statistics at the advanced undergraduate level.
+
+Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450, and Chapters 7-10 in Math 4451.
+
 - [Course Syllabus](syllabus.pdf)
 
 --------------
 
-## Class notes and recorded lectures
+## Class notes
 
 1. [Introduction](01/index.html)
 

@@ -15,6 +15,8 @@
 \usefonttheme[onlymath]{serif}
 % use article-like math letters, from http://tex.stackexchange.com/questions/34265/how-to-get-beamer-math-to-look-like-article-math
 
+\newcommand{\defeq}{\vcentcolon=}
+
 %%% notation for ARMA models
 \newcommand\ar{\phi}
 \newcommand\ma{\psi}
@@ -149,5 +151,6 @@
 \mode<beamer>{\setbeamertemplate{footline}[frame number]}
 \mode<beamer>{\setbeamertemplate{frametitle continuation}[from second][\insertcontinuationcountroman]}
 \mode<beamer>{\setbeamertemplate{navigation symbols}{}}
+\mode<beamer>{\renewcommand{\bibsection}{}}
 
 \mode<handout>{\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}

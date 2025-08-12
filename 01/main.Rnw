@@ -71,7 +71,7 @@ Chapter \CHAPTER: Probability}
 
 \subsection{Chapter I Overview}
 
-\begin{frame}{Probability: Chapter I Overview}
+\begin{frame}[allowframebreaks]{Probability: Chapter I Overview}
 
 \begin{itemize}
 
@@ -87,6 +87,8 @@ Chapter \CHAPTER: Probability}
 \end{itemize}
 \end{itemize}
 
+\framebreak
+
 This semester will focus on the theory of probability as a mathematical model for chance phenomena. This will be essential for building statistical theory in 4451.
 
 \end{frame}
@@ -101,7 +103,7 @@ Probability theory is concerned with situations in which the outcomes occur rand
 We call these situations \alert{experiments}. 
 The set of all possible outcomes is called the \alert{sample space}. 
 
-\begin{exampleblock}{Flipping a coin}
+\begin{exampleblock}{Example: Flipping a coin}
   Flipping a coin is an \emph{experiment}, with possible outcomes $\{H, T\}$, which defines the \emph{sample space} of the experiment.
 \end{exampleblock}
 
@@ -165,7 +167,7 @@ For the below definitions, we assume that $\Omega$ is the sample space, and $A, 
   \end{block}
   
   \begin{block}{Empty Set}
-    The \alert{empty set} $(\emptyset)$ is the set with no elements, or the event with no outcomes. If $A \cap B = \emptyset$, then $A$ and $B$ are $\alert{disjoint}$.
+    The \alert{empty set} $(\emptyset)$ is the set with no elements, or the event with no outcomes. If $A \cap B = \emptyset$, then $A$ and $B$ are $\alert{disjoint}$ (sometimes we would also say that $A$ and $B$ are mutually exlusive).
   \end{block}
   
 \end{frame}
@@ -190,7 +192,7 @@ For the below definitions, we assume that $\Omega$ is the sample space, and $A, 
 \section{Probability Measures}
 
 \begin{frame}{Probability Measures}
-\emph{Measure theory} is a branch of mathematics that allows us to rigorously talk about the "size" or "length" of sets in interesting ways.
+\emph{Measure theory} is a branch of mathematics that allows us to rigorously talk about the ``size" or ``length" of sets in interesting ways.
 Measure theory is the basis of probability (and thereofore statistics), but a complete treatment of measure theory is outside the scope of this course. 
 
 Instead, we will focus on a specific type of measure, called a \alert{probability measure}.
@@ -216,10 +218,21 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
 \end{frame}
 
 \begin{frame}{Properties}
-  \begin{block}{Property A (Theorm 1.1)}
+  \begin{block}{Property A (Theorem 1.1)}
     $P(A^c) = 1 - P(A)$.
   \end{block}
   \emph{Proof.}
+  
+  \mode<article>{
+  \vspace{3mm}
+    Note that $\Omega = A \cup A^c$, and because $A \cap A^c = \emptyset$.
+    Thus, by the first axiom and third axioms:
+    $$
+    P(\Omega) = P(A \cup A^c) = P(A) + P(A^c) = 1,
+    $$
+    and therefore $P(A^c) = 1 - P(A)$.
+  }
+  
 \end{frame}
 
 \begin{frame}{Properties II}
@@ -227,6 +240,12 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
     $P(\emptyset) = 0$.
   \end{block}
   \emph{Proof.}
+  
+  \mode<article>{
+  \vspace{3mm}
+  Follows directly from Property A and the first axiom, as $\Omega^c = \emptyset$, and therefore $P(\emptyset) = 1 - P(\Omega) = 0$.
+  }
+  
 \end{frame}
 
 \begin{frame}{Properties II}
@@ -234,6 +253,24 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
     If $A \subset B$, the $P(A) \leq P(B)$.
   \end{block}
   \emph{Proof.}
+  
+  \mode<article>{
+  \vspace{3mm}
+  This property states that if $B$ occurs whenever $A$ occurs, the $P(A) \leq P(B)$. For instance, if whenever it rains ($A$) it is also cloudy ($B$), then the probability that it rains is less than or equal to the probability that it is cloudy.
+  
+  Break $B$ into two parts: the parts of $B$ that are in $A$, and the parts of $B$ that are in $A^c$:
+  \begin{align*}
+    B &= (B \cap A) \cup (B \cap A^c)
+  \end{align*}
+  Because $A \subset B$, $B \cap A = A$, thus
+  $$
+  B = A \cup (B \cap A^c).
+  $$
+  Now $A$ and $A^c$ are disjoint, meaning they share no outcomes. Thus, because $B \cap A^c \subset A^c$, $A$ also shares no outcomes with $B \cap A^c$, and $A$ and $B \cap A^c$ are disjoint. Thus by the third axiom:
+  $$
+  P(B) = P(A) + P(B \cap A^c) \geq P(A).
+  $$
+  }
 \end{frame}
 
 \begin{frame}{Proprties III}
@@ -247,21 +284,23 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
   Recall that the sample space $\Omega$ can consist of many types of outcomes. A probability measure can assign probabilities to subsets of $\Omega$ in a variety of ways, as long as it satisfies the axioms provided above.
   
   The most simple examples are finite sample spaces.
+  \begin{exampleblock}{Example: Finite Spaces}
   Suppose that $\Omega = \{\omega_1, \omega_2, \ldots, \omega_N\}$.
   A probability measure for this sample space defines a mapping such that for all $\omega_i \in \Omega$, $P\big(\{\omega_i\}\big) = p_i$, with $\sum_i p_i = 1$.
   
   That is, each element $\omega_i \in \Omega$ gets assigned a probability value $p_i$.
+  \end{exampleblock}
   
 \end{frame}
 
 \begin{frame}{Tossing a coin}
   Consider the simple experiment of tossing a coin once. The sample space is $\Omega = \{h, t\}$. There are many possible probability measures that can be assigned to this space:
-  \begin{exampleblock}{Fair coin}
+  \begin{exampleblock}{Example: Fair coin}
     One probability measure $P$ assumes that the coin is fair, or that each outcome is equally as likely.
     Thus, $P(\{h\}) = \frac{\text{Total Number of Outcomes of} h}{\text{Total Number of Outcomes}} = 1/2$.
   \end{exampleblock}
   
-  \begin{exampleblock}{Unfair coin}
+  \begin{exampleblock}{Example: Unfair coin}
     Alternatively, we could define a probability measure $P'$ that represents an unfair coin. In this case, we could assign $P'(\{h\}) = p_h$, and $P'(\{t\}) = 1 - p_h$. $p_h$ can be any value such that $0 \leq p_h \leq 1$, and this proposed measure $P'$ will satisfy the axioms.
   \end{exampleblock}
 \end{frame}
@@ -272,7 +311,7 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
   
   For finite spaces, we can think of each outcome $(\omega)$ as it's own event $(\{\omega\})$. Then, more more interesting events, the probability is computed by summing the disjoint events that make up the more interesting subset.
   
-  \begin{exampleblock}{Flipping two fair coins}
+  \begin{exampleblock}{Example: Flipping two fair coins}
     Consider flipping a fair coin twice. The sample space is:
     $$
     \Omega = \{hh, ht, th, tt\}.
@@ -300,19 +339,22 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Multiplication Principle}
-  Consider an experiment that consists of two smaller experiments with sample spaces $\Omega_1$ and $\Omega_2$, such that $|\Omega_1| = n$, and $|\Omega_2| = m$. Then the total number of outcomes is $n \times m$. 
+
+  \begin{block}{Multiplication Principle}
+  Consider an experiment that consists of two smaller experiments with sample spaces $\Omega_1$ and $\Omega_2$, such that $|\Omega_1| = n$, and $|\Omega_2| = m$. Then the total number of outcomes is $n \times m$.
+  \end{block}
   
   \begin{proof}
     Write the outcomes of the first experiment as $(a_1, \ldots, a_n)$, and the outcomes of the second experiment as $(b_1, \ldots, b_m)$. The outcome of the complete experiment can be expressed as pairs $(a_i, b_j)$. We can then write the complete set of experiments as an $n \times m$ matrix, with entries the unique combinations of $(a_i, b_j)$. This matrix has $n \times m$ elements.
   \end{proof}
   
-  \begin{exampleblock}{Student Government}
+  \begin{exampleblock}{Example: Student Government}
     In a class, a teacher would like to randomly select 1 boy and 1 girl to serve as representatives to the student government. If there are 12 boys and 18 girls, then the total number of ways she can pick students (outcomes) is $12 \times 18 = 216$.
   \end{exampleblock}
   
   The multiplication principle also extends to the case where there are many experiments.
   
-  \begin{exampleblock}{Binary Numbers}
+  \begin{exampleblock}{Example: Binary Numbers}
     An 8-bit binary number contains a sequence of 8 digits, each being $0$ or $1$. How many different $8$-bit words are there? For each bit, there are two choices. Thus, using the multiplication principal, there are:
     $$
     2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 = 2^8 = 256
@@ -356,17 +398,52 @@ Roughly speaking, we can think of a probability measure $P$ on a sample space $\
     The number of orderings of $n$ elements is $n(n-1)(n-2)\ldots 1 = n!$
   \end{block}
   
-  \begin{exampleblock}{License plates}
+  \begin{exampleblock}{Example: License plates}
     In some states, license plates have six characters: three letters followed by three numbers. How many unique plates are possible?
     
     This is an example of sampling with replacement (as each license plate can have duplicated numbers or letters). Thus, there are $26^3$ different ways to choose the letters, and $10^3$ different ways to choose the numbers. Using the multiplication principle, there are $26^3 \times 10^3 = 17,576,000$ possible unique license plate numbers (using this rule).
   \end{exampleblock}
   
-  \begin{exampleblock}{Birthday probabilities}
-    Suppose that a room contains $n$ people. Assuming birthdays are uniformly distributed for 365 days, what is the probability that at least two of them have a common birthday?
+  \begin{exampleblock}{Exercise: Birthday probabilities}
+    Suppose that a room contains $n$ people. Assuming birthdays are uniformly distributed for 365 days, what is the probability that \emph{at least two} of them have a common birthday?
   \end{exampleblock}
   
-  \emph{Solution:} See examples $E$ and $F$ from the textbook.
+  \emph{Solution:} 
+  
+  \mode<article>{
+  \vspace{3mm}
+    Let $A$ be the event that at least two people have a common birthday.
+    Calculating $P(A)$ directly is surprisingly difficult, because $A$ can happen in many different ways; however, $A^c$ (the event that nobody has a common birthday) is a much simpler event.
+    
+    To see this in practice, let's think about the people walking into the room one at a time (it doesn't really matter how the people get into the room of course, but it may help with the intuition).
+    For event $A^c$ to occur, the first person can have a birthday on any of the $365$ days, and therefore there are $365$ ways for this to happen.
+    Once the second person enters the room, for event $A^c$ to occur, the second person's birthday must not overlap with the first person's, and therefore there are only $364$ ways for this to occur. We continue this way to see that for $n$ people in a room, there are
+    $$
+    365 \times 364 \times ... \times (365 - n + 1)
+    $$
+    different ways for $A^c$ to occur.
+    Because there are $365^n$ possible outcomes, we can now calculate:
+    $$
+    P(A^c) = \frac{365 \times 364 \times ... \times (365 - n + 1)}{365^n},
+    $$
+    and therefore
+    $$
+    P(A) = 1 - P(A^c) = 1 - \frac{365 \times 364 \times ... \times (365 - n + 1)}{365^n}.
+    $$
+    Calculating both the numerator and denominator can be hard because they are large numbers, but a relevant table of values is given below: 
+    \begin{table}
+    \centering
+    \begin{tabular}{cc}
+      $n$ & $P(A)$ \\\hline
+      4 & .016 \\
+      16 & .284 \\
+      23 & .507 \\
+      32 & .753 \\
+      40 & .891 \\
+      56 & .988 \\\hline
+    \end{tabular}
+    \end{table}
+  }
   
 \end{frame}
 
@@ -409,14 +486,18 @@ In particular, this implies that $2^n = \sum_{k = 0}^n \binom{n}{k}$, which can 
 \begin{frame}{Quality Control}
   Suppose you are tasked with quality control of a manufacturing process, and that there are $n$ total items, and $k$ defective items. If you randomly sample $r$ items, what is the probability that you find exactly $m$ defective items in your sample (this question is relevant because it can be used to design effective sample schemes).
   
-  \emph{Solution:} 
-  % Let $A$ be the event that we sample exactly $m$ defective items in our sample of $r$ items. 
-  % The total number of samples of size $r$ is $\binom{n}{r}$, which will be our denominator.
-  % The total number of ways that $A$ can occur can be found using the multiplication principle. There are $\binom{k}{m}$ ways to choose $m$ defective samples, and $\binom{n-k}{r-m}$ ways to choose the remaining (non defective) samples.
-  % That is, there are a total of $\binom{n}{r} \times \binom{k}{m}$ ways for $A$ to occur. Thus,
-  % $$
-  % P(A) = \frac{\binom{k}{m}\binom{n-k}{r-m}}{\binom{n}{r}}.
-  % $$
+  \emph{Solution:}
+  
+  \mode<article>{
+  \vspace{3mm}
+  Let $A$ be the event that we sample exactly $m$ defective items in our sample of $r$ items.
+  The total number of samples of size $r$ is $\binom{n}{r}$, which will be our denominator.
+  The total number of ways that $A$ can occur can be found using the multiplication principle. There are $\binom{k}{m}$ ways to choose $m$ defective samples, and $\binom{n-k}{r-m}$ ways to choose the remaining (non defective) samples.
+  That is, there are a total of $\binom{n}{r} \times \binom{k}{m}$ ways for $A$ to occur. Thus,
+  $$
+  P(A) = \frac{\binom{k}{m}\binom{n-k}{r-m}}{\binom{n}{r}}.
+  $$
+  }
   
   
 \end{frame}
@@ -449,14 +530,14 @@ where the sum is over all nonnegative integers $n_1, n_2, \ldots, n_r$ that sati
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Multinomial Examples}
-  \begin{exampleblock}{Subcommittees}
+  \begin{exampleblock}{Example: Subcommittees}
     How many ways can a committee of seven members be divided into three subcommittees of sizes three, two, and two, respectively?
     $$
     \binom{7}{3\,2\,2} = \frac{7!}{3!2!2!} = 210.
     $$
   \end{exampleblock}
   
-  \begin{exampleblock}{Genomics}
+  \begin{exampleblock}{Example: Genomics}
     In how many ways can the set of nucleotides $\{A, A, G, G, G, G, C, C, C\}$ be arranged in a sequence of nine letters? 
     
     To answer, let's re-frame the question. How many ways can nine positions be divided into subroups of sizes two, four, and three (i.e., the locations of the letters $A$, $G$, and $C$?)
@@ -470,14 +551,420 @@ where the sum is over all nonnegative integers $n_1, n_2, \ldots, n_r$ that sati
 
 \section{Conditional Probability}
 
-\begin{frame}{test cond prob}
-  Start of Conditional Prob.
+\begin{frame}{Introduction}
+  \alert{Conditional probability} is an extremely important concept in Statistics, many scientists spend most of their time with data dealing with conditional probabilities, or conditional expectations.
+  
+  \begin{itemize}
+    \item An example of this is \emph{regression}.
+  The idea is to model one (or many) variables conditioned on one (or many) other variables.
+  Ideas related to conditional probability help us learn about the connections between variables, or make inference / predictions on hard-to-measure variables using easy-to-measure variables.
+  \end{itemize}
+  
 \end{frame}
 
+\begin{frame}[allowframebreaks]{Example: }
+  Following the textbook \citep{rice07}, we will introduce conditional probabilities using an example.
+  
+  \alert{Digitalis therapy} \citep{rahimtoola04} is sometimes used for patients who have suffered congestive heart failure, but there is a risk of intoxication, a serious side effect that is difficult to diagnose.
+  
+  
+  To improve the chances of a correct diagnosis, the concentration of digitalis in the blood can be measured. \citet{beller71} conducted a study of the relation of the concentration of digitalis in the blood to digitalis intoxication in 135 patients.
+  Their results are simplified slightly in the following table.
+  
+  \begin{align*}
+    T+ &= \text{high blood concentration (positive test)}\\
+    T- &= \text{low blood concentration (negative test)}\\
+    D+ &= \text{toxicity (disease present)}\\
+    D- &= \text{no toxicity (disease absent)}
+  \end{align*}
+  
+  \begin{table}
+    \centering
+    \begin{tabular}{c|cc|c}
+            & $D+$ & $D-$ & Total \\\hline
+      $T+$  & 25   & 14   & 39 \\
+      $T-$  & 18   & 78   & 96 \\\hline
+      Total & 43   & 92   & 135 \\
+    \end{tabular}
+    \caption{\label{tab:digitalis}Taken from \citep[][Chapter~1]{rice07}.}
+  \end{table}
+  
+  For now, we will assume that the relative frequencies in the study roughly hold in some larger population of patients\footnote{Making inference about frequencies for a larger population is a \alert{statistics} problem (4451), not probability (4450).}. Converting the frequencies in the preceding table into proprtions gives Table~\ref{tab:digitalisProps}
+  
+    \begin{table}
+    \centering
+    \begin{tabular}{c|cc|c}
+            & $D+$  & $D-$ & Total \\\hline
+      $T+$  & .185  & .104 & .289 \\
+      $T-$  & .133  & .578 & .711 \\\hline
+      Total & .318  & .682 & 1.00 \\
+    \end{tabular}
+    \caption{\label{tab:digitalisProps}Taken from \citep[][Chapter~1]{rice07}.}
+  \end{table}
+  
+  Suppose a patient gets a test done, and there was a positive result ($T+$, meaning there was a high blood concentration of digitalis).
+  What is the probability of disease given these test results?
+  In the table, we can restrict ourselves to the first row, as we know there was a positive test $(T+)$. 
+  Of the 39 patients that tested positive, 25 suffered the disease ($18.5\%$).
+  We call he probability that a patient shows toxicity given that the test is positive the \alert{conditional probability} of $D+$ given $T+$, denoted $P(D+ | T+)$
+  $$
+  P(D+ | T+) = \frac{25}{39} = 0.640.
+  $$
+  
+  Equivalently, the same conditional probability can be calculated as:
+  $$
+  P(D+ | T+) = \frac{P(D+ \cap T+)}{P(T+)} = \frac{.185}{.289} = 0.640.
+  $$
+  
+  Note that the \emph{unconditional} probability of the event $D+$ is $0.318$, whereas the conditional probability of $D+$ given $T+$ is $0.640$. Therefore, knowing that the test is positive suggests that toxicity is twice as likely.
+  
+  This example leads to our definition of conditional probability:
+  
+  \begin{block}{Definition: Conditional Probability}
+    Let $A$ and $B$ be two events with $P(B) \neq 0$. The conditional probability of $A$ given $B$ is defined to be:
+    $$
+    P(A|B) = \frac{P(A \cap B)}{P(B)}.
+    $$
+  \end{block}
+  Some intuition behind this definition is the following: If we \emph{know} that event $B$ occurred, then the relevant sample space for other events becomes $B$, not $\Omega$. Thus, the conditional probability is a probability measure on $B$. It can be shown that this new probability measure on $B$ rather than $A$ satisfies all of the axioms to be considered a probability measure.
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Multiplication Law}
+  In some situations, $P(A|B)$ and $P(B)$ can be found rather easily, and we can use the definition of conditional probability to obtain the joint probability
+  \begin{block}{Multiplication Law}
+    Let $A$ and $B$ be events, and assume $P(B) \neq 0$. Then
+    $$
+    P(A \cap B) = P(A|B)P(B).
+    $$
+  \end{block}
+  
+  \begin{exampleblock}{Example: colored balls}
+    An urn contains three red balls, one blue ball. Two balls are selected without replacement. What is the probability that they are both red? 
+    
+    Let $R_1$ and $R_2$ denote the events that a red ball is drawn on the first and second trials, respectively. Then
+    $$
+    P(R_1 \cap R_2) = P(R_1)P(R_2 | R_1).
+    $$
+    $P(R_1) = 3/4$, and the conditional probability is calculated assuming one red ball has been removed, hence $P(R_2 | R_1) = 2/3$. Therefore
+    $$
+    P(R_1 \cap R_2) = \frac{3}{4}\times\frac{2}{3} = \frac{1}{2}.
+    $$
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Partitions}
+  We can extend the idea of conditional probability and the multiplication law to more than one set, but to do so we will first introduce a new definition.
+  \begin{block}{Definition: Partition}
+    Let $\Omega$ be our sample space. Consider non-empty sets $B_1, B_2, \ldots, B_n$ such that for all $i \neq j$, $B_i \cap B_j = \emptyset$, and $\cup_{i = 1}^n B_i = \Omega$. The sets $B_1, B_2, \ldots, B_n$ are said to form a partition of $\Omega$, and the set $P = \{B_1, B_2, \ldots, B_n\}$ is a partition of $\Omega$.
+  \end{block}
+  In other words, a partition is a set of sets; each element of the superset is a non-empty set, and that every element of $\Omega$ is contained in one and only one of these elemental sets.
+  
+  E.g.: $\Omega = \{1, 2, 3, 4, 5\}$, $P = \big\{ \{1, 4\}, \{3\}, \{2, 5\} \big\}.$
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Total Probability}
+  \begin{block}{Law of Total Probability}
+    Let $B_1, B_2, \ldots, B_n$ form a partition of $\Omega$, such that $P(B_i) > 0$ for all $i$. Then for any event $A$,
+    $$
+    P(A) = \sum_{i = 1}^n P(A|B_i)P(B_i).
+    $$
+    That is, to find the probability of an event $A$, we sume the conditional probabilities of $A$ given $B_i$, weighted by $P(B_i)$.
+  \end{block}
+  
+  \framebreak
+  
+  \emph{Proof:} 
+  
+  \mode<article>{
+  \vspace{3mm}
+  Note that because the $B_i$ are a partition, $B_i \cap B_j = \emptyset$ for all $i \neq j$, and therefore $(A \cap B_i) \cap (A \cap B_j) = \emptyset$ for all $i \neq j$. Also, because $A \subset \Omega$, we have $A \cap \Omega = A$. Thus,
+  \begin{align*}
+    P(A) &= P(A \cap \Omega) \\
+    &= P\Big(A \cap \big(\cup_{i = 1}^n B_i\big)\Big) \\
+    &= P\big(\cup_{i = 1}^n (A \cap B_i)\big) \\
+    &= \sum_{i = 1}^n P(A \cap B_i) \\
+    &= \sum_{i = 1}^n P(A|B_i)P(B_i).
+  \end{align*}
+  }
+
+  \framebreak
+  
+  \begin{exampleblock}{Example: Colored Balls (Part II)}
+    Returning to the colored ball example, what is the probability that a red ball is selected on the second draw?
+    
+    \begin{align*}
+    P(R_2) &= P(R_2 | R_1) P(R_1) + P(R_2 | R_1^c)P(R_1^c)\\
+    &= \frac{2}{3}\times \frac{3}{4} + 1 \times \frac{1}{4} = \frac{3}{4}
+    \end{align*}
+
+  \end{exampleblock}
+
+It may (or may not) be surprising that $P(R_1) = P(R_2) = 3/4$.
+One way to think about this is symmetry: without any knowledge about what happens with the first draw, both the first and second draws have the same probability of being Red. 
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Example: Class mobility}
+
+  \citet{glass13} compiled some statistics regarding movement between social classes in England and Wales in the 1950s.
+  
+  Let $(U, M, L)$ denote the upper, middle, and lower classes, resp., and use subscripts $1, 2$ to distinguish between father and son generations (i.e., $M_1$ is the event that the father belongs to the middle class, $L_2$ is the event the son is in the lower class).
+  
+  Then, \emph{transition} probabilities compiled from this study can be summarized as
+ 
+  \framebreak
+  
+  \begin{table}
+  \centering
+  \caption{\label{tab:mobility}Transition probabilities for class mobility.}
+    \begin{tabular}{c|ccc}
+            & $U_2$ & $M_2$ & $L_2$ \\\hline
+      $U_1$ & 0.45  & 0.48  & 0.07  \\
+      $M_1$ & 0.05  & 0.70  & 0.25  \\
+      $L_1$ & 0.01  & 0.50  & 0.49  \\
+    \end{tabular}
+  \end{table}
+  
+  Table~\ref{tab:mobility} is called a \emph{matrix of transition probaiblities}, or a \emph{transition matrix}. 
+  It provides conditional probabilities for a son to be in a particular social class given the social class of the father.
+  For example, the probability that the son is upper class, given the father middle class, is
+  $$
+  P(U_2 | M_1) = 0.05.
+  $$
+  
+  \framebreak
+  
+  \emph{Question}: Suppose that in the Father's generation, $10\%$ are upper class, $40\%$ are middle class, and $50\%$ are lower class. What is the probability that a son is in $U$? 
+
+  \emph{Solution:}
+  
+  \mode<article>{
+  \vspace{3mm}
+  \begin{align*}
+  P(U_2) &= P(U_2 | U_1)P(U_1) + P(U_2 | M_1)P(M_1) + P(U_2 | L_1) P(L_1) \\
+  &= 0.45 \times 0.10 + 0.05 \times 0.40 + 0.01 \times 0.50
+  &= 0.07.
+  \end{align*}
+  }
+
+\end{frame}
+
+\subsection{Bayes Rule}
+
+\begin{frame}[allowframebreaks]{Bayes Rule: Introduction}
+  At times, we may want to ``reverse" the order of a conditional probability.
+  For example, suppose we know a son belongs to social class $U_2$, and we want to find the probability that his father was in social class $U_1$.
+  
+  In this case, we are doing an \alert{inverse} problem.
+  That is, we are given an ``effect", and we want to find the probability of a particular ``cause".
+  We can use the basic rules from conditional probability to do this:
+  
+  \begin{align*}
+    P(U_1 | U_2) &= \frac{P(U_1 \cap U_2)}{P(U_2)} \\
+    &= \frac{P(U_2 | U_1)P(U_1)}{P(U_2 | U_1)P(U_1) + P(U_2 | M_1)P(M_1) + P(U_2|L_1)P(L_1)}\\
+    &= \frac{0.045}{0.07} = 0.64.
+  \end{align*}
+  
+\end{frame}
+
+\begin{frame}{Bayes Rule}
+
+  \begin{block}{Bayes' Rule}
+    Let $A \subset \Omega$ be an event, and $B_1, B_2, \ldots, B_n$ form a partition of $\Omega$ such that $P(B_i) > 0$ for all $i$. Then
+    $$
+    P(B_j | A) = \frac{P(A | B_j)P(B_j)}{\sum_{i = 1}^n P(A|B_i)P(B_i)}.
+    $$
+  \end{block}
+  
+  The proof of Bayes' rule follows directly from our previous example. 
+  That is, it is a direct result of the definition of conditional probabilities (gives the quotient), the multiplication law for conditional probabilities (numerator), and the law of total probability (denominator).
+  
+\end{frame}
+  
+  \begin{frame}[allowframebreaks]{Failing Intuition}
+    For many people, Bayes theorem can give results that may seem counter-intuitive; this is true not just among opinions of statisticians (Bayesian vs Frequentist), but also for highly trained professionals. 
+    
+    Consider the study by \citet{eddy82}, which showed that the vast majority of physicians do not assimilate evidence using Bayes' rule.
+    One hundred physicians were presented with the following information: 
+    
+    \framebreak
+    
+    \begin{itemize}
+      \item Without any special information, the probability that a woman in the study has breast cancer is $1\%$.
+      \item If the patient has breast cancer, the probability that the radiologist will correctly diagnose it is $80\%$.
+      \item If the patient has a benign lesion (no cancer), the probability that the radiologist will incorrectly diagnose it as cancer is $10\%$.
+      \end{itemize}
+      
+      The question was asked: ``What is the probability that a patient with a positive mammogram actually has breast cancer?"
+      
+      95 out of 100 physicians estimated the probability to be about $75\%$.
+      
+      \framebreak
+      
+      \emph{Actual Probability:}
+      
+      \mode<article>{
+      \vspace{3mm}
+      Let $A$ be the event that a patient has cancer, and $B$ be the event of a positive test.
+      From the information given, we have $P(A) = 0.01$, $P(B | A) = 0.8$, and $P(B | A^c) = 0.1$. We are wanting to know $P(A | B)$, which we can calculate using Bayes' rule:
+      $$
+      P(A|B) = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)} = \frac{(0.01)(0.8)}{(0.01)(0.8) + (0.99)(0.1)} \approx 0.075
+      $$
+      }
+      
+      \framebreak
+      
+      It may be surprising initially that the probability that a patient has breast cancer given a positive test is so low (even most physicians got this wrong).
+      
+      It is a result of the fact that breast cancer was so rare among study participants, that a positive result is more likely to be an incorrect diagnosis rather than an actual case of breast cancer.
+      
+    
+  \end{frame}
+  
+  \begin{frame}[allowframebreaks]{Example: Polygraph tests}
+    Polygraphs (lie-detectors) are routinely administered in cop shows and in some real-world scenarios.
+    The idea is that the test should help tell if a suspect (or prospective employee) is lying.
+    
+    Let $+$ denote the event that the polygraph reading is positive ($-$ for negative test), which suggests that the subject is lying (or telling the truth if $-$).
+    Furthermore, let $T$ denote the event that the subject is telling the truth, and $L$ the event the subject is lying\footnote{Note that the event $- = +^c$, and $L = T^c$, but we introduce new variables for interpretability}.
+    
+    \framebreak 
+    
+    According to studies of polygraph reliability \citep{gastwirth87}, $P(+ | L) = .88$, and $P(-|T) = .86$.
+    From these probabilities, we can calculate $P(- | L) = .12$, and $P(+ | T) = .14$
+    
+    Now suppose that for a particular question, the vast majority of subjects have no reason to lie; for instance, we'll assume that $P(T) = 0.99$, whereas $P(L) = 0.01$. 
+    
+    
+    \emph{Question:} Suppose that a subject produces a positive response (indicating a lie). What is the probability that the polygraph is incorrect, and that the subject is telling the truth?
+    
+    \framebreak
+    
+    \emph{Answer:}
+    
+    \mode<article>{
+    \vspace{3mm}
+    We want $P(T|+)$. Using Bayes rule,
+    $$
+    P(T|+) = \frac{P(+ | T)P(T)}{P(+|T)P(T) + P(+ | L)P(L)} = \frac{(.14)(.99)}{(.14)(.99) + (.88)(.01)} = .94
+    $$
+    That is, in screening a population of largely innocent people (say $99\%$ innocent of the crime), $94\%$ of the positive polygraph readings will be in error! Most people who are placed under suspicion because of a polygraph result will, in fact, be innocent.
+    }
+    
+  \end{frame}
+  
 \section{Independence}
 
-\begin{frame}{test 1}
-  Start of independence. \citep{breto14}
+\begin{frame}[allowframebreaks]{Independence: Introduction}
+  Our final topic in this chapter is Independence.
+  Independence is useful because it usually makes calculating probabilities easier.
+  
+  \begin{block}{Independence}
+    Let $A, B$ be two events in the sample space $\Omega$. We say that $A$ and $B$ are \emph{independent} if
+    $$
+    P(A \cap B) = P(A)P(B).
+    $$
+  \end{block}
+  
+  \framebreak
+  
+  Intuitively, the term \alert{independent} suggests that knowing that one event occurs gives us no information about whether or not the other event occurs.
+  That is, $P(A | B) = P(A)$ and $P(B | A) = P(B)$.
+  This idea is comparable with our definition of independence.
+  Using the definition of conditional probabilities, we have for instance 
+  $$
+  P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A)P(B)}{P(B)} = P(A).
+  $$
+  
+  \begin{exampleblock}{Example: Checking Independence}
+    A card is selected randomly from a deck. Let $A$ denote the event that it is an ace, and $D$ the event that it is a diamond.
+    Intuitively, knowing that the card is an Ace gives us no information about the suit, and we suspect the events are independent.
+    
+    Knowing that only one card is the ace of diamonds, $P(A \cap D) = 1/52$. However, we note that $P(A) = 4/52$, and $P(D) = 13/52$, and since $P(A)P(D) = \frac{4}{52}\times\frac{13}{52} = 1/52$, we see that $P(A \cap D) = P(A)P(D)$, and $A$ and $D$ are independent.
+  \end{exampleblock}
+  
+  \begin{exampleblock}{Example: System Reliability}
+    A system is designed so that it fails only if a unit and a backup unit both fail.
+    Say the probability of failure of both units is $p = 0.1$.
+    If the status of backup is designed to be independent of the primary, the probability that the system fails is $p^2 = 0.01$.
+  \end{exampleblock}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Mutual vs Pairwise Independence}
+  Now we extend the idea of independence to more than 2 events. Let $A_1, A_2, \ldots, A_n$ be $n$ events. We introduce the following definitions: 
+  
+  \begin{block}{Pairwise independence}
+    The events $A_1, \ldots, A_n$ are said to be \alert{pairwise independent} if for all $i \neq j$, $A_i$ is independent of $A_j$. That is,
+    $$
+    P(A_i \cap A_j) = P(A_i)P(A_j).
+    $$
+  \end{block}
+  
+  \begin{block}{Mutual Independence}
+    The events $A_1, \ldots, A_n$ are said to be \alert{mutually independent} if for any sub-collection $A_{i_1}, A_{i_2}, \ldots, A_{i_m}$, where $m \geq 2$,
+    $$
+    P(A_{i_1} \cap \cdots \cap A_{i_m}) = P(A_{i_1})\cdots P(A_{i_m}).
+    $$
+  \end{block}
+  
+  Note that these two definitions are \emph{not} the same. Mutual independence implies pairwise independence, but pairwise independence does not necessarily imply mutual independence.
+  Consider the following example.
+  
+  \begin{exampleblock}{Example: Tossing Coins}
+    A fair coin is tossed twice. Let $A$ denote the event of heads on the first toss, $B$ the event of heads on the second toss, and $C$ the event that exactly one head is thrown.
+    
+    $A$ and $B$ are clearly independent. Note that $P(C) = 0.5$ (as there are 4 total outcomes of the two coin flips, and $C$ is the event $\{ht, th\}$).
+    
+    Now note that $A$ and $C$ are independent, as $P(C | A) = P(C) = 0.5$, and similarly for the events $B$ and $C$ (by symmetry), However,
+    $$
+    P(A \cap B \cap C) = 0 \neq P(A)P(B)P(C),
+    $$
+    and therefore the events $A$, $B$, and $C$ are not mutually independent.
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Exercise: AIDS transmission}
+    AIDS is transmitted via sexual contacts. Following several studies on AIDS, an article in the \emph{Los Angeles Times} (August 24, 1987) suggests that the average risk of contracting AIDS per sexual contact with someone infected with AIDS is about $1/500$.
+    
+    Assuming that virus transmissions are independent events, calculate the probability of contracting AIDS if an individual has sexual contacts with $n$ infected individuals.
+  \end{exampleblock}
+  
+  \emph{Solution:}
+  
+  \mode<article>{
+  \vspace{3mm}
+    Because there are many different ways for the outcome to occur, it is easier to instead find the probability of the complement of this event (similar to the birthday problem).
+    
+    Let $C_i$ denote the event that the virus transmission does not occur during the $i$th sexual contact with an infected individual.
+    Then, the probability of no infections in $n$ such contacts is:
+    $$
+    P(C_1 \cap C_2 \cap \ldots \cap C_n) = \big(1 - \frac{1}{500}\big)^{n}.
+    $$
+  }
+  
+  \framebreak
+  
+  \begin{block}{CAUTION}
+    It is a very common mistake to confuse ``Mutually Independent" with ``Mutually Disjoint" (or ``Mutually Exclusive"), which is a topic we covered previously.
+    
+    Recall mutually disjoint events $A_1, \ldots, A_n$ are such that $A_i \cap A_j = \emptyset$. If you made this mistake with the previous example, you may try saying that the probability of AIDS infection are mutually disjoint (not the case), and that the probability would be calculated by letting $A_i$ be the event of transmission, and then the probability of getting infected would be
+    $$
+    P(A_1 \cup A_2 \cup \cdots \cup A_n) = \sum_{i = 1}^n P(A_i).
+    $$
+This is incorrect, as the events $A_i$ are NOT mutually exclusive. See Textbook Example B in Chapter 1.3 for more details. 
+  \end{block}
+  
+  To summarize the above caution: 
+  \begin{itemize}
+    \item \alert{IF} the events are mutually disjoint (also called mutually exclusive), then calculating \alert{UNIONS} (often ``or" statements) is easy, because we can sum the probabilities.
+    \item \alert{IF} the events are mutually independent (not pairwise), then calculating \alert{INTERSECTIONS} (often ``and" statements) is easy, because we can take the product.
+  \end{itemize}
+  
+  The above summaries are meant to be a guide on how to calculate difficult probabilities, not a rule that must be followed.
+  
 \end{frame}
 
 \newcommand\acknowledgments{
@@ -504,11 +991,15 @@ where the sum is over all nonnegative integers $n_1, n_2, \ldots, n_r$ that sati
 
 \mode<article>{
 
+\newpage
+
 {\bf \Large \noindent Acknowledgments}
 
 \acknowledgments
 
-  \bibliography{../bib4450}
+\newpage
+
+\bibliography{../bib4450}
 
 }
 

@@ -31,7 +31,6 @@ figure
 *.synctex.gz
 *.old
 
-02/*
 03/*
 04/*
 05/*

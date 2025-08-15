@@ -5,6 +5,7 @@
 \mode<beamer>{\metroset{block=fill}}
 % \mode<beamer>{\usecolortheme{wolverine}}
 
+\mode<beamer>{\setcounter{tocdepth}{2}}
 \mode<beamer>{\setbeamertemplate{section in toc}[sections numbered]}
 \mode<beamer>{\setbeamertemplate{subsection in toc}[subsections numbered indented]}
 
@@ -165,7 +166,9 @@ Chapter \CHAPTER: Probability}
   
 \end{frame}
 
-\subsection{Bernoulli Random Variables}
+\subsection{Common random variables}
+
+\subsubsection{Bernoulli Random Variables}
 
 \begin{frame}{Bernoulli Random Variables}
 
@@ -203,7 +206,7 @@ Chapter \CHAPTER: Probability}
   \end{itemize}
 \end{frame}
 
-\subsection{Binomail Distribution}
+\subsubsection{Binomail Distribution}
 
 \begin{frame}[allowframebreaks]{Binomial Distribution}
 
@@ -275,7 +278,7 @@ Chapter \CHAPTER: Probability}
   
 \end{frame}
   
-\subsection{Geometric and Negative Binomial Distributions}
+\subsubsection{Geometric and Negative Binomial Distributions}
 
 \begin{frame}[allowframebreaks]{Geometric Distribution}
   
@@ -339,7 +342,7 @@ Chapter \CHAPTER: Probability}
   
 \end{frame}
 
-\subsection{Hypergeometric and Poisson Distribution}
+\subsubsection{Hypergeometric and Poisson Distribution}
 
 \begin{frame}[allowframebreaks]{The Hypergeometric Distribution}
 
@@ -589,6 +592,8 @@ $$
   \item The previous density can be generalized to any interval $[a, b]$, such that $a < b$.
 \end{itemize}
 
+\subsection{The Uniform Random Variable}
+
 \begin{block}{Continuous uniform density}
   If $X$ is a RV uniformly distributed on an interval $[a, b]$, where $a < b$, then the corresponding density function is: 
   $$
@@ -610,6 +615,8 @@ $$
   \end{itemize}
 
 \end{frame}
+
+\subsection{The cumulative distribution function}
 
 \begin{frame}[allowframebreaks]{Cumulative distribution function}
 
@@ -739,7 +746,8 @@ $$
   
 \end{frame}
 
-\subsection{Example Distributions}
+\subsection{Common random variables}
+\subsubsection{The Exponential Distribution}
 
 \begin{frame}[allowframebreaks]{Exponential Distribution}
   \begin{itemize}
@@ -826,6 +834,429 @@ $$
   
 \end{frame}
 
+\subsubsection{The Gamma Density}
+
+\begin{frame}[allowframebreaks]{The Gamma Density}
+  \begin{itemize}
+    \item The \alert{gamma} density function depends on two parameters $\alpha > 0$ and $\lambda > 0$.
+    $$
+    g(t) = \frac{\lambda^\alpha}{\Gamma(\alpha)}t^{\alpha - 1}e^{-\lambda t}, \quad t \geq 0.
+    $$
+    \item For $t < 0$, we define $g(t) = 0$.
+    \item The \alert{gamma function}, is defined as:
+    $$
+    \Gamma(x) = \int_{0}^\infty u^{x - 1}e^{-u}du, \quad x > 0.
+    $$
+  \end{itemize}
+  
+  \framebreak 
+  
+  \begin{itemize}
+    \item Note that if $\alpha = 1$, then the gamma density coincides with the exponential density. 
+    \item The parameter $\alpha > 0$ in this formulation is called the \alert{shape} parameter.
+    \item The parameter $\lambda > 0$ is called the \alert{scale} parameter.
+    \item As the names suggest, $\alpha$ changes the \emph{shape} of the density function, whereas $\lambda$ changes the scale of the density (i.e., can be used to change from inches to feet).
+  \end{itemize}
+  
+  % \end{frame}
+
+  \framebreak
+
+  % \begin{frame}{Gamma Density Figure}
+  
+  \begin{figure}[ht]
+<<fig:gamma, fig.align='center', fig.height=4, warning=FALSE, message=FALSE, echo=FALSE>>=
+library(tidyverse)
+library(latex2exp)
+
+# Parameters
+alphas <- c(0.5, 1, 2, 5, 7)   # Choose several alpha (shape) values
+lambda <- 1                     # Fixed scale parameter
+
+# Define an x range that covers most of the density
+x <- seq(1e-10, 12, length.out = 1000)
+
+data.frame(
+  x = x, 
+  alpha_05 = dgamma(x, shape = alphas[1], scale = lambda),
+  alpha_1  = dgamma(x, shape = alphas[2], scale = lambda),
+  alpha_2  = dgamma(x, shape = alphas[3], scale = lambda),
+  alpha_5  = dgamma(x, shape = alphas[4], scale = lambda),
+  alpha_7  = dgamma(x, shape = alphas[5], scale = lambda)
+) %>% 
+  pivot_longer(
+    cols = -x,
+    names_to = "alpha",
+    values_to = "value",
+    names_prefix = "alpha_"
+  ) %>% 
+  mutate(
+    alpha = case_when(
+      alpha == "05" ~ "0.5", 
+      TRUE ~ alpha
+    )
+  ) %>% 
+  ggplot(aes(x = x, y = value, col = alpha, group = alpha)) + 
+  geom_line() + 
+  scale_y_continuous(limits = c(0, 1.25)) + 
+  theme_bw() + 
+  theme(legend.title = element_blank(), 
+        legend.position = 'inside', 
+        legend.position.inside = c(0.9,0.75),
+        plot.title = element_text(hjust = 1),
+        axis.title = element_blank()) + 
+  scale_color_manual(
+    values = c(
+      '0.5' = "#c7e9b4",
+      '1' = "#7fcdbb",
+      '2' = "#41b6c4",
+      '5' = "#2c7fb8",
+      '7' = "#253494" 
+    ),
+    labels = c(
+      '0.5' = TeX("$\\alpha = 0.5$"),
+      '1' = TeX("$\\alpha = 1$"),
+      '2' = TeX("$\\alpha = 2$"),
+      '5' = TeX("$\\alpha = 5$"),
+      '7' = TeX("$\\alpha = 7$")
+    )
+  ) + 
+  ggtitle(TeX("$\\lambda = 1$ for all curves"))
+@
+  \caption{\label{fig:gamma}A few Gamma pdf functions for various levels of $\alpha$.}
+  \end{figure}
+  
+  \end{frame}
+  
+\subsubsection{The Normal Distribution}
+  
+  \begin{frame}[allowframebreaks]{The Normal Density}
+  
+    \begin{itemize}
+      \item The normal distribution plays a central role in both probability and statistics.
+      \item It is also called \alert{the Gaussian} distribution, after Carl Friedrich Gauss, who used it as a model for modeling measurement errors. 
+      \item One reason it is so important is the \alert{Central Limit Theorem} (CLT, Chapter 6), which suggests that the normal distribution is useful in a large number of settings.
+      \item Roughly speaking, the CLT states that large(ish) sums (or averages) of independent random variables will be approximately normally distributed.
+    \end{itemize}
+  
+  \framebreak 
+  
+  The density function for the normal distribution depends on two parameters:
+  \begin{itemize}
+    \item $\mu$: the mean of the distribution.
+    \item $\sigma$: the standard deviation of the distribution. 
+  \end{itemize}
+  
+  \begin{block}{The Normal Density}
+    Let $X$ be a random variable that is normally distributed with mean $\mu$ and standard deviation $\sigma$. The corresponding probability density function is
+    $$
+    f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x - \mu)^2/2\sigma^2}, \quad -\infty < x < \infty
+    $$
+  \end{block}
+  
+  \framebreak
+  
+  A few notes about this density / distribution:
+  
+  \begin{itemize}
+    \item You'll often see the shorthand $X \sim N(\mu, \sigma^2)$ to mean ``X follows a normal distribution with parameters $\mu$ and $\sigma$". 
+    \item The density is symmetric about $\mu$, meaning $f(\mu - x) = f(\mu + x)$; $x = \mu$ is also the maximum value of the density (mode). The ``spread" of the distribution is determined by $\sigma$. 
+    \item When the mean $\mu = 0$ and standard deviation $\sigma = 1$, we call this the \alert{standard normal distribution}.
+    \item There is no closed form expression for the cdf of the normal distribution. The cdf of the standard normal is usually denoted $\Phi(\cdot)$, and the pdf $\phi(\cdot)$.
+  \end{itemize}
+  
+  \end{frame}
+
+\subsubsection{The Beta Distribution}
+
+\begin{frame}[allowframebreaks]{The Beta Desnity}
+  \begin{itemize}
+    \item The \alert{beta} distribution is useful for modeling random variables that are restricted to the interval $[0, 1]$:
+    \item The density function depends on two parameters, $\alpha, \beta > 0$.
+    $$
+    f(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha - 1}(1 - x)^{\beta - 1}, \quad 0 \leq x \leq 1.
+    $$
+    \item Note that if $\alpha = \beta = 1$, the distribution becomes uniformly distributed.
+    \item Both $\alpha$ and $\beta$ are shape parameters, and the distribution is quite flexible. 
+  \end{itemize}
+  
+  \framebreak
+  
+    \begin{figure}[ht]
+<<fig:beta, fig.align='center', fig.height=4, warning=FALSE, message=FALSE, echo=FALSE>>=
+library(tidyverse)
+library(latex2exp)
+
+pars <- matrix(
+  c(
+    2, 6, 6, .5,  4, # alpha
+    2, 2, 6,  4, .5  # beta
+  ), ncol = 2
+)
+
+# Define an x range that covers most of the density
+x <- seq(1e-12, 1-1e-12, length.out = 1000)
+
+data.frame(
+  x = x, 
+  beta1 = dbeta(x, shape1 = pars[1, 1], shape2 = pars[1, 2]),
+  beta2 = dbeta(x, shape1 = pars[2, 1], shape2 = pars[2, 2]),
+  beta3 = dbeta(x, shape1 = pars[3, 1], shape2 = pars[3, 2]),
+  beta4 = dbeta(x, shape1 = pars[4, 1], shape2 = pars[4, 2]),
+  beta5 = dbeta(x, shape1 = pars[5, 1], shape2 = pars[5, 2])
+) %>% 
+  pivot_longer(
+    cols = -x,
+    names_to = "beta",
+    values_to = "value",
+    names_prefix = "beta"
+  ) %>% 
+  # mutate(
+  #   alpha = case_when(
+  #     alpha == "05" ~ "0.5", 
+  #     TRUE ~ alpha
+  #   )
+  # ) %>% 
+  ggplot(aes(x = x, y = value, col = beta, group = beta)) + 
+  geom_line() + 
+  scale_y_continuous(limits = c(0, 5)) +
+  theme_bw() + 
+  theme(legend.title = element_blank(), 
+        # legend.position = 'bottom',
+        # legend.position.inside = c(0.9,0.75),
+        plot.title = element_text(hjust = 1),
+        axis.title = element_blank()) + 
+  scale_color_discrete(
+    # values = c(
+    #   '0.5' = "#c7e9b4",
+    #   '1' = "#7fcdbb",
+    #   '2' = "#41b6c4",
+    #   '5' = "#2c7fb8",
+    #   '7' = "#253494"
+    # ),
+    labels = c(
+      '1' = TeX("$\\alpha = 2, \\beta = 2$"),
+      '2' = TeX("$\\alpha = 6, \\beta = 2$"),
+      '3' = TeX("$\\alpha = 6, \\beta = 6$"),
+      '4' = TeX("$\\alpha = 0.5, \\beta = 4$"),
+      '5' = TeX("$\\alpha = 4, \\beta = 0.5$")
+    )
+  )
+@
+  \caption{\label{fig:beta}A few Beta pdf functions for various levels of $\alpha$ and $\beta$.}
+  \end{figure}
+  
+\end{frame}
+
+\begin{frame}{Comments on density functions}
+  \begin{itemize}
+    \item So far, we have been using $f$ and $F$ to denote the pdf and cdf of a random variable, respectively. If there is more than one random variable, say $X$ and $Y$, we may want to distinguish between the functions, and we do so like: $f_X(x)$, or $F_Y(y)$. 
+    \item There exist alternative \alert{parameterizations} of the common pmf / pdf functions we have discussed. For example, we introduced the negative binomial distribution with parameters $p$ and $r$. This is known as the size-probability parameterization, but there also exists and alternative with parameters $\mu$ and $k$, known as the mean-ddispersion parameterization (commonly used in Ecology). 
+  \end{itemize}
+\end{frame}
+
+\section{Functions of a random variable}
+
+\begin{frame}[allowframebreaks]{Variable transformations}
+  \begin{itemize}
+    \item Often we will be interested in function of a random variable.
+    \item Let $X$ be a random variable, and $g$ an arbitrary function.
+    \item Our goal is to find the distribution of the random variable $Y = g(X)$.
+  \end{itemize}
+  
+  \begin{exampleblock}{Kinetic energy}
+    Let $X$ denote a random variable representing the velocity of a particle of mass $m$; we might be interested in the distribution of $Y = \frac{1}{2}mX^2$, the particle's kinetic energy.
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item We will eventually provide a rule for a general transformation, $g: \R \rightarrow \R$, but we will first build some intuition using simple transformations.
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Linear Transformations (Part I)}
+    Let $X$ be a random variable with pdf and cdf $f_X$ and $F_X$, respectively.
+    Find the density of $Y = aX + b$, where $a > 0$, and $b \in \R$.
+  \end{exampleblock}
+  
+  \mode<article>{
+  We will use what I like to call ``the cdf method". It's a simple idea that uses the connection between the cdf and pdf of a random variable, and the definition of the cdf. 
+  \begin{align*}
+    F_Y(y) &= P(Y \leq y) \\
+    &= P(aX + b \leq y) \\
+    &= P\big(X \leq \frac{y - b}{a}\big) \\ 
+    &= F_X\big(\frac{y-b}{a}\big).
+  \end{align*}
+  On the left, we have the cdf of $Y$, and we have equated this to the cdf of $X$. Now we can differentiate the equation with respect to $y$:
+  \begin{align*}
+    f_Y(y) &= \frac{d}{dy}F_X\big(\frac{y - b}{a}\big) \\
+    &= \frac{1}{a} f_X\big(\frac{y-b}{a}\big).
+  \end{align*}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item This same idea is how we will build a general formula for finding the pdf of a transformed random variable.
+    \item Now let's change it slightly, and see some potential pitfalls.
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Linear Transformations (Part II)}
+    Let $X$ be a random variable with pdf and cdf $f_X$ and $F_X$, respectively.
+    Find the density of $Y = aX + b$, where $a < 0$, and $b \in \R$.
+  \end{exampleblock}
+  
+  \mode<article>{
+  \begin{align*}
+    F_Y(y) &= P(Y \leq y) \\
+    &= P(aX + b \leq y) \\
+    &= P\big(X \geq \frac{y - b}{a}\big) \\ 
+    &= 1 - F_X\big(\frac{y-b}{a}\big).
+  \end{align*}
+  On the left, we have the cdf of $Y$, and we have equated this to the cdf of $X$. Now we can differentiate the equation with respect to $y$:
+  \begin{align*}
+    f_Y(y) &= 0 - \frac{d}{dy}F_X\big(\frac{y - b}{a}\big) \\
+    &= -\frac{1}{a} f_X\big(\frac{y-b}{a}\big).
+  \end{align*}
+  \begin{itemize}
+    \item Note that all pdf functions have to be positive. In this example, we have $a < 0$, and therefore the negative sign in the final result helps us ensure that $f_Y(y)$ is positive.
+    \item We can also see that $\big|\frac{1}{a}\big| = -\frac{1}{a}$, so we can write:
+    $$
+    f_Y(y) = f_{X}\Big(\frac{y - b}{a}\Big)\Big|\frac{1}{a}\Big|.
+    $$
+  \end{itemize}
+  }
+ 
+ \framebreak
+  
+  \begin{itemize}
+    \item Now, more generally, assume that $g$ is a strictly monotonically increasing function. Then: $P\big(g(X) \leq y\big) = P\big(X \leq g^{-1}(y)\big)$.
+    \item If $g$ is a strictly monotonically decreasing function, then $P\big(g(X) \leq y\big) = P\big(X \geq g^{-1}(y)\big).$
+    \item These two examples can be combined to give us a new proposition
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Proposition 2.1: monotonic transformations}
+    Let $X$ be a continuous random variable with density $f_X$, and let $Y = g(X)$, where $g$ is differentiable, and strictly monotonic on an interval $I$. Then $Y$ has the density function
+    $$
+    f_Y(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|.
+    $$
+    for $y$ such that $y = g(x)$, and $f_Y(y) = 0$ if $y \neq g(x)$ for any $x \in I$.
+  \end{block}
+  
+  \emph{proof}
+  
+  \mode<article>{
+  
+  \vspace{2mm}
+  Suppose that $g$ is increasing. Then 
+  \begin{align*}
+   F_Y(y) &= P(Y \leq y) \\
+    &= P\big(g(X) \leq y\big) \\
+    &= P\big(X \leq g^{-1}(y)\big) \\ 
+    &= F_X\big(g^{-1}(y)\big).
+  \end{align*}
+  Taking the derivative, 
+  $$
+  f_Y(y) = f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|,
+  $$
+  where the last equality is a result of the fact that if $g$ is increasing, the derivative is always positive, and hence equal to it's absolute value. 
+  
+  \vspace{2mm}
+  
+  Now suppose that $g$ is decreasing. Then
+    \begin{align*}
+   F_Y(y) &= P(Y \leq y) \\
+    &= P\big(g(X) \leq y\big) \\
+    &= P\big(X \geq g^{-1}(y)\big) \\ 
+    &= 1 - F_X\big(g^{-1}(y)\big).
+  \end{align*}
+  Taking the derivative, 
+  $$
+  f_Y(y) = -f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|,
+  $$
+  where the last equality is a result of the fact that if $g$ is decreasing, the derivative is always negative, and hence equal to it's absolute value when multiplied by negative one. 
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item Proposition 2.1 is useful to have / know, but it's often easier to just work from scratch (we'll see a few examples of this).
+    \item Proposition 2.1 can also be extended for use with non-monotonic functions $g$. The idea is that you break $g: \mathcal{X} \rightarrow \mathcal{Y}$ into a series of functions $g_i: \mathcal{X}_i \rightarrow \mathcal{Y}$ where $\mathcal{X}_i \subset \mathcal{X}$ is a set such that $g_i$ is monotonic. Then, the final density $f_Y$ can be found by summing these functions:
+    $$
+    f_Y(y) = \sum_{i} f_X\big(g^{-1}_i(y)\big)\Big|\frac{d}{dy}g_i^{-1}(y)\Big|.
+    $$
+    See \citet[][Theorem~2.1.8]{casella24} for more details.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item Here are some common RV transformations that really come in handy.
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Normal Distribution I}
+    Let $X \sim N(\mu, \sigma^2)$. Then if $Y = aX + b$, $Y\sim N(a \mu + b, a^2\sigma^2)$.
+    
+    \emph{proof}: direct consequence of Linear Transformation examples (parts I and II)
+  \end{exampleblock}
+  
+  \begin{block}{Proposition 2.2: Uniform CDF}
+    Let $X$ be a random variable with cdf $F$. Then $Z = F(X)$ has a uniform distribution on $[0, 1]$. 
+    
+    \emph{proof:} $P(Z \leq z) = P\big(F(X) \leq x\big) = P\big(X \leq F^{-1}(z)\big) = F\big(F^{-1}(z)\big) = z$
+  \end{block}
+  
+    \framebreak
+  
+    \begin{block}{Proposition 2.3: Inverse Uniform CDF}
+    Let $U$ be uniform on $[0, 1]$, and let $X = F^{-1}(U)$. Then the cdf of $X$ is $F$.
+    
+    \emph{proof:} $P(X \leq x) = P\big(F^{-1}(U) \leq x\big) = P\big(U \leq F(x)\big) = F(x)$
+  \end{block}
+  
+  \begin{itemize}
+    \item This last proposition is very useful. We can use it to \alert{generate random numbers} (pseudorandom).
+    \item Many computer packages have ways of generating numbers uniformly on $U[0, 1]$; the proposition implies that to generate from any arbitrary distribution with cdf $F$, all we need to do is apply $F_{-1}$ to uniform $[0, 1]$ random numbers. 
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Chi-square distribution}
+  \begin{itemize}
+    \item If $Z \sim N(0, 1)$, find the density of $X = Z^2$.
+  \end{itemize}
+  
+  \mode<article>{
+  \begin{align*}
+    F_X(x) &= P(X \leq x) \\
+    &= P(-\sqrt{x} \leq Z \leq \sqrt{x})\\
+    &= \Phi(\sqrt{x}) - \Phi(\sqrt{x}).
+  \end{align*}
+  \begin{itemize}
+    \item We now find the density by differentiation the cdf with respect to $x$.
+  \end{itemize}
+  \begin{align*}
+    f_X(x) &= \frac{1}{2}x^{-1/2}\phi(\sqrt{x}) + \frac{1}{2}x^{-1/2}\phi(-\sqrt{x}) \\
+    &= x^{-1/2}\phi(\sqrt{x}) \quad \text{since } \phi \text{ is symmetric} \\
+    &= \frac{x^{-1/2}}{\sqrt{2\pi}}e^{-x/2}, \quad x \geq 0. 
+  \end{align*}
+  \begin{itemize}
+    \item If you recall that $\Gamma(1/2) = \sqrt{\pi}$, you may recognize that this is a particular instance of the gamma density, with $\alpha = \lambda = 1/2$.
+    \item We call this density the \alert{chi-square density} with 1 degree of freedom.
+  \end{itemize}
+  }
+
+\end{frame}
+
+\begin{frame}{Final remarks}
+  \begin{itemize}
+    \item We have introduce some concepts of random variables, but a full rigorous discussion about random variables requires background in measure theory. If you are interested in learning more, a good textbook for a statistics student is \citet{resnick19}; this is considered a graduate level text, and some background in analysis will be beneficial.
+    \item We have discussed only discrete and continuous random variables. In practice, we often run into random variables that have both a discrete and continuous component. For instance, consider a zero-inflated continuous random variable $X$, where $X = 0$ with probability $p$ (discrete component), but $X \sim N(0, 1)$ with probability $1-p$ (continuous component). 
+  \end{itemize}
+\end{frame}
+
 \newcommand\acknowledgments{
 \begin{itemize}
 \item   Compiled on {\today} using \Rlanguage version \Sexpr{getRversion()}.
@@ -837,13 +1268,13 @@ $$
 }
 
 \mode<presentation>{
-\begin{frame}[allowframebreaks=0.8]{References and Acknowledgements}
-  
-\bibliography{../bib4450}
-
-\vspace{3mm}
+\begin{frame}[allowframebreaks=0.9]{References and Acknowledgements}
 
 \acknowledgments
+
+\framebreak
+
+\bibliography{../bib4450}
 
 \end{frame}
 }

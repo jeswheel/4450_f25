@@ -21,7 +21,7 @@ output: html_document
 
 [Back to course homepage](../index.html)  
 [Acknowledgements](../acknowledge.html)  
-[Source code for these notes](http://github.com/jeswheel/4450_f25/tree/main/01/)
+[Source code for these notes](http://github.com/jeswheel/4450_f25/tree/main/02/)
 
 
 ----------------------

@@ -17,7 +17,7 @@
 
 \mode<handout>{\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
 
-\newcommand\CHAPTER{1}
+\newcommand\CHAPTER{2}
 % \newcommand\answer[2]{\textcolor{blue}{#2}} % to show answers
 % \newcommand\answer[2]{\textcolor{red}{#2}} % to show answers
  \newcommand\answer[2]{#1} % to show blank space

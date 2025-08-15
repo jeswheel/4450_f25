@@ -49,6 +49,8 @@ Chapter \CHAPTER: Probability}
 \begin{frame}{Introduction}
   
   \begin{itemize}
+
+  \item This material is based on Chapter~2 of \citet{rice07}.
   \item Formally, a \alert{random variable} is a function from a sample space $\Omega$ to the real numbers\footnote{In this class, will assume real-valued spaces, though more generally a random variable can map to any measureable space}.
   
   \item That is, for any element $\omega \in \Omega$, a random variable $X$ will map $\omega$ to a real number: $X(\omega) \in \R$.

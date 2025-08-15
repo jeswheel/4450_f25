@@ -46,11 +46,14 @@ Chapter \CHAPTER: Probability}
 \section{Introduction}
 
 \begin{frame}{Introduction}
-  Formally, a \alert{random variable} is a function from a sample space $\Omega$ to the real numbers\footnote{In this class, will assume real-valued spaces, though more generally a random variable can map to any measureable space}.
   
-  That is, for any element $\omega \in \Omega$, a random variable $X$ will map $\omega$ to a real number: $X(\omega) \in \R$.
+  \begin{itemize}
+  \item Formally, a \alert{random variable} is a function from a sample space $\Omega$ to the real numbers\footnote{In this class, will assume real-valued spaces, though more generally a random variable can map to any measureable space}.
   
-  Most often people think of random variables as random numbers rather than functions; in most instances in this class, this treatment will be sufficient.
+  \item That is, for any element $\omega \in \Omega$, a random variable $X$ will map $\omega$ to a real number: $X(\omega) \in \R$.
+  
+  \item Most often people think of random variables as random numbers rather than functions; in most instances in this class, this treatment will be sufficient.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Example of a random variable}
@@ -58,9 +61,12 @@ Chapter \CHAPTER: Probability}
   $$
   \Omega = \{hhh, hht, hth, thh, htt, tht, tth, ttt\}.
   $$
-  Some possible random variables include (1) the number of heads, (2) the number of tails, (3) the number of heads minus the number of tails.
   
-  Importantly, a random variable must assign a value to all possible outcomes $\omega \in \Omega$. 
+  \begin{itemize}
+    \item Some possible random variables include (1) the number of heads, (2) the number of tails, (3) the number of heads minus the number of tails.
+  
+    \item Importantly, a random variable must assign a value to all possible outcomes $\omega \in \Omega$.
+  \end{itemize}
   
   \begin{exampleblock}{Number of Heads}
     Let $X$ be the random variable representing the number of heads. If the result of the outcome is the event $hth$, the $X(\{hth\}) = 2$.
@@ -85,14 +91,23 @@ Chapter \CHAPTER: Probability}
     A discrete random variable is a random variable that can take on only a finite or at most a countably infinite number of values.
   \end{block}
   
-  Example: The number of heads in three coin flips can only be in the set $\{0, 1, 2, 3\}$. Alternatively, consider flipping a coin indefinitely until you achieve a heads. The possible outcomes are in the set $\{1, 2, 3, \ldots\}$, which is countably infinite.
+  \begin{itemize}
+    \item Example: The number of heads in three coin flips can only be in the set $\{0, 1, 2, 3\}$. Alternatively, consider flipping a coin indefinitely until you achieve a heads. The possible outcomes are in the set $\{1, 2, 3, \ldots\}$, which is countably infinite.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Probabilities}
-  The probability measure on the sample space determines the probability of the values of $X$.
-  In our example, if a coin is fair, then we can assign a uniform probability measure on the sample set of flipping a coin three times. 
-  That is, all outcomes are equally likely, each with probability $1/8$.
-  The probability that $X$ takes on it's potential values is easily computed, by counting the number of outcomes that result in the particular value of $X$:
+
+  \begin{itemize}
+
+    \item The probability measure on the sample space determines the probability of the values of $X$.
+    
+    \item In our example, if a coin is fair, then we can assign a uniform probability measure on the sample set of flipping a coin three times. 
+  
+    \item That is, all outcomes are equally likely, each with probability $1/8$.
+    
+    \item The probability that $X$ takes on it's potential values is easily computed, by counting the number of outcomes that result in the particular value of $X$:
+  \end{itemize}
   
   \begin{align*}
     P(X = 0) &= \frac{1}{8} \\
@@ -103,12 +118,14 @@ Chapter \CHAPTER: Probability}
   
   \framebreak
   
-  More generally, let's assume that $X$ is a discrete RV, and denote the possible values as $x_1, x_2, \ldots$.
+  \begin{itemize}
+    \item More generally, let's assume that $X$ is a discrete RV, and denote the possible values as $x_1, x_2, \ldots$.
   There exists a function $p$ such that $p(x_i) = P(X = x_i)$ that satisfies $\sum_i p(x_i) = 1$.
   This function $p$ is called the \alert{probability mass function} (pmf) of the random variable $X$. 
   
-  We may also be interested in calculating for all values $x \in \R$, the probability $F(x) = P(X \leq x)$; the function $F$ is called the \alert{cumulative distribution function} (cdf).
+    \item We may also be interested in calculating for all values $x \in \R$, the probability $F(x) = P(X \leq x)$; the function $F$ is called the \alert{cumulative distribution function} (cdf).
   The cdf plays a number of important roles in probability and statistics that we will see later on.
+  \end{itemize}
   
   \framebreak
   
@@ -130,7 +147,10 @@ Chapter \CHAPTER: Probability}
 \end{frame}
 
 \begin{frame}{Independence}
-  Jumping ahead a little bit, we will define what it means for random variables to be independent (a chapter 3 topic), as it will be useful for our discussions in this chapter.
+
+  \begin{itemize}
+    \item Jumping ahead a little bit, we will define what it means for random variables to be independent (a chapter 3 topic).
+  \end{itemize}
   
   \begin{block}{Definition: Independent random variables}
     Let $X$ and $Y$ be discrete random variables defined on the same probability space, taking values $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$, respectively. $X$ and $Y$ are said to be independent if, for all $i, j$, 
@@ -139,33 +159,39 @@ Chapter \CHAPTER: Probability}
     $$
   \end{block}
   
-  This definition follows very similarly to that of independent events. Similar to that case, we can extend this definition to \alert{mutaul independence} of many variables if the probabilities of all combinations of variables can be factored.
+  \begin{itemize}
+    \item This definition follows very similarly to that of independent events. We can also extend this definition to \alert{mutual independence} of many variables if the probabilities of all combinations of variables can be factored.
+  \end{itemize}
   
 \end{frame}
 
 \subsection{Bernoulli Random Variables}
 
 \begin{frame}{Bernoulli Random Variables}
-  A Bernoulli RV only takes on two values\footnote{Sometimes you'll see the random variable take values $-1$ and $1$.}, $0$ and $1$, with probabilities $1-p$ and $p$, respectively.
+
+  \begin{itemize}
+    \item A Bernoulli RV only takes on two values\footnote{Sometimes you'll see the random variable take values $-1$ and $1$.}, $0$ and $1$, with probabilities $1-p$ and $p$, respectively.
   The pmf is therefore
   \begin{align*}
     p(1) &= p \\
     p(0) &= 1-p \\
     p(x) &= 0, \quad \text{if } x \neq 0 \text{ and } x\neq 1.
   \end{align*}
-  
-  By using the output of $0$ and $1$, the pmf is usually written in a more compact form:
+
+    \item By using the output of $0$ and $1$, the pmf is usually written in a more compact form:
   $$
   p(x) = \begin{cases} 
     p^x(1 - p)^x, & \text{if } x = 0\, \text{ or } x = 1,\\
     0 & \text{otherwise}
   \end{cases}
   $$
+  \end{itemize}
   
 \end{frame}
 
 \begin{frame}{Indicator functions}
-  A common instance of a Bernoulli RV is an \alert{indicator random variable}.
+  \begin{itemize}
+    \item A common instance of a Bernoulli RV is an \alert{indicator random variable}.
   Let $I_A$ be the random variable that takes on the value of $1$ if the event $A \subset \Omega$ occurs, and $0$ otherwise:
   $$
   I_A(\omega) = \begin{cases}
@@ -173,19 +199,23 @@ Chapter \CHAPTER: Probability}
     0 & \text{otherwise}
   \end{cases}
   $$
-  Here, we see that $P(I_A = 1) = P(A)$. 
+  \item Here, we see that $P(I_A = 1) = P(A)$. 
+  \end{itemize}
 \end{frame}
 
 \subsection{Binomail Distribution}
 
 \begin{frame}[allowframebreaks]{Binomial Distribution}
-  Using what we know about independent RVs and Bernoulli RVs, we can derive the pmf for a Binomial distribution.
+
+  \begin{itemize}
+    \item Using what we know about independent RVs and Bernoulli RVs, we can derive the pmf for a Binomial distribution.
   
-  Suppose that we have $n$ independent experiments, where $n$ is a fixed (positive) integer.
+    \item Suppose that we have $n$ independent experiments, where $n$ is a fixed (positive) integer.
   Let each experiment have two outcomes with probabilities $p$ and $1-p$, respectively, which we call ``success" or ``failure".
   We are interested now in the random variable $X$, the number of ``successes" in $n$ independent trials.
   
-  \emph{Question:} What is the probability that $X = k$, for some $k \in \{0, 1, 2, \ldots\}$?
+  \item \emph{Question:} What is the probability that $X = k$, for some $k \in \{0, 1, 2, \ldots\}$?
+  \end{itemize}
   
   \framebreak
   
@@ -193,17 +223,18 @@ Chapter \CHAPTER: Probability}
   
   \mode<article>{
   
-    \vspace{2mm}
-  
-    For $X = k$, we must have \emph{exactly} $k$ successes and $n-k$ failures. By the multiplication law, any one such sequence has probability $p^k(1 - p)^{n-k}$ (for instance suppose $n = 3$. What is the probability of the event $SFS$? it's $p \times (1-p) \times p = p^2(1-p)^{3-2}$.)
+    \begin{itemize}
+      \item For $X = k$, we must have \emph{exactly} $k$ successes and $n-k$ failures. By the multiplication law, any one such sequence has probability $p^k(1 - p)^{n-k}$ (for instance suppose $n = 3$. What is the probability of the event $SFS$? it's $p \times (1-p) \times p = p^2(1-p)^{3-2}$.)
     
-    Because we only care about the \emph{number} of successes, not the order, we now have a counting problem: with $n$ total trials (positions), how many ways can we arrange the $k$ successes? Another way of thinking is: ``How many ways can we choose $k$ out of $n$ locations in a sequence to place the successes?".
-    The answer is $\binom{n}{k}$, so in total, the probability that $X = k$ is: 
+      \item Because we only care about the \emph{number} of successes, not the order, we now have a counting problem: with $n$ total trials (positions), how many ways can we arrange the $k$ successes? Another way of thinking is: ``How many ways can we choose $k$ out of $n$ locations in a sequence to place the successes?".
+    
+    \item The answer is $\binom{n}{k}$, so in total, the probability that $X = k$ is: 
     $$
     p(k) = P(X = k) = \binom{n}{k}p^k(1- p)^{n-k}.
     $$
     
-    The function $p$ above is the pmf for the binomial distribution.
+    \item The function $p$ above is the pmf for the binomial distribution.
+    \end{itemize}
   }
   
   \framebreak
@@ -217,26 +248,30 @@ Chapter \CHAPTER: Probability}
     $$
   \end{exampleblock}
   
-  \begin{exampleblock}{Rolling Dice}
-    Suppose a five 6-sided (fair) dice are rolled simultaneously. What is the probability that at least two of the dice show the value 6?
+  \framebreak
+  
+  \begin{itemize}
+    \item Suppose a five 6-sided (fair) dice are rolled simultaneously. What is the probability that at least two of the dice show the value 6?
     
-    Let $X$ denote the number of 6s in this experiment, which takes values in the set $\{0, 1, \ldots 5\}$.
+    \item Let $X$ denote the number of 6s in this experiment, which takes values in the set $\{0, 1, \ldots 5\}$.
     We want the probability that $X \geq 2$. 
-    Because the different values of $X$ are mutually exclusive events (i.e., $X=2$ implies $X \neq 3$), we can calculate this as:
+    
+    \item Because the different values of $X$ are mutually exclusive events (i.e., $X=2$ implies $X \neq 3$), we can calculate this as:
     $$
     P(X \geq 2) = \sum_{i \in \{2, 3, 4, 5\}} p(i) \approx \Sexpr{1 - dbinom(0, 5, 1/6) - dbinom(1, 5, 1/6)},
     $$
     where $p(i)$ is the pmf of the binomial$(5, 1/6)$ distribution. 
-    Alternatively, we can use the complement set, which is smaller:
+    
+    \item Alternatively, we can use the complement set, which is smaller:
     $$
     P(X \geq 2) = 1 - P(X < 2) = 1 - \big(p(0) + p(1)\big) \approx \Sexpr{1 - dbinom(0, 5, 1/6) - dbinom(1, 5, 1/6)}
     $$
-  \end{exampleblock}
+  \end{itemize}
   
-  \framebreak
-  
-  \emph{Note:} A binomial RV can be expressed as the sum of independent Bernoulli RVs. That is, let $X_1, X_2, \ldots, X_n$ be independent Bernoulli RVs, each with $P(X_i = 1) = p$. Then,
+ \begin{itemize} 
+  \item \emph{Note:} A binomial RV can be expressed as the sum of independent Bernoulli RVs. That is, let $X_1, X_2, \ldots, X_n$ be independent Bernoulli RVs, each with $P(X_i = 1) = p$. Then,
   $Y = X_1 + X_2 + \ldots + X_n$ is a Binomial RV, with parameters $(n, p)$.
+  \end{itemize}
   
 \end{frame}
   
@@ -244,12 +279,16 @@ Chapter \CHAPTER: Probability}
 
 \begin{frame}[allowframebreaks]{Geometric Distribution}
   
-  We can construct a \alert{geometric} RV in a similar way that we did with the binomial distribution.
-  Suppose instead of having a fixed number of trials, we continue having a trial until our first success. That means that if $X = k$, we will have $k-1$ failures, one success, and then stop.
-  Thus, the pmf can easily be constructed to be: 
-  $$
-  p(k) = P(X = k) = (1-p)^{k-1}p, \quad k = 1, 2, 3, \ldots
-  $$
+  \begin{itemize}
+    \item We can construct a \alert{geometric} RV in a similar way that we did with the binomial distribution.
+    
+    \item Suppose instead of having a fixed number of trials, we continue having a trial until our first success. That means that if $X = k$, we will have $k-1$ failures, one success, and then stop.
+    
+    \item Thus, the pmf can easily be constructed to be: 
+    $$
+    p(k) = P(X = k) = (1-p)^{k-1}p, \quad k = 1, 2, 3, \ldots
+    $$
+  \end{itemize}
   
   \framebreak
   
@@ -267,19 +306,27 @@ Chapter \CHAPTER: Probability}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Negative Binomial Distribution}
-  The \alert{negative binomial} (NB) distribution can be thought of as a generalization of the geometric distribution; rather than stopping when we have exactly one success, we now will stop when we have $r$ successes.
   
-  For any particular sequence of trials of length $k$ that satisfy this condition, the probability is $p^r(1 - p)^{k - r}$.
-  Now, the last trial must be a success (because we stopped), so we need to choose the location of the remaining $r - 1$ successes. Thus, if $X$ has a negative binomial distribution, the pmf is:
+  \begin{itemize}
+    \item The \alert{negative binomial} (NB) distribution can be thought of as a generalization of the geometric distribution; rather than stopping when we have exactly one success, we now will stop when we have $r$ successes.
+  
+    \item For any particular sequence of trials of length $k$ that satisfy this condition, the probability is $p^r(1 - p)^{k - r}$.
+  
+    \item The last trial must be a success (because we stopped), so we need to choose the location of the remaining $r - 1$ successes. 
+    
+    \item Thus, if $X$ has a negative binomial distribution, the pmf is:
   $$
   p(k) = P(X = k) = \binom{k-1}{r - 1}p^r(1-p)^{k-r}.
   $$
+  \end{itemize}
   
   \framebreak
   
-  Another way that can be helpful for thinking about the NB-distribution is considering it as the sum of $r$ independent geometric random variables: 
+    \begin{itemize}
+      \item Another way that can be helpful for thinking about the NB-distribution is considering it as the sum of $r$ independent geometric random variables: 
   
-  we want to represent the total number of trials until the $r$th success, which is the sum of the number of trials until (and including) the first success, plus the number of trials from the first success until (and including) the second success, and continued until we get $r$ successes.
+      \item We want to represent the total number of trials until the $r$th success, which is the sum of the number of trials until (and including) the first success, plus the number of trials from the first success until (and including) the second success, and continued until we get $r$ successes.
+    \end{itemize}
   
   \begin{exampleblock}{Negative Binomial Lottery}
     Suppose that there is a type of lottery where each purchased ticket has equal probability of winning $(p = 1/100)$, and there are 3 total prizes to be won. 
@@ -296,31 +343,38 @@ Chapter \CHAPTER: Probability}
 
 \begin{frame}[allowframebreaks]{The Hypergeometric Distribution}
 
-Suppose that there is a total population of size $n$, and $r$ have some trait of interest (``success"), and $n-r$ do not (``failure").
-If we sample $m$ items from the population, then the total number of ``successes" in our sample of size $m$ follows a hypergeometric distribution:
+  \begin{itemize}
+    \item Suppose that there is a total population of size $n$, and $r$ have some trait of interest (``success"), and $n-r$ do not (``failure").
+    
+    \item If we sample $m$ items from the population, then the total number of ``successes" in our sample of size $m$ follows a hypergeometric distribution:
 $$
 P(X = k) = \frac{\binom{r}{k}\binom{n-r}{m-k}}{\binom{n}{m}}.
 $$
+  \end{itemize}
 
 \framebreak
 
-Combinatorially, for $X = k$, we must select $k$ successes out of the total possible $r$ successes in the entire population; there are $\binom{r}{k}$ ways to do this.
+  \begin{itemize}
+  
+  \item Combinatorially, for $X = k$, we must select $k$ successes out of the total possible $r$ successes in the entire population; there are $\binom{r}{k}$ ways to do this.
 
-Since we selected $m$ objects in our sample, and we want $m-k$ of them to be failures, we must pick $m-k$ failures from the $n-r$ failures in the population; there are $\binom{n-r}{m-k}$ ways to do this.
+  \item Since we selected $m$ objects in our sample, and we want $m-k$ of them to be failures, we must pick $m-k$ failures from the $n-r$ failures in the population; there are $\binom{n-r}{m-k}$ ways to do this.
 
-Together, the multiplication principle implies there are $\binom{r}{k}\binom{n-r}{m-k}$ ways that a sample of size $m$ contains $k$ successes from described population.
+  \item Together, the multiplication principle implies there are $\binom{r}{k}\binom{n-r}{m-k}$ ways that a sample of size $m$ contains $k$ successes from described population.
 
 \mode<presentation>{
-  Finally, there are a total of $\binom{n}{m}$ ways we can pick our sample.
+  \item Finally, there are a total of $\binom{n}{m}$ ways we can pick our sample.
 }
 
 \mode<article>{
-Finally, there are a total of $\binom{n}{m}$ ways we can pick our sample:
+\item Finally, there are a total of $\binom{n}{m}$ ways we can pick our sample:
 
 $$
 P(X = k) = \frac{\binom{r}{k}\binom{n-r}{m-k}}{\binom{n}{m}}.
 $$
 }
+
+\end{itemize}
 
 \begin{exampleblock}{Balls in a basket}
   Suppose that there are $n$ balls in a basket, and $r$ balls are black, $n-r$ balls are some other color. If we select $1 \leq m < n$ balls randomly (without replacement), let $X$ denote the number of black balls in our sample of size $m$. Then, for all $0 \leq k \leq r$,
@@ -333,7 +387,9 @@ $$
 
 \begin{frame}[allowframebreaks]{The Poisson Distribution}
 
-  The Poisson distribution is used very frequently in both theory and practice, though the derivation is less intuitive than other distributions, so we will first just provide the pmf:
+  \begin{itemize}
+    \item The Poisson distribution is used very frequently in both theory and practice, though the derivation is less intuitive than other distributions, so we will first just provide the pmf:
+  \end{itemize}
   
   \begin{block}{Definition: Poisson Distribution}
     The pmf of a random variable $X$ that follows a Poisson distribution with parameter $\lambda > 0$ is
@@ -344,7 +400,9 @@ $$
   
   \framebreak
   
-  Recall from calculus that $e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}$. Thus, like all pmf's, the pmf of a Poisson distributed RV sums to one: 
+  \begin{itemize}
+    \item Recall from calculus that $e^x = \sum_{n = 0}^\infty \frac{x^n}{n!}$. Thus, like all pmf's, the pmf of a Poisson distributed RV sums to one:
+  \end{itemize}
   
   \begin{align*}
     \sum_{k = 0}^\infty p(k) &= \sum_{k = 0} \frac{\lambda^k}{k!}e^{-\lambda} \\
@@ -354,7 +412,9 @@ $$
   
   \framebreak
   
-  The value of $\lambda$ controls the \emph{shape} of the distribution:
+  \begin{itemize}
+    \item The value of $\lambda$ controls the \emph{shape} of the distribution:
+  \end{itemize}
   
   \begin{figure}[ht]
   \centering
@@ -364,7 +424,9 @@ $$
  
 \framebreak
 
-The Poisson distribution can be derived as the limit of a binomial distribution as the number of trials $n \rightarrow \infty$, and $p\rightarrow 0$, such that $np = \lambda$.
+\begin{itemize}
+  \item The Poisson distribution can be derived as the limit of a binomial distribution as the number of trials $n \rightarrow \infty$, and $p\rightarrow 0$, such that $np = \lambda$.
+\end{itemize}
 
 \mode<presentation>{
   See next slide.
@@ -421,8 +483,12 @@ This derivation suggests how a Poisson distribution can arise in practice.
 
 \framebreak
 
-Following this, X is nearly binomially distributed, with $n$ being the number of sub-intervals, and $p = \lambda / n$ the probability of the event in each sub-interval.
-Taking the limit, we get something that is nearly Poisson distributed.
+\begin{itemize}
+  \item Following this, X is nearly binomially distributed, with $n$ being the number of sub-intervals, and $p = \lambda / n$ the probability of the event in each sub-interval.
+  \item Taking the limit, we get something that is nearly Poisson distributed.
+\end{itemize}
+
+\framebreak
 
 \begin{itemize}
 
@@ -454,9 +520,12 @@ In this scenario, the random (stochastic) process that generates the data is cal
 \section{Continuous Random Variables}
 
 \begin{frame}{Introduction}
-  Because discrete RVs take only a finite number of possibilities, they are relatively simple to define.
+
+  \begin{itemize}
+    \item Because discrete RVs take only a finite number of possibilities, they are relatively simple to define.
   
-  In many situations, however, we are interested in random variables that can take on a continuum of values rather than a finite (or countably infinite) number.
+    \item In many situations, however, we are interested in random variables that can take on a continuum of values rather than a finite (or countably infinite) number.
+  \end{itemize}
   
   \begin{exampleblock}{Example: Lifetime of electronic}
     We might be interested in the lifetime of an electronic component; the total lifetime may be random, but may take on any positive real number.
@@ -465,8 +534,10 @@ In this scenario, the random (stochastic) process that generates the data is cal
 \end{frame}
 
 \begin{frame}{Density function}
-  For continuous random variables, we no longer have a pmf (which maps all values of the random variable to their corresponding probabilities).
-  Instead, the role of the pmf is taken by a \alert{probability density function} (pdf), which we will denote $f(x)$.
+  \begin{itemize}
+    \item For continuous random variables, we no longer have a pmf (which maps all values of the random variable to their corresponding probabilities).
+    \item Instead, the role of the pmf is taken by a \alert{probability density function} (pdf), which we will denote $f(x)$.
+  \end{itemize}
   
   \begin{block}{Basic properties of a pdf}
     If $f(x)$ is a pdf, then $f(x) \geq 0$ for all $x$, $f$ is piece-wise continuous, and $\int_{-\infty}^{\infty} f(x) dx = 1$.
@@ -475,19 +546,22 @@ In this scenario, the random (stochastic) process that generates the data is cal
 \end{frame}
 
 \begin{frame}{Probabilities}
-  If $X$ is a random variable with a density function $f$, then for any $a \leq b$, the probability that $X$ falls in the interval $(a, b)$ (with the treatment that if $a = b$, the interval collapses to the set $\{a\}$) is given by: 
+  \begin{itemize}
+    \item If $X$ is a random variable with a density function $f$, then for any $a \leq b$, the probability that $X$ falls in the interval $(a, b)$ (with the treatment that if $a = b$, the interval collapses to the set $\{a\}$) is given by: 
   $$
   P(a < X < b) = \int_{a}^b f(x) dx.
   $$
-  An immediate consequence of this definition is that $P(X = a) = 0$ for any $a \in \R$.
+  \item An immediate consequence of this definition is that $P(X = a) = 0$ for any $a \in \R$.
+  \end{itemize}
   
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Example: Continuous uniform random variable}
-  By \emph{uniform}, we mean that all outcomes in the given set are equally as likely.
-  For example, if $X$ is a RV with uniform distribution on the interval $[0, 1]$, then any real number in this interval is equally likely, and the probability that $X$ is in a sub-interval of length $h$ should be equal to $h$. 
   
-You can verify that the following density satisfies this condition: 
+  \begin{itemize}
+    \item By \emph{uniform} probability, we mean that all outcomes in the given set are equally as likely.
+    \item For example, if $X$ is a RV with uniform distribution on the interval $[0, 1]$, then any real number in this interval is equally likely, and the probability that $X$ is in a sub-interval of length $h$ should be equal to $h$. 
+    \item You can verify that the following density satisfies this condition: 
 
 $$
 f(x) = \begin{cases}
@@ -495,10 +569,13 @@ f(x) = \begin{cases}
 0 & x < 0 \text{ or } x > 1.
 \end{cases}
 $$
+\end{itemize}
 
 \mode<article>{
 
-For instance, we can pick some $c \in [0, 1]$, and $h \in (0, 1-c)$. Then the probability that $X \in (c, c+h)$ is given by:
+\begin{itemize}
+  \item For instance, we can pick some $c \in [0, 1]$, and $h \in (0, 1-c)$. Then the probability that $X \in (c, c+h)$ is given by:
+\end{itemize}
 
 $$
 P(c < X < c+h) = \int_{c}^{c+h}1_{0 \leq x \leq 1}dx = \int_c^{c+h}1dx = (c + h) - c = h.
@@ -508,7 +585,9 @@ $$
 
 \framebreak
 
-The previous density can be generalized to any interval $[a, b]$, such that $a < b$.
+\begin{itemize}
+  \item The previous density can be generalized to any interval $[a, b]$, such that $a < b$.
+\end{itemize}
 
 \begin{block}{Continuous uniform density}
   If $X$ is a RV uniformly distributed on an interval $[a, b]$, where $a < b$, then the corresponding density function is: 
@@ -522,38 +601,46 @@ The previous density can be generalized to any interval $[a, b]$, such that $a <
 
 \framebreak
 
-One important thing to note is that if $X$ is a continuous RV, then
+\begin{itemize}
+  \item One important thing to note is that if $X$ is a continuous RV, then
 $$
 P(a < X < b) = P(a \leq X < b) = P(a < X \leq b).
 $$
-This is because the probability $X$ being any particular value is zero; if this were not the case, then the probability of the entire set would infinite (and probabilities must sum to one).
+  \item This is because the probability $X$ being any particular value is zero; if this were not the case, then the probability of the entire set would infinite (and probabilities must sum to one).
+  \end{itemize}
 
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Cumulative distribution function}
 
-  The cumulative distribution function of a continuous random variable $X$ is defined in the same way as for a discrete random variable:
+\begin{itemize}
+  \item The cumulative distribution function of a continuous random variable $X$ is defined in the same way as for a discrete random variable:
   
   $$
   F(x) = P(X \leq x) = \int_{-\infty}^x f(x) dx.
   $$
   
-  Thus, we can connect the cdf and the pdf of a continuous random variable using the fundamental theorem of calculus.
-  Specifically, if $f(x)$ is continuous at $x$, then $F'(x)$, and
+  \item Thus, we can connect the cdf and the pdf of a continuous random variable using the fundamental theorem of calculus.
+  
+  \item Specifically, if $f(x)$ is continuous at $x$, then $F'(x)$, and
   $$
   P(a \leq X \leq b) = \int_{a}^{b} f(x)dx = F(b) - F(a).
   $$
+\end{itemize}
   
   \framebreak
   
-  This derivation gives some hints at properties of the cdf (both continuous and discrete RVs). Let $F$ be a distribution function. Then the following properties hold: 
+  \begin{itemize}
+   \item This derivation gives some hints at properties of the cdf (both continuous and discrete RVs). Let $F$ be a distribution function. Then the following properties hold: 
   \begin{itemize}
     \item $F$ is right-continuous.
     \item $F$ is monotonically increasing (non-decreasing).
-    \item $F: \R \rightarrow [0, 1]$ and satisfies $\lim_{x \rightarrow -\infty} F(x) = 0$, and $\lim_{x \rightarrow \infty}$ F(x) = 1.
+    \item $F: \R \rightarrow [0, 1]$ and satisfies $\lim_{x \rightarrow -\infty} F(x) = 0$, and $\lim_{x \rightarrow \infty} F(x) = 1$.
   \end{itemize}
   
-  Note: every probability distribution supported on the real numbers is uniquely identified by its distribution function $F$ (more to come).
+  \item \emph{Note}: every probability distribution supported on the real numbers is uniquely identified by its distribution function $F$ (more to come).
+  
+  \end{itemize}
   
   \framebreak
   
@@ -573,12 +660,16 @@ This is because the probability $X$ being any particular value is zero; if this 
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Percentiles}
-  You're probably familiar with the term \alert{median}.
+  \begin{itemize}
+    \item You're probably familiar with the term \alert{median}.
   For any given sample, the median defines the ``mid-point", meaning that half of the values are larger, half are smaller.
   
-  This same concept applies to distribution functions.
-  That is, the median of a distribution $F$ is defined to be that value $x_{.5}$ such that $P(X < x_{.5}) = 0.5$.
-  Formally, the sample median is the same as the definition above, using the \emph{empirical} distribution function \citep{wiki:edf}.
+  \item This same concept applies to distribution functions.
+  
+  \item That is, the median of a distribution $F$ is defined to be that value $x_{.5}$ such that $P(X < x_{.5}) = 0.5$.
+  
+  \item Formally, the sample median is the same as the definition above, using the \emph{empirical} distribution function \citep{wiki:edf}.
+  \end{itemize}
   
   It is important to note that, as defined, the median value may not be unique!
 
@@ -591,7 +682,9 @@ This is because the probability $X$ being any particular value is zero; if this 
     If an inverse function is needed in this case, we will define $F^{-1}(p) = \inf \{x \in \R: F(x) \geq p\}$.
   \end{block}
   
-  The last bit of the definition is just some important book keeping to ensure the inverse function exists in odd examples, though I don't think it comes up in this course.
+  \begin{itemize}
+    \item The last bit of the definition is just some important book keeping to ensure the inverse function exists in odd examples, though I don't think it comes up in this course.
+  \end{itemize}
   
   \framebreak
   
@@ -649,29 +742,88 @@ This is because the probability $X$ being any particular value is zero; if this 
 \subsection{Example Distributions}
 
 \begin{frame}[allowframebreaks]{Exponential Distribution}
-  The exponential density function is:
+  \begin{itemize}
+    \item The exponential density function is:
   $$
   f(x) = \begin{cases}
     \lambda e^{-\lambda x} & x \geq 0 \\
     0 & x < 0
   \end{cases}
   $$
-  Like the Poisson distribution, the exponential density function depends on a single parameter $\lambda$.
-  When this is the case, we refer to it as the \alert{family} of exponential densities that is \emph{indexed} by the parameter $\lambda$. 
+  \item Like the Poisson distribution, the exponential density function depends on a single parameter $\lambda$.
+  
+  \item When this is the case, we refer to it as the \alert{family} of exponential densities that is \emph{indexed} by the parameter $\lambda$.
+  \end{itemize}
   
   \framebreak
   
-  The cdf is easily found via the fundamental theorem of calculus: 
+  \begin{itemize}
+    \item The cdf is easily found via the fundamental theorem of calculus: 
   $$
   F(x) = \int_{-\infty}^x f(u)du = \begin{cases}
     1 - e^{-\lambda x} & x \geq 0 \\
     0 & x < 0
   \end{cases}
   $$
-  From this, we can easily find quantiles of the distribution, such as the median: by solving $F(x_{.5}) = 1/2$
+    \item From this, we can easily find quantiles of the distribution, such as the median: by solving $F(x_{(.5)}) = 1/2$
   $$
-  1 - e^{-\lambda x_{.5}} = \frac{1}{2} \quad \implies \quad x_{.5} = \frac{\log 2}{\lambda}.
+  1 - e^{-\lambda x_{(.5)}} = \frac{1}{2} \quad \implies \quad x_{(.5)} = \frac{\log 2}{\lambda}.
   $$
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The exponential distribution is often used to model lifetimes or waiting times (time-to-event).
+    \item In this context, it's conventional to replace the variable $x$ with $t$. 
+  
+    \item The exponential distribution has a unique property known as the \alert{memoryless} property.
+  
+    \item That is, if something follows an exponential distribution and has already lasted a time of $s$, then the probability that it will last another $t$ units of time does not depend on $s$:
+  \end{itemize}
+  
+  \framebreak
+  
+  \emph{Memoryless property:} Let $T$ be an exponentially distributed RV, and $s, t > 0$. Calculate $P(T > t + s | T > s)$.
+  
+  \mode<article>{
+    \begin{align*}
+      P(T > t+s | T > s) &= \frac{P(T > t + s \text{ and } T > s)}{P(T > s)} \\
+      &= \frac{P(T > t+s)}{P(T > s)} \\
+      &= \frac{1 - F(t+s)}{1 - F(s)} \\
+      &= \frac{e^{-\lambda(t + s)}}{e^{-\lambda s}} \\
+      &= e^{-\lambda t} = P(T > t).
+    \end{align*}
+  }
+  
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item It can be shown that any continuous RV with the \emph{memoryless} property must be exponentially distributed.
+  
+    \item Similarly, it can be shown that any discrete RV with the \emph{memoryless} property must be geometrically distributed (maybe a HW question?)
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The exponential distribution is also related to the \emph{Poisson process} that we have discussed.
+    \item Consider a poisson process with rate $\lambda$ over an interval $\mathcal{T} \subset \R$.
+  
+    \item While the number of events in any interval $T_0 \subset \mathcal{T}$ of length $t$ follows a Poisson distribution, the time-to-next-event $T$ follows an exponential distribution:
+  
+  \mode<article>{
+  \item Suppose that an event occurs at time $t_0 \in T_0$, and let $T$ denote the time until next event. Then:
+  \begin{align*}
+  P(T > t) &= P\big(\text{no events in} (t_0, t_0 + t)\big) \\
+  &= P(X = 0), \quad \text{where } X \sim \text{Pois}(\lambda t). \\
+  &= e^{-\lambda t},
+  \end{align*}
+  \item Therefore $T$ is exponentially distributed with parameter $\lambda$.
+  }
+  \end{itemize}
+  
 \end{frame}
 
 \newcommand\acknowledgments{

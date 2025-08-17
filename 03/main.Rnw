@@ -54,14 +54,80 @@ Chapter \CHAPTER: Joint Distributions}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Joint cdf}
+\begin{frame}[allowframebreaks]{Joint cdf}
   \begin{itemize}
     \item Just like the univariate case, the joint behavior of two random variables, $X$ and $Y$, is determined by the cumulative distribution function
     $$
     F(x, y) = P(X \leq x, Y \leq y).
     $$
     \item This is true for both discrete and continuous random variables.
+    \item The any set $A \subset \R^2$, the joint cdf can give $P\big((X, Y) \in A\big)$.
   \end{itemize}
+  
+  \framebreak
+
+  \begin{itemize}
+    \item For example, let $A$ be the rectangle defined by $x_1 < X < x_2$, and $y_1 < Y < y_2$. (It helps to draw a picture...)
+    \item $F(x_2, y_2)$ gives $P(X < x_2, Y < y_2)$, an area that is too big, so we subtract off pieces
+    \begin{itemize}
+      \item $F(x_2, y_1) = P(X < x_2, Y < y_1)$ (we already have the area $X < x_2$, but now subtract away the area $Y < y_1$).
+      \item $F(x_1, y_2) = P(X < x_1, Y < y_2)$ (Now subtracting the area $X < x_1$)
+      \item We have ``double subtracted" the area $\{X < x_1, Y < y_1\}$, so we add it back.
+    \end{itemize}
+    \end{itemize}
+  
+  $$P\big((X, Y) \in A\big) = F(x_2, y_2) - F(x_2, y_1) - F(x_1, y_2) + F(x_1, y_1).$$
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The definition also applies to more than two random variables. 
+    \item Let $X_1, \ldots, X_n$ be jointly distributed random variables defined on the same sample space. Then
+    $$
+    F(x_1, x_2, \ldots, x_n) = P(X_1 \leq x_1, X_2 \leq x_2, \ldots, X_n \leq x_n).
+    $$
+    
+    \item Like the univariate case, we can also define the pmf and pdf of jointly distributed random variables as well. 
+  \end{itemize}
+  
+\end{frame}
+
+\section{Discrete Random Variables}
+
+\begin{frame}[allowframebreaks]{Discrete Random Variables}
+
+  \begin{block}{Definition: Joint pmf}
+    Let $X$ and $Y$ be discrete random variables define on the same sample space, and take on values $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$, respectively. The \alert{joint pmf} (or joint frequency function), is
+    $$
+    p(x_i, y_j) = P(X = x_i, Y = y_j).
+    $$
+  \end{block}
+
+  \begin{itemize}
+    \item For discrete RVs, it's often useful to describe the joint pmf as a frequency table.
+  \end{itemize}
+
+  \framebreak
+
+  \begin{itemize}
+    \item Suppose a fair coin is tossed 3 times. Let $X$ denote the number of heads on the first toss, and $Y$ the total number of heads.
+    \item The sample space is
+    $$
+    \Omega = \{hhh, hht, hth, thh, htt, tht, tth, ttt\}.
+    $$
+    \item The joint pmf can be expressed as the frequency table below (Table~\ref{tab:freq}).
+  \end{itemize}
+
+  \begin{table}
+  \begin{tabular}{c|cccc}
+    & $y$             &             &                 &              \\\hline
+  $x$ &           $0$ &           $1$ &           $2$ &          $3$ \\\hline
+  $0$ & $\frac{1}{8}$ & $\frac{2}{8}$ & $\frac{1}{8}$ &          $0$ \\
+  $1$ &           $0$ & $\frac{1}{8}$ & $\frac{2}{8}$ & $\frac{1}{8}$
+  \end{tabular}
+  \caption{\label{tab:freq}Frequency table for $X$ and $Y$, flipping a fair coin three times.}
+  \end{table}
+
 \end{frame}
 
 \newcommand\acknowledgments{

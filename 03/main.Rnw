@@ -127,7 +127,156 @@ Chapter \CHAPTER: Joint Distributions}
   \end{tabular}
   \caption{\label{tab:freq}Frequency table for $X$ and $Y$, flipping a fair coin three times.}
   \end{table}
+  
+  \begin{itemize}
+    \item Note that the probabilities in Table~\ref{tab:freq} sum to one.
+    \item Using the probability laws we have already learned, we can calculate \alert{marginal} probabilities. 
+    
+    \framebreak
+    
+    \begin{align*}
+      p_Y(0) &= P(Y = 0) \\
+      &= P(Y = 0, X = 0) + P(Y = 0, X = 1) \\
+      &= \frac{1}{8} + 0 = \frac{1}{8} \\
+      p_Y(1) &= P(Y = 1) \\
+      &= P(Y = 1, X = 0) + P(Y = 1, X = 1) \\
+      &= \frac{2}{8} + \frac{1}{8} = \frac{3}{8}.
+    \end{align*}
+    
+    \framebreak
 
+    \item In general, to find the frequency function for $Y$ and $X$, we just need to sum the appropriate columns or rows, respectively.
+    \item $p_X(x) = \sum_i P(x, y_i)$ and $p_Y(y) = \sum_{j} P(x_j, y)$.
+    \item The case with multiple random variables is similar:
+    $$
+    p_{X_i}(x_i) = \sum_{x_j: j\neq i} p(x_1, x_2, \ldots, x_n).
+    $$
+    \item We can also get marginal frequencies for more than one variable:
+    $$
+    p_{X_iX_j}(x_i, x_j) = \sum_{x_k: k \notin \{i, j\}} p(x_1, x_2, \ldots, x_n).
+    $$
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Example: Multinomial Distribution}
+  
+  \begin{itemize}
+    \item The \alert{multinomial} distribution is a generalization of the binomial distribution.
+    \item Suppose there are $n$ independent trials, each with $r$ possible outcomes, with probabilities $p_1, p_2, \ldots, p_r$, respectively.
+    \item Let $N_i$ be the total number of outcomes of type $i$ in the $n$ trials, with $i \in \{1, 2, \ldots, r\}$.
+    \item The probability of any particular sequence $(N_1, N_2, \ldots, N_r) = (n_1, n_2, \ldots, n_r)$ is
+    $$
+    p_1^{n_1}p_2^{n_2}\cdots p_r^{n_r}
+    $$
+    \item The total number of ways to do this was an identity from Chapter~1 (Proposition~1.3):
+    $$
+    \binom{n}{n_1\, \cdots\, n_r}.
+    $$
+    \item Combining this gives us the pmf of the multinomial distribution:
+  \end{itemize}
+  
+  \begin{block}{Multinomial Distribution}
+    Let $N_1, N_2, \ldots, N_r$ be random variables that follow a multinomial distribution with parameters $N$ and $(p_1, \ldots, p_r)$. The joint pmf is
+    $$
+    p(n_1, n_2, \ldots, n_r) = \binom{n}{n_1\, \cdots\, n_r}p_1^{n_1}p_2^{n_2}\cdots p_r^{n_r}
+    $$
+  \end{block}
+    
+    \begin{itemize}
+      \item The marginal distribution for any $N_i$ can be found by summing the joint frequency function over the other $n_j$.
+      \item While possible, this is a non-trivial algebraic exercise.
+      \item The simple alternative is to reframe the problem: Let $N_i$ be the number of successes in $n$ trials, and $\tilde{N}_i = \sum_{j \neq i}N_j$ be the number of failures. The probability of success is still $p_i$, leaving the probability of failure to be $1 - p_i$. 
+      \item Thus, we see that the marginal distribution for $N_i$ must follow a binomial distribution:
+      \begin{align*}
+      p_{N_i}(n_i) &= \sum_{n_j: j \neq i} \binom{n}{n_1\, \cdots\, n_r}p_1^{n_1}p_2^{n_2}\cdots p_r^{n_r}\\
+      & = \binom{n}{n_i}p_i^{n_i}(1 - p_i)^{n-n_i}
+      \end{align*}
+    \end{itemize}
+  
+\end{frame}
+
+\section{Continuous Random Variables}
+
+\begin{frame}[allowframebreaks]{Continuous Random Variables}
+  \begin{itemize}
+    \item Let $X, Y$ be continuous random variables with joint cdf $F(x, y)$.
+    \item Their \alert{joint density function} is a piecewise continuous function of two variables, $f(x, y)$.
+    \item A few properties: 
+    \begin{itemize}
+      \item $f(x, y) \geq 0$ for all $(x, y) \in \R$ (or the support).
+      \item $\int_{-\infty}^\infty\int_{-\infty}^\infty f(x, y) dxdy = 1$.
+      \item For any ``measureable set" $A \subset \R^2$, $P\big((X, Y) \in A\big) = \int\int_A f(x, y) dxdy$
+      \item In particular, $F(x, y) = \int_{-\infty}^x\int_{-\infty}^y f(u, v)dudv$.
+    \end{itemize}
+    \item From the fundamental theorem of multivariable calculus, it follows that
+    $$
+    f(x, y) = \frac{\partial^2}{\partial x\partial y}F(x, y),
+    $$
+    wherever the derivative is defined.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Finding joint probabilities}
+    Let $X, Y$ be jointly defined RVs with pdf
+    $$
+    f(x, y) = \frac{12}{7}(x^2 + xy), \quad 0 \leq x \leq 1, \quad 0 \leq y \leq 1.
+    $$
+    Find $P(X > y)$.
+    
+    \mode<article>{
+    \begin{align*} 
+      P(X > Y) &= \frac{12}{7}\int_{0}^1\int_{0}^x (x^2 + xy)dydx \\
+      &= \frac{9}{14}.
+    \end{align*}
+    }
+    
+  \end{exampleblock}
+  
+  \mode<presentation>{
+    \emph{Solution:}
+  }
+  
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Marginal cdf}
+    The \alert{marginal cdf} of $X$, denoted $F_X$, is
+    \begin{align*}
+      F_X(x) &= P(X \leq x) \\
+      &= P(X \leq x \cap Y \in \R) = P(X \leq x \cap Y < \infty)\\
+      &= \lim_{y \rightarrow \infty} F(x, y) \\
+      &= \int_{-\infty}^x\int_{-\infty}^{\infty} f(u, y)dydu.
+    \end{align*}
+    By taking the derivative of both sides of the equation, we get the \alert{marginal density} of $X$:
+    $$
+    f_X(x) = F_{X}'(x) = \int_{-\infty}^\infty f(x, y)dy.
+    $$
+    
+    \framebreak
+    
+    \begin{exampleblock}{Calculating Marginal Densities}
+      Using the same joint distribution as the previous example, find the marginal density of $X$: 
+      \begin{align*}
+      f_X(x) &= \int_Y f(x, y) dy \\
+      &= \frac{12}{7} \int_{0}^1 (x^2 + xy)dy \\
+      &= \frac{12}{7} \Big(x^2y + \frac{x}{2}y^2\Big)\Big|^{1}_{0} \\
+      &= \frac{12}{7} \Big(x^2 + \frac{x}{2}\Big)
+      \end{align*}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{More than two random variables}
+  \begin{itemize}
+    \item For several jointly continuous random variables, we can make the obvious generalizations.
+    \item That is, to find the \emph{marginal} densities, we need to ``marginalize-" or ``integrate-" out the \alert{nusaince} variables.
+    \item This means integrating out any combination of variables that we want.
+    \item Example: Let $X$, $Y$, and $Z$ be jointly continuous RVs with pdf $f(x, y, z)$. Then the two-dimensional marginal distribution of $X$ and $Z$ is: 
+    $$
+    f_{XZ}(x, z) = \int_{-\infty}^\infty f(x, y, z) dy.
+    $$
+  \end{itemize}
 \end{frame}
 
 \newcommand\acknowledgments{

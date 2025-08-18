@@ -279,6 +279,130 @@ Chapter \CHAPTER: Joint Distributions}
   \end{itemize}
 \end{frame}
 
+\begin{frame}[allowframebreaks]{Example: constructing bivariate cdfs}
+  \begin{itemize}
+    \item Suppose that $F(x)$ and $G(y)$ are cdfs for random variables $X$ and $Y$, resp. 
+    \item It can be shown that the following function, $H(x, y)$, is always a bivariate cdf for all $-1 \leq \alpha \leq 1$:
+    $$
+    H(x, y) = F(x)G(y)\Big(1 + \alpha \big(1 - F(x)\big)\big(1 - G(y)\big)\Big).
+    $$
+    \item Because $\lim_{x \rightarrow \infty} F(x) = \lim_{y \rightarrow \infty} G(x) = 1$, the marginal distributions are:
+    \begin{align*}
+      \lim_{y \rightarrow \infty}H(x, y) &= F(x) \\
+      \lim_{x \rightarrow \infty}H(x, y) &= G(y)
+    \end{align*}
+    \item Thus, we can use this approach to build an infinite number of biviariate distributions that have a particular marginal distribution.
+    
+    \framebreak
+    
+    \item One important example is when the marginal distributions are uniformly distributed.
+    \item Let $F(x) = x, 0 \leq x \leq 1$, and $G(y) = y, 0 \leq y \leq 1$.
+    \item By selecting $\alpha = -1$, we have 
+      \begin{align*}
+        H(x, y) &= xy[1 - (1-x)(1-y)]\\
+        &= x^2y + y^2x - x^2y^2, \quad 0\leq x, y \leq 1.
+      \end{align*}
+    \item The density is
+      \begin{align*}
+        h(x, y) &= \frac{\partial^2}{\partial x\partial y}H(x, y) \\
+        &= 2x + 2y - 4xy, \quad 0 \leq x, y \leq 1.
+      \end{align*}
+    \item \href{https://www.desmos.com/3d/p0makz897t}{Here is a link} to a 3D rendering of this function.
+
+  \framebreak
+  
+    \item Now, let's select $\alpha = 1/2$:
+    \begin{align*}
+      H(x, y) &= xy\Big(1 + \frac{1}{2}\big(1 - F(x)\big)\big(1 - G(y)\big)\Big) \\
+      &= \frac{1}{2}x^2y^2 - \frac{1}{2}x^2y - \frac{1}{2}xy^2 + \frac{3}{2}xy.
+    \end{align*}
+    \item Taking the derivative, we get:
+    \begin{align*}
+      h(x, y) &= \frac{\partial^2}{\partial x\partial y}H(x, y) \\
+      &= 2xy - x - y +\frac{3}{2}, \quad 0 \leq x, y \leq 1.
+    \end{align*}
+    \item \href{https://www.desmos.com/3d/otohcn69lx}{Here is a link} to a 3D rendering of this function.
+  
+  \framebreak
+  
+    \item The last two joint cdfs were examples of a \alert{copula}. 
+    
+    \begin{block}{Definition: Copulas}
+      A copula is a joint cdf that has uniform marginal distributions.
+    \end{block}
+    
+    \item Let $C(u, v)$ be a copula. One immediate consequence of the definition is that if $U$ and $V$ are uniform random variables, then $P(U \leq u) = C(u, 1) = u$, and $P(V \leq v) = C(1, v) = v$. 
+    
+    \framebreak
+    
+    \item Let $C(u, v)$ be a copula, we will restrict ourselves to the case where it is twice differentiable, such that $c(u,v) = \frac{\partial^2}{\partial u\partial v} C(u, v) \geq 0$.
+    \item let $F_X$ and $F_Y$ be the cdfs of $X$ and $Y$, resp.
+    \item Now define $U = F_X(X)$, and $V = F_Y(Y)$. From Proposition~2.2, $U$ and $V$ are uniformly distributed.
+    \item Now consider the function $H(x, y) = C(u, v) = C\big((F_X(x), F_Y(y)\big)$.
+    \item Thus, by the property that $C(u, 1) = u$ and $C(1, v) = v$, we have
+    \begin{align*}
+      C\big(F_X(x), 1\big) &= F_X(x) \\
+      C\big(1, F_Y(y)\big) &= F_Y(y).
+    \end{align*}
+    Therefore by definition, $F_{XY}(x, y) = H(x, y) = C\big((F_X(x), F_Y(y)\big)$.
+    \item Using the chain rule, we can differentiate to obtain
+    $$
+    f_{XY}(x, y) = c\big(F_X(x), F_Y(y)\big)f_X(x)f_Y(y).
+    $$
+    
+    \framebreak
+    
+    \item \alert{Takeaway:} We took arbitrary marginal distributions $F_X$ and $F_Y$, and created a family of joint density functions, defined by \emph{any} copula. Thus: the marginal distributions do not determine the joint distribution.
+    \item There is a Theorem known as Sklar's Theorem \citep{wikiSklar} that generalizes this statement: All joint distributions can be expressed using a copula and marginal distributions, \emph{and} the representation is unique.
+    \item That is, the copula can be thought of as a way to describe the dependence between the variables in any joint distribution. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Uniform on specific region}
+
+\begin{itemize}
+  \item So far when we have talked about \emph{uniform distributions}, we think about being uniform over $[0, 1]$, or a higher dimensional box: $[a, b]^d$.
+  \item It's often useful to have a uniform distribution for other regions of space.
+  \item Let $R\subset \R^2$ be any region of interest. The two-dimensional uniform distribution over $R$ is defined by the probability
+  $$
+  P\big((X, Y) \in A\big) = \frac{|A|}{|R|},
+  $$
+  where $|\,|$ denotes the measure of the area.
+\end{itemize}
+
+\framebreak
+
+\begin{itemize}
+  \item Example: Suppose a point is chosen randomly in a disk of radius $1$.
+  \item The area of the disk is $\pi r^2 = \pi$, and therefore the joint pdf for the location $(X, Y)$ is
+  $$
+  f(x, y) = \begin{cases} \frac{1}{\pi} & x^2 + y^2 \leq 1 \\ 0 & \text{otherwise}\end{cases}
+  $$
+  \item Now let $R$ be the random variable denoting the distance of the point from the origin.
+  \item Note that $R \leq r$ if and only if the point lies in a disk of radius $r$. This disk has area $\pi r^2$, and therefore the joint probability is
+  $$
+  P(R \leq r) = \frac{\pi r^2}{\pi} = r^2, \quad 0 \leq r \leq 1.
+  $$
+  \item Taking a derivative, the corresponding density function is 
+  $$f_R(r) = 2r, \quad 0 \leq r \leq 1.$$
+  
+  \framebreak 
+  
+  \item Now let us compute the marginal density of the $x$ coordinate: 
+  
+  \mode<article>{
+  \begin{align*}
+    f_X(x) &= \int_{-\infty}^\infty f(x, y)dy \\
+    &= \int_{-\infty}^\infty \frac{1}{\pi}\times 1[x^2 + y^2 \leq 1]dy\\
+    &= \int_{-\sqrt{1 - x^2}}^{\sqrt{1 - x^2}} \frac{1}{\pi}dy \\
+    &= \frac{2}{\pi} \sqrt{1 - x^2}, \quad -1 \leq x \leq 1. 
+  \end{align*}
+  }
+  
+\end{itemize}
+
+\end{frame}
+
 \newcommand\acknowledgments{
 \begin{itemize}
 \item   Compiled on {\today} using \Rlanguage version \Sexpr{getRversion()}.

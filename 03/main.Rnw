@@ -741,6 +741,139 @@ Chapter \CHAPTER: Joint Distributions}
     f_Z(z) = \int_{-\infty}^{\infty} |x|f_X(x)f_Y(xz) dx.
     $$
   \end{itemize}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Example: Cauchy density}
+
+\begin{itemize}
+  \item Let $X$ and $Y$ be independent, standard normal random variables.
+  \item We wish to find the pdf of $Z = Y / X$.
+  \item Using the expression we previously derived for the quotient of independent RVs, we have
+  $$
+  f_Z(z) = \int_{-\infty}^{\infty} \frac{|x|}{2\pi}e^{-x^2/2}e^{-x^2z^2/2} \, dx.
+  $$
+  \item Because the integrand is symmetric, we can re-express this as
+  \begin{align*}
+    f_Z(z) &= 2\int_{0}^{\infty} \frac{|x|}{2\pi}e^{-x^2/2}e^{-x^2z^2/2} \,dx \\
+     &= \frac{1}{\pi}\int_{0}^\infty x e^{-x^2\big((z^2 + 1)/2\big)} \, dx \\
+     &= \frac{1}{2\pi} \int_{0}^\infty e^{-u\big((z^2 + 1) / 2\big)}\, du \\
+     &= \frac{1}{2\lambda \pi} \int_{0}^\infty \lambda e^{-u\lambda}\, du \\
+     &= \frac{1}{\pi(z^2 + 1)}, \quad -\infty < z < \infty.
+  \end{align*}
+  \item Here, I made the substitution $\lambda = (z^2 + 1)/2$, and the integral was calculated using the fact that the pdf of the exponential distribution integrates to one: $\int_0^\infty \lambda e^{-\lambda x} dx = 1$.
+  \item This density is called the \alert{Cauchy density}.
+  \item Like the standard normal, the Cauchy density is symmetric about zero and bell-shaped, but the tails of the Cauchy tend to zero very slowly.
+  \item \href{https://www.desmos.com/calculator/tqvayodexb}{Here is a link} showing this comparison.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{The General Case}
+  \begin{itemize}
+    \item There is also a way to find the pdf of more general cases, though the derivation is outside the scope of this course.
+    \item Let $X$ and $Y$ be jointly distributed, continuous RVs, and suppose we are interested in the joint pdf of $U = g_1(X, Y)$, $V = g_2(X, Y)$, where $g_1$ and $g_2$ are invertible functions with continuous partial derivatives.
+    \item We will denote the inverse of $g_1$ and $g_2$ as $X = h_1(U, V)$ and $Y = h_2(U, V)$, respectively.
+    % \item The \alert{Jacobian} of the transformation $J(x, y)$ is
+    % $$
+    % J(x, y) = \det \begin{bmatrix}\frac{\partial g_1}{\partial x} & \frac{\partial g_1}{\partial y} \\ \frac{\partial g_2}{\partial x} & \frac{\partial g_2}{\partial y} \end{bmatrix} = \Big(\frac{\partial g_1}{\partial x}\Big)\Big(\frac{\partial g_2}{\partial y}\Big) - \Big(\frac{\partial g_2}{\partial x}\Big)\Big(\frac{\partial g_2}{\partial y}\Big).
+    % $$
+    \item The pdf of $(U, V)$ can be calculated in two ways:
+  \end{itemize}
+  
+  \begin{block}{Proposition 3.1: Multivariate transformations}
+    Under the assumptions above, the joint density of $U$ and $V$ is 
+    \begin{align*}
+    f_{UV}(u, v) &= f_{XY}\big(h_1(u, v), h_2(u, v)\big)\Big|J_h(u, v)\Big| \\
+                 &= f_{XY}\big(x, y\big)\Big|J^{-1}_g\big(x, y\big)\Big|
+    \end{align*}
+    for $(u, v)$ such that $u = g_1(x, y)$ and $v = g_2(x, y)$ for some $(x, y)$, and $0$ otherwise.
+  \end{block}
+  
+  \begin{itemize}
+    \item Above, we call $J_f$ the \alert{Jacobian determinant} (or just Jacobian) of $f$. It is equal to the matrix of partial derivatives: 
+    \begin{align*}
+      J_h &= \det \begin{bmatrix}\frac{\partial h_1}{\partial u} & \frac{\partial h_1}{\partial v} \\ \frac{\partial h_2}{\partial u} & \frac{\partial h_2}{\partial v} \end{bmatrix} = \Big(\frac{\partial h_1}{\partial u}\Big)\Big(\frac{\partial h_2}{\partial v}\Big) - \Big(\frac{\partial h_2}{\partial u}\Big)\Big(\frac{\partial h_2}{\partial v}\Big) \\
+      J_g &= \det \begin{bmatrix}\frac{\partial g_1}{\partial x} & \frac{\partial g_1}{\partial y} \\ \frac{\partial g_2}{\partial x} & \frac{\partial g_2}{\partial y} \end{bmatrix} = \Big(\frac{\partial g_1}{\partial x}\Big)\Big(\frac{\partial g_2}{\partial y}\Big) - \Big(\frac{\partial g_2}{\partial x}\Big)\Big(\frac{\partial g_2}{\partial y}\Big)
+    \end{align*}
+    \item The reason these two expressions are equal is because $J_h = J^{-1}_g$, and we defined $x = h_1(u, v)$ and $y = h_2(u, v)$; you end up with the same result, but sometimes one might be an easier calculation than the other. Both versions are fairly common in textbooks and courses.
+    \item I find the first line of the proposition more intuitive: it's a function of $u$ and $v$, so let's start by calculating the Jacobian of the inverse transformation so that all variables are $u$ and $v$. 
+    \item The textbook uses the second line approach. You might find this more intuitive, as it is a generalization of the single dimensional case.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Example: Polar Coordinates}
+  \begin{itemize}
+    \item Suppose that $X$ and $Y$ are independent standard normal RVs. Their joint pdf is
+    $$
+    f_{XY}(x, y) = \frac{1}{2\pi}e^{-(x^2/2) - (y^2/2)}.
+    $$
+    \item We wish the find the joint pdf of $R = \sqrt{X^2 + Y^2}$, and $\Theta = \text{arctan}(y/x)$.
+    \item Thus, we have 
+    $$
+    \begin{cases}
+    g_1(x, y) = \sqrt{x^2 + y^2} = r \\
+    g_2(x, y) = \text{arctan}(y/x) = \theta,\, \quad \text{if}\, x \neq 0,\, \text{and}\, \theta = 0 \, \text{o.w.}
+    \end{cases}
+    $$
+    \item The inverse transformations are 
+    $$
+    \begin{cases}
+    h_1(r, \theta) = r\cos \theta = x\\
+    h_2(r, \theta) = r \sin \theta = y.
+    \end{cases}
+    $$
+    \item The Jacobian of the inverse transformation $J_h$ is
+    \begin{align*}
+    J_h(r, \theta) &= \det \begin{bmatrix}\frac{\partial h_1}{\partial r} & \frac{\partial h_1}{\partial \theta} \\ \frac{\partial h_2}{\partial r} & \frac{\partial h_2}{\partial \theta} \end{bmatrix} \\
+              &= \det \begin{bmatrix} \cos\theta & -r\sin\theta \\ \sin \theta & r\cos \theta  \end{bmatrix} \\
+              &= r \cos^2\theta + r \sin^2\theta = r
+    \end{align*}
+    \item Therefore, the joint distribution is
+    \begin{align*}
+      f_{R\Theta}(r, \theta) &= r f_{XY}(r \cos\theta, r \sin \theta) \\
+      &= \frac{r}{2\pi}e^{-r^2\cos^2\theta / 2 - r^2\sin^2\theta / 2} \\
+      &= \frac{r}{2\pi}e^{-r^2/2}.
+    \end{align*}
+    \item As always, we can't forget the \alert{support}, or values over which the density is positive. Here, because $(X, Y) \in \R^2$, the transformations imply that $\Theta \in [0, 2\pi]$, and $R \geq 0$. 
+  \end{itemize}
+\end{frame}
+
+% TODO: Include another example? 
+% \begin{frame}{Example: Sum of random variables}
+%   \begin{itemize}
+%     \item Let $X_1$ and $X_2$ be independent, standard normal variables.
+%     \item What is the joint density of $(X_1, X_1 + X_2)$?
+%     \item Let's let $U = X_1$, and $V = X_1 + X_2$.
+%     \item Our transformations are:
+%     
+%   \end{itemize}
+% \end{frame}
+
+\begin{frame}{Transformations of many variables}
+\begin{itemize}
+  \item Proposition~3.1 can be generalized to transformations of more than two random variables. If $X_1, \ldots, X_n$ have the joint density function $f_{X_1\cdots X_n}$, and 
+  \begin{align*}
+  Y_i &= g_i(X_1, \ldots, X_n), \quad i = 1, \ldots, n\\
+  X_i &= h_i(Y_1, \ldots, Y_n), \quad i = 1, \ldots, n
+  \end{align*}
+  And if $J_g$ is the determinant of the matrix with the $ij$th entry $\partial g_i/\partial x_j$, and $J_h$ is the determinant of the matrix with entry $\partial h_i / \partial y_j$, then the joint density of $Y_1, \ldots, Y_n$ is
+  \begin{align*}
+    &f_{Y_1\cdots Y_n}(y_1, \ldots, y_n) \\
+    &= f_{X_1\cdots X_n}(x_1, \ldots, x_n)\big|J^{-1}_g(x_1, \ldots, x_n)\big|\\
+    &= f_{X_1\cdots X_n}\big(h_1(y_1, \ldots, y_n), \ldots, h_n(y_1, \ldots, y_n)\big)\big|J_h(y_1, \ldots, y_n)\big|
+  \end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Final Comments}
+  \begin{itemize}
+    \item In the transformation formulas, we always transform $n$ variables to $n$ variables. In practice, you might want to consider a transformation from $n \mapsto m$, with $m \leq n$. In this case, there are two main approaches:
+    \begin{itemize}
+      \item Start from scratch, just like we did for sums and quotients of random variables.
+      \item Create dummy variables to make $m = n$ (i.e., $Y_k = X_k$), calculate Jacobian, and then integrate out the dummy variables.
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \newcommand\acknowledgments{

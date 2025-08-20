@@ -30,6 +30,10 @@ slides.pdf handout.pdf notes.pdf: main.tex
 	pdflatex $*
 	pdflatex $*
 
+syllabus.pdf: syllabus.tex
+	pdflatex syllabus
+	pdflatex syllabus
+
 clean:
 	$(RM) *.bak
 	$(RM) *.o *.so

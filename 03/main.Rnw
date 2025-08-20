@@ -119,6 +119,7 @@ Chapter \CHAPTER: Joint Distributions}
   \end{itemize}
 
   \begin{table}
+  \centering
   \begin{tabular}{c|cccc}
     & $y$             &             &                 &              \\\hline
   $x$ &           $0$ &           $1$ &           $2$ &          $3$ \\\hline
@@ -464,6 +465,7 @@ Chapter \CHAPTER: Joint Distributions}
   \end{itemize}
 
   \begin{table}
+  \centering
   \begin{tabular}{c|cccc}
     & $y$             &             &                 &              \\\hline
   $x$ &           $0$ &           $1$ &           $2$ &          $3$ \\\hline

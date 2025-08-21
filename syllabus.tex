@@ -166,6 +166,8 @@ The first of a two-part sequence on:
 Probability, random variables, discrete and continuous distributions, order statistics, limit theorems, point and interval estimation, uniformly most powerful tests, likelihood ratio tests, chi-square and F tests, nonparametric tests. 
 PREREQ: MATH 3326 and MATH 3352. Offered Odd Years in the Fall Semester.
 
+Multivariate calculus (MATH 2275) is not a formal prerequisite for the class, but we will use a little bit throughout the course. This will arise primarily in the derivation of theorems in course lectures, but it is not expected that students will need a complete understanding of the topic for this course.
+
 This course is 3 Credit Hours, and we meet every Tuesday and Thursday, 11:00 am - 12:15 pm, PS 313, with the exception of university-observed holidays and breaks.
 
 This course is a prerequisite for Math 4451. A student must earn a C- or better in this class in order to use this as a pre-requisite for this course.
@@ -210,15 +212,33 @@ Student understanding will be assessed via homework, quizes, a midterm exam, and
 
 \section{Textbook and Course Materials}
 
+\subsection{Required Text}
 \begin{hangparas}{0.25in}{1}
-John A. Rice. \emph{Mathematical Statistics and Data Analysis}. Vol. 371. Belmont, CA: Thomson/Brooks/Cole, 2007. Third Edition. ISBN: 0-534-39942-8.
+Rice, J. A., 2007. \emph{Mathematical Statistics and Data Analysis}. Vol. 371. Belmont, CA: Thomson/Brooks/Cole. Third Edition. ISBN: 0-534-39942-8.
 \end{hangparas}
 
-This text will be required.
+This text will be required, and our lectures will follow the textbook closely.
+
+\subsection{Supplemental Text}
+
+The John A. Rice textbook is a nice introduction to the topic, but as an undergraduate level text, it sometimes misses details that would be nice to have. 
+As such, I recommend the following as supplemental text on the topic if you would like to learn more; I also will occasionally draw material from these textbooks when relevant, though these texts are not required.
+
+\begin{hangparas}{0.25in}{1}
+Casella, G. and Berger, R., 2024. \emph{Statistical inference}. Chapman and Hall/CRC. Second Edition. ISBN: 0-534-24312-6.
+\end{hangparas}
+
+\begin{hangparas}{0.25in}{1}
+Resnick, S. I, 2019. \emph{A probability path}. Springer. ISBN: 978-0-8176-8408-2
+.
+\end{hangparas}
+
+My brief description of each book: Casella and Berger covers the same basic topics as the John Rice textbook, but at a higher-level (master's student). Specifically, it covers both probability and statistics, and could be used as a textbook for 4450/4451. While the book is more advanced, it does not provide a rigourous, measure-theoretic approach to probability.
+Resnick is a great textbook for a measure-theoretic approach to probability and statistics, geared towards an advanced student of statistics. It's often used as a reference for a PhD level course, but can also be a nice reference for advanced probability for both math and statistics students (geared towards the latter).
 
 \subsection{Software}
 
-This semester we will use the \Rlogo\, programming language; 
+For Math 4450, I do not anticipate that we will use any statistical software (or any software for that matter). However, for Math 4451, I anticipate that we will use the \Rlogo\, programming language; 
 for the purpose of our class, think of this software as a special calculator used for Statistics.
 To interact with this software, I highly recommend using RStudio, an Integrated Development Environment (IDE) built for writing \Rlogo\, code.
 
@@ -282,29 +302,29 @@ No credits or grade points are awarded in any courses for which an X grade is re
 The table below provides a tentative schedule of the course. 
 This table will be updated on the course website as needed.
 
-\begin{longtable}{|c|l|l|l|}
+\begin{longtable}{|c|l|c|}
 \hline
-\textbf{Week} & \textbf{Dates (MWF)} & \textbf{Textbook Chapters} & \textbf{Topic} \\
+\textbf{Week} & \textbf{Dates (MWF)} & \textbf{Textbook Chapters} \\
 \hline
 \endhead
 
-1 & Aug 26, 28     &  &  \\\hline
-2 & Sep 2, 4       &  &  \\\hline
-3 & Sep 9, 11      &  &  \\\hline
-4 & Sep 16, 18     &  &  \\\hline
-5 & Sep 23, 25     &  &  \\\hline
-6 & Sep 30, Oct 2  &  &  \\\hline
-7 & Oct 7, 9       &  &  \\\hline
-8 & Oct 14, {\color{blue} \textbf{16}}     &  &  \\\hline
-9 & Oct 21, 23     &  &  \\\hline
-10 & Oct 28, 30    &  &  \\\hline
-11 & Nov 4, 6      &  &  \\\hline
-12 & Nov 11, 13    &  &  \\\hline
-13 & Nov 18, 20    &  &  \\\hline
-14 & \multicolumn{3}{|c|}{\textit{Fall Break (No Classes, Nov 25 \& 27)}} \\\hline
-15 & Dec 2, 4      &  &  \\\hline
-16 & Dec 9, 11     &  &  \\\hline
-17 & Dec 15--19 & \multicolumn{2}{l|}{Finals Week (Dec 17)} \\ \hline
+1 & Aug 26, 28     & 1\\\hline
+2 & Sep 2, 4       & 1\\\hline
+3 & Sep 9, 11      & 1 + 2\\\hline
+4 & Sep 16, 18     & 2 \\\hline
+5 & Sep 23, 25     & 2 \\\hline
+6 & Sep 30, Oct 2  & 3 \\\hline
+7 & Oct 7, 9       & 3 \\\hline
+8 & Oct 14, {\color{blue} \textbf{16}} & 3 + 4\\\hline
+9 & Oct 21, 23     &  4 \\\hline
+10 & Oct 28, 30    &  4 \\\hline
+11 & Nov 4, 6      &  5 \\\hline
+12 & Nov 11, 13    &  5 \\\hline
+13 & Nov 18, 20    &  5 + 6\\\hline
+14 & \multicolumn{2}{|c|}{\textit{Fall Break (No Classes, Nov 25 \& 27)}} \\\hline
+15 & Dec 2, 4      &  6 \\\hline
+16 & Dec 9, 11     &  6 \\\hline
+17 & Dec 15--19 & Finals Week ({\color{blue}Dec \textbf{18}}) \\ \hline
 
 \end{longtable}
 
@@ -314,15 +334,33 @@ For other important dates and deadlines, please see the University academic cale
 \subsection{Exams}
 
 \begin{itemize}
-  \item \textbf{Final Exam}: Wednesday, Dec 17, 7:30-9:30 a.m. (Sorry about the time, I didn't chose this). The location will be our regular classroom. 
-  \item \textbf{Midterm}: Planned for {\color{blue} \textbf{Oct 17}}, during regular class time. Tentatively, the midterm will cover Chapters 1-10.
+  \item \textbf{Final Exam}: Thursday, Dec 18, 10:00 a.m. -- 12:00 p.m. The location will be our regular classroom. The exam will be closed book.
+  \item \textbf{Midterm}: Planned for {\color{blue} \textbf{Oct 16}}, during regular class time. Tentatively, the midterm will cover Chapters 1--3.
 \end{itemize}
 
 \subsection{Homeworks}
 
-Homeworks make up the largest portion of your final grade. There will be 10 homework assignments, each worth $5\%$ of your grade.
+Homeworks make up the largest portion of your final grade.
+There will be 10 homework assignments, each worth $5\%$ of your grade.
 Homework assignments will be due one week after they are assigned, which will be made clear to students via Canvas announcements.
 Late homework submissions will not be accepted, unless permission is provided by the instructor.
+
+Homeworks will be 10 points total: 9 points for contribution (correct and original responses), 1 point for academic integrity.
+You can use any resources to help you with your homework, including the internet and generative AI.
+Before using outside sources, you are required to work on a given problem for at least one hour (honor-system).
+
+The order of preferred sources are:
+\begin{itemize}
+  \item Lecture Slides, Lecture Notes, and the Textbook.
+  \item Office hours.
+  \item Classmates.
+  \item The internet.
+  \item Other.
+\end{itemize}
+When looking for outside sources, please try your best to not search directly for a solution.
+To obtain full points for ``academic integrity", each homework assignment must include a statement at the start of the assignment indicating which sources they used, how long they worked on the problem before looking for alternative sources, and what they learned from the source they found.
+More details regarding the 2 academic integrity points can be found in TODO
+
 
 \subsection{Quizes}
 

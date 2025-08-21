@@ -20,6 +20,7 @@ This is a well-known textbook to use as an introduction to mathematical statisti
 Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450, and Chapters 7-10 in Math 4451.
 
 - [Course Syllabus](syllabus.pdf)
+- [About the Instructor](Introduction.pdf)
 
 --------------
 

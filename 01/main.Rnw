@@ -62,7 +62,7 @@ Chapter \CHAPTER: Probability}
 
 \begin{frame}{Course Logistics}
   \begin{itemize}
-    \item About Me (TODO)
+    \item \link{https://jeswheel.github.io/4450\_f25/Introduction.pdf}{About Me}
     \item Course Website: \link{https://jeswheel.github.io/4450\_f25/}{https://jeswheel.github.io/4450\_f25/}. 
     \item Canvas: Canvas will be used to submit assignments, view grades, and for course announcments.
     \item \link{https://jeswheel.github.io/4450\_f25/syllabus.pdf}{Course Syllabus}

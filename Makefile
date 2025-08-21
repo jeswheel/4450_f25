@@ -1,6 +1,6 @@
 MODULES = 01
 
-default: index.html syllabus.pdf acknowledge.html rubric_homework.html rubric_participation.html 
+default: index.html syllabus.pdf acknowledge.html rubric_homework.html
 
 include rules.mk
 

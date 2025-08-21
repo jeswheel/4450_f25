@@ -86,7 +86,7 @@ $$
 In this particular instance, there are a few things you could do to solve this problem, some are acceptable and some are unacceptable.
 For instance,
 
-1. **Not acceptable**: You might recognize that $p(k)$ is the pmf of a Poisson random variable. **You cannot** search (or ask AI): "how to show that the Poisson random variable integrates to one", or "how to show that the Poisson distribution has valid pmf?"
+1. **Not acceptable**: You might recognize that $p(k)$ is the pmf of a Poisson random variable. **You cannot** search (or ask AI): "how to show that the Poisson random variable integrates to one", or "how to show that the Poisson distribution has valid pmf?". If you do this, you may loose **contribution** points, even if you include an appropriate academic integrity statement.
 
 1. **Acceptable**: You remember that the sum of all pmf's over their support must be equal to $1$. Hence, you deduce that 
 $$

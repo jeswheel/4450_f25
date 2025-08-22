@@ -1,6 +1,6 @@
 ---
 title: "Rubric for homework grades"
-subtitle: "[Math 4450, Fall 2025](../index.html)"
+subtitle: "[Math 4450, Fall 2025](index.html)"
 output: html_document
 
 ---

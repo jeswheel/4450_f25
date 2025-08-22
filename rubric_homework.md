@@ -1,6 +1,6 @@
 ---
 title: "Rubric for homework grades"
-subtitle: "Math 4450, Fall 2025"
+subtitle: "[Math 4450, Fall 2025](../index.html)"
 output: html_document
 
 ---
@@ -103,3 +103,19 @@ If you did the **Acceptable** option, then you should something similar to the f
 > "I worked on problem (1) for at least one hour, but got stuck because I couldn't figure out how to show the infinite sum had value $e^{-\lambda}$. I eventually (went to office hours / asked a friend / searched the internet) for help, which reminded me about this particular expansion."
 
 If a website was used, **you also need to include a link to the website**. If generative AI is used (e.g. ChatGPT), **you need to include the prompt that you submitted, and the output**.
+
+------------
+
+## Bonus points: LaTeX submissions
+
+I will give 0.5 bonus points on each assignment if you meet the following conditions:
+
+1. A response to all homework questions has been given
+1. You have an appropriate Academic Integrity statement
+1. You have typed all of your responses in LaTeX 
+
+For each homework assignment, I'll provide a simple template that you can use as a starting point for your homework submission.
+You can use generative-AI to help with formatting your LaTeX responses.
+
+
+

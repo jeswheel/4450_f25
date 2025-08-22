@@ -66,6 +66,7 @@ Chapter \CHAPTER: Probability}
     \item Course Website: \link{https://jeswheel.github.io/4450\_f25/}{https://jeswheel.github.io/4450\_f25/}. 
     \item Canvas: Canvas will be used to submit assignments, view grades, and for course announcements.
     \item \link{https://jeswheel.github.io/4450\_f25/syllabus.pdf}{Course Syllabus}
+    \item \link{https://jeswheel.github.io/4450\_f25/rubric\_homework.html}{Homework grading rubric}.
   \end{itemize}
 \end{frame}
 

@@ -31,10 +31,6 @@ figure
 *.synctex.gz
 *.old
 
-04/*
-05/*
-06/*
-
 hw00/*
 hw01/*
 hw02/*

@@ -1,0 +1,216 @@
+\input{../header}
+
+% \mode<beamer>{\usetheme{AnnArbor}}
+\mode<beamer>{\usetheme{metropolis}}
+\mode<beamer>{\metroset{block=fill}}
+% \mode<beamer>{\usecolortheme{wolverine}}
+
+\mode<beamer>{\setbeamertemplate{section in toc}[sections numbered]}
+\mode<beamer>{\setbeamertemplate{subsection in toc}[subsections numbered indented]}
+
+% \mode<beamer>{\usefonttheme{serif}}
+\mode<beamer>{\setbeamertemplate{footline}}
+\mode<beamer>{\setbeamertemplate{footline}[frame number]}
+\mode<beamer>{\setbeamertemplate{frametitle continuation}[from second][\insertcontinuationcountroman]}
+\mode<beamer>{\setbeamertemplate{navigation symbols}{}}
+
+\mode<handout>{\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm]}
+
+\newcommand\CHAPTER{4}
+% \newcommand\answer[2]{\textcolor{blue}{#2}} % to show answers
+% \newcommand\answer[2]{\textcolor{red}{#2}} % to show answers
+ \newcommand\answer[2]{#1} % to show blank space
+
+\title{\vspace{2mm} \link{https://jeswheel.github.io/4450_f25/}{Mathematical Statistics I}\\ \vspace{2mm}
+Chapter \CHAPTER: Expected Values}
+\author{Jesse Wheeler}
+\date{}
+
+\setbeamertemplate{footline}[frame number]
+
+
+
+
+\begin{document}
+
+\maketitle
+
+\mode<article>{\tableofcontents}
+
+\mode<presentation>{
+  \begin{frame}{Outline}
+    \tableofcontents
+  \end{frame}
+}
+
+\section{Discrete random variables}
+
+\begin{frame}{Introduction}
+  \begin{itemize}
+    \item This material comes primarily from \citet[][Chapter~4]{rice07}, though I'm going to deviate slightly.
+    \item We will cover the ideas of expected value, variance, as well has higher-order moments.
+    \item This includes topics such as conditional expectation, which is one of the fundamental ideas behind many branches of statistics and machine learning.
+    \item For instance, most regression / prediction algorithms are built with the idea of minimizing some conditional expectation.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Expectation: Discrete random variables}
+  \begin{itemize}
+    \item We will begin by defining the expectation for discrete random variables.
+    \item I'm going to deviate from our textbook in this definition.
+  \end{itemize}
+  \begin{block}{Definition: Expectation of discrete random variables}
+    Let $X$ be a discrete random variable with pmf $p(x)$, which takes values in the space $\mathcal{X}$. The \alert{expected value} of $g(X)$ is 
+    $$
+    E\big(g(X)\big) = \sum_{x\in \mathcal{X}}g(x)\,p(x).
+    $$
+    In particular, for $g(x) = x$, we have
+    $$
+    E(X) = \sum_{x \in \mathcal{X}}x\, p(x).
+    $$
+  \end{block}
+  \begin{itemize}
+    \item This is not the most mathematically precise definition of expectation, but a more complete treatment of the topic is outside the scope of this course \citep[See][]{resnick19}.
+    \item The definition is only applicable if the sum is finite.
+    \item The concept of the expected value parallels the notion of a \emph{weighted average}.
+    \item That is, we weight each possibility $x \in \mathcal{X}$ by their corresponding probability: $\sum_x x \, p(x)$.
+    \item $E(X)$ is also referred to as the \alert{mean} of $X$, and is typically denoted $\mu$ or $\mu_X$. 
+    \item If the function $p$ is thought of as a weight, then $E(X)$ is the center; that is, if we place the mass $p(x_i)$ at the points $x_i$, then the balancing point is $E(X)$.
+    \item Like with the pmf and cdf, we often use subscripts to denote which probability law we are using for the expectation, it if is not clear: $E_X(X)$. 
+  \end{itemize}
+  
+  \begin{exampleblock}{Roulette}
+    A roulette wheel has the numbers $1$ through $36$, as well as $0$ and $00$. If you bet \$1 that an odd number comes up, you win or lose \$1 according to whether that event occurs. If $X$ denotes your net gain, $X = 1$ with probability $18/38$ and $X = -1$ with probability $20/28$. The expected value of $X$ is
+    $$
+    E(X) = 1 \times \frac{18}{38} + (-1) \times \frac{20}{38} = -\frac{1}{19}.
+    $$
+  \end{exampleblock}
+  
+  \begin{itemize}
+    \item As you might imagine, the expected value coincides in the limit with the actual average loss per game, if you play many games (Chapter~5).
+    \item Most casino games have a negative expected value by design; you may win some money, but if a large number of games are played, the house will come out on top. 
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Geometric Random Variable}
+   Suppose that items are produced in a plant are independently defective with probability $p$. If items are inspected one by one until a defective item is found, then how many items must be inspected on average?
+  
+  \mode<article>{
+  Let $X$ denote the number of items inspected, up-to and including the first defective item. $X$ is geometrically distributed, which as pmf
+  $$
+  p(k) = P(X = k) = p\,(1-p)^{k-1}.
+  $$
+  Therefore
+  \begin{align*}
+    E(X) &= \sum_{k = 1}^\infty k p\, (1-p)^{k-1} \\
+         &= p \sum_{k = 1}^{\infty} k \, (1-p)^{k-1}.
+  \end{align*}
+  To work out this summation, we will use a trick that is sometimes useful for infinite series.
+  First, lets define $q = 1-p$, and note that $0 < q < 1$. Then, the sum becomes
+  $$
+  E(X) = p\sum_{k = 1}^\infty k\,q^{k-1}.
+  $$
+  You might notice that the summand is a power-rule derivative:
+  $$
+  \frac{d}{dq} q^k = k\,q^{k-1}.
+  $$
+  This fact is going to be useful, because the left-hand side of this derivative equation is a geometric sum, which we know how to calculate:
+  $$
+  \sum_{k = 1}^\infty q^k = \sum_{k = 1}^\infty q\,q^{k-1} = q\sum_{j = 0}^\infty q^j = \frac{q}{1-q}.
+  $$
+  Thus, what we would like to do is write 
+  $$
+  \frac{d}{dq}\Big(\frac{q}{1-q}\Big) = \frac{d}{dq}\Big(\sum_{k = 1}^\infty q^{k}\Big) \overset{?}{=} \sum_{k = 1}^\infty \frac{d}{dq} q^k = \sum_{k = 1}^{\infty} kq^{k-1}.
+  $$
+  Now we can easily calculate the left-hand side to be $\frac{1}{(1-q)^2}$, and therefore we want to make the conclusion
+  $$
+  \sum_{k = 1}^{\infty} k\, q^{k-1} \overset{?}{=} \frac{d}{dq}\Big(\frac{q}{1-q}\Big) = \frac{1}{(1 - q)^2}.
+  $$
+  The question is: \textbf{Can we move the derivative inside of the infinite sum?} For this particular case, the answer is \emph{yes}. In more advanced analysis classes, you learn methods for justifying this step rigorously using uniform convergence. Specifically, what we need is for uniform convergence of the partial sums and their derivatives. Fortunately for this class, all of the sums (and integrals) we will consider will be ``well-behaved" and will satisfy these conditions.
+  
+  With this sorted out, we can now use our trick to finish the calculation:
+  \begin{align*}
+    E(X) &= p \sum_{k = 1}^{\infty} k \, (q)^{k-1} \\
+         &= p\frac{1}{(1 - q)^2} \\
+         &= \frac{p}{p^2} = \frac{1}{p}.
+  \end{align*}
+  }
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution:}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Poisson Distribution}
+    The Poisson$(\lambda)$ distribution has pmf $p(k) = \frac{\lambda^k}{k!}e^{-\lambda}$, for all $k \geq 0$. Thus, if $X \sim \text{Pois}(\lambda)$, then what is $E[X]$? \mode<article>{
+  \begin{align*}
+    E[X] &= \sum_{k = 0}^\infty \frac{k\,\lambda^k}{k!}e^{-\lambda}\\
+    &= e^{-\lambda} \sum_{k = 0}^\infty \frac{k\, \lambda^{k-1}\cdot \lambda}{k!} \\
+    &= \lambda e^{-\lambda} \sum_{k = 1}^\infty \frac{\lambda^{k-1}}{(k-1)!} \\
+    &= \lambda e^{-\lambda} \sum_{j = 0}^{\infty} \frac{\lambda^j}{j!} \\
+    &= \lambda e^{-\lambda} e^{\lambda} = \lambda.
+  \end{align*}
+  }
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution:}
+  }
+  
+  \end{frame}
+
+  \section{Continuous random variables}
+
+\begin{frame}{Expectation: Continuous random variables}
+
+\end{frame}
+
+\newcommand\acknowledgments{
+\begin{itemize}
+\item   Compiled on {\today} using \Rlanguage version 4.5.1.
+\item   \parbox[t]{0.75\textwidth}{Licensed under the \link{http://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons Attribution-NonCommercial license}.
+    Please share and remix non-commercially, mentioning its origin.}
+    \parbox[c]{1.5cm}{\includegraphics[height=12pt]{../cc-by-nc}}
+\item We acknowledge \link{https://jeswheel.github.io/4450_f25/acknowledge.html}{students and instructors for previous versions of this course / slides}.
+\end{itemize}
+}
+
+\mode<presentation>{
+\begin{frame}[allowframebreaks=0.8]{References and Acknowledgements}
+  
+\bibliography{../bib4450}
+
+\vspace{3mm}
+
+\acknowledgments
+
+\end{frame}
+}
+
+\mode<article>{
+
+\newpage
+
+{\bf \Large \noindent Acknowledgments}
+
+\acknowledgments
+
+\newpage
+
+\bibliography{../bib4450}
+
+}
+
+
+
+\end{document}
+
+
+
+
+
+
+

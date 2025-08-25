@@ -47,7 +47,7 @@ Chapter \CHAPTER: Expected Values}
 
 \begin{frame}{Introduction}
   \begin{itemize}
-    \item This material comes primarily from \citet[][Chapter~4]{rice07}, though I'm going to deviate slightly.
+    \item This material comes primarily from \citet[][Chapter~4]{rice07}.
     \item We will cover the ideas of expected value, variance, as well has higher-order moments.
     \item This includes topics such as conditional expectation, which is one of the fundamental ideas behind many branches of statistics and machine learning.
     \item For instance, most regression / prediction algorithms are built with the idea of minimizing some conditional expectation.
@@ -55,23 +55,22 @@ Chapter \CHAPTER: Expected Values}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Expectation: Discrete random variables}
-  \begin{itemize}
-    \item We will begin by defining the expectation for discrete random variables.
-    \item I'm going to deviate from our textbook in this definition.
-  \end{itemize}
+  % \begin{itemize}
+  %   \item We will begin by defining the expectation for discrete random variables.
+  % \end{itemize}
   \begin{block}{Definition: Expectation of discrete random variables}
-    Let $X$ be a discrete random variable with pmf $p(x)$, which takes values in the space $\mathcal{X}$. The \alert{expected value} of $g(X)$ is 
+    Let $X$ be a discrete random variable with pmf $p(x)$, which takes values in the space $\mathcal{X}$. The \alert{expected value} of $X$ is 
+    % $$
+    % E\big(g(X)\big) = \sum_{x\in \mathcal{X}}g(x)\,p(x).
+    % $$
+    % In particular, for $g(x) = x$, we have
     $$
-    E\big(g(X)\big) = \sum_{x\in \mathcal{X}}g(x)\,p(x).
+    E(X) = \sum_{x \in \mathcal{X}}x\, p(x),
     $$
-    In particular, for $g(x) = x$, we have
-    $$
-    E(X) = \sum_{x \in \mathcal{X}}x\, p(x).
-    $$
+    provided that $\sum_{x \in \mathcal{X}} |x|\, p(x) < \infty$; otherwise, the expectation is not defined.
   \end{block}
   \begin{itemize}
     \item This is not the most mathematically precise definition of expectation, but a more complete treatment of the topic is outside the scope of this course \citep[See][]{resnick19}.
-    \item The definition is only applicable if the sum is finite.
     \item The concept of the expected value parallels the notion of a \emph{weighted average}.
     \item That is, we weight each possibility $x \in \mathcal{X}$ by their corresponding probability: $\sum_x x \, p(x)$.
     \item $E(X)$ is also referred to as the \alert{mean} of $X$, and is typically denoted $\mu$ or $\mu_X$. 
@@ -164,8 +163,197 @@ Chapter \CHAPTER: Expected Values}
 
   \section{Continuous random variables}
 
-\begin{frame}{Expectation: Continuous random variables}
+\begin{frame}[allowframebreaks]{Expectation: Continuous random variables}
 
+  \begin{block}{Definition: Expectation of continuous random variables}
+    Let $X$ be a continuous random variable with pdf $f(x)$, which takes values in the space $\mathcal{X}$. The \alert{expected value} of $X$ is 
+    $$
+    E(X) = \int_{x\in \mathcal{X}}xf(x)\, dx.
+    $$
+    % In particular, for $g(x) = x$, we have
+    % $$
+    % E(X) = \sum_{x \in \mathcal{X}}x\, p(x).
+    % $$
+    provided that $\int_{x\in \mathcal{X}}xf(x)\, dx < \infty$, otherwise the expectation is undefined. 
+  \end{block}
+
+ \begin{itemize}
+    \item As before, this is not the most mathematically precise definition of expectation, but a more complete treatment of the topic is outside the scope of this course \citep[See][]{resnick19}.
+    \item We can still think of $E(X)$ as the center of mass of the density.
+  \end{itemize}
+
+\framebreak
+
+\begin{exampleblock}{Gamma Density}
+  If $X$ follows a gamma density with parameters $\alpha$ and $\lambda$, then the pdf of $X$ is
+  $$
+  f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1}e^{-\lambda x}, \quad x \geq 0.
+  $$
+  Find $E(X)$.
+
+  \mode<article>{
+  \vspace{2mm}
+  \emph{Solution:} By definition, the expected value of $X$ is
+  $$
+  E(X) = \int_{0}^\infty (x) \, \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1}e^{-\lambda x} \, dx.
+  $$
+  Combining the factors of $x$ in the integrand, we obtain
+  $$
+  E(X) = \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha}e^{-\lambda x}\,dx.
+  $$
+  Now we will apply the ``integration by density function" trick: we will re-write the integrand so that it corresponds to the density function of some random variable, and use the fact that the density function must integrate to one. Specifically, note that if we let $\alpha* = \alpha + 1$, then $\alpha = \alpha^* - 1$, and we can express the integral as:
+  \begin{align*}
+    E(X) &= \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha}e^{-\lambda x}\,dx \\
+         &= \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha* - 1}e^{-\lambda x}\,dx \\
+         &= \Big(\frac{\lambda^\alpha}{\Gamma(\alpha)}\Big)\Big(\frac{\Gamma(\alpha^*)}{\lambda^{\alpha^*}}\Big)\int_{0}^\infty \frac{\lambda^{\alpha^*}}{\Gamma(\alpha^*)} x^{\alpha* - 1}e^{-\lambda x}\,dx \\
+         &= \Big(\frac{\lambda^\alpha}{\Gamma(\alpha)}\Big)\Big(\frac{\Gamma(\alpha^*)}{\lambda^{\alpha^*}}\Big)
+  \end{align*}
+  Where the last step is a result of the fact that the integrand (and support of the integral) matches the density of a Gamma$(\alpha^*, \lambda)$ distribution. Now using the fact that $\alpha* = \alpha + 1$, and that $\Gamma(x+1) = x\Gamma(x)$, we obtain
+  \begin{align*}
+    E(X) &= \frac{\lambda^\alpha\, \Gamma(\alpha + 1)}{\Gamma(\alpha)\,\lambda^{\alpha + 1}} \\
+         &= \frac{\alpha}{\lambda}
+  \end{align*}
+  }
+\end{exampleblock}
+
+\mode<presentation>{
+  \emph{Solution.}
+}
+
+% \framebreak
+
+% \begin{exampleblock}{Normal Distribution}
+%   Let $X$ follow a normal distribution with mean $\mu$ and variance $\sigma^2$. Using our definition of expectation, show that $E[X] = \mu$.
+%   
+%   \mode<article>{
+%   \vspace{2mm}
+%   \emph{Solution:} Recall that the density of a random variable $X \sim N(\mu, \sigma^2)$ is given by
+%   $$
+%   f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(x - \mu)^2}, \quad -\infty < x < \infty.
+%   $$
+%   Thus, the expected value is
+%   $$
+%   E(X) = \frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^\infty x e^{-\frac{1}{2}(x - \mu)^2}\, dx.
+%   $$
+%   Using a change of variables $z = x - \mu$, we have $dx = dz$, and $x = z + \mu$, 
+%   }
+%   
+% \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Functions of random variables}
+  \begin{itemize}
+    \item We are often interested in functions of random variables: $Y = g(X)$.
+    \item Ideas that we have already covered enable us to calculate $E(Y)$.
+    \item For instance, you could use the change-of-variables theorem to get the density of $Y$, then use the definition to calculate $E[Y]$.
+    \item Fortunately, we don't have to do this. We can instead calculate $E[Y]$ by integrating (or summing) with respect to $X$:
+    $$
+    E[g(X)] = \int_{x \in \mathcal{X}} g(x)f(x) \, dx.
+    $$
+    \item We will justify this for the discrete analog.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem 4.1: Expectation of transformed random variables}
+    Suppose that $X$ is a random variable and that $Y = g(X)$ for some function $g$. Then,
+    \begin{itemize}
+      \item If $X$ is discrete with pmf $p(x)$:
+      $$
+      E(Y) = \sum_x g(x)\, p(x),
+      $$
+      provided that $\sum_x |g(x)| p(x) < \infty$.
+      \item If $X$ is continuous with pdf $f(x)$:
+      $$
+      E(Y) = \int_{-\infty}^\infty g(x) f(x)\, dx,
+      $$
+      provided that $\int |g(x)| f(x) \, dx < \infty$.
+    \end{itemize}
+  \end{block}
+  
+  \end{frame}
+  
+  \begin{frame}[allowframebreaks]{Functions of random variables: proof}
+  
+  \mode<presentation>{
+    \emph{Proof:}
+  }
+  
+  \mode<article>{
+    \vspace{2mm}
+    \emph{Proof:} By definition of expectation,
+    $$
+    E(Y) = \sum_i y_i p_Y(y_i).
+    $$
+    Now let $A_i$ denote the set of $x$'s that are mapped to $y_i$ by $g$. That is, $A_i$ is the pre-image of $y_i$, meaning that $x \in A_i$ if $g(x) = y_i$. Then,
+    $$
+    p_Y(y_i) = \sum_{x \in A_i} p(x),
+    $$
+    and we can express the expectation as
+    \begin{align*}
+      E(Y) &= \sum_i y_i p_Y(y_i) \\
+           &= \sum_i y_i \sum_{x \in A_i} p(x) \\
+           &= \sum_i \sum_{x \in A_i} y_i\, p(x) \\
+           &= \sum_i \sum_{x \in A_i} g(x)\,p(x)\\
+           &= \sum_x g(x)\, p(x)
+    \end{align*}
+    Here, the second to last step is because for all $x \in A_i$, $g(x) = y_i$ by definition. The final step is a result of the fact that the $A_i$ are disjoint, and every $x$ belongs to some $A_i$, and thus the sum over $i$ and $x \in A_i$ is the sum of all $x$.
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The proof for the continuous case is similar, but does require a measure-theoretic approach to integration.
+    \item One important thing to note is that $g\big(E(X)\big)$ is not usually equal to $E\big(g(x)\big)$.
+    \item For example, let $Z$ be a standard normal. We know that $E[Z] = 0$, because it's symmetric. However, $P\big(|Z| > 0) = 1$, thus we can readily deduce that $E\big[|Z|\big] \geq 0 = \big|E[Z]\big|$.
+    \item An immediate consequence is that if for all non-negative random variables $X$ that have finite expectation, if $g(x) \leq x$ for some function $g$, then $E[g(X)] \leq E[X]$.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Expected value of indicator functions}
+  \begin{itemize}
+    \item An interesting example is \alert{indicator} functions.
+    \item For example, suppose that $X$ is a random variable. Then $Y = 1[X \in A]$ for some $A \subset \mathcal{X}$ is a random variable.
+    \item Example: Let $X$ follow a standard normal distribution, and $A = [-1, 1]$. Then $Y = 1[X \in A]$ is defined as the random variables such that $Y(\omega) = 1$ if $X(\omega) \in A$, and $Y(\omega) = 0$ otherwise.
+    \item Expectations of indicator variables are \alert{probabilities}:
+    \begin{align*}
+    E(Y) &= E\big(1[X \in A]\big) \\
+    &= \int_{x \in \mathcal{X}} 1[X \in A]\, f(x) \, dx \\
+    & = \int_{x \in A} f(x) \, dx = P(X \in A).
+    \end{align*}
+    \item This fact is useful for deriving some important inequalities. 
+    \item Let $X$ be a continuous random variable with expectation $E(X)$. From our definition, this implies that $\int |x|\, f(x)\,dx < \infty$.
+    \item Now suppose that for some random variable $Y = g(X)$ such that $|Y| \leq |X|$. Then, if $Y$ has a pdf, we can deduce that $\int |y|\, f(x)\,dx < \infty$, and therefore $E[Y]$ exists.
+    \item Now suppose that $\varphi$ is a non-decreasing, non-negative function, and that for some $a \in \R$, $\varphi(a) > 0$. Then, for all $x \geq a$, $\varphi(x) / \varphi(a) \geq 1$.
+    \item Define $Y = 1[X \geq a]$. Note that for all possible outcomes $\omega \in \Omega$, 
+    $$
+    Y = 1[X \geq a] \leq \varphi(X) / \varphi(a) 1[X \geq a] \leq \varphi(X) / \varphi(a).
+    $$
+    \item Taking expectations of both sides,
+    $$
+    E\big(1[X \geq a]\big) = P(X \geq a) \leq \frac{E\big[\varphi(X)\big]}{\varphi(a)} = E\left[\varphi(X) / \varphi(a)\right].
+    $$
+    \item This inequality is known as \alert{Markov's (general) inequality}, and is very useful for bounding the probability of particular events. 
+    \item Specifically, if $\varphi(x) = |x|^p$, with $p > 0$, then because $|X|$ is always positive, $\varphi$ is non-negative, non-decreasing, and therefore
+    $$
+    P(|X| \geq a) \leq \frac{E\big[|X|^p\big]}{a^p},
+    $$
+    \item If we restrict ourselves to the case where $X$ is non-negative, we get the most standard version of the inequality:
+    $$
+    P(X \geq a) \leq E(X) / a.
+    $$
+  
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Markov's Inequality}
+
+\begin{itemize}
+  \item There are a 
+\end{itemize}
 \end{frame}
 
 \newcommand\acknowledgments{

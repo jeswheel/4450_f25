@@ -161,7 +161,7 @@ Chapter \CHAPTER: Expected Values}
   
   \end{frame}
 
-  \section{Continuous random variables}
+\section{Continuous random variables}
 
 \begin{frame}[allowframebreaks]{Expectation: Continuous random variables}
 
@@ -241,6 +241,8 @@ Chapter \CHAPTER: Expected Values}
 % \end{exampleblock}
 
 \end{frame}
+
+\section{Expectation of functions of random variables}
 
 \begin{frame}[allowframebreaks]{Functions of random variables}
   \begin{itemize}
@@ -349,7 +351,7 @@ Chapter \CHAPTER: Expected Values}
   \framebreak
 
   \begin{exampleblock}{Markov's Inequality in Action}
-    suppose that an individual is taken randomly from a population that has an average salary of \$50,000. If we assume that salary from the population is approximately independently and identically distributed, we can provide an upper-bound for the probability that the individual is wealthy.
+    Suppose that an individual is taken randomly from a population that has an average salary of \$50,000. If we assume that salary from the population is approximately independently and identically distributed, we can provide an upper-bound for the probability that the individual is wealthy.
     
     Let $X_i$ be the salary of individual $i$, randomly drawn from said population. Even though all we know is the average salary, Markov's inequality tells use that:
     $$
@@ -458,6 +460,74 @@ $$
 E(Y) = a + b_1E(X_1) + b_2E(X_2).
 $$
 }
+
+\framebreak
+
+\begin{itemize}
+  \item The previous theorem is extremely useful for calculating expected values. 
+  \item An obvious example is \alert{sums} of random variables, such as the arithmetic average.
+  \item It's also useful because some distributions can be expressed as the sum of other distributions.
+  \item For instance, we saw in a previous example that the sum of two exponential random variables has a Gamma distribution. Thus, if we know the mean of an exponential, we can readily calculate the mean of a Gamma distribution. 
+\end{itemize}
+
+\framebreak
+
+\begin{exampleblock}{Expectation of a binomial distribution}
+  Let $Y$ follow a Binomial$(p, q)$ distribution. Find the expected value of $Y$. 
+  
+  \mode<article>{\emph{Solution}. The pmf of a binomial distribution is given by
+  $$
+  p(k) = \binom{n}{k} p^k (1-p)^{n-k}.
+  $$
+  Therefore, to find the expected value directly, we need to calculate the sum
+  $$
+  E(Y) = \sum_{k = 0}^n k \binom{n}{k} p^k (1-p)^{n-k}.
+  $$
+  It's not immediately clear how one can calculate this sum directly. Instead, we can use the fact that a binomial random variable is defined by the sum of independent Bernoulli distributed random variables. That is, let $X_1, X_2, \ldots, X_n$ be Bernoulli random variables with parameter $p$. Then
+  $$
+  Y \overset{d}{=} \sum_{i = 1}^n X_i
+  $$
+  where the symbol $\overset{d}{=}$ is used to indicate that $Y$ and $\sum_i X_i$ have the same distribution\footnote{they are not necessarily equal to each-other, as they are not necessarily defined using the same probability space. Instead, we only require that they have the same distribution.}. Then it is very easy to calculate the expected value of $Y$, as it is the sum of expected values of $X_i$:
+  $$
+  E[X_i] = p (1) + (1 - p) (0) = p.
+  $$
+  Thus, 
+  $$
+  E[Y] = \sum_i E[X_i] = \sum_i p = np. 
+  $$
+  }
+\end{exampleblock}
+
+\mode<presentation>{
+\emph{Solution:}
+}
+
+\framebreak
+
+% \begin{itemize}
+%   \item An application of the expectation of a binomial distribution is ``shotgun sequencing" in genomics.
+%   \item This is a method of trying to figure out the sequence of letters that make up a long segment of DNA.
+%   \item It is technically difficult / expensive to sequence the entire segment at once if it is very long.
+%   \item Idea: Chop the DNA randomly into many small fragments, sequence each fragment, and then assemble the fragments into one long \alert{contig}.
+%   \item If there are many fragments, the hope is that the overlaps can be used to assemble the contig.
+% 
+% \framebreak
+%   \item Suppose that the length of the DNA sequence is $G > 0$, and that there are $N$ fragments, each of length $0 < L < G$.
+%   \item For example, the length $G$ might be as large as 100,000, and $L$ about 500.
+%   \item Now assume that the left end of each fragment is equally likely to be at positions $1, 2, \ldots, G - L + 1$.
+%   \item Some questions that we might as are:
+%   \begin{itemize}
+%     \item What is the probability that a particular location $x \in \{L, L+1, \ldots, G\}$ is covered by at least one fragment?
+%     \item How many fragments are expected to cover a particular location?
+%   \end{itemize}
+%   \item Note: the positions $\{1, 2, \ldots, L - 1\}$ are left out because they behave slightly differently. Only the fragment that covers position $1$ has its left end position at $1$.
+%   \item TODO: finish this example.
+% \end{itemize}
+
+\begin{exampleblock}{Example: Coupon Collection}
+  Suppose that you collect coupons, that there are $n$ distinct coupons, and that on each trial you are equally likely to get a coupon of any of the types.
+  TODO: finish example. 
+\end{exampleblock}
 
 \end{frame}
 

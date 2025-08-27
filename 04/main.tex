@@ -524,11 +524,100 @@ $$
 %   \item TODO: finish this example.
 % \end{itemize}
 
-\begin{exampleblock}{Example: Coupon Collection}
-  Suppose that you collect coupons, that there are $n$ distinct coupons, and that on each trial you are equally likely to get a coupon of any of the types.
-  TODO: finish example. 
+\begin{exampleblock}{Example: Baseball Card Collection}
+  Suppose that you collect baseball cards, that there are $n$ distinct cards, and that on each trial you are equally likely to get a card of any of the types.
+  How many trials would you expect to go through until you had a complete set of cards?
+  
+  \mode<article>{
+  \begin{itemize}
+    \item Let $X_1$ denote the number of trials up to and including the trial on which the first type of card is collected. Since our first draw is guaranteed to give us a new type of card, we have $X_1 = 1$.
+    \item Now let $X_2$ be the number of trials form that point up to and including the trail on which the next card of a new type is obtained.
+    \item We can continue this definition, letting $X_i$ be the number of trials needed to obtain the $i$th type of card, after $i-1$ types of cards have already been obtained. Thus, the total number of trials needed until all types of cards have been obtained is $X = \sum_{i = 1}^n X_i$.
+    \item What is the distribution of $X_r$, for $1 \leq r \leq n$?
+    \item When counting the number of trials to find the $r$th type, we have already found $r-1$ unique types, leaving $n - r + 1$ types that we have not yet collected. We can see then that $X_r$ is a geometric distributed random variable with $p = (n - r + 1) / n$ representing the probability of success. The expected value of a geometric random variable is $1/p$, and therefore we have
+        \begin{align*}
+      E[X] &= \sum_{i = 1}^n E[X_i] \\
+           &= \sum_{i = 1}^n \frac{n}{n-i+1} \\
+           &= n\sum_{i = 1}^n \frac{1}{n-i+1} = n\Big(\frac{1}{n} + \frac{1}{n-1} + \ldots + \frac{1}{1}\Big) \\
+           &= n\sum_{k = 1}^n \frac{1}{k}
+    \end{align*}
+    \item  As far as I am aware, there is not a way to express this final sum succinctly, but we can easily calculate the sum on a computer for moderate values of $n$. For very large values of $n$, there are some additional approximations that can be useful. 
+    \item For instance, if we suppose that there are roughly 1200 MLB players (40 players per team, 30 teams), and assume that all players are equally as likely to appear on a card (not a good assumption), then the expected number of cards we would need to purchase until we had a card for every player is $1200 \sum_{k = 1}^{1200} \frac{1}{k}$. In R, we could calculate this using \begin{center} \code{1200 * sum(1/(1:1200))}$=9201.25$ \end{center}
+    \item For most $n < 1\times 10^8$, modern computers can calculate this sum almost instantly.
+    \item For very large $n$, we could use the famous approximation
+    $$
+    \sum_{k = 1}^n \frac{1}{k} = \log\,n + \gamma + \epsilon_n,
+    $$
+    where $\gamma \approx 0.577$ is ``Euler's Constant" (which is often defined as the limit of difference between harmonic series and $\log\, n$), and $\epsilon_n \rightarrow 0$. 
+  \end{itemize}
+  }
+  
 \end{exampleblock}
 
+
+\framebreak
+
+\begin{exampleblock}{Example: Group Testing}
+  Suppose that a large number, $n$ of blood samples are screened for a rare disease. If each sample is taken individually, $n$ tests will be required. An alternative approach is group individuals into $m$ groups of size $k$, pool the blood samples for each group together and perform a test on the pooled sample. If the pooled test is negative, we know all individuals in the group do not have the rare disease; however, if the test is positive, we can then do tests on each individual in the smaller group. What is the expected number of tests that will be conducted using this approach?
+  
+  \mode<article>{
+  \begin{itemize}
+    \item To solve a problem like this, it's important to give names to quantities of interest.
+    \item We have $n$ individuals we need to test, and $m$ groups of size $k$, such that $n = mk$.
+    \item Let $X_i$ denote the number of tests conducted on the $i$th group. Thus, the total number of tests is $X = \sum_i X_i$. 
+    \item If a group tests negative, then $X_i = 1$. If a group tests positive, then we test all members of the group, so $X_i = k$.
+    \item Let's let $p$ denote the probability that an individual tests negative (assuming independence, we could let $p$ be 1 minus the proportion of individuals that have the rare disease).
+    \item The probability that a group tests negative is therefore $p^k$; in this case, the total number of tests is 1. The probability that a group tests positive is $1 - p^k$, and in this case, the total number of tests is $k+1$ (one for the group, $k$ for each individual test). 
+    \item Thus, the expected number of tests is
+    $$
+    E[X_i] = p^k + (k + 1) (1 - p^k) = k + 1 - kp^k.
+    $$
+    \item This expectation is the same for all groups, thus
+    $$
+    E[X] = \sum_i E[X_i] = mE[X_i] = mk + m - mkp^k = n\Big(1 + \frac{1}{k} - p^K\Big).
+    $$
+    \item We can see now that the expectation of this group testing scenario is $n$ times a proportion $\Big(1 + \frac{1}{k} - p^K\Big)$. Specifically, if we fix $p$ at 1 minus the rate of disease occurrence in a large population, then the number of tests is a function of group size $k$.
+    \item Consider using Desmos to play with the value $p$ (start with something like 0.99) as a function of $k$.
+  \end{itemize}
+  }
+  
+  % TODO: Example 4.1.2.D?
+  
+\end{exampleblock}
+
+\framebreak 
+
+\begin{exampleblock}{Example: Counting DNA ``words"}
+  Within DNA patterns, we might be interested in finding the number of times a particular combination of letters (or ``word") occurs in a DNA sequence. This can be useful for determining if a region of DNA has unusually large occurrences of specific sequences. Assume each sequence is randomly composed of letters $A, C, G, T$, and that for each location in the sequence, each letter has probability $1/4$. For example, consider occurrence of the ``word" $TATA$.
+  $$
+  ACTATATAGATATA
+  $$
+  In the above sequence, we would count $TATA$ 3 times (counting overlaps). In a sequence of length $N$, what is the expected number of times a word of length $q$ occurs?
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Some comments on expected values}
+  \begin{itemize}
+    \item The expected value can be used as an indication of the central value of the density or frequency function.
+    \item Because of this, the expected value is sometimes referred to as a \alert{location parameter}.
+    \item The expected value is not the only type of location parameter. For instance, the \emph{median} is also a type of location parameter.
+    \item We have seen a lot of parallel between the expected value of a discrete random variable and that of a continuous random variable. This is not a coincidence. 
+    \item Specifically, we generally just ``swap" and integration with summation, and pdf with pmfs.
+    \item With a more rigorous definition of expectation, we could define expectation as a \alert{Lebesgue-Stieltjes} integral, with respect to some measure $P$.
+    \item That is, $E(X) = \int_\Omega XdP$, where $P$ is a probability measure. If the probability measure is a counting measure, then the integral \emph{is} a sum. 
+    \item Note that this definition does not require the existence of a pdf; in fact, there distributions where the expectation is well-defined, but the pdf is not. These types of distributions do not come up often in standard examples. 
+  \end{itemize}
+\end{frame}
+
+\section{Variance and Standard Deviation}
+
+\begin{frame}{Variance}
+  \begin{itemize}
+    \item The expected value is useful for summarizing the average or expected behavior of a random variable.
+    \item 
+    \item We are also often interested 
+  \end{itemize}
 \end{frame}
 
 \newcommand\acknowledgments{

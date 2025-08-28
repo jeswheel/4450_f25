@@ -627,7 +627,7 @@ $$
     In how many ways can the set of nucleotides $\{A, A, G, G, G, G, C, C, C\}$ be arranged in a sequence of nine letters? 
     
     \mode<article>{
-    To answer, let's re-frame the question. How many ways can nine positions be divided into subroups of sizes two, four, and three (i.e., the locations of the letters $A$, $G$, and $C$?)
+    To answer, let's re-frame the question. How many ways can nine positions be divided into subgroups of sizes two, four, and three (i.e., the locations of the letters $A$, $G$, and $C$?)
     $$
     \binom{9}{2\,4\,3} = \frac{9!}{2!4!3!} = 1260
     $$
@@ -699,7 +699,7 @@ $$
   
   \begin{itemize}
     \item In the table, we can restrict ourselves to the first row, as we know there was a positive test $(T+)$. 
-    \item Of the 39 patients that tested positive, 25 suffered the disease ($18.5\%$).
+    \item Of the 39 patients that tested positive, 25 suffered the disease ($64.1\%$).
     \item We call he probability that a patient shows toxicity given that the test is positive the \alert{conditional probability} of $D+$ given $T+$, denoted $P(D+ | T+)$
   $$
   P(D+ | T+) = \frac{25}{39} = 0.640.
@@ -724,7 +724,7 @@ $$
   
   \begin{itemize}
     \item Some intuition behind this definition is the following: If we \emph{know} that event $B$ occurred, then the relevant sample space for other events becomes $B$, not $\Omega$.
-    \item Thus, the conditional probability is a probability measure on $B$. It can be shown that this new probability measure on $B$ rather than $A$ satisfies all of the axioms to be considered a probability measure.
+    \item Thus, the conditional probability is a probability measure on $B$. It can be shown that this new probability measure on $B$ rather than $\Omega$ satisfies all of the axioms to be considered a probability measure.
   \end{itemize}
   
 \end{frame}
@@ -871,13 +871,19 @@ $$
   
     \item In this case, we are doing an \alert{inverse} problem. That is, we are given an ``effect", and we want to find the probability of a particular ``cause".
     
-    \item We can use the basic rules from conditional probability to do this:
-  
+    \framebreak
+    
+    \item For example, calculate the probability $P(U_1 | U_2)$.
+    
+    \mode<article>{
+      \item We can use the basic rules from conditional probability to do this:
   \begin{align*}
     P(U_1 | U_2) &= \frac{P(U_1 \cap U_2)}{P(U_2)} \\
     &= \frac{P(U_2 | U_1)P(U_1)}{P(U_2 | U_1)P(U_1) + P(U_2 | M_1)P(M_1) + P(U_2|L_1)P(L_1)}\\
     &= \frac{0.045}{0.07} = 0.64.
   \end{align*}
+    }
+
   \end{itemize}
   
 \end{frame}

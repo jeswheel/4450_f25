@@ -772,7 +772,104 @@ $$
     
   \end{exampleblock}
   
+  \framebreak
+  
+  \begin{itemize}
+    \item Using the definition of variance, we will derive a very famous inequality.
+  \end{itemize}
+  
+  \begin{block}{Theorem~4.5: Chebyshev's Inequality}
+    Let $X$ be a random variable with $E[X] = \mu$, and $\Var(X) = \sigma^2$. Then for any $t > 0$,
+    $$
+    P\big(|X - \mu| > t\big) \leq \frac{\sigma^2}{t^2}.
+    $$
+    \mode<article>{
+    \begin{proof}
+      The proof of the inequality is rather trivial using Markov's inequality. Let $Y = (X - \mu)^2$. Because $Y$ is non-negative, we can use the most standard version of Markov's inequality:
+      \begin{align*}
+        P(Y > t^2) &\leq \frac{E[Y]}{t^2} \\
+        P\big((X - \mu)^2 > t^2\big) &\leq \frac{E\big[(X - \mu)^2\big]}{t^2}\\
+        P\big(|X - \mu| > t \big) &\leq \frac{\sigma^2}{t^2}.
+      \end{align*}
+    \end{proof}
+    }
+  \end{block}
+  
+  \begin{itemize}
+    \item This theorem bounds the probability that the difference between $X$ and $E[X]$ is larger than $t$.
+    \item If $\sigma^2$ is small, then the probability that $X$ deviates far away from the mean is also small.
+    \item By letting $t = k\sigma$, we get a bound on the probability that a variable will be $k$-standard deviations away from the mean:
+    $$
+    P\big(|X - \mu| > k\sigma\big)\leq \frac{1}{k^2},
+    $$
+    \item For instance, the probability that any arbitrary random variable $X$ will be more than $4\sigma$ away from $E[X]$ is less than $1/16$.
+    \item While applicable to all random variables with well-defined variances, it is not the most optimal bound we can acheive.
+    \item For instance, if $X \sim N(\mu, \sigma^2)$, then $P(|X - \mu| > 2\sigma) = 0.05 < 1/4$
+  \end{itemize}
+  
+  \begin{block}{Corollary: zero variance}
+    Let $X$ be a random variable with $\Var(X) = 0$. Then $P(X = \mu) = 1$.
+    
+    \mode<article>{
+    \begin{proof}
+      Suppose that $P(X = \mu) \neq 1$. Since $P$ is a probability measure, we can deduce $P(X = \mu) < 1$ from this assumption. Thus, there must exist some $\epsilon > 0$ such that $P(|X - \mu| > \epsilon) > 0$. However, this leads us to a contradiction: using Chebyshev's inequality, we know that for all $\epsilon > 0$, $P(|X - \mu| > \epsilon) = 0$, and therefore our assumption must be false, implying that $P(X = \mu) = 1$.
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~4.6: Variance Calculation}
+    Let $X$ be a random variable such that $\Var(X)$ exists. Then
+    $$
+    \Var(X) = E(X^2) - \big[E(X)\big]^2 = E(X^2) - \mu^2,
+    $$
+    where $\mu = E(X)$.
+  \end{block}
+  
+  \mode<article>{
+  \begin{proof}
+    \begin{align*}
+      \Var(X) &= E\big[(X - \mu)^2\big] \\
+              &= E\big[X^2 - 2\mu X + \mu^2\big] \\
+              &= E(X^2) - 2\mu E(X) + \mu^2 \\
+              &= E(X^2) - 2\mu^2 + \mu^2 \\
+              &= E(X^2) - \mu^2.
+    \end{align*}
+  \end{proof}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item Theorem~4.5 is sometimes useful to help us calculate the variance of a random variable. 
+    \item Other times, the variance is known, and the theorem helps us calculate $E(X^2)$. 
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Uniform distribution}
+    Let $X \sim U(0, 1)$. Use Theorem~4.5 to find $\Var(X)$.
+    
+    \mode<article>{
+    \emph{Solution.} the pdf of $X$ is $f(x) = 1[0 \leq x \leq 1]$. Then
+    $$
+    E[X] = \int_{-\infty}^\infty x f(x) \,dx = \int_0^1 x \, dx = 1/2.
+    $$
+    $$
+    E[X^2] = \int_{-\infty}^\infty x^2 f(x) \,dx = \int_0^1 x^2 \, dx = 1/3.
+    $$
+    Thus, 
+    $$
+    \Var(X) = E[X^2] - \big(E[X]\big)^2 = \frac{1}{3} - \left(\frac{1}{2}\right)^2 = \frac{1}{12}.
+    $$
+    }
+  \end{exampleblock}
+  
 \end{frame}
+
+% \begin{frame}[allowframebreaks]{}
+% 
+% \end{frame}
 
 \newcommand\acknowledgments{
 \begin{itemize}

@@ -593,12 +593,40 @@ $$
   ACTATATAGATATA
   $$
   In the above sequence, we would count $TATA$ 3 times (counting overlaps). In a sequence of length $N$, what is the expected number of times a word of length $q$ occurs?
+  
+  \mode<article>{\emph{Solution.} To solve this problem, we will use indicator functions. 
+  \begin{itemize}
+    \item Let $I_n$ denote the event that the start of a word starts at position $n$ of the sequence, for $n \in \{1, 2, \ldots, N - q + 1\}$. 
+    \item Thus, $I_n = 1$ if the word occurs in position $n$, and $I_n = 0$ otherwise. 
+    \item The total number of words in a sequence of length $N$ is therefore
+  $$
+  W = \sum_{n = 1}^{N - q + 1} I_n,
+  $$
+    \item because $I_n$ only has two possibilities, it is Bernoulli distributed.
+    \item Our task is now to find the value of $p$, the probability that a word occurs at position $n$. 
+    \item Our assumption that we made is that all letters are independent, and equally as likely to occur at any given position. 
+    \item Therefore, the probability that the first letter occurs at position $n$ is $1/4$, and the probability that the second letter occurs at the position $n+1$ is $1/4$, and so on.
+    \item By the multiplication principle, $P(I_n = 1) = (1/4)^q$, and the expected value is $E[I_n] = (1/4)^q$.
+    \item Thus, the expected value of $W$ is
+    $$
+    E[W] = \sum_{n = 1}^{N - q + 1} E[I_n] = (N - q + 1)(1/4)^q.
+    $$
+  \end{itemize}
+  }
 \end{exampleblock}
 
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Some comments on expected values}
-  \begin{itemize}
+
+\begin{itemize}
+  \item An important thing to notice about the theorem for linear combinations is that we do not require independence.
+  \item The last example demonstrates this principle. Though $I_n$ is Bernoulli distributed, $\sum_n I_n$ is \alert{NOT} binomial distributed, because the $I_n$ are not independent.
+  \item As an example, if our word is $TATA$, then $I_1 = 1$ implies that $I_2 = 0$, since a $TATA$ at position 1 implies that the second letter starts with $A$, and thus $TATA$ cannot occur at position $2$.
+  \item Despite this, we can still calculate the expected value of a sum by taking the sum of expected values.
+
+\framebreak
+
     \item The expected value can be used as an indication of the central value of the density or frequency function.
     \item Because of this, the expected value is sometimes referred to as a \alert{location parameter}.
     \item The expected value is not the only type of location parameter. For instance, the \emph{median} is also a type of location parameter.
@@ -612,12 +640,138 @@ $$
 
 \section{Variance and Standard Deviation}
 
-\begin{frame}{Variance}
+\begin{frame}[allowframebreaks]{Variance}
   \begin{itemize}
     \item The expected value is useful for summarizing the average or expected behavior of a random variable.
-    \item 
-    \item We are also often interested 
+    \item We are also often interested in the ``spread" of a random variable.
+    \item That is, if the expected value is the center (or location) of a distribution, we want an indication of how dispersed a distribution is around this center.
+    \item The two most common ways to express this idea is the \alert{variance} and \alert{standard deviation} of a random variable.
   \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Definition: Variance}
+    If $X$ is a random variable with expected value $E(X)$, then the \alert{variance} of $X$ is
+    $$
+    \Var(X) = E\Big[\big(X - E(x)\big)^2\Big],
+    $$
+    provided the expectation exists.
+  \end{block}
+  
+  \begin{itemize}
+    \item If $X$ is a discrete random variable, then by Theorem~4.1, 
+    $$
+    \Var(X) = \sum_{i}(x_i - \mu)^2\,p(x_i),
+    $$
+    where $\mu = E[X]$.
+    \item If $X$ is a continuous random variable, then
+    $$
+    \Var(X) = \int_{-\infty}^\infty (x- \mu)^2 f(x)\, dx
+    $$
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Definition: Standard deviation}
+    If $X$ is a random variable, then the standard deviation of $X$ is the square-root of the variance, provided it exists. 
+  \end{block}
+  
+  \begin{itemize}
+    \item The variance is often denoted by $\sigma^2$, and the standard deviation $\sigma$.
+    \item Because $\big(X - E(x)\big)^2 \geq 0$, $\Var(X) \geq 0$.
+    \item Formally, the variance is the mean of the squared distance between $X$ and $E[X]$. If most values of $X$ are close to the mean, this value is small; and vice-versa if most values of $X$ are far away from $E[X]$.
+    \item By this definition, the units for the variance are squared units. 
+    \item That is, if $X$ is measured in meters, then the variance is measured in square-meters, and the standard deviation is measured in meters. 
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~4.4: linear transformation of a single variable}
+    Let $X$ be a random variable, and assume that $\Var(X)$ exists. Then if $Y = a + bX$, then $\Var(X) = b^2\Var(X)$.
+    
+    \mode<article>{
+    \begin{proof}
+      \begin{align*}
+        E\Big[\big(Y - E(Y)\big)^2\Big] &= E\Big[\big(a + bX - (a + bE[X]\big)^2\Big] \\
+                                        &= E\Big[b^2\big(X - E[X]\big)^2\Big] \\
+                                        &= b^2E\Big[\big(X - E[X]\big)^2\Big] \\
+                                        &= b^2 \Var(X)
+      \end{align*}
+    \end{proof}
+    }
+  \end{block}
+  
+  \mode<presentation>{\emph{Proof.}}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item This result makes a lot of sense: adding a constant only ``shifts" a distribution, it does not affect the spread.
+    \item The multiplier does change the spread, and because we're squaring the difference, the multiplier is also squared.
+    \item From this result, we can also see that the standard deviation also changes in a natural way. 
+    \item Specifically, if $\sigma_Y, \sigma_X$ denote the standard deviations of $X$ and $Y$, respectively, then
+    $$
+    \sigma_Y = |b|\sigma_X.
+    $$
+    \item We take the absolute value, because variance and standard deviation are always positive, though the multiplier $b$ might be negative.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Bernoulli distribution}
+    Let $X$ be a Bernoulli$(p)$ distributed random variable. What is the variance of $X$?
+    
+    \mode<article>{\emph{Solution.} We'll calculate the variance using the definition of expectation. For a discrete random variable, that means summing the possible values by the corresponding probabilities:
+    \begin{align*}
+      \Var(X) &= \sum_{x} (x-p)^2 \, p(x) \\
+              &= (0 - p)^2 (1-p) + (1 - p)^2 (p) \\
+              &= p^2(1-p) + p(1-p)^2 \\
+              &= p^2 - p^3 + p - 2p^2 + p^3 \\
+              &= p(1 - p).
+    \end{align*}
+    \begin{itemize}
+      \item Note that $p(1-p)$ is a quadratic function of $p$, that is maximized at $p = 1/2$.
+      \item When $p = 0$ or $p = 1$, the variance is $0$, because the value will have value $X = 0$ or $X = 1$ with probability $1$.
+    \end{itemize}
+    }
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Normal distribution}
+    Let $X \sim N(\mu, \sigma^2)$. What is $\Var(X)$? 
+    
+    \mode<article>{
+      \emph{Solution.} Since we are already familiar with the normal distribution, we suspect that the variance is $\sigma^2$, both because it's the standard notation for variance, and because we call $\sigma$ the standard deviation parameter for the distribution. However, let's quickly demonstrate that this is indeed the case.
+      If we denote $E(X) = \mu$, then
+      \begin{align*}
+        \Var(X) &= E\Big[\big(X - E[X]\big)^2\Big] \\
+                &= \frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^\infty (x - \mu)^2 e^{-\frac{1}{2}\big(\frac{x - \mu}{\sigma}\big)^2} \, dx.
+      \end{align*}
+      Making the change of variables $z = (x - \mu) / \sigma$, we have 
+      \begin{align*}
+        \Var(X) &= \frac{\sigma^3}{\sigma\sqrt{2\pi}} \int_{-\infty}^\infty z^2 e^{-z^2/2} \, dz \\
+                &= \frac{2\sigma^2}{\sqrt{2\pi}} \int_0^\infty z^2 e^{-z^2/2} \, dz.
+      \end{align*}
+      We now make another transformation, $u = z^2 / 2$, which implies that $du = zdu$ and $z = \sqrt{2u}$, and thus
+      \begin{align*}
+        \Var(X) &= \frac{2\sigma^2}{\sqrt{2\pi}} \int_{0}^\infty \frac{2u}{\sqrt{2u}}e^{-u} \, du \\
+                &= \frac{2\sigma^2}{\sqrt{\pi}} \int_0^\infty u^{1/2} e^{-u} \, du
+      \end{align*}
+      Now we can use the Gamma-distribution to help us evaluate this integral. Namely we need to find values of $\alpha$ and $\lambda$ such that the integrand matches the pdf of a Gamma$(\alpha, \lambda)$ distribution:
+      $$
+      f(u) = \frac{\lambda^\alpha}{\Gamma(\alpha)} u^{\alpha - 1}e^{-\lambda u}, \quad u \geq 0.
+      $$
+      Thus if we let $\alpha = 3/2$ and $\lambda = 1$, then we find that the integral on the right hand side is
+      \begin{align*}
+        \Var(X) &= \frac{2\sigma^2}{\sqrt{\pi}} \times \frac{\Gamma(\alpha)}{\lambda^\alpha} \\
+                &= \frac{2\sigma^2}{\sqrt{\pi}} \times \Gamma(3/2) \\
+                &= \frac{2\sigma^2}{\sqrt{\pi}} \frac{\sqrt{\pi}}{2} = \sigma^2.
+      \end{align*}
+    }
+    
+  \end{exampleblock}
+  
 \end{frame}
 
 \newcommand\acknowledgments{

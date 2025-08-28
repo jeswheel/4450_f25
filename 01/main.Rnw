@@ -433,6 +433,8 @@ For the below definitions, we assume that $\Omega$ is the sample space, and $A, 
     This is an example of sampling with replacement (as each license plate can have duplicated numbers or letters). Thus, there are $26^3$ different ways to choose the letters, and $10^3$ different ways to choose the numbers. Using the multiplication principle, there are $26^3 \times 10^3 = 17,576,000$ possible unique license plate numbers (using this rule).
   \end{exampleblock}
   
+  \framebreak
+  
   \begin{exampleblock}{Exercise: Birthday probabilities}
     Suppose that a room contains $n$ people. Assuming birthdays are uniformly distributed for 365 days, what is the probability that \emph{at least two} of them have a common birthday?
   \end{exampleblock}
@@ -459,8 +461,15 @@ For the below definitions, we assume that $\Omega$ is the sample space, and $A, 
     $$
     P(A) = 1 - P(A^c) = 1 - \frac{365 \times 364 \times ... \times (365 - n + 1)}{365^n}.
     $$
-    Calculating both the numerator and denominator can be hard because they are large numbers, but a relevant table of values is given below: 
-    \begin{table}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item Table~\ref{tab:birthdays} gives some probabilities for a few values of $n$. 
+  \end{itemize}
+  
+      \begin{table}
     \centering
     \begin{tabular}{cc}
       $n$ & $P(A)$ \\\hline
@@ -471,8 +480,22 @@ For the below definitions, we assume that $\Omega$ is the sample space, and $A, 
       40 & .891 \\
       56 & .988 \\\hline
     \end{tabular}
+    \caption{\label{tab:birthdays}Some birthday probabilities for various numbers of $n$.}
     \end{table}
-  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item These days, a computer can very quickly calculate these probabilities. You just need to be careful not to run into numeric overflow when calculating $n!$.
+    \item Specifically, don't try $n! / (n - r)!$, because the numerator and denominator will be so large for even small values of $n$ that the computer will just say $n! = \inf$. Instead, reduce the fraction, then compute.
+    \item For this class, we have $11$ people (including myself). So the probability that at least one of us shares a birthday can be approximated in R by: 
+      \begin{center}
+        \code{1 - (prod(365:355)) / (365\string^11)} $\approx \Sexpr{round(1 - (prod(365:355)) / (365^11), 3)}$
+      \end{center}
+    \item I said ``approximate"... Why?
+  \end{itemize}
+  
+  \framebreak
   
 \end{frame}
 
@@ -486,10 +509,16 @@ For the below definitions, we assume that $\Omega$ is the sample space, and $A, 
     \item Probably a few ways to think about this, but let's use the theorems / corollaries / propositions that we have already derived.
     \item First, consider how many unique ordered samples there are (without replacement). Then, how many times are we counting the same sample? That is, how many unique ways can we arrange the sample?
   
-  \item First, there are $nPr(n, r)$ ordered samples, which is equal to the number of unique samples (the thing we want, let's call it $\binom{n}{r}$), times the number of ways to order each unique sample. 
-  \item From Corollary 1.1.1, the latter value is $r!$. 
-  \item Thus: $\binom{n}{r} = nPr(n, r) / r! = \frac{n!}{(n-r)!r!}$.
+  \mode<article>{
+    \item First, there are $nPr(n, r)$ ordered samples, which is equal to the number of unique samples (the thing we want, let's call it $\binom{n}{r}$), times the number of ways to order each unique sample. 
+    \item From Corollary 1.1.1, the latter value is $r!$. 
+    \item Thus: $\binom{n}{r} = nPr(n, r) / r! = \frac{n!}{(n-r)!r!}$.
+  }
 \end{itemize}
+
+\mode<presentation>{\emph{Sketch:}}
+
+\framebreak
 
 \begin{block}{Proposition 1.2: Binomial Coefficient}
   The number of unordered samples of $r$ objects selected from $n$ objects without replacement is:
@@ -516,8 +545,12 @@ $$
   \item Suppose to win a jackpot for a given lottery, you must correctly choose 6 numbers from 1 to 53, where the order doesn't matter. 
   \item How many possible combinations of numbers are there, and if you play once, what is the probability that you win (these numbers come from California lottery in the 90's)
   
+  \mode<article>{
   \item \emph{Answer}: There are $\binom{53}{6} = 22,957,480$ possible combinations. If you play once, your probability of winning is $1/22,957,480 \approx 0.00000004$.
+  }
 \end{itemize}
+
+\emph{Sketch.}
 
 \end{frame}
 
@@ -534,7 +567,7 @@ $$
   Let $A$ be the event that we sample exactly $m$ defective items in our sample of $r$ items.
   The total number of samples of size $r$ is $\binom{n}{r}$, which will be our denominator.
   The total number of ways that $A$ can occur can be found using the multiplication principle. There are $\binom{k}{m}$ ways to choose $m$ defective samples, and $\binom{n-k}{r-m}$ ways to choose the remaining (non defective) samples.
-  That is, there are a total of $\binom{n}{r} \times \binom{k}{m}$ ways for $A$ to occur. Thus,
+  That is, there are a total of $\binom{n}{r} \times \binom{n-k}{r-m}$ ways for $A$ to occur. Thus,
   $$
   P(A) = \frac{\binom{k}{m}\binom{n-k}{r-m}}{\binom{n}{r}}.
   $$
@@ -555,12 +588,13 @@ $$
   \framebreak
   
   \begin{itemize}
-    \item \emph{Proof Sketch:} There are $\binom{n}{n_1}$ ways to choose the objects for the first class. 
+    \item \emph{Proof Sketch:} \mode<article>{There are $\binom{n}{n_1}$ ways to choose the objects for the first class. 
     \item Having done that, there are $\binom{n-n_1}{n_2}$ ways of choosing the objects for the second class, etc. Thus:
   $$
   \binom{n}{n_1\,n_2\,\cdots\,n_r} = \frac{n!}{n_1!(n - n_1)!}\frac{(n-n_1)!}{(n - n_1 - n_2)!n_2!}\frac{(n - n_1 - n_2)!}{(n-n_1-n_2-n_3)n_3!}\cdots
   $$
   \item Canceling out factors, we get the desired result.
+  }
   \end{itemize}
 
 \end{frame}
@@ -580,20 +614,24 @@ $$
 
 \begin{frame}[allowframebreaks]{Multinomial Examples}
   \begin{exampleblock}{Example: Subcommittees}
-    How many ways can a committee of seven members be divided into three subcommittees of sizes three, two, and two, respectively?
+    How many ways can a committee of seven members be divided into three subcommittees of sizes three, two, and two, respectively?\mode<article>{
     $$
     \binom{7}{3\,2\,2} = \frac{7!}{3!2!2!} = 210.
     $$
+    }
   \end{exampleblock}
+  
+  \framebreak
   
   \begin{exampleblock}{Example: Genomics}
     In how many ways can the set of nucleotides $\{A, A, G, G, G, G, C, C, C\}$ be arranged in a sequence of nine letters? 
     
+    \mode<article>{
     To answer, let's re-frame the question. How many ways can nine positions be divided into subroups of sizes two, four, and three (i.e., the locations of the letters $A$, $G$, and $C$?)
-    
     $$
     \binom{9}{2\,4\,3} = \frac{9!}{2!4!3!} = 1260
     $$
+    }
   \end{exampleblock}
   
 \end{frame}

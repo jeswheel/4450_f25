@@ -72,7 +72,7 @@ Chapter \CHAPTER: Probability}
   \end{itemize}
   
   \begin{exampleblock}{Number of Heads}
-    Let $X$ be the random variable representing the number of heads. If the result of the outcome is the event $hth$, the $X(\{hth\}) = 2$.
+    Let $X$ be the random variable representing the number of heads. If the result of the experiment is the outcome $hth$, then $X(\{hth\}) = 2$.
   \end{exampleblock}
   
 \end{frame}
@@ -82,7 +82,7 @@ Chapter \CHAPTER: Probability}
     \item Sometimes in this course I will use the abbreviation RV to mean ``random variable", and you can do so as well.
     \item It is conventional to use uppercase letters (math text or italics) to denote random variables.
     \item While a random variable is a function, the outcome of an experiment $\omega \in \Omega$ is random (that's the point), and we only ever see a single outcome.
-    Thus, the fact that $X$ is a function is often dropped, and we just write $X$. 
+    \item Thus, the fact that $X$ is a function is often dropped, and we just write $X$. 
     The realized value of $X$ is random, because the input is random. 
   \end{itemize}
 \end{frame}
@@ -255,9 +255,11 @@ Chapter \CHAPTER: Probability}
   
   \framebreak
   
-  \begin{itemize}
-    \item Suppose a five 6-sided (fair) dice are rolled simultaneously. What is the probability that at least two of the dice show the value 6?
-    
+  \begin{exampleblock}{Example: multiple dice}
+    Suppose a five 6-sided (fair) dice are rolled simultaneously. What is the probability that at least two of the dice show the value 6?
+    \mode<article>{
+    \emph{Solution:}
+    \begin{itemize}
     \item Let $X$ denote the number of 6s in this experiment, which takes values in the set $\{0, 1, \ldots 5\}$.
     We want the probability that $X \geq 2$. 
     
@@ -272,6 +274,11 @@ Chapter \CHAPTER: Probability}
     P(X \geq 2) = 1 - P(X < 2) = 1 - \big(p(0) + p(1)\big) \approx \Sexpr{1 - dbinom(0, 5, 1/6) - dbinom(1, 5, 1/6)}
     $$
   \end{itemize}
+    }
+  \end{exampleblock}
+  
+  \framebreak
+
   
  \begin{itemize} 
   \item \emph{Note:} A binomial RV can be expressed as the sum of independent Bernoulli RVs. That is, let $X_1, X_2, \ldots, X_n$ be independent Bernoulli RVs, each with $P(X_i = 1) = p$. Then,

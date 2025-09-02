@@ -56,10 +56,13 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 Please read the [grading rubric](rubric_homework.html) before submitting homework.
 
-<!--- 
 
-* [Homework 1](hw01/hw01.html), due Sun Jan 21, 11:59pm. 
-[Solution](hw01/sol01.html).
+* [Homework 1](hw01/hw01.pdf), due Wed Sep 10, 11:59pm.
+[TeX file](hw01/hw01.tex)
+
+<!---[Solution](hw01/sol01.html). -->
+
+<!--- 
 
 * [Participation 1](participation/participation1.html), due Sun Jan 21, 11:59pm.
 

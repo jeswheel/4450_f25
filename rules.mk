@@ -37,7 +37,7 @@ syllabus.pdf: syllabus.tex
 clean:
 	$(RM) *.bak
 	$(RM) *.o *.so
-	$(RM) *.log *.aux *.out *.blg *.toc *.nav *.snm *.vrb *.brf
+	$(RM) *.log *.aux *.out *.blg *.toc *.nav *.snm *.vrb *.brf *.synctex.gz  *-concordance.tex
 	$(RM) Rplots.*
 
 fresh: clean

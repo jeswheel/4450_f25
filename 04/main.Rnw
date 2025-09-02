@@ -795,6 +795,8 @@ $$
     }
   \end{block}
   
+  \framebreak
+  
   \begin{itemize}
     \item This theorem bounds the probability that the difference between $X$ and $E[X]$ is larger than $t$.
     \item If $\sigma^2$ is small, then the probability that $X$ deviates far away from the mean is also small.
@@ -843,12 +845,12 @@ $$
   \framebreak
   
   \begin{itemize}
-    \item Theorem~4.5 is sometimes useful to help us calculate the variance of a random variable. 
+    \item Theorem~4.6 is sometimes useful to help us calculate the variance of a random variable. 
     \item Other times, the variance is known, and the theorem helps us calculate $E(X^2)$. 
   \end{itemize}
   
   \begin{exampleblock}{Example: Uniform distribution}
-    Let $X \sim U(0, 1)$. Use Theorem~4.5 to find $\Var(X)$.
+    Let $X \sim U(0, 1)$. Use Theorem~4.6 to find $\Var(X)$.
     
     \mode<article>{
     \emph{Solution.} the pdf of $X$ is $f(x) = 1[0 \leq x \leq 1]$. Then
@@ -865,6 +867,70 @@ $$
     }
   \end{exampleblock}
   
+\end{frame}
+
+\section{Bias-Variance Tradeoff}
+
+\begin{frame}[allowframebreaks]{Measurement Error}
+
+\begin{itemize}
+  \item Often, values of interest cannot be known precisely, but instead must be determined by experimental procedures.
+  \item For instance: measurements of weight, length, voltage, or intervals of time can be complex, and generally involve potential sources of error.
+  \item The National Institute of Standards and Technology (NIST) in the US are charged with developing and maintaining measurement standards.
+  \item Statisticians have historically been employed by these organizations to help with this endeavor.
+  
+  \framebreak 
+  
+  \item Typically, there are two main types of measurement error: \alert{random} vs \alert{systematic}.
+  \item For instance, a sequence of repeated independent measurements made from the same instrument or experimental procedure may not give the same value each time. These uncontrollable differences are modeled as \alert{random} error. 
+  \item However, there may be a \alert{systematic} error that affects all measurements, such as poorly calibrated instruments, or errors that are associated with the method of measurement.
+  \item Suppose that the true value of a quantity being measured is $x_0$. We have a random measurement $X$, which is modeled as 
+  $$
+  X = x_0 + \beta + \epsilon.
+  $$
+  \item Here, $\beta$ is the systematic error, and $\epsilon$ is the random component of the error.
+\end{itemize}
+  \framebreak
+  
+  \begin{block}{Definition: Bias}
+    Let $x_0$ be the true value of a measurement, modeled as a random variable $X$ such that
+    $$
+    X = x_0 + \beta + \epsilon,
+    $$
+    where $E(\epsilon) = 0$, $\Var(\epsilon) = \sigma^2$. Then, we have
+    $$
+    E[X] = x_0 + \beta.
+    $$
+    The value $\beta = E(X - x_0)$ is called the \alert{bias} of the random variable, and we say that $X$ is an unbiased estimate of $x_0$ if $\beta = 0$. 
+  \end{block}
+  
+  \framebreak
+  
+\begin{itemize}
+  \item The two factors that impact the quality of our estimator is the bias $\beta$ and the variance $\sigma^2$. 
+  \item If both $\beta = 0$ and $\sigma^2 = 0$, then we get a perfect measurement.
+  \item Ideally, we want an estimator that minimizes the bias and the variance, though as we will see (Math 4451) there is a principle known as the \alert{bias-variance} trade-off, which suggests that efforts to minimize bias often result in larger variance (and vice-versa).
+  \item Many approaches in statistics we will cover next semester aim at finding estimators that are unbiased ($\beta = 0$), while having minimum variance as possible (that is, the minimum-variance unbiased estimator (MVUE)).
+\end{itemize}
+
+\framebreak
+
+\begin{block}{Theorem~4.7: Mean Squared Error}
+  Let $X$ be a random variable representing a random estimate for value $x_0$. The mean-squared error of the estimator $X$ is defined as $\text{MSE}(X) = E\big[(X-x_0)^2\big]$. If $\beta$ is the bias of the estimator and $\sigma^2$ the variance, then
+  $$
+  \text{MSE}(X) = \beta^2 + \sigma^2.
+  $$
+  \mode<article>{
+  \begin{proof}
+    \begin{align*}
+      E\big[(X-x_0)^2\big] &= \Var(X - x_0) + \big[E(X - x_0)\big]^2 \\
+      &= \Var(X) + \beta^2 \\
+      &= \sigma^2 + \beta^2.
+    \end{align*}
+  \end{proof}
+  }
+\end{block}
+
 \end{frame}
 
 % \begin{frame}[allowframebreaks]{}

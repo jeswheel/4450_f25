@@ -28,9 +28,10 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 1. [Chapter 1: Probability](01/index.html)
 
-<!--
 
-2. [Estimating trend and autocovariance](02/index.html)
+2. [Chapter 2: Random Variables](02/index.html)
+
+<!--
 
 3. [Stationarity, white noise, and some basic time series models](03/index.html)
 

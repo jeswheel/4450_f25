@@ -23,7 +23,7 @@
  \newcommand\answer[2]{#1} % to show blank space
 
 \title{\vspace{2mm} \link{https://jeswheel.github.io/4450_f25/}{Mathematical Statistics I}\\ \vspace{2mm}
-Chapter \CHAPTER: Probability}
+Chapter \CHAPTER: Random Variables}
 \author{Jesse Wheeler}
 \date{}
 

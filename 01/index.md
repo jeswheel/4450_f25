@@ -12,9 +12,7 @@ output: html_document
 | Lecture notes   | [pdf](notes.pdf) |
 ----------------------
 
-<!--
-| Annotated slides | [pdf](slides-annotated.pdf) |
--->
+| Discussion Problems | [pdf](discussionProbs.pdf) |
 
 
 ----------------------

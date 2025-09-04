@@ -878,6 +878,64 @@ Chapter \CHAPTER: Joint Distributions}
   \end{itemize}
 \end{frame}
 
+\section{Order Statistics}
+
+\begin{frame}[allowframebreaks]{Extrema and Order Statistics}
+
+\begin{itemize}
+  \item At times we are interested in properties of ordered collections of random variables.
+  \item For instance, if we have $n$ independent and identical random variables, what's the distribution of the \alert{maximum} or \alert{minimum} of this collection of random variables? 
+  \item More generally, we might want to find the distribution of the $k$th random variable, with $k \in \{1, 2, \ldots, n\}$.
+\end{itemize}
+  \framebreak
+  
+  \begin{exampleblock}{Example: Maximum}
+    Let $X_1, X_2, \ldots, X_n$ be independent and idenditcally distributed random variables, with distribution function $F(x)$ and density $f(x)$. Let $X_{(1)}, X_{(2)}, \ldots, X_{(n)}$ be the ordered random variables, such that $X_{(1)}$ is the minimum and $X_{(n)}$ is the maximum.
+    Find the density function and pdf of $X_{(n)}$.
+    
+    \mode<article>{
+    \begin{itemize}
+      \item To find the distribution function, we want to find $P(X_{(n)} \leq x)$.
+      \item If $X_{(n)}$ is the maximum of all $X_i$, then that means $X_{(n)} \leq x$ if and only if $X_{i} \leq x$ for all $i$. By the multiplication principle,
+      \begin{align*}
+      P(X_{(n)} \leq x) &= P(X_1 \leq x)P(X_2 \leq x)\cdots P(X_n \leq x) \\
+                        &= F(x)F(x)\cdots F(x) \\
+                        &= F(x)^n = F_{X_{(n)}}(x)
+      \end{align*}
+      \item To find the density, we differentiate:
+      $$
+      f_{X_{(n)}}(x) = nF(x)^{n-1}f(x)
+      $$
+    \end{itemize}
+    }
+    
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Maximum}
+    Using the same setup as above, find the distribution and density functions for the minimum, $X_{(1)}$.
+    
+    \mode<article>{
+    \begin{itemize}
+      \item As before, we are looking for the function $F_{X_{(1)}}(x) = P(X_{(1)} \leq x)$.
+      \item In this case, it's easier to find $P(X_{(1)} > x)$.
+      \item The minimum is bigger than $x$ if and only if all $X_i > x$. Thus
+      $$
+      1 - F_{X_{(1)}}(x) = P(X_{(1)} > x) = \big(1 - F(x)\big)^n.
+      $$
+      \item Therefore, by taking the derivative, we find
+      \begin{align*}
+        F_{X_{(1)}}(x) &= 1 - \big(1 - F(x)\big)^n \\
+        f_{X_{(1)}}(x) &= n f(x) \big(1 - F(x))^{n-1}
+      \end{align*}
+    \end{itemize}
+    }
+    
+  \end{exampleblock}
+  
+\end{frame}
+
 \newcommand\acknowledgments{
 \begin{itemize}
 \item   Compiled on {\today} using \Rlanguage version \Sexpr{getRversion()}.

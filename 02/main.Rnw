@@ -1259,6 +1259,37 @@ data.frame(
 
 \end{frame}
 
+\section{Miscellaneous}
+
+\begin{frame}[allowframebreaks]{Identically distributed}
+  \begin{itemize}
+    \item Let $X$ and $Y$ be random variables defined on the same space.
+    \item We say that $X$ and $Y$ are \alert{identically distributed} if for all (measureable) subsets $A \subset \R$, $P(X \in A) = P(Y \in A)$.
+  \end{itemize}
+  \begin{block}{Theorem~\CHAPTER.1: Identical distributions}
+    Random variables $X$ and $Y$ are identically distributed if and only if $F_X(x) = F_Y(x)$ for every $x$.
+    \mode<article>{
+          We will only prove the forward direction; the opposite direction requires more background on sigma-algebras than we would like to develop for this class. 
+    \begin{proof}
+      If $X$ and $Y$ are identically distributed, then by definition, $P(X \in (-\infty, x)) = P(Y \in (-\infty, x))$, because $(-\infty, x)$ is a measurable set for all $x$. But $F_X(x) = P(X \in (-\infty, x)) = P(Y \in (-\infty, x)) = F_Y(x)$, proving the statement.
+    \end{proof}
+    }
+  \end{block}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item If $X$ and $Y$ are identically distributed, we often use the shorthand(s):
+    $$
+    X \overset{d}{=} Y, \quad \text{ or } \quad X \sim Y.
+    $$
+    \item From Theorem~\CHAPTER.1, we have the equivalency between cdf's and distributions. Naturally, we want to extend this to pdf's as well, but there is a subtle distinction that must be made.
+    \item Namely, if two pdf's are the same, then the random variables have the same distribution. However, two random variables can have the same distribution but different pdf's, but the difference can only occur on sets with probability $0$.
+    \item This is a consequence of the definition of a pdf, which implies that a pdf may not be unique. 
+  \end{itemize}
+  
+\end{frame}
+
 \begin{frame}{Final remarks}
   \begin{itemize}
     \item We have introduce some concepts of random variables, but a full rigorous discussion about random variables requires background in measure theory. If you are interested in learning more, a good textbook for a statistics student is \citet{resnick19}; this is considered a graduate level text, and some background in analysis will be beneficial.

@@ -186,7 +186,7 @@ Chapter \CHAPTER: Random Variables}
     \item By using the output of $0$ and $1$, the pmf is usually written in a more compact form:
   $$
   p(x) = \begin{cases} 
-    p^x(1 - p)^x, & \text{if } x = 0\, \text{ or } x = 1,\\
+    p^x(1 - p)^{1-x}, & \text{if } x = 0\, \text{ or } x = 1,\\
     0 & \text{otherwise}
   \end{cases}
   $$

@@ -934,6 +934,117 @@ Chapter \CHAPTER: Joint Distributions}
     
   \end{exampleblock}
   
+  \framebreak
+  
+  \begin{block}{Theorem~3.1: Order statistic for continuous random variables}
+    Let $X_{1}, \ldots, X_{n}$ be continuous random variables, with cdf and pdf $F$ and $f$, respectively. 
+    If the ordered random variables are $X_{(1)}, \ldots, X_{(n)}$, then the cdf of $X_{(j)}$, $j \in \{1, 2, \ldots, n\}$ is
+    $$
+    F_{X_{(j)}}(x) = \sum_{k = j}^n \binom{n}{k} \big[F(x)\big]^k\big[1-F(x)\big]^{n-k}.
+    $$
+    
+    \mode<article>{
+    \begin{proof}
+    \begin{itemize}
+      \item Let $Y$ be a random variable that counts the number of $X_i$ less than or equal to $x$.
+      \item If we define the ``success" as the event that $X_{i}\leq x$, then the probability of success is $p = F(x)$.
+      \item Thus, $Y$ is a binomial random variable with $n$ trials, and probability $p = F(x)$.
+      \item For $X_{(j)} \leq x$, that means that $j$ of the $X_i$ are less than or equal to $x$.
+      \item Using our definition of $Y$, $X_{(j)} \leq x$ if and only if $Y \geq j$. Thus
+      \begin{align*}
+        F_{X_{(j)}}(x) &= P(Y \geq j) \\
+                       &= \sum_{k = j}^n \binom{n}{k}\big[F(x)\big]^k\big[1-F(x)\big]^{n-k}.
+      \end{align*}
+    \end{itemize}
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~3.2: The pdf of ordered statistics}
+    Consider the same setup as Theorem~3.1. That is, $X_{(1)}, \ldots, X_{(n)}$ represent the order statistics of a random sample. Then the pdf of $X_{(j)}$ is
+    $$
+    f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!}f(x)\big[F(x)\big]^{j-1}\big[1 - F(x)\big]^{n-j}.
+    $$
+    \mode<article>{
+    \begin{proof}
+    First, I want to note the following identity that will use
+    $$
+    \binom{n}{k+1}(k+1) = \frac{n!}{(n-k-1)!(k+1)!}(k+1) = \frac{n!}{(n-k-1)!k!} = \frac{n!}{(n-k)!k!}(n-k) = \binom{n}{k}(n-k)
+    $$
+    \begin{itemize}
+      \item Because we already have the cdf, we just need to differentiate to get the pdf.
+    \end{itemize}
+    \begin{align*}
+      f_{X_{(j)}}(x) &= \frac{d}{dx} F_{X_{(j)}}(x) \\
+      &= \frac{d}{dx} \sum_{k = j}^n \binom{n}{k}\big[F(x)\big]^k\big[1-F(x)\big]^{n-k} \\
+      &= \sum_{k=j}^n \binom{n}{k}\left[kf(x)\big(F(x)\big)^{k-1}\big(1 - F(x)\big)^{n-k} - (n-k)f(x)\big(F(x)\big)^k\big(1-F(x)\big)^{n-k-1}\right]\\
+      &= \sum_{k=j}^n \binom{n}{k}\left[kf(x)\big(F(x)\big)^{k-1}\big(1 - F(x)\big)^{n-k}\right] - \sum_{k = j}^n \binom{n}{k}\left[(n-k)f(x)\big(F(x)\big)^k\big(1-F(x)\big)^{n-k-1}\right]
+    \end{align*}
+    \begin{itemize}
+      \item There are many like terms in these sums, which becomes most evident with the identity we derived.
+      \item In the first sum, let's ``pull-out" the first term.
+      \item In the second sum, the last term is zero because when $k = n$, we have a product $(n -k)$.
+    \end{itemize}
+    \begin{align*}
+      f_{X_{(j)}}(x) &= \binom{n}{j} j \big(F(x)\big)^{j-1}\big(1 - F(x)\big)^{n-j}f(x) \\
+                     & \quad + \sum_{k = j+1}^n \binom{n}{k}\left[kf(x)\big(F(x)\big)^{k-1}\big(1 - F(x)\big)^{n-k}\right] \\
+                     & \quad - \sum_{k = j}^{n-1} \binom{n}{k}\left[(n-k)f(x)\big(F(x)\big)^k\big(1-F(x)\big)^{n-k-1}\right].
+    \end{align*}
+    \begin{itemize}
+      \item Now I will expand the factorial in the first term, and do a change of variables for the first summation, shifting the indices down one so that the two sums match.
+    \end{itemize}
+    \begin{align*}
+      f_{X_{(j)}}(x) &= \frac{n!}{(j-1)!(n-j)!} f(x) \big(F(x)\big)^{j-1}\big(1 - F(x)\big)^{n-j} \\
+                     & \quad + \sum_{k = j}^{n-1} \binom{n}{k+1}\left[kf(x)\big(F(x)\big)^{k}\big(1 - F(x)\big)^{n-k-1}\right] \\
+                     & \quad - \sum_{k = j}^{n-1} \binom{n}{k}\left[(n-k)f(x)\big(F(x)\big)^k\big(1-F(x)\big)^{n-k-1}\right].
+    \end{align*}
+    \begin{itemize}
+      \item Finally, using the identity that we previously derived,
+      $$
+      \binom{n}{k+1}(k+1) = \binom{n}{k}(n - k),
+      $$
+      we see that the two sums are additive inverses of one another and cancel out, thus
+    \end{itemize}
+    $$
+    f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!}f(x)\big[F(x)\big]^{j-1}\big[1 - F(x)\big]^{n-j}.
+    $$
+    \end{proof}
+    }
+  \end{block}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item There are a few more useful theorems / identities that are useful, and there derivation is similar.
+    \item I'll just present these theorems without proof for now, but proofs can be found in \citet[][Chapter~5.4]{casella24}.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~3.3: Discrete random variables}
+    Let $X_1, \ldots, X_n$ be a sample from a discrete distribution with pmf $p(x_i) = p_i$. If we define $P_0 = 0$, and for all $i \geq 1$ $P_i = \sum_{j = 1}^i p_j$, then the cdf and pmf of the order statistic $X_{(j)}$ are given by
+    $$
+    P(X_{(j)} \leq x_i) = \sum_{k = j}^n \binom{n}{k}P_i^k (1- P_i)^{n-k},
+    $$
+    and
+    $$
+    P(X_{(j)} = x) = \sum_{k = j}^{n}\binom{n}{k}\big[P_i^k (1 - P_i)^{n-k} - P_{i - 1}^k(1 - P_{i-1})^{n-k}\big].
+    $$
+  \end{block}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~3.4: Joint distributions}
+    If $X_{(1)}, \ldots, X_{(n)}$ denote the order statistics of a random sample from a continuous population with cdf $F(x)$ and pdf $f(x)$, then for any $1 \leq i < j \leq n$, the joint pdf of $X_{(i)}$ and $X_{(j)}$ is 
+    \begin{align*}
+    f_{X_{(i)}, X_{(j)}}(u, v) &= \frac{n!}{(i - 1)!(j-1-i)!(n-j)!}f(u)f(v) \\
+    &\quad \times \big[F(u)\big]^{i-1}\big[F(v)-F(u)\big]^{j-1-i}\big[1-F(v)\big]^{n-j}.
+    \end{align*}
+  \end{block}
+  
 \end{frame}
 
 \newcommand\acknowledgments{

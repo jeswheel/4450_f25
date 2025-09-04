@@ -99,12 +99,12 @@
     
     \item A closet contains $n$ pairs of shoes (that is, $2n$ total shoes). If $2r$ shoes are chosen at random $(2r < n)$, what is the probability that there will be no matching pair in the sample? 
     
-    {\color{blue} There are $2n$ shoes total and we are picking $2r$ of these shoes, so there are a total of $\binom{2n}{2r}$ different samples from which we could draw. 
-    
-    Now I would like to find the number of samples in which there is no matching pair. First, there are $n$ total pairs to choose from. For a sample of $2r$ to have none of the pairs repeated, then there must be $2r$ unique pairs in that sample. Therefore there are $\binom{n}{2r}$ unique sets of $2r$ pairs of shoes. For each pair, I have two shoes to pick from. Therefore I have $2^{2r}$ different ways of picking which shoe within each chosen pair. Therefore there are $\binom{n}{2r}2^{2r}$ different samples of size $2r$ that do not contain a matching pair.
-    
-    Therefore because each sample is equally as likely, the probability that there will be no matching pair in the sample is $\dfrac{\binom{n}{2r}2^{2r}}{\binom{2n}{2r}}$.}
-    
+    % {\color{blue} There are $2n$ shoes total and we are picking $2r$ of these shoes, so there are a total of $\binom{2n}{2r}$ different samples from which we could draw. 
+    % 
+    % Now I would like to find the number of samples in which there is no matching pair. First, there are $n$ total pairs to choose from. For a sample of $2r$ to have none of the pairs repeated, then there must be $2r$ unique pairs in that sample. Therefore there are $\binom{n}{2r}$ unique sets of $2r$ pairs of shoes. For each pair, I have two shoes to pick from. Therefore I have $2^{2r}$ different ways of picking which shoe within each chosen pair. Therefore there are $\binom{n}{2r}2^{2r}$ different samples of size $2r$ that do not contain a matching pair.
+    % 
+    % Therefore because each sample is equally as likely, the probability that there will be no matching pair in the sample is $\dfrac{\binom{n}{2r}2^{2r}}{\binom{2n}{2r}}$.}
+    % 
     % \item Consider a multinomial experiment where at any given trial, $m$ distinct mutually exclusive and exhaustive outcomes can occur (e.g. a die is thrown and one of the six faces has to come up). Let $p_j$ be the probability that the $j$th outcome turns up in the trial. Then $\sum_{j = 1}^mp_j = 1$. Consider repeating the multinomial experiment independently (i.e. you keep throwing the die repeatedly) till $m_1, m_2, \ldots, m_k$ outcomes of types $1$ through $k$ (where $k < m)$ are obtained. What is the probability that you need $N$ trials of the experiment for this to happen? 
     
     % {\color{blue} For this to happen, the $N$th trial of the experiment must result in an outcome of type 1 through $k$ (otherwise we wouldn't have stopped). 

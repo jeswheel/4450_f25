@@ -122,6 +122,7 @@ Chapter \CHAPTER: Random Variables}
   \framebreak
   
   \begin{itemize}
+    \item These simple examples gives us some intuition to derive formulas for the more general case.
     \item More generally, let's assume that $X$ is a discrete RV, and denote the possible values as $x_1, x_2, \ldots$.
   There exists a function $p$ such that $p(x_i) = P(X = x_i)$ that satisfies $\sum_i p(x_i) = 1$.
   This function $p$ is called the \alert{probability mass function} (pmf) of the random variable $X$. 
@@ -533,7 +534,7 @@ In this scenario, the random (stochastic) process that generates the data is cal
 
 \begin{frame}[allowframebreaks]{The distribution function}
   \begin{itemize}
-    \item All random variables $X$ have an associated distribution function.
+    \item All random variables have an associated distribution function.
     \item We have discussed how this arises in the context of discrete random variables, now we want to discuss this for continuous random variables.
     \item If $X$ is a random variable, then its cumulative distribution function is given by
     $$
@@ -666,6 +667,7 @@ $$
   
   \begin{itemize}
     \item By \emph{uniform} probability, we mean that all outcomes in the given set are equally as likely.
+    \item Specifically, if $S \subset \R^p$ for some $p$, then for any $A \subset S$, $X$ is uniformly distributed on $S$ if $P(X \in A) = \text{volume}(A) / \text{volume}(S)$. 
     \item For example, if $X$ is a RV with uniform distribution on the interval $[0, 1]$, then any real number in this interval is equally likely, and the probability that $X$ is in a sub-interval of length $h$ should be equal to $h$. 
     \item You can verify that the following density satisfies this condition: 
 
@@ -722,87 +724,6 @@ $$
     \end{align*}
   \end{exampleblock}
 
-\end{frame}
-
-
-\begin{frame}[allowframebreaks]{Percentiles}
-  \begin{itemize}
-    \item You're probably familiar with the term \alert{median}.
-  For any given sample, the median defines the ``mid-point", meaning that half of the values are larger, half are smaller.
-  
-  \item This same concept applies to distribution functions.
-  
-  \item That is, the median of a distribution $F$ is defined to be that value $x_{.5}$ such that $P(X < x_{.5}) = 0.5$.
-  
-  \item Formally, the sample median is the same as the definition above, using the \emph{empirical} distribution function \citep{wiki:edf}.
-  \end{itemize}
-  
-  It is important to note that, as defined, the median value may not be unique!
-
-  \framebreak
-  
-  \begin{block}{Definition: Percentile}
-    Let $F$ be the cdf of a continuous random variable. The $p$th quantile of the distribution $F$ is defined to be any value $x_p$ such that $F(x_p) = P(X \leq x_p) = p$. If $F$ is strictly increasing, then $x_p$ is unique and we say that $F^{-1}(p) = x_p$.
-    
-    If $F$ is not strictly increasing, then $x_p$ may not be unique; in this case, all such values are considered percentiles.
-    If an inverse function is needed in this case, we will define $F^{-1}(p) = \inf \{x \in \R: F(x) \geq p\}$.
-  \end{block}
-  
-  \begin{itemize}
-    \item The last bit of the definition is just some important book keeping to ensure the inverse function exists in odd examples, though I don't think it comes up in this course.
-  \end{itemize}
-  
-  \framebreak
-  
-  Some important percentiles have their own names, including: 
-  \begin{itemize}
-    \item Median: $p = 1/2$.
-    \item Quartiles (lower and upper): $p = 1/4$, and $p = 3/4$, resp.
-    \item Min: $p = 0$.
-    \item Max: $p = 1$.
-  \end{itemize}
-  
-  Note that the inverse cdf is sometimes called the \alert{quantile function}.
-  
-  \framebreak
-  
-  \begin{exampleblock}{Calculating the inverse cdf}
-    Suppose that 
-    $$
-    F(x) = \begin{cases} 0 & x < 0 \\ x^2 & 0 < x < 1 \\ 1 & x > 1 \end{cases}
-    $$ 
-    for $0 \leq x \leq 1$. Find the inverse distribution function $F^{-1}$.
-  \end{exampleblock}
-  
-  \emph{Solution:}
-  
-  \mode<article>{
-  \vspace{2mm}
-  First, let's check that this is a valid distribution function. First, $\lim_{x \rightarrow -\infty}F(x) = 0$, and $\lim_{x \rightarrow \infty} F(x) = 1$.
- 
-  \vspace{2mm}
-  Now we note that it is trivially monotonically increasing from $(-\infty, 0)$ and $[1, \infty)$. Now on $[0, 1)$, $x^2$ is also increasing, and hence we have $F(x)$ is a monotonically increasing function. 
-  
-  \vspace{2mm}
-  Finally, we need to check that it is right-continuous. In this case it is trivial, because the only points of potential discontinuity are $x = 0$ and $x = 1$, but the limit clearly exists and equals the function value at both of these points. 
-  
-  \vspace{2mm}
-  Now to find the inverse function, we will focus on the more interesting part of the function, and solve $y = F(x) = x^2$ for $x$, obtaining $x = F^{-1}(y) = \sqrt{y}$. This provides the inverse function for all points in $(0, 1)$, but what about the endpoints? These are not unique, so we take:
-  $$
-  F^{-1}(0) = \inf \{x \in \R: F(x) \geq 0\} = \inf_x [0, \infty) = 0,
-  $$
-  and 
-  $$
-  F^{-1}(1) = \inf \{x \in \R: F(x) \geq 1\} = \inf_x [1, \infty) = 1.
-  $$
-  Fortunately, these points already match what we found in the mid-point with the square-root function: $\sqrt{0}=0$ and $\sqrt{1}=1$ (you could have guessed this would happen since the function is always continuous), so we get
-  $$
-  F^{-1}(p) = \sqrt{p}.
-  $$
-  Thus, the inverse function defined on the interval $[0, 1]$ is
-  }
-  
-  
 \end{frame}
 
 \subsection{Common random variables}
@@ -1189,60 +1110,281 @@ data.frame(
  \framebreak
   
   \begin{itemize}
-    \item Now, more generally, assume that $g$ is a strictly monotonically increasing function. Then: $P\big(g(X) \leq y\big) = P\big(X \leq g^{-1}(y)\big)$.
-    \item If $g$ is a strictly monotonically decreasing function, then $P\big(g(X) \leq y\big) = P\big(X \geq g^{-1}(y)\big).$
-    \item These two examples can be combined to give us a new proposition
+    \item More generally, suppose that $X$ is a random variable, and $Y = g(X)$ is a new random variable.
+    \item Since $Y$ is a function of $X$, we can describe the probabilistic behavior of $Y$ in terms of that of $X$. 
+    \item For any set $A \subset \R$, we have
+    $$
+    P(Y \in A) = P\big(g(X) \in A\big),
+    $$
+    showing that the distribution of $Y$ depends on the functions $F_X$ and $g$.
   \end{itemize}
   
   \framebreak
   
-  \begin{block}{Proposition 2.1: monotonic transformations}
-    Let $X$ be a continuous random variable with density $f_X$, and let $Y = g(X)$, where $g$ is differentiable, and strictly monotonic on an interval $I$. Then $Y$ has the density function
+  \begin{itemize}
+    \item Suppose $X$ takes values in $\mathcal{X}$, then $Y$ takes values in $\mathcal{Y}$, where
     $$
-    f_Y(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|.
+    g: \mathcal{X} \rightarrow \mathcal{Y}.
     $$
-    for $y$ such that $y = g(x)$, and $f_Y(y) = 0$ if $y \neq g(x)$ for any $x \in I$.
-  \end{block}
-  
-  \emph{proof}
-  
-  \mode<article>{
-  
-  \vspace{2mm}
-  Suppose that $g$ is increasing. Then 
-  \begin{align*}
-   F_Y(y) &= P(Y \leq y) \\
-    &= P\big(g(X) \leq y\big) \\
-    &= P\big(X \leq g^{-1}(y)\big) \\ 
-    &= F_X\big(g^{-1}(y)\big).
-  \end{align*}
-  Taking the derivative, 
-  $$
-  f_Y(y) = f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|,
-  $$
-  where the last equality is a result of the fact that if $g$ is increasing, the derivative is always positive, and hence equal to it's absolute value. 
-  
-  \vspace{2mm}
-  
-  Now suppose that $g$ is decreasing. Then
+    \item We will define $g^{-1}(A)$ to be the set of values in $\mathcal{X}$ that get mapped to $A$:
+    $$
+    g^{-1}(A) = \{x \in \mathcal{X}: g(x) \in A\}.
+    $$
+    \item For ease of communicating, we'll call $g^{-1}(A)$ the \alert{pre-image} of $A$.
+    \item The mapping $g^{-1}$ takes sets into sets.
+    
+    \framebreak 
+    
+    \item For point sets like $\{y\}$, we often write $g^{-1}(y)$ rather than $g^{-1}(\{y\})$.
+    \item The quantity $g^{-1}(y)$, can still be a set, if more than one $x$ gets mapped to $y$.
+    \item If $g^{-1}(y)$ is the point set $\{x\}$, we will write $g^{-1}(y) = x$.
+    \item Returning to probabilities, we have
     \begin{align*}
-   F_Y(y) &= P(Y \leq y) \\
-    &= P\big(g(X) \leq y\big) \\
-    &= P\big(X \geq g^{-1}(y)\big) \\ 
-    &= 1 - F_X\big(g^{-1}(y)\big).
-  \end{align*}
-  Taking the derivative, 
-  $$
-  f_Y(y) = -f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|,
-  $$
-  where the last equality is a result of the fact that if $g$ is decreasing, the derivative is always negative, and hence equal to it's absolute value when multiplied by negative one. 
-  }
+      P(Y \in A) &= P\big(g(X) \in A\big) \\
+                 &= P\big(\{x \in \mathcal{X}: \, g(x) \in A\}\big) \\
+                 &= P\big(X \in g^{-1}(A)\big).
+    \end{align*}
+    \item This gives a formal definition for the probability distribution of $Y$, and one can show this satisfies the probability axioms.
+  \end{itemize}
   
   \framebreak
   
   \begin{itemize}
-    \item Proposition 2.1 is useful to have / know, but it's often easier to just work from scratch (we'll see a few examples of this).
-    \item Proposition 2.1 can also be extended for use with non-monotonic functions $g$. The idea is that you break $g: \mathcal{X} \rightarrow \mathcal{Y}$ into a series of functions $g_i: \mathcal{X}_i \rightarrow \mathcal{Y}$ where $\mathcal{X}_i \subset \mathcal{X}$ is a set such that $g_i$ is monotonic. Then, the final density $f_Y$ can be found by summing these functions:
+    \item If $X$ is a discrete random variable, then $\mathcal{X}$ is countable.
+    \item We immediately see that $\mathcal{Y} = \{y: y = g(x), x \in \mathcal{X}\}$ is also a countable set, and therefore a discrete random variable.
+    \item The pmf of $Y$ is found by:
+    \begin{align*}
+      p_Y(y) &= P(Y = y) \\
+      &= P\big(g(X) = y\big) \\
+      &= P\big(X \in g^{-1}(y)\big) \\
+      &= \sum_{x \in g^{-1}(y)}P(X = x) = \sum_{x \in g^{-1}(y)}p_X(x).
+    \end{align*}
+    \item That is, finding the pmf of $Y$ involves identifying $g^{-1}(y)$ for all $y \in \mathcal{Y}$ and summing the appropriate probabilities. 
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Binomial Transformation}
+    Let $X$ have a binomial distribution, so that
+    $$
+    p_X(x) = \binom{n}{x}p^x(1- p)^{n-x},\quad x = 0, 1, \ldots, n.
+    $$
+    Find the pmf of $Y = n-X$.
+    \mode<article>{
+    \emph{Solution.} Here, $g(x) = n-x$, and $\mathcal{X} = \{0, 1, \ldots, n\}$ and $\mathcal{Y} = \{0, 1, \ldots, n\}$. For any $y \in \mathcal{Y}$, we have $n - x = y$ if and only if $x = n - y$. Therefore for all $y$, $g^{-1}(y)$ is just the single point $n - y$. Therefore
+    \begin{align*}
+      p_Y(y) &= \sum_{x \in g^{-1}(y)} p_X(x) \\
+      &= p_X(n - y) \\
+      &= \binom{n}{n-y}p^{n-y}(1-p)^{n - (n - y)} \\
+      &= \binom{n}{y}(1 - p)^{y}p^{n-y}.
+    \end{align*}
+    This result shows that $Y$ is also a binomial distribution, with the probability is now $1-p$. 
+    }
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item If $X$ is a continuous random variable, there are several transformation where the basic definition of $Y = g(X)$ can be used directly to find the cdf / pdf of $Y$, like the linear transformations we considered.
+    \item More generally, we have:
+    \begin{align*}
+      F_Y(y) &= P(Y \leq y) \\
+             &= P\big(g(X) \leq y\big) \\ 
+             &= P\big(\{x \in \mathcal{X}: \, g(x) \leq y\}\big) \\
+             &= \int_{\{x \in \mathcal{X}: \, g(x) \leq y\}} f_X(x)dx.
+    \end{align*}
+    \item Thus, the key is finding the set $\{x \in \mathcal{X}: g(X) \leq y\}$ and integrating over this set, which can sometimes be difficult.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: $g(x) = \sin^2(x)$}
+    Suppose $X$ is uniformly distributed on $(0, 2\pi)$, so that
+    $$
+    f_X(x) = \begin{cases} 1/2\pi & 0 \leq x \leq 2\pi \\ 0 & \text{otherwise}.\end{cases}
+    $$
+    If $Y = \sin^2(X)$, find $P(Y \leq y)$.
+    \mode<article>{
+    \emph{Solution}. 
+      \begin{itemize}
+        \item For a fixed $y$, we need to find the set of $X$ such that $g(x) \leq y$.
+        \item The function $g(x) = \sin^2(x)$ takes values in $[0, 1]$, so we will focus on $y$ in this set.
+        \item To find the following information, it's helpful to plot the function: \url{https://www.desmos.com/calculator/vvm6cm8fd3}. 
+        \item for any $y \in (0, 1)$, there are four points of intersection, where $g(x) = y$.
+        \item For $Y \leq y$, we must have $X \in (0, x_1] \cup [x_2, x_3] \cup [x_4, 2\pi)$, where $x_1, \ldots, x_4$ are the found solutions to $g(x) = y$.
+        \item Thus, 
+        $$
+        P(Y \leq y) = P(X \leq x_1) + P(x_2 \leq X \leq x_3) + P(X \geq x_4). 
+        $$
+        \item Because $X$ is uniform and because of the symmetry of $g(x)$, we can simplify this further if we want: 
+        $$
+        P(Y \leq y) = 2P(X \leq x_1) + 2P(x_2 \leq X \leq \pi),
+        $$
+        where $x_1$ and $x_2$ are the two solutions to $\sin^2(x) = y$, with $0 < x < \pi$.
+      \end{itemize} 
+    }
+  \end{exampleblock}
+  
+  \framebreak 
+  
+  \begin{itemize}
+    \item As we can see from the previous example, even simple transformations can result in expressions that are not very simple. 
+    \item One of the easiest places to make a mistake is keeping track of the sample space of each of the random variables.
+    \item To simplify things as much as possible, it helps to make $\mathcal{X}$ to be the set of values of $x$ that have positive pdf, and the let $\mathcal{Y}$ as the possible values of $Y$ given the set $\mathcal{X}$: 
+    $$
+    \mathcal{X} = \{x:\, f_X(x) > 0\}, \quad \mathcal{Y} = \{y: y = g(x) \text{ for some } x \in \mathcal{X}\}.
+    $$
+    \item As defined above, the set $\mathcal{X}$ is called the \alert{support} of $X$
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The easiest type of transformation are functions $g$ that are \alert{monotone}.
+    \item $g$ is a monotone, increasing function if
+    $$
+    u > v \implies g(u) \geq g(v).
+    $$
+    \item $g$ is a monotone, decreasing function, if
+    $$
+    u < v \implies g(u) \geq g(v).
+    $$
+    \item We say that a function is strictly monotonic if the inequalities above are strict. 
+    
+    \framebreak
+    
+    \item For strictly monotonic functions, then $g$ is a one-to-one and onto function, meaning that each $x \in \mathcal{X}$ is mapped to one and only one $y \in \mathcal{Y}$, and each $y \in \mathcal{Y}$ comes from one and only one $x\in \mathcal{X}$.
+    \item In other words, $g$ uniquely pairs each $x$ and $y$ together, and we can find an inverse function such that $g^{-1}(y) = x$ if and only if $g(x) = y$.
+    \item If $g$ is strictly monotone and \alert{increasing}, then the set of all points $x$ such that $g(x) \leq y$ is given by the set of all points $x$ smaller than $g^{-1}(y)$:
+    \begin{align*}
+    \{x \in \mathcal{X}: \, g(x) \leq y\} &= \big\{x \in \mathcal{X}: g^{-1}\big((g(x)\big) \leq g^{-1}(y) \big\} \\
+    &= \{x \in \mathcal{X}:\, x \leq g^{-1}(y)\}.
+    \end{align*}
+    
+    \framebreak
+    
+    \item The exact opposite is true if $g$ is a strictly monotone \alert{decreasing} function.
+    \item For the set of $x$ such that $g(x) \leq y$ is the same as the set of $x$ such that $x \geq g^{-1}(y)$:
+    \begin{align*}
+    \{x \in \mathcal{X}: \, g(x) \leq y\} &= \big\{x \in \mathcal{X}: g^{-1}\big((g(x)\big) \geq g^{-1}(y) \big\} \\
+                                          &= \{x \in \mathcal{X}:\, x \geq g^{-1}(y)\}.
+    \end{align*}
+    \item These results will lead us to our next theorem
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~\CHAPTER.3: cdf of monotone transformations}
+    Let $X$ have a cdf of $F_X(x)$, and let $Y = g(X)$. Then 
+    \begin{itemize}
+      \item If $g$ is a strictly monotone increasing function on $\mathcal{X}$, then
+      $$
+      F_Y(y) = F_X\big(g^{-1}(y)\big), \quad \text{for } y \in \mathcal{Y}.
+      $$
+      \item If $g$ is a strictly monotone decreasing function on $\mathcal{Y}$, then
+      $$
+      F_Y(y) = 1 - F_X\big(g^{-1}(y)\big), \quad \text{for } y \in \mathcal{Y}.
+      $$
+    \end{itemize}
+    \mode<article>{
+    \begin{proof}
+      \begin{itemize}
+        \item We will show this for the case that $g$ is decreasing; the proof when $g$ is increasing is similar. 
+        \begin{align*}
+          F_Y(y) &= P(Y \leq y) \\
+          &= P\big(g(X) \leq y\big) \\
+          &= P\big(\{x \in \mathcal{X}: \, g(x) \leq y\}\big) \\
+          &= P\big(\{x \in \mathcal{X}: \, x \geq g^{-1}(y)\}\big) \\ 
+          &= \int_{g^{-1}(y)}^\infty f_X(x)\, dx = 1 - F_X\big(g^{-1}(x)\big).
+        \end{align*}
+      \end{itemize}
+    \end{proof}
+    }
+  \end{block}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item This theorem gives the immediate consequence for random variables that have pdfs.
+  \end{itemize}
+  
+  \begin{block}{Theorem~\CHAPTER.4: pdf of monotonic transformations}
+    Let $X$ be a random variable with continuous pdf $f_X(x)$ on $\mathcal{X}$, and let $Y=g(X)$. If $g$ is a strictly monotonic transformation such that $g^{-1}$ has a continuous derivative on $\mathcal{Y}$, then the pdf of $Y$ is given by
+    $$
+    f_Y(y) = \begin{cases}
+      f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy} g^{-1}(y)\Big| & y \in \mathcal{Y} \\
+      0 & \text{otherwise}.
+    \end{cases}
+    $$
+    \mode<article>{
+    \begin{proof}
+      The proof is a direct consequence of the previous theorem and the chain rule. Specifically,
+      $$
+      f_Y(y) = \frac{d}{dy}F_Y(y) = \begin{cases}f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) & \text{if } g \text{ is increasing.} \\-f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) & \text{if } g \text{ is decreasing.} \end{cases}
+      $$
+      Because the derivative of a decreasing function is always negative, we can concisely express both cases by using the absolute value.
+    \end{proof}
+    }
+  \end{block}
+  
+  % TODO: Add example 2.1.6 from Casella and Berger. Also Example 2.1.7
+  
+  
+  % \begin{itemize}
+  %   \item Now, more generally, assume that $g$ is a strictly monotonically increasing function. Then: $P\big(g(X) \leq y\big) = P\big(X \leq g^{-1}(y)\big)$.
+  %   \item If $g$ is a strictly monotonically decreasing function, then $P\big(g(X) \leq y\big) = P\big(X \geq g^{-1}(y)\big).$
+  %   \item These two examples can be combined to give us a new proposition
+  % \end{itemize}
+  
+  % \framebreak
+  
+  % \begin{block}{Proposition 2.1: monotonic transformations}
+  %   Let $X$ be a continuous random variable with density $f_X$, and let $Y = g(X)$, where $g$ is differentiable, and strictly monotonic on an interval $I$. Then $Y$ has the density function
+  %   $$
+  %   f_Y(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|.
+  %   $$
+  %   for $y$ such that $y = g(x)$, and $f_Y(y) = 0$ if $y \neq g(x)$ for any $x \in I$.
+  % \end{block}
+  
+  % \emph{proof}
+  
+  % \mode<article>{
+  % 
+  % \vspace{2mm}
+  % Suppose that $g$ is increasing. Then 
+  % \begin{align*}
+  %  F_Y(y) &= P(Y \leq y) \\
+  %   &= P\big(g(X) \leq y\big) \\
+  %   &= P\big(X \leq g^{-1}(y)\big) \\ 
+  %   &= F_X\big(g^{-1}(y)\big).
+  % \end{align*}
+  % Taking the derivative, 
+  % $$
+  % f_Y(y) = f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|,
+  % $$
+  % where the last equality is a result of the fact that if $g$ is increasing, the derivative is always positive, and hence equal to it's absolute value. 
+  % 
+  % \vspace{2mm}
+  % 
+  % Now suppose that $g$ is decreasing. Then
+  %   \begin{align*}
+  %  F_Y(y) &= P(Y \leq y) \\
+  %   &= P\big(g(X) \leq y\big) \\
+  %   &= P\big(X \geq g^{-1}(y)\big) \\ 
+  %   &= 1 - F_X\big(g^{-1}(y)\big).
+  % \end{align*}
+  % Taking the derivative, 
+  % $$
+  % f_Y(y) = -f_X\big(g^{-1}(y)\big)\frac{d}{dy}g^{-1}(y) = f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy}g^{-1}(y)\Big|,
+  % $$
+  % where the last equality is a result of the fact that if $g$ is decreasing, the derivative is always negative, and hence equal to it's absolute value when multiplied by negative one. 
+  % }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item Theorem~\CHAPTER.4 is useful to have / know, but it's often easier to just work from scratch (we'll see a few examples of this).
+    \item Theorem~\CHAPTER.4 can also be extended for use with non-monotonic functions $g$. The idea is that you break $g: \mathcal{X} \rightarrow \mathcal{Y}$ into a series of functions $g_i: \mathcal{X}_i \rightarrow \mathcal{Y}$ where $\mathcal{X}_i \subset \mathcal{X}$ is a set such that $g_i$ is monotonic. Then, the final density $f_Y$ can be found by summing these functions:
     $$
     f_Y(y) = \sum_{i} f_X\big(g^{-1}_i(y)\big)\Big|\frac{d}{dy}g_i^{-1}(y)\Big|.
     $$
@@ -1310,6 +1452,86 @@ data.frame(
 \end{frame}
 
 \section{Miscellaneous}
+
+\begin{frame}[allowframebreaks]{Percentiles}
+  \begin{itemize}
+    \item You're probably familiar with the term \alert{median}.
+  For any given sample, the median defines the ``mid-point", meaning that half of the values are larger, half are smaller.
+  
+  \item This same concept applies to distribution functions.
+  
+  \item That is, the median of a distribution $F$ is defined to be that value $x_{.5}$ such that $P(X < x_{.5}) = 0.5$.
+  
+  \item Formally, the sample median is the same as the definition above, using the \emph{empirical} distribution function \citep{wiki:edf}.
+  \end{itemize}
+  
+  It is important to note that, as defined, the median value may not be unique!
+
+  \framebreak
+  
+  \begin{block}{Definition: Percentile}
+    Let $F$ be the cdf of a continuous random variable. The $p$th quantile of the distribution $F$ is defined to be any value $x_p$ such that $F(x_p) = P(X \leq x_p) = p$. If $F$ is strictly increasing, then $x_p$ is unique and we say that $F^{-1}(p) = x_p$.
+    
+    If $F$ is not strictly increasing, then $x_p$ may not be unique; in this case, all such values are considered percentiles.
+    If an inverse function is needed in this case, we will define $F^{-1}(p) = \inf \{x \in \R: F(x) \geq p\}$.
+  \end{block}
+  
+  \begin{itemize}
+    \item The last bit of the definition is just some important book keeping to ensure the inverse function exists in odd examples, though I don't think it comes up in this course.
+  \end{itemize}
+  
+  \framebreak
+  
+  Some important percentiles have their own names, including: 
+  \begin{itemize}
+    \item Median: $p = 1/2$.
+    \item Quartiles (lower and upper): $p = 1/4$, and $p = 3/4$, resp.
+    \item Min: $p = 0$.
+    \item Max: $p = 1$.
+  \end{itemize}
+  
+  Note that the inverse cdf is sometimes called the \alert{quantile function}.
+  
+  \framebreak
+  
+  \begin{exampleblock}{Calculating the inverse cdf}
+    Suppose that 
+    $$
+    F(x) = \begin{cases} 0 & x < 0 \\ x^2 & 0 < x < 1 \\ 1 & x > 1 \end{cases}
+    $$ 
+    for $0 \leq x \leq 1$. Find the inverse distribution function $F^{-1}$.
+  \end{exampleblock}
+  
+  \emph{Solution:}
+  
+  \mode<article>{
+  \vspace{2mm}
+  First, let's check that this is a valid distribution function. First, $\lim_{x \rightarrow -\infty}F(x) = 0$, and $\lim_{x \rightarrow \infty} F(x) = 1$.
+ 
+  \vspace{2mm}
+  Now we note that it is trivially monotonically increasing from $(-\infty, 0)$ and $[1, \infty)$. Now on $[0, 1)$, $x^2$ is also increasing, and hence we have $F(x)$ is a monotonically increasing function. 
+  
+  \vspace{2mm}
+  Finally, we need to check that it is right-continuous. In this case it is trivial, because the only points of potential discontinuity are $x = 0$ and $x = 1$, but the limit clearly exists and equals the function value at both of these points. 
+  
+  \vspace{2mm}
+  Now to find the inverse function, we will focus on the more interesting part of the function, and solve $y = F(x) = x^2$ for $x$, obtaining $x = F^{-1}(y) = \sqrt{y}$. This provides the inverse function for all points in $(0, 1)$, but what about the endpoints? These are not unique, so we take:
+  $$
+  F^{-1}(0) = \inf \{x \in \R: F(x) \geq 0\} = \inf_x [0, \infty) = 0,
+  $$
+  and 
+  $$
+  F^{-1}(1) = \inf \{x \in \R: F(x) \geq 1\} = \inf_x [1, \infty) = 1.
+  $$
+  Fortunately, these points already match what we found in the mid-point with the square-root function: $\sqrt{0}=0$ and $\sqrt{1}=1$ (you could have guessed this would happen since the function is always continuous), so we get
+  $$
+  F^{-1}(p) = \sqrt{p}.
+  $$
+  Thus, the inverse function defined on the interval $[0, 1]$ is
+  }
+  
+  
+\end{frame}
 
 \begin{frame}[allowframebreaks]{Final remarks}
   \begin{itemize}

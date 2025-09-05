@@ -531,10 +531,110 @@ In this scenario, the random (stochastic) process that generates the data is cal
 
 \section{Continuous Random Variables}
 
-\begin{frame}{Introduction}
+\begin{frame}[allowframebreaks]{The distribution function}
+  \begin{itemize}
+    \item All random variables $X$ have an associated distribution function.
+    \item We have discussed how this arises in the context of discrete random variables, now we want to discuss this for continuous random variables.
+    \item If $X$ is a random variable, then its cumulative distribution function is given by
+    $$
+    F(x) = P(X \leq x), \quad \text{for all } x.
+    $$
+    \item Some general properties of $F$ can be shown, but requires a more formal definition of probability spaces, so we will just state the result.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem~\CHAPTER.1: The cdf}
+    The function $F(x)$ is a cdf if and only if the following conditions hold
+    \begin{itemize}
+      \item $\lim_{x \rightarrow -\infty}F(x) = 0$ and $\lim_{x \rightarrow \infty}F(x) = 1$.
+      \item $F(x)$ is a non-decreasing function of $x$.
+      \item $F(x)$ is right-continuous; that is, for every number $x_0$, $\lim_{x\downarrow x_0}F(x) = F(x_0)$.
+    \end{itemize}
+  \end{block}
+  
+  \begin{itemize}
+    \item An interesting aspect of this theorem is that it states that every function that satisfies these conditions is a cdf for some random variable.
+    \item The definition of cdf also leads to an alternative definition of continuous vs discrete random variables, which is that a continuous random variable has continuous cdf, and a discrete random variable does not.
+    \item One important thing to note is that the cdf completely determines the probability distribution of a random variable, which is why it is sometimes called the distribution function.
+    \item We will formalize this with a definition and a theorem.
+  \end{itemize}
+  
+  \begin{block}{Definition: Identical Distribution}
+    Random variables $X$ and $Y$ are said to be \alert{identically} distributed if for every (measurable) set $A \subset \R$, $P(X \in A) = P(Y \in A)$.
+  \end{block}
 
   \begin{itemize}
-    \item Because discrete RVs take only a finite number of possibilities, they are relatively simple to define.
+    \item If $X$ and $Y$ are identically distributed, we often use the shorthand(s):
+    $$
+    X \overset{d}{=} Y, \quad \text{ or } \quad X \sim Y.
+    $$
+    \item This definition is intuitive, but it can be hard to show that $X$ and $Y$ have the same distribution, as it would require checking all possible sets.
+    \item The following theorem gives us an easier way to check the equivalence of distributions.
+  \end{itemize}
+  
+    \begin{block}{Theorem~\CHAPTER.2: Identical distributions}
+    Random variables $X$ and $Y$ are identically distributed if and only if $F_X(x) = F_Y(x)$ for every $x$.
+    \mode<article>{
+          We will only prove the forward direction; the opposite direction requires more background on sigma-algebras than we would like to develop for this class. 
+    \begin{proof}
+      If $X$ and $Y$ are identically distributed, then by definition, $P(X \in (-\infty, x)) = P(Y \in (-\infty, x))$, because $(-\infty, x)$ is a measurable set for all $x$. But $F_X(x) = P(X \in (-\infty, x)) = P(Y \in (-\infty, x)) = F_Y(x)$, proving the statement.
+    \end{proof}
+    }
+  \end{block}
+  
+  \begin{itemize}
+      \item Because the distribution is determined by the cdf, we often use the shorthand $X \sim F(x)$ to mean that ``$X$ has a distribution given by F(x)".
+      \item As we have already seen for discrete RVs, the cdf is connected to the pmf in the following way: 
+    $$
+    F(x) = P(X \leq x) = \sum_{i = -\infty}^x p(i).
+    $$
+      \item A natural extension of this idea for continuous random variables is to replace the sum with an integral.
+  \end{itemize}
+  
+  \begin{block}{Definition: probability density function}
+    Let $X$ be a random variable with distribution function $F$. Then the \alert{probability density function} of $X$ is any function $f(x)$ that satisfies
+    $$
+    F_X(x) = \int_{-\infty}^x f(t)dt,\quad \text{for all } x.
+    $$
+  \end{block}
+  
+  \begin{itemize}
+    \item By the fundamental theorem of calculus, we can see that if $F$ is continuous, then $\frac{d}{dx}F(x) = f(x)$, or that taking the derivative of the cdf gives the pdf.
+    \item An interesting thing to notice about the definition of a pdf is that it is not necessarily unique; it is only unique ``almost everywhere", meaning the area where the functions don't match integrates to zero.
+    \item For any given distribution, the density function may not exist, because $F$ may exist and be continuous but not differentiable. We will avoid these pathological cases in this class.
+    \item We also note that any non-negative function with a finite positive integral over a set $A$ can be turned into a pdf. 
+    \item For example, suppose $h(x)$ is positive over the set $A$, and
+    $$
+    \int_{A} h(t)dt = K,
+    $$
+    then $$
+    f(x) = \begin{cases}
+      h(x) / K & x \in A \\
+      0 & x \notin A
+    \end{cases}
+    $$
+    is a valid pdf. 
+  \end{itemize}
+  
+  \begin{block}{Theorem: properties of pmf / pdf}
+    Given the definition of pmf and pdf, we can readily deduce the following properties. Let $f(x)$ be the pdf or pmf of a random variable $X$. Then
+    \begin{itemize}
+      \item $f(x)\geq 0$ for all $x$.
+      \item $\sum_{x} f(x) = 1 \quad \text{(if pmf)}$
+      \item $\int_x f(x) = 1 \quad \text{(if pdf)}$.
+    \end{itemize}
+  \end{block}
+  \begin{itemize}
+    \item The proof to these are not so interesting or difficult, so they are left for practice.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Continuous Random Variables}
+
+  \begin{itemize}
+    \item Because discrete RVs take only a finite number of possibilities, they are relatively simple to define by assigning probabilities to each possible outcome.
   
     \item In many situations, however, we are interested in random variables that can take on a continuum of values rather than a finite (or countably infinite) number.
   \end{itemize}
@@ -545,27 +645,21 @@ In this scenario, the random (stochastic) process that generates the data is cal
   
 \end{frame}
 
-\begin{frame}{Density function}
-  \begin{itemize}
-    \item For continuous random variables, we no longer have a pmf (which maps all values of the random variable to their corresponding probabilities).
-    \item Instead, the role of the pmf is taken by a \alert{probability density function} (pdf), which we will denote $f(x)$.
-  \end{itemize}
-  
-  \begin{block}{Basic properties of a pdf}
-    If $f(x)$ is a pdf, then $f(x) \geq 0$ for all $x$, $f$ is piece-wise continuous, and $\int_{-\infty}^{\infty} f(x) dx = 1$.
-  \end{block}
-  
-\end{frame}
-
 \begin{frame}{Probabilities}
   \begin{itemize}
     \item If $X$ is a random variable with a density function $f$, then for any $a \leq b$, the probability that $X$ falls in the interval $(a, b)$ (with the treatment that if $a = b$, the interval collapses to the set $\{a\}$) is given by: 
   $$
-  P(a < X < b) = \int_{a}^b f(x) dx.
+  P(a < X < b) = F(b) - F(a) = \int_{a}^b f(x) dx.
   $$
   \item An immediate consequence of this definition is that $P(X = a) = 0$ for any $a \in \R$.
-  \end{itemize}
   
+  \item Additionally,
+$$
+P(a < X < b) = P(a \leq X < b) = P(a < X \leq b).
+$$
+  \item This is because the probability $X$ being any particular value is zero; if this were not the case, then the probability of the entire set would infinite (and probabilities must sum to one).
+  \end{itemize}
+
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Example: Continuous uniform random variable}
@@ -615,52 +709,7 @@ $$
 
 \framebreak
 
-\begin{itemize}
-  \item One important thing to note is that if $X$ is a continuous RV, then
-$$
-P(a < X < b) = P(a \leq X < b) = P(a < X \leq b).
-$$
-  \item This is because the probability $X$ being any particular value is zero; if this were not the case, then the probability of the entire set would infinite (and probabilities must sum to one).
-  \end{itemize}
-
-\end{frame}
-
-\subsection{The cumulative distribution function}
-
-\begin{frame}[allowframebreaks]{Cumulative distribution function}
-
-\begin{itemize}
-  \item The cumulative distribution function of a continuous random variable $X$ is defined in the same way as for a discrete random variable:
-  
-  $$
-  F(x) = P(X \leq x) = \int_{-\infty}^x f(x) dx.
-  $$
-  
-  \item Thus, we can connect the cdf and the pdf of a continuous random variable using the fundamental theorem of calculus.
-  
-  \item Specifically, if $f(x)$ is continuous at $x$, then $F'(x)$, and
-  $$
-  P(a \leq X \leq b) = \int_{a}^{b} f(x)dx = F(b) - F(a).
-  $$
-\end{itemize}
-  
-  \framebreak
-  
-  \begin{itemize}
-   \item This derivation gives some hints at properties of the cdf (both continuous and discrete RVs). Let $F$ be a distribution function. Then the following properties hold: 
-  \begin{itemize}
-    \item $F$ is right-continuous.
-    \item $F$ is monotonically increasing (non-decreasing).
-    \item $F: \R \rightarrow [0, 1]$ and satisfies $\lim_{x \rightarrow -\infty} F(x) = 0$, and $\lim_{x \rightarrow \infty} F(x) = 1$.
-  \end{itemize}
-  
-  \item \emph{Note}: every probability distribution supported on the real numbers is uniquely identified by its distribution function $F$ (more to come).
-  
-  \end{itemize}
-  
-  \framebreak
-  
-  \begin{exampleblock}{cdf of continuous uniform density}
+\begin{exampleblock}{cdf of continuous uniform density}
     From the definition, we can calculate the cdf of the continuous uniform density rather easily. Suppose that $X$ is uniformly distributed on $[0, 1]$. Then the cdf $F$ is:
     \begin{align*}
     F(X \leq x) &= \int_{-\infty}^x f(x)dx \\
@@ -672,8 +721,9 @@ $$
     \end{cases}
     \end{align*}
   \end{exampleblock}
-  
+
 \end{frame}
+
 
 \begin{frame}[allowframebreaks]{Percentiles}
   \begin{itemize}
@@ -1261,37 +1311,14 @@ data.frame(
 
 \section{Miscellaneous}
 
-\begin{frame}[allowframebreaks]{Identically distributed}
+\begin{frame}[allowframebreaks]{Final remarks}
   \begin{itemize}
-    \item Let $X$ and $Y$ be random variables defined on the same space.
-    \item We say that $X$ and $Y$ are \alert{identically distributed} if for all (measureable) subsets $A \subset \R$, $P(X \in A) = P(Y \in A)$.
-  \end{itemize}
-  \begin{block}{Theorem~\CHAPTER.1: Identical distributions}
-    Random variables $X$ and $Y$ are identically distributed if and only if $F_X(x) = F_Y(x)$ for every $x$.
-    \mode<article>{
-          We will only prove the forward direction; the opposite direction requires more background on sigma-algebras than we would like to develop for this class. 
-    \begin{proof}
-      If $X$ and $Y$ are identically distributed, then by definition, $P(X \in (-\infty, x)) = P(Y \in (-\infty, x))$, because $(-\infty, x)$ is a measurable set for all $x$. But $F_X(x) = P(X \in (-\infty, x)) = P(Y \in (-\infty, x)) = F_Y(x)$, proving the statement.
-    \end{proof}
-    }
-  \end{block}
-  
-  \framebreak
-  
-  \begin{itemize}
-    \item If $X$ and $Y$ are identically distributed, we often use the shorthand(s):
-    $$
-    X \overset{d}{=} Y, \quad \text{ or } \quad X \sim Y.
-    $$
-    \item From Theorem~\CHAPTER.1, we have the equivalency between cdf's and distributions. Naturally, we want to extend this to pdf's as well, but there is a subtle distinction that must be made.
+    \item From Theorem~\CHAPTER.2, we have the equivalency between cdf's and distributions. Naturally, we want to extend this to pdf's as well, but there is a subtle distinction that must be made.
     \item Namely, if two pdf's are the same, then the random variables have the same distribution. However, two random variables can have the same distribution but different pdf's, but the difference can only occur on sets with probability $0$.
     \item This is a consequence of the definition of a pdf, which implies that a pdf may not be unique. 
-  \end{itemize}
-  
-\end{frame}
-
-\begin{frame}{Final remarks}
-  \begin{itemize}
+    
+    \framebreak
+    
     \item We have introduce some concepts of random variables, but a full rigorous discussion about random variables requires background in measure theory. If you are interested in learning more, a good textbook for a statistics student is \citet{resnick19}; this is considered a graduate level text, and some background in analysis will be beneficial.
     \item We have discussed only discrete and continuous random variables. In practice, we often run into random variables that have both a discrete and continuous component. For instance, consider a zero-inflated continuous random variable $X$, where $X = 0$ with probability $p$ (discrete component), but $X \sim N(0, 1)$ with probability $1-p$ (continuous component). 
   \end{itemize}

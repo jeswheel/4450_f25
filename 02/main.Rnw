@@ -759,10 +759,10 @@ $$
     0 & x < 0
   \end{cases}
   $$
-    \item From this, we can easily find quantiles of the distribution, such as the median: by solving $F(x_{(.5)}) = 1/2$
-  $$
-  1 - e^{-\lambda x_{(.5)}} = \frac{1}{2} \quad \implies \quad x_{(.5)} = \frac{\log 2}{\lambda}.
-  $$
+  %   \item From this, we can easily find quantiles of the distribution, such as the median: by solving $F(x_{(.5)}) = 1/2$
+  % $$
+  % 1 - e^{-\lambda x_{(.5)}} = \frac{1}{2} \quad \implies \quad x_{(.5)} = \frac{\log 2}{\lambda}.
+  % $$
   \end{itemize}
   
   \framebreak

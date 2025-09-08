@@ -1477,7 +1477,11 @@ data.frame(
   \begin{block}{Proposition 2.2: Uniform CDF}
     Let $X$ be a random variable with cdf $F$. Then $Z = F(X)$ has a uniform distribution on $[0, 1]$. 
     
-    \emph{proof:} $P(Z \leq z) = P\big(F(X) \leq x\big) = P\big(X \leq F^{-1}(z)\big) = F\big(F^{-1}(z)\big) = z$
+    \mode<article>{
+    \begin{proof}
+    $P(Z \leq z) = P\big(F(X) \leq x\big) = P\big(X \leq F^{-1}(z)\big) = F\big(F^{-1}(z)\big) = z$
+    \end{proof}
+    }
   \end{block}
   
     \framebreak

@@ -936,7 +936,7 @@ Chapter \CHAPTER: Joint Distributions}
   
   \framebreak
   
-  \begin{block}{Theorem~3.1: Order statistic for continuous random variables}
+  \begin{block}{Theorem~\CHAPTER.1: Order statistic for continuous random variables}
     Let $X_{1}, \ldots, X_{n}$ be continuous random variables, with cdf and pdf $F$ and $f$, respectively. 
     If the ordered random variables are $X_{(1)}, \ldots, X_{(n)}$, then the cdf of $X_{(j)}$, $j \in \{1, 2, \ldots, n\}$ is
     $$
@@ -963,8 +963,8 @@ Chapter \CHAPTER: Joint Distributions}
   
   \framebreak
   
-  \begin{block}{Theorem~3.2: The pdf of ordered statistics}
-    Consider the same setup as Theorem~3.1. That is, $X_{(1)}, \ldots, X_{(n)}$ represent the order statistics of a random sample. Then the pdf of $X_{(j)}$ is
+  \begin{block}{Theorem~\CHAPTER.2: The pdf of ordered statistics}
+    Consider the same setup as Theorem~\CHAPTER.1. That is, $X_{(1)}, \ldots, X_{(n)}$ represent the order statistics of a random sample. Then the pdf of $X_{(j)}$ is
     $$
     f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!}f(x)\big[F(x)\big]^{j-1}\big[1 - F(x)\big]^{n-j}.
     $$
@@ -1017,6 +1017,59 @@ Chapter \CHAPTER: Joint Distributions}
   
   \framebreak
   
+  \begin{exampleblock}{Example: Uniform order statistic pdf}
+    Let $X_1, \ldots, X_n$ be independent Uniform$(0, 1)$ random variables, so that $f(x) = 1[0 < x < 1]$, and $F_X(x) = x$. Find the pdf of the $j$th order statistic.
+    \mode<article>{
+    \begin{itemize}
+      \item We can just use the formula we previously derived for order statistics:
+      \begin{align*}
+        f_{X_{(j)}}(x) &= \frac{n!}{(j-1)!(n-j)!}(x)^{j-1}(1 - x)^{n - j}, \quad x \in (0, 1) \\
+        &= \frac{\Gamma(n + 1)}{\Gamma(j)\Gamma(n - j + 1)}x^{j - 1}(1 - x)^{(n - j + 1) - 1}, \quad x \in (0, 1),
+      \end{align*}
+      \item where the last equation comes from the definition of the gamma-function
+      \item This final expression is the pdf of a beta$(j, n-j+1)$ random variable, which could be used to calculate the mean or variance.
+      \item 
+    \end{itemize}
+    }
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The joint distribution of two or more order statistics can also be derived, and is useful for deriving the density of some statistics of interest.
+  \end{itemize}
+  
+  \begin{block}{Theorem~\CHAPTER.3: joint pdf of order statistics}
+    Consider the same setup as Theorem~\CHAPTER.1. That is, $X_{(1)}, \ldots, X_{(n)}$ represent the order statistics of a random sample. Then the joint pdf of $X_{(i)}, X_{(j)}$, $1 \leq i < j \leq n$ is
+    \begin{align*}
+      f_{X_{(i)}, X_{(j)}}(u, v) &= \frac{n!}{(i-1)!(j-1-i)!(n-j)!}f(u)f(v)\big(F(u)\big)^{i-1}\\
+      &\quad \times \big(F(v) - F(u)\big)^{j - 1 - i}\big(1 - F(v)\big)^{n - j},
+    \end{align*}
+    for $-\infty < u < v < \infty$.
+  \end{block}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Midrange and Range}
+    Let $X_1, \ldots, X_n$ be independent uniform$(0, a)$ random variables, and denote the $i$th order statistic as $X_{(i)}$. The \alert{range} of a sample is defined as the difference between the largest and smallest observations, $R = X_{(n)} - X_{(1)}$. Define the \alert{midrange} as the midpoint between the minimum and maximum observations, $V = (X_{(1)} + X_{(n)}) / 2$. Find the pdf of both $R$ and $V$.
+    
+    %TODO: Finish this example
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The joint pdf of more than two order statistics can also be found.
+    \item Perhaps the most useful is the joint pdf of all of the order statistics:
+    $$
+    f_{X_{(1)}, \ldots, X_{(n)}}(x_1, \ldots, x_n) = \begin{cases} n!f(x_1)\cdots f(x_n) & -\infty < x_1 < \ldots < x_n < \infty \\ 0 & \text{otherwise}\end{cases}
+    $$
+    \item The $n!$ arises naturally because it is the number of ways to arrange $n$ items.
+    \item Conditional and marginal densities of order statistics can be found using formulas for conditional and marginal densities, as needed.
+  \end{itemize}
+  
+  \framebreak
+  
   \begin{itemize}
     \item There are a few more useful theorems / identities that are useful, and there derivation is similar.
     \item I'll just present these theorems without proof for now, but proofs can be found in \citet[][Chapter~5.4]{casella24}.
@@ -1024,7 +1077,7 @@ Chapter \CHAPTER: Joint Distributions}
   
   \framebreak
   
-  \begin{block}{Theorem~3.3: Discrete random variables}
+  \begin{block}{Theorem~\CHAPTER.4: Discrete random variables}
     Let $X_1, \ldots, X_n$ be a sample from a discrete distribution with pmf $p(x_i) = p_i$. If we define $P_0 = 0$, and for all $i \geq 1$ $P_i = \sum_{j = 1}^i p_j$, then the cdf and pmf of the order statistic $X_{(j)}$ are given by
     $$
     P(X_{(j)} \leq x_i) = \sum_{k = j}^n \binom{n}{k}P_i^k (1- P_i)^{n-k},
@@ -1037,7 +1090,7 @@ Chapter \CHAPTER: Joint Distributions}
   
   \framebreak
   
-  \begin{block}{Theorem~3.4: Joint distributions}
+  \begin{block}{Theorem~\CHAPTER.5: Joint distributions}
     If $X_{(1)}, \ldots, X_{(n)}$ denote the order statistics of a random sample from a continuous population with cdf $F(x)$ and pdf $f(x)$, then for any $1 \leq i < j \leq n$, the joint pdf of $X_{(i)}$ and $X_{(j)}$ is 
     \begin{align*}
     f_{X_{(i)}, X_{(j)}}(u, v) &= \frac{n!}{(i - 1)!(j-1-i)!(n-j)!}f(u)f(v) \\

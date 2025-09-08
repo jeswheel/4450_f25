@@ -713,15 +713,21 @@ $$
 
 \begin{exampleblock}{cdf of continuous uniform density}
     From the definition, we can calculate the cdf of the continuous uniform density rather easily. Suppose that $X$ is uniformly distributed on $[0, 1]$. Then the cdf $F$ is:
+    $$
+    F(x) = \int_{-\infty}^x f(x)\, dx.
+    $$
+    \mode<article>{
     \begin{align*}
-    F(X \leq x) &= \int_{-\infty}^x f(x)dx \\
-    &= \int_{-\infty}^x 1[0 \leq x \leq 1]dx \\
-    &= \begin{cases}
-      0 & x < 0 \\
-      x & 0 \leq x \leq 1 \\
-      1 & x > 1.
-    \end{cases}
+      F(x) &= \int_{-\infty}^x f(x)\,dx \\
+      &= \int_{-\infty}^x 1[0 \leq x \leq 1]\,dx \\
+      &= \begin{cases}
+        0 & x < 0 \\
+        x & 0 \leq x \leq 1 \\
+        1 & x > 1.
+      \end{cases}
     \end{align*}
+    }
+
   \end{exampleblock}
 
 \end{frame}
@@ -1327,8 +1333,36 @@ data.frame(
     }
   \end{block}
   
-  % TODO: Add example 2.1.6 from Casella and Berger. Also Example 2.1.7
+  \framebreak
   
+  \begin{exampleblock}{Example: Inverted Gamma Distribution}
+    Let $X$ be a gamma$(\lambda, \alpha)$ distributed random variable, which has pdf
+    $$
+    f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}, \quad x \geq 0
+    $$
+    Find the pdf of $Y = g(X) = 1/X$. 
+    \mode<article>{
+    \begin{itemize}
+      \item First, we will find the support sets $\mathcal{X}$, $\mathcal{Y}$.
+      \item $f(x)$ is positive on the interval $(0, \infty)$, (we will avoid dividing by zero, which doesn't change the distribution because it's only a single point), giving $\mathcal{X} = (0, \infty)$.
+      \item Over this set, the support of $Y$ is also $\mathcal{Y} = (0, \infty)$.
+      \item On these sets, $g$ is monotone, and if $g(x) = y$, then $g^{-1}(y) = x = 1/y$.
+      \item Over the set $\mathcal{Y}$, we can evaluate the derivative as
+      $$
+      \frac{d}{dy}g^{-1}(y) = -\frac{1}{y^2}.
+      $$
+      \item Applying the change of variable theorem,
+      \begin{align*}
+        f_Y(y) &= f_X\big(g^{-1}(y)\big)\Big|\frac{d}{dy} g^{-1}(y)\Big| \\
+               &= \frac{\lambda^\alpha}{\Gamma(\alpha)}\big(1/y\big)^{\alpha-1}e^{-\lambda / y}\frac{1}{y^2} \\
+               &= \frac{\lambda^\alpha}{\Gamma(\alpha)}\big(1/y\big)^{\alpha + 1}e^{-\lambda / y}.
+      \end{align*}
+      \item This pdf is a special case of the inverted gamma pdf.
+    \end{itemize}
+    }
+  \end{exampleblock}
+  
+  \framebreak
   
   % \begin{itemize}
   %   \item Now, more generally, assume that $g$ is a strictly monotonically increasing function. Then: $P\big(g(X) \leq y\big) = P\big(X \leq g^{-1}(y)\big)$.
@@ -1384,7 +1418,44 @@ data.frame(
   
   \begin{itemize}
     \item Theorem~\CHAPTER.4 is useful to have / know, but it's often easier to just work from scratch (we'll see a few examples of this).
-    \item Theorem~\CHAPTER.4 can also be extended for use with non-monotonic functions $g$. The idea is that you break $g: \mathcal{X} \rightarrow \mathcal{Y}$ into a series of functions $g_i: \mathcal{X}_i \rightarrow \mathcal{Y}$ where $\mathcal{X}_i \subset \mathcal{X}$ is a set such that $g_i$ is monotonic. Then, the final density $f_Y$ can be found by summing these functions:
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Square Transformation}
+    Suppose $X$ is a continuous random variable with support $\mathcal{X} = \R$, and let $Y = X^2$. Find the pdf of $Y$.
+    \mode<article>{
+    \begin{itemize}
+      \item In this case, the function $g(x) = x^2$ is \emph{not} monotonic on the support $\mathcal{X}$, and we can't apply the theorem.
+      \item However, it's relatively easy to work from first-principles in this case.
+      \item First, we can readily see that $\mathcal{Y} = [0, \infty)$.
+      \item Consider the interval $A_y = (-\infty, y]$, for some $y \in \mathcal{Y}$. Then $Y \in A_y$ if and only if $X^2 < y$, or $-\sqrt{y} \leq X \leq \sqrt{y}$, so
+      $$
+      g^{-1}(A_y) = \{x \in \mathcal{X}:\, -\sqrt{y} \leq x \leq \sqrt{y}\}. 
+      $$
+      \item Thus, we're looking for the probability that $X$ lies in the interval $(-\sqrt{y}, \sqrt{y})$.
+      \item We want to express this in terms of the pdf of $X$ (which we assume exists), in which case we want to express this first in terms of the cdf of $X$ and then take a derivative.
+      \item We can short-hand this calculation as:
+      \begin{align*}
+        P(Y \in A_y) &= P(Y \leq y) \big(= F_Y(y)\big) \\
+        &= P(X^2 \leq y) \\
+        &= P(\sqrt{y} \leq X \leq \sqrt{y}) \\
+        &= P(X \leq \sqrt{y}) - P(X \leq -\sqrt{y}) \\
+        &= F_X(\sqrt{y}) - F_X(-\sqrt{y}).
+      \end{align*}
+      \item Now taking derivatives, we have
+      \begin{align*}
+      f_Y(y) &= \frac{d}{dy}\big(F_X(\sqrt{y}) - F_X(-\sqrt{y})\big) \\
+             &= \frac{1}{2\sqrt{y}}f_X(\sqrt{y}) + \frac{1}{2\sqrt{y}}f_X(-\sqrt{y}) \\
+             &= \frac{1}{2\sqrt{y}}\big[f_X(\sqrt{y}) + f_X(-\sqrt{y})\big] \\
+      \end{align*}
+    \end{itemize}
+    }
+  \end{exampleblock}
+  
+  \framebreak
+    
+  \begin{itemize}
+    \item Notice in the pdf of $Y = X^2$, we have expressed the pdf as the sum of two pieces. These two pieces represent the two different sets where $g(x)$ is monotone (decreasing on $(-\infty, 0)$, and increasing on $[0, \infty)$).
+    \item This principle can be used to extend Theorem~\CHAPTER.4 to general, non-monotonic functions $g$. The idea is that you break $g: \mathcal{X} \rightarrow \mathcal{Y}$ into a series of functions $g_i: \mathcal{X}_i \rightarrow \mathcal{Y}$ where $\mathcal{X}_i \subset \mathcal{X}$ is a set such that $g_i$ is monotonic. Then, the final density $f_Y$ can be found by summing these functions:
     $$
     f_Y(y) = \sum_{i} f_X\big(g^{-1}_i(y)\big)\Big|\frac{d}{dy}g_i^{-1}(y)\Big|.
     $$

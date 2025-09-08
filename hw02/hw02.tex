@@ -1,0 +1,158 @@
+\documentclass[10pt,twoside]{article}\usepackage[]{graphicx}\usepackage[dvipsnames,svgnames,table]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[marginparsep=1em]{geometry}
+\geometry{lmargin=1.0in,rmargin=1.0in, bmargin=1.2in,  tmargin=1.2in}
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{mathtools}
+            
+%%%%  SHORTCUT COMMANDS  %%%%
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arc}{\rightarrow}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RP}{\mathbb{R}(+)}
+\newcommand{\Rs}{\mathbb{R}^{**}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\PX}{\mathcal{P}(X)}
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\OK{\ding{51}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Answer}{\vspace{2mm}\textbf{\underline{Answer}}\\}
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+
+\newcommand{\stirling}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\lhead{\fancyplain{}{}} 
+\fancyhead[RE,RO]{Math 4450, Fall 2025}
+\fancyfoot[RE,RO]{\thepage}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\begin{flushright}
+\begin{minipage}{.33\textwidth}
+\rightline{YOUR NAME}
+\rightline{\href{mailto:YOUR EMAIL}{YOUR EMAIL}}
+\rightline{\today}
+\end{minipage}
+\end{flushright}
+
+\begin{center}
+{\large{\textbf{Homework 2}}}
+\end{center}
+
+\begin{enumerate}
+    \item Suppose that $P(A) = \frac{1}{3}$ and that $P(B^c) = \frac{1}{4}$. Can $A$ and $B$ be disjoint? Explain why or why not.
+    \item Suppose that a sample space $S$ is finite and has $n$ elements. Prove (combinatorial argument is acceptable) that the total number of possible subsets is $2^n$. 
+    \item Consider an experiment of tossing two dice, so the sample space $\Omega$ is
+    $$
+    \Omega = \{(1, 1), (1, 2), \ldots, (6, 6)\}.
+    $$
+    Define the following events:
+    \begin{align*}
+      A &= \{\text{doubles appear}\} = \{(1, 1), (2, 2), \ldots, (6, 6)\},\\
+      B &= \{\text{The sum is between 7 and 10}\}, \\
+      C &= \{\text{The sum is 2 or 7 or 8}\}.
+    \end{align*}
+    \begin{enumerate}
+      \item Find the following probabilities:
+      \begin{itemize}
+          \item $P(A)$
+          \item $P(B)$
+          \item $P(C)$
+          \item $P(A \cap B \cap C)$.
+      \end{itemize}
+      \item Are $A, B, C$ mutually independent? Why or why not.
+    \end{enumerate}
+    \item Suppose that $A$ and $B$ are events such that $P(A), P(B) > 0$. Prove the following statements:
+    \begin{enumerate}
+      \item If $A$ and $B$ are mutually exclusive, they cannot be independent.
+      \item If $A$ and $B$ are independent, they cannot be mutually exclusive.
+    \end{enumerate}
+    
+    \item Let $X$ and $Y$ be random variables with cdf $F_X$ and $F_Y$, respectively. $X$ is said to be \emph{stochastically greater than or equal to} $Y$ if $F_X(t) \leq F_Y(t)$ for all $t$, (\emph{stochastically greater} if there is at least some $t_0$ such that $F_X(t_0) < F_Y(t_0)$). Show that this implies $P(X > t) \geq P(Y > t)$ for all $t$. That is, $X$ tends to be larger than $Y$. 
+    
+    \item Let $W$ be a random variable taking the values in the set of integers $\{1, 2, \ldots\}$ with $P(W = j) > 0$ for all $j\geq 1$, and having the so-called ``memoryless" property that 
+    $$
+    P(W > i+j\mid W > i) = P(W > j)
+    $$
+    Show that $W$ is geometrically distributed.
+    
+    (Hint: $W$ is a discrete random variable, and therefore must assign probability to each possible value of $W$. Call $P(W = 1) = p$, and $P(W > 1) = 1-p$. For convenience, you may want to use a shorthand like $1 - p = q$). 
+    
+    \item (Banach match problem) Suppose that Jeremy has two pockets full of his favorite candy, each pocket with $n$ pieces. Jeremy will randomly pick a pocket to take candy from (with equal probability each time). Continuing this practice, he will eventually run out of candy in one pocket; let $X$ be a random variable representing the amount of candy in his \emph{other} pocket the first time that he reaches into a pocket and finds it empty. Find the probability mass function for $X$.
+    
+    (Hint: choose one of the pockets to be called a ``success", which is selected with probability $p$. If $X = k$, that means that he has picked a ``success" $n - k$ times. What kind of distribution does this sound like? With this approach, don't forget that we arbitrarily selected one of the pockets to be a ``success". How many ways can we choose which pocket is the ``success"?)
+
+\end{enumerate}
+
+
+\end{document}

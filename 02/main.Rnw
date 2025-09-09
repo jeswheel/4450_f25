@@ -523,6 +523,26 @@ In this scenario, the random (stochastic) process that generates the data is cal
 
 \framebreak
 
+\begin{block}{Definition: Poisson Process}
+  Let $\lambda > 0$ be fixed. We let $N(t)$ be a random variable denoting the number of events that occur from time $t = 0$ up to time $t$. The counting process $\{N(t),\, t\in[0, \infty)\}$ is called a Poisson process with rate $\lambda$ if the following conditions hold:
+  \begin{itemize}
+    \item $N(0) = 0$.
+    \item $N(t)$ has independent increments.
+    \item The number of ``arrivals" in any interval of length $\tau > 0$ is Poisson$(\lambda \tau)$ distributed.
+  \end{itemize}
+\end{block}
+
+\framebreak
+
+\begin{itemize}
+  \item Though $N(t)$ counts the number of events, and follows a Poisson distribution, the time between events follow expontential distributions.
+  \item If $X_1, X_2, \ldots$ denote time in between events, then it can be shown that the $X_i$ are independent and $X_i \sim \text{Exponential}(\lambda)$.
+  \item Poisson processes are also used to model spatial processes, rather than those that evolve over time.
+  \item If there is interest, we can discuss these more later.
+\end{itemize}
+
+\framebreak
+
 \begin{exampleblock}{Example: Telephone calls}
   Suppose that an office receives telephone calls as a Poisson process with $\lambda = 0.5$ calls per minute.
   The number of calls in a 5-min. interval follows a Poisson distribution with parameter $5\lambda = 2.5$. Thus, the probability of no calls in a 5-min. interval is $p(0) = e^{-2.5} \approx .082$; the probability one one call is $p(1) = 2.5 e^{-2.5} \approx .205$
@@ -712,10 +732,10 @@ $$
 \framebreak
 
 \begin{exampleblock}{cdf of continuous uniform density}
-    From the definition, we can calculate the cdf of the continuous uniform density rather easily. Suppose that $X$ is uniformly distributed on $[0, 1]$. Then the cdf $F$ is:
-    $$
-    F(x) = \int_{-\infty}^x f(x)\, dx.
-    $$
+    From the definition, we can calculate the cdf of the continuous uniform density rather easily. Suppose that $X$ is uniformly distributed on $[0, 1]$. Find the CDF of $X$.:
+    % $$
+    % F(x) = \int_{-\infty}^x f(x)\, dx.
+    % $$
     \mode<article>{
     \begin{align*}
       F(x) &= \int_{-\infty}^x f(x)\,dx \\
@@ -1489,8 +1509,14 @@ data.frame(
     \begin{block}{Proposition 2.3: Inverse Uniform CDF}
     Let $U$ be uniform on $[0, 1]$, and let $X = F^{-1}(U)$. Then the cdf of $X$ is $F$.
     
-    \emph{proof:} $P(X \leq x) = P\big(F^{-1}(U) \leq x\big) = P\big(U \leq F(x)\big) = F(x)$
+    \mode<article>{
+    \begin{proof}
+     $P(X \leq x) = P\big(F^{-1}(U) \leq x\big) = P\big(U \leq F(x)\big) = F(x)$
+    \end{proof}
+    }
   \end{block}
+  
+  \framebreak
   
   \begin{itemize}
     \item This last proposition is very useful. We can use it to \alert{generate random numbers} (pseudorandom).

@@ -1028,7 +1028,6 @@ Chapter \CHAPTER: Joint Distributions}
       \end{align*}
       \item where the last equation comes from the definition of the gamma-function
       \item This final expression is the pdf of a beta$(j, n-j+1)$ random variable, which could be used to calculate the mean or variance.
-      \item 
     \end{itemize}
     }
   \end{exampleblock}
@@ -1052,6 +1051,52 @@ Chapter \CHAPTER: Joint Distributions}
   
   \begin{exampleblock}{Example: Midrange and Range}
     Let $X_1, \ldots, X_n$ be independent uniform$(0, a)$ random variables, and denote the $i$th order statistic as $X_{(i)}$. The \alert{range} of a sample is defined as the difference between the largest and smallest observations, $R = X_{(n)} - X_{(1)}$. Define the \alert{midrange} as the midpoint between the minimum and maximum observations, $V = (X_{(1)} + X_{(n)}) / 2$. Find the pdf of both $R$ and $V$.
+    
+    \mode<article>{
+    \begin{itemize}
+      \item We first can apply Theorem~\CHAPTER.3 to get the joint density of $X_{(1)}$ and $X_{(n)}$:
+      \begin{align*}
+        f_{X_{(i)}, X_{(j)}}(x_1, x_n) &= \frac{n!}{(i-1)!(j-1-i)!(n-j)!}f(x_1)f(x_n)\big(F(x_1)\big)^{i-1}\\
+      &\quad \times \big(F(x_n) - F(x_1)\big)^{j - 1 - i}\big(1 - F(x_n)\big)^{n - j} \\
+      &= \frac{n!}{(1-1)!(n-1-1)!(n-n)!}f(x_1)f(x_n)\big(F(x_1)\big)^{1-1}\\
+      &\quad \times \big(F(x_n) - F(x_1)\big)^{n - 1 - 1}\big(1 - F(x_n)\big)^{n - n} \\
+      &= \frac{n(n-1)}{a^2}\Big(\frac{x_n}{a} - \frac{x_1}{a}\Big)^{n-2} \\
+      &= \frac{n(n-1)(x_n - x_1)^{n-2}}{a^n}, \quad 0 < x_1 < x_n < a.
+      \end{align*}
+      \item Now we can use the change of variables theorem. We find that $g_1(x_1, x_n) = x_n - x_1$, and $g_2(x_1, x_n) = (x_1 + x_n) / 2$.
+      \item Solving for $R$ and $V$ as functions of $X_{(1)}$ and $X_{(n)}$, we find the inverse transformations
+      $$
+      h_1(r, v) = v - r/2, \quad h_2(r, v) = v + r/2.
+      $$
+      \item We can now calculate the Jacobian of the transformation:
+      $$
+      J_h = \begin{vmatrix}
+      \frac{\partial h_1}{\partial r} & \frac{\partial h_1}{\partial v} \\
+      \frac{\partial h_2}{\partial r} & \frac{\partial h_2}{\partial r}
+      \end{vmatrix} = -\frac{1}{2} - \frac{1}{2} = -1.
+      $$
+      \item We need to calculate the support of $(R, V)$. The transformation $g(x_1, x_n)$ maps the set $\{(x_1, x_n):\, 0 < x_1 < x_n < a\}$ onto the set $\{(r, v):\, 0 < r < a, r/2 < v < a-r/2\}$. To see this, note that $0 < x_2 - x_1 < a$, and the lower and upper bounds for $v$ can be found by plugging in $x_1 = h_1(r, v)$ and $x_n = h_2(r, v)$ into the upper and lower inequalities of $0 < x_1 < x_n < a$, respectively.
+      \item Thus, we find the joint density of $(R, V)$ as
+      \begin{align*}
+      f_{R, V}(r, v) &= \frac{n(n-1)\big(h_2(r,v) - h_1(r, v)\big)^{n-2}}{a^n}, \quad 0 < r < a, \,\, r/2 < v < a-r/2\\
+      &= \frac{n(n-1)r^{n-2}}{a^n}, \quad 0 < r < a, \,\, r/2 < v < a-r/2.
+      \end{align*}
+      \item Finally, we can integrate to find the marginal densities:
+      \begin{align*}
+        f_R(r) &= \int_{\R} f_{(R, V)}(r, v) \,dv \\
+        &= \int_{r/2}^{a - r/2} \frac{n(n-1)r^{n-2}}{a^n}\, dv \\
+        &= \frac{n(n-1)r^{n-2}(a - r)}{a^n}, \quad 0 < r < a.
+      \end{align*}
+      \item If $a = 1$, the density of $R$ corresponds to that of a beta$(n-1, 2)$ distribution; alternatively, we can do a quick change of variable to see that $R/a$ has a beta distribution, where $a$ just scales the distribution.
+      \item The bounds on the integral for integrating out $r$ is a little bit less straightforward because $r$ appears in both inequalities. In this case, it's helpful to plot the region \url{https://www.desmos.com/calculator/tosungnfnu}.
+      \item We see we have a triangle that has a base on the v-axis, with height $a$. The triangle is defined by the equations $r = 2v$ and $r = 2(a - v)$, so the integral is calculated over two parts:
+      \begin{align*}
+        f_V(v) &= \int_{\R} f_{(R, V)}(r, v) \,dr \\
+               &= 1[0 < v \leq a/2]\int_{0}^{2v} \frac{n(n-1)r^{n-2}}{a^n}\, dr + 1[a/2 < v \leq a]\int_{0}^{2(a-b)} \frac{n(n-1)r^{n-2}}{a^n}\, dr \\
+               &= \begin{cases} \frac{n(2v)^{n-1}}{a^n}, & 0 < v \leq a/2 \\ \frac{n\big(2(a-v)\big)^{n-1}}{a^n}, & a / 2 < v \leq a \end{cases}
+      \end{align*}
+    \end{itemize}
+    }
     
     %TODO: Finish this example
   \end{exampleblock}

@@ -853,9 +853,28 @@ $$
     $$
     \Gamma(x) = \int_{0}^\infty u^{x - 1}e^{-u}du, \quad x > 0.
     $$
+    \end{itemize}
+    
+  \framebreak 
+    
+    Some properties of the Gamma function $\Gamma(x)$ include:
+  
+  \begin{itemize}
+    \item $\Gamma(1) = 1$.
+    \item $\Gamma(x + 1) = x\Gamma(x)$. A special instance arises when $x$ is a positive integer
+    \item $\Gamma(n+1) = n\Gamma(n) = n(n-1)\Gamma(n-1) = \ldots = n!$ It is considered an extension of the factorial function
+    \item Some values worth mention:
+    $$
+    \Gamma\big(\frac{1}{2}\big) = \sqrt{\pi}, \quad \Gamma\big(\frac{3}{2}\big) = \frac{\sqrt{\pi}}{2}
+    $$
+    \item $\Gamma(x) \neq 0$ for all $x$, so we can always use $1 / \Gamma(x)$. We mostly will use it with $x > 0$, in which case $\Gamma(x)$ always exists.
   \end{itemize}
   
-  \framebreak 
+  \framebreak
+  
+    $$
+    g(t) = \frac{\lambda^\alpha}{\Gamma(\alpha)}t^{\alpha - 1}e^{-\lambda t}, \quad t \geq 0.
+    $$
   
   \begin{itemize}
     \item Note that if $\alpha = 1$, then the gamma density coincides with the exponential density. 
@@ -871,7 +890,7 @@ $$
   % \begin{frame}{Gamma Density Figure}
   
   \begin{figure}[ht]
-<<fig:gamma, fig.align='center', fig.height=4, warning=FALSE, message=FALSE, echo=FALSE>>=
+<<fig:gamma, fig.align='center', fig.height=4, warning=FALSE, message=FALSE, echo=FALSE, dev='cairo_pdf'>>=
 library(tidyverse)
 library(latex2exp)
 
@@ -979,9 +998,10 @@ data.frame(
   \begin{itemize}
     \item The \alert{beta} distribution is useful for modeling random variables that are restricted to the interval $[0, 1]$:
     \item The density function depends on two parameters, $\alpha, \beta > 0$.
-    $$
-    f(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha - 1}(1 - x)^{\beta - 1}, \quad 0 \leq x \leq 1.
-    $$
+    \begin{align*}
+    f(x) &= \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha - 1}(1 - x)^{\beta - 1}, \quad 0 \leq x \leq 1. \\
+         &= \frac{1}{B(\alpha, \beta)}x^{\alpha - 1}(1 - x)^{\beta - 1}, \quad 0 \leq x \leq 1.
+    \end{align*}
     \item Note that if $\alpha = \beta = 1$, the distribution becomes uniformly distributed.
     \item Both $\alpha$ and $\beta$ are shape parameters, and the distribution is quite flexible. 
   \end{itemize}
@@ -989,7 +1009,7 @@ data.frame(
   \framebreak
   
     \begin{figure}[ht]
-<<fig:beta, fig.align='center', fig.height=4, warning=FALSE, message=FALSE, echo=FALSE>>=
+<<fig:beta, fig.align='center', fig.height=4, warning=FALSE, message=FALSE, echo=FALSE, dev='cairo_pdf'>>=
 library(tidyverse)
 library(latex2exp)
 
@@ -1057,7 +1077,8 @@ data.frame(
 \begin{frame}{Comments on density functions}
   \begin{itemize}
     \item So far, we have been using $f$ and $F$ to denote the pdf and cdf of a random variable, respectively. If there is more than one random variable, say $X$ and $Y$, we may want to distinguish between the functions, and we do so like: $f_X(x)$, or $F_Y(y)$. 
-    \item There exist alternative \alert{parameterizations} of the common pmf / pdf functions we have discussed. For example, we introduced the negative binomial distribution with parameters $p$ and $r$. This is known as the size-probability parameterization, but there also exists and alternative with parameters $\mu$ and $k$, known as the mean-ddispersion parameterization (commonly used in Ecology). 
+    \item There exist alternative \alert{parameterizations} of the common pmf / pdf functions we have discussed.
+    \item For example, we introduced the negative binomial distribution with parameters $p$ and $r$. This is known as the size-probability parameterization, but there also exists and alternative with parameters $\mu$ and $k$, known as the mean-dispersion parameterization (commonly used in Ecology). 
   \end{itemize}
 \end{frame}
 

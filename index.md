@@ -69,6 +69,10 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 [TeX file](hw02/hw02.tex).
 [In class solutions](hw02/HW2discussion.pdf)
 
+
+* [Homework 2](hw03/hw03.pdf), due Wed Sep 24, 11:59pm.
+[TeX file](hw03/hw03.tex).
+
 <!--- 
 
 * [Participation 2](participation/participation2.html), due Tue Jan 30, 11:59pm.

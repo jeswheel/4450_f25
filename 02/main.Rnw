@@ -994,7 +994,7 @@ data.frame(
 
 \subsubsection{The Beta Distribution}
 
-\begin{frame}[allowframebreaks]{The Beta Desnity}
+\begin{frame}[allowframebreaks]{The Beta Density}
   \begin{itemize}
     \item The \alert{beta} distribution is useful for modeling random variables that are restricted to the interval $[0, 1]$:
     \item The density function depends on two parameters, $\alpha, \beta > 0$.

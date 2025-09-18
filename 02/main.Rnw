@@ -1086,7 +1086,7 @@ data.frame(
 
 \begin{frame}[allowframebreaks]{Variable transformations}
   \begin{itemize}
-    \item Often we will be interested in function of a random variable.
+    \item Often we will be interested in functions of a random variable.
     \item Let $X$ be a random variable, and $g$ an arbitrary function.
     \item Our goal is to find the distribution of the random variable $Y = g(X)$.
   \end{itemize}

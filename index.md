@@ -47,8 +47,6 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 9. [Case study: An association between unemployment and mortality?](09/index.html)
 
-10. [Introduction to partially observed Markov process models](10/index.html)
-
 -->
 
 --------

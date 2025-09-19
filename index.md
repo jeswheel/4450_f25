@@ -45,8 +45,6 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 8. [Smoothing in the time and frequency domains](08/index.html)
 
-9. [Case study: An association between unemployment and mortality?](09/index.html)
-
 -->
 
 --------

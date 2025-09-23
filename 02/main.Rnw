@@ -1541,7 +1541,7 @@ data.frame(
   
   \begin{itemize}
     \item This last proposition is very useful. We can use it to \alert{generate random numbers} (pseudorandom).
-    \item Many computer packages have ways of generating numbers uniformly on $U[0, 1]$; the proposition implies that to generate from any arbitrary distribution with cdf $F$, all we need to do is apply $F_{-1}$ to uniform $[0, 1]$ random numbers. 
+    \item Many computer packages have ways of generating numbers uniformly on $U[0, 1]$; the proposition implies that to generate from any arbitrary distribution with cdf $F$, all we need to do is apply $F^{-1}$ to uniform $[0, 1]$ random numbers. 
   \end{itemize}
   
 \end{frame}

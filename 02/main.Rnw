@@ -638,12 +638,12 @@ In this scenario, the random (stochastic) process that generates the data is cal
     is a valid pdf. 
   \end{itemize}
   
-  \begin{block}{Theorem: properties of pmf / pdf}
+  \begin{block}{Theorem~2.2: properties of pmf / pdf}
     Given the definition of pmf and pdf, we can readily deduce the following properties. Let $f(x)$ be the pdf or pmf of a random variable $X$. Then
     \begin{itemize}
       \item $f(x)\geq 0$ for all $x$.
       \item $\sum_{x} f(x) = 1 \quad \text{(if pmf)}$
-      \item $\int_x f(x) = 1 \quad \text{(if pdf)}$.
+      \item $\int_x f(x)\, dx = 1 \quad \text{(if pdf)}$.
     \end{itemize}
   \end{block}
   \begin{itemize}

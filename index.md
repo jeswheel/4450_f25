@@ -68,6 +68,7 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 
 * [Homework 3](hw03/hw03.pdf), due Wed Sep 24, 11:59pm.
 [TeX file](hw03/hw03.tex).
+[In class solutions](hw03/HW3discussion.pdf).
 
 <!--- 
 

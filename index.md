@@ -31,9 +31,10 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 2. [Chapter 2: Random Variables](02/index.html)
 
+3. [Chapter 3: Joint Distributions](03/index.html)
+
 <!--
 
-3. [Stationarity, white noise, and some basic time series models](03/index.html)
 
 4. [Linear time series models and the algebra of ARMA models](04/index.html)
 
@@ -70,17 +71,10 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 [TeX file](hw03/hw03.tex).
 [In class solutions](hw03/HW3discussion.pdf).
 
+* [Homework 4](hw04/hw04.pdf), due Wed Sep 24, 11:59pm.
+[TeX file](hw04/hw04.tex).
+
 <!--- 
-
-* [Participation 2](participation/participation2.html), due Tue Jan 30, 11:59pm.
-
-* [Homework 3](hw03/hw03.html), due Sun Feb 11, 11:59pm.
-[Solution](hw03/sol03.html).
-
-* [Participation 3](participation/participation3.html), due Sun Feb 11, 11:59pm.
-
-* [Homework 4](hw04/hw04.html), due Sun Feb 18, 11:59pm.
-[Solution](hw04/sol04.html).
 
 * [Participation 4](participation/participation4.html), due Sun Feb 18, 11:59pm.
 

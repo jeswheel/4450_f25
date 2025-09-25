@@ -51,6 +51,75 @@ Chapter \CHAPTER: Joint Distributions}
     \item This material is based on the textbook by \citet[][Chapter~3]{rice07}.
     \item Our goal is to better understand the joint probability structure of more than one random variable, defined on the same sample space.
     \item One reason that studying joint probabilities is an important topic is that it enables us to use what we know about one variable to study another.
+    \item Multivariate calculus is not a formal prerequisite for this course. We'll start by presenting a few details from multivariate calculus, as well as some results from analysis.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Swapping order of limits and integrals}
+  \begin{itemize}
+    \item An important result from measure theory (often covered in an analysis class) is known as the Dominated Convergence Theorem.
+    \item We won't prove the theory here, nor state the complete theory, but we will state parts of it that will be useful to us.
+    \item A proof of the parts of the theory that we are interested in can be found in our supplement text \citep[Section~2.4 of][]{casella24}.
+    \item A more complete treatment of this idea can be found in \citet[Chapter~5,][]{resnick19}.
+    \item The next few theorems are all special cases of the Dominated Convergence Theorem.
+  
+  \framebreak
+    
+    \item First, we consider changing the order of a limit and an integral.
+    
+  \end{itemize}
+  
+  \begin{block}{Theorem: Limits and Integrals}
+    Suppose the function $h(x, y)$ is continuous at $y_0$ for each $x$, and there exists a function $g(x)$ satisfying
+    \begin{enumerate}[(i)]
+      \item $|h(x, y)| \leq g(x)$ for all $x$ and $y$. 
+      \item $\int_{-\infty}^\infty g(x)\, dx < \infty$.
+    \end{enumerate}
+    Then
+    $$
+    \lim_{y \rightarrow y_0} \int_{-\infty}^\infty h(x, y)\, dx = \int_{-\infty}^\infty \lim_{y \rightarrow y_0} h(x, y)\, dx.
+    $$
+  \end{block}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item Note that derivatives are just special types of limits:
+    $$
+    \frac{\partial}{\partial \theta}f(x, \theta) = \lim_{\delta \rightarrow 0} \frac{f(x, \theta + \delta) - f(x, \theta)}{\delta}.
+    $$
+    \item Thus, theorems about interchanging integrals and integrals can be worked into a theorem about interchanging integrals and derivatives
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Corollary: Derivatives and Integrals}
+    Suppose $f(x, \theta)$ is differentiable in $\theta$ and there exists a function $g(x, \theta)$, and $\delta_0 > 0$ such that
+    $$
+    \left|\frac{\partial}{\partial \theta} f(x, \theta)\right|_{\theta = \theta'} \leq g(x, \theta), \quad \text{for all } \theta' \text{ such that } |\theta' - \theta| \leq \delta_0,
+    $$
+    and $\int_{-\infty}^\infty g(x, \theta) \, dx < \infty$. Then,
+    $$
+    \frac{d}{d\theta} \int_{-\infty}^\infty f(x, \theta)\, d\theta = \int_{-\infty}^\infty \frac{\partial}{\partial \theta} f(x,\theta)dx.
+    $$
+  \end{block}
+  
+  % TODO: Add example 2.4.5, but don't talk about expectation yet. In fact, maybe this needs to move to Chapter~4? 
+  % TODO: Add stuff about partial derivatives, multiple integrals, and at least talk about polar coordinates. 
+  
+  \framebreak
+    
+    \begin{block}{Leibnitz's Rule}
+    If $f(x, \theta)$ is differentiable with respect to $\theta$, then
+    $$
+    \frac{d}{d\theta} \int_{a}^{b} f(x, \theta)\, dx = \int_{a}^b \frac{\partial}{\partial \theta} f(x, \theta)\, dx.
+    $$
+    \end{block}
+    
+    \begin{itemize}
+    \item This is actually a special case of Leibnitz's Rule, which gives an expression if the limits of integration $a$, $b$, are actually differentiable functions of $\theta$: $a(\theta), b(\theta)$.
+    \item Thus, if the integral has finite range, we can change the order of the integral and derivative.
+     
   \end{itemize}
 \end{frame}
 

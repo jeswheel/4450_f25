@@ -55,6 +55,110 @@ Chapter \CHAPTER: Joint Distributions}
   \end{itemize}
 \end{frame}
 
+\begin{frame}[allowframebreaks]{Partial Derivatives}
+
+\begin{itemize}
+  \item A partial derivative is an extension of a uni-variate derivative, where the function is a function of more than one variable.
+\end{itemize}
+
+\begin{block}{Definition: Partial Derivative}
+  Let $f(\mathbf{x})$ be a function $f: \, \R^d \rightarrow \R$. The partial derivative of $f$ with respect to $x_i$, where $i \in \{1, 2, \ldots, d\}$ is
+  \begin{align*}
+  \frac{\partial}{\partial x_i}f(\mathbf{x}) &= \frac{\partial f}{\partial x_i} \\
+  &= \lim_{h\rightarrow 0} \frac{f(x_1, x_2, \ldots, x_i + h, \ldots, x_d) - f(x_1, x_2, \ldots, x_d)}{h}.
+  \end{align*}
+\end{block}
+
+\begin{itemize}
+  \item We don't have to worry so much about the definition in this class. The thing to notice is that it's a directional derivative.
+  \item Holding all other variables constant, it tells us the slope of the function in the $x_i$ direction.
+  \item Because it's definition is a limit, similar to the uni-variate case, the same derivative rules that you are familiar with from calculus also apply to partial derivatives, after treating the remaining variables as constants.
+\end{itemize}
+
+\begin{exampleblock}{Example}
+  Let $f(x_1, x_2, x_3) = x_1^2x_2 - 10x_2^2x_3^3 + 43x_1 - 7\tan(4x_2)$. Find $ \frac{\partial}{\partial x_i} f(x_1, x_2, x_3)$ for all $i \in \{1, 2, 3\}$.
+\end{exampleblock}
+
+\begin{block}{Schwarz's Theorem}
+  Let $f: \, \R^d \rightarrow \R$ be twice-differentiable function. Higher order derivatives are written:
+  $$
+  \frac{\partial^2}{\partial x_i\partial x_j} f = \frac{\partial}{\partial x_i} \left(\frac{\partial}{\partial x_j} f\right).
+  $$
+  That is, we first take the derivative with respect to $x_j$, and then $x_i$. Shwarz's theorem states that the order can be swapped: 
+  $$
+  \frac{\partial^2}{\partial x_i\partial x_j} f = \frac{\partial^2}{\partial x_j\partial x_i} f.
+  $$
+\end{block}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Higher order integrals}
+  \begin{itemize}
+    \item The next thing that we will review is higher-order integrals.
+    \item This is a complex topic that we can't cover in detail in this class, but they do appear in this chapter and the next.
+    \item For now, we'll just show some simple results that will be useful for our calculations. 
+    
+    \framebreak
+    
+    \item Recall one definition of integrals in the uni-case: calculating the area under the curve using an infinite Reimann approximation.
+    \item That is, suppose we want to find the area under the function $f(x)$, on the interval $[a, b]$. We can use small, uniform sized rectangles to approximate the area.
+    \item Let each rectangle have width $\Delta x$, with midpoint $x^*_i$, where the height of the $i$th rectangle is $f(x^*_i)$. Then:
+    $$
+    A \approx f(x^*_1)\Delta x + f(x^*_2)\Delta x + \ldots + f(x^*_n) \Delta x.
+    $$
+    \item The exact area is equal to the limit as the boxes get smaller (and the number of boxes goes to infinity):
+    $$
+    A = \int_{a}^b f(x)\, dx = \lim_{n \rightarrow \infty} \sum_{i = 1}^n f(x^*_1)\, \Delta x.
+    $$
+    \item We now want to do the same thing, but in higher dimensions. Instead of using small rectangles to approximate the area, we now need to use small rectangular prisms.
+    \item Let $z = f(x, y)$. Our goal is to find the volume between the function $f$ and the $x, y$ plane.
+    \item We construct boxes such that the height of the $i$th box is given by $f(x^*_i, y^*_j)$.
+    \item Then, the base of the rectangular prisms has area $\Delta A = \Delta x_i\times\Delta y_i$, and the height is $f(x^*_i, y^*_i)$.
+    
+\begin{figure}
+    \centering
+    \includegraphics[width=0.35\linewidth]{doubleInt.png}
+    \caption{Credit: Paul's Online Notes: Section 15.1}
+    \label{fig:doubleInt}
+\end{figure}
+    
+    \item The total volume is approximately given by summing up the volume of each box: 
+    $$
+    V \approx \sum_{i = 1}^n \sum_{j = 1}^m f(x^*_i, y^*_j) \Delta A.
+    $$
+    \item We now can get the exact volume by taking the limit:
+    $$
+    V = \iint_R f(x, y)\, dA = \lim_{n, m \rightarrow \infty} \sum_{i = 1}^n \sum_{j = 1}^m f(x^*_i, y^*_j) \delta A
+    $$
+    \item \emph{Fubini's theorem} gives us the standard approach to calculating these integrals
+  \end{itemize}
+  
+  \begin{block}{Fubini's Theorem}
+    If we are evaluating a double integral on a rectangular region $R = X \times Y$, then the integral can be calculated as iterated uni-variate integrals:
+    \begin{align*}
+    \iint_R f(x, y)\, dA &= \iint_{X \times Y} f(x, y)\, d(x, y) \\
+    &= \int_X\left(\int_Y f(x, y)\, dy\right)\, dx \\
+    &= \int_Y\left(\int_X f(x, y)\, dx\right)\, dy.
+    \end{align*}
+  \end{block}
+  
+  \begin{exampleblock}{example}
+    Let $R = [2, 4] \times [1, 2]$. Find
+    $$
+    \iint_R 6xy^2 \, dA.
+    $$
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item One thing to note about higher-order integrals is that the area we are integrating ($dA$) doesn't have to be rectangular, and the limits of integration can be functions themselves.
+    \item We'll see a few examples of this later, and I'll try to walk through these examples carefully. However, this isn't a class on multivariate calculus, so you won't be required to do calculations beyond what you can do using Fubini's theorem.
+    \item There is a nice example in our textbook for polar-coordinate integration, which is perhaps the most common extension \citep[][Example~A, Chapter 3.6.2]{rice07}.
+  \end{itemize}
+  
+\end{frame}
+
 \begin{frame}[allowframebreaks]{Swapping order of limits and integrals}
   \begin{itemize}
     \item An important result from measure theory (often covered in an analysis class) is known as the Dominated Convergence Theorem.
@@ -62,10 +166,27 @@ Chapter \CHAPTER: Joint Distributions}
     \item A proof of the parts of the theory that we are interested in can be found in our supplement text \citep[Section~2.4 of][]{casella24}.
     \item A more complete treatment of this idea can be found in \citet[Chapter~5,][]{resnick19}.
     \item The next few theorems are all special cases of the Dominated Convergence Theorem.
+    \end{itemize}
   
   \framebreak
     
-    \item First, we consider changing the order of a limit and an integral.
+    \begin{block}{Leibnitz's Rule}
+    If $f(x, \theta)$ is differentiable with respect to $\theta$, then
+    $$
+    \frac{d}{d\theta} \int_{a}^{b} f(x, \theta)\, dx = \int_{a}^b \frac{\partial}{\partial \theta} f(x, \theta)\, dx.
+    $$
+    \end{block}
+
+    \begin{itemize}
+    \item This is actually a special case of Leibnitz's Rule, which gives an expression if the limits of integration $a$, $b$, are actually differentiable functions of $\theta$: $a(\theta), b(\theta)$.
+    \item Thus, if the integral has finite range, we can change the order of the integral and derivative.
+
+  \end{itemize}
+    
+    \framebreak
+    
+  \begin{itemize}
+    \item Next, we consider changing the order of a limit and an integral.
     
   \end{itemize}
   
@@ -107,20 +228,20 @@ Chapter \CHAPTER: Joint Distributions}
   % TODO: Add example 2.4.5, but don't talk about expectation yet. In fact, maybe this needs to move to Chapter~4? 
   % TODO: Add stuff about partial derivatives, multiple integrals, and at least talk about polar coordinates. 
   
-  \framebreak
+  % \framebreak
     
-    \begin{block}{Leibnitz's Rule}
-    If $f(x, \theta)$ is differentiable with respect to $\theta$, then
-    $$
-    \frac{d}{d\theta} \int_{a}^{b} f(x, \theta)\, dx = \int_{a}^b \frac{\partial}{\partial \theta} f(x, \theta)\, dx.
-    $$
-    \end{block}
-    
-    \begin{itemize}
-    \item This is actually a special case of Leibnitz's Rule, which gives an expression if the limits of integration $a$, $b$, are actually differentiable functions of $\theta$: $a(\theta), b(\theta)$.
-    \item Thus, if the integral has finite range, we can change the order of the integral and derivative.
-     
-  \end{itemize}
+  %   \begin{block}{Leibnitz's Rule}
+  %   If $f(x, \theta)$ is differentiable with respect to $\theta$, then
+  %   $$
+  %   \frac{d}{d\theta} \int_{a}^{b} f(x, \theta)\, dx = \int_{a}^b \frac{\partial}{\partial \theta} f(x, \theta)\, dx.
+  %   $$
+  %   \end{block}
+  %   
+  %   \begin{itemize}
+  %   \item This is actually a special case of Leibnitz's Rule, which gives an expression if the limits of integration $a$, $b$, are actually differentiable functions of $\theta$: $a(\theta), b(\theta)$.
+  %   \item Thus, if the integral has finite range, we can change the order of the integral and derivative.
+  %    
+  % \end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Joint cdf}
@@ -130,7 +251,10 @@ Chapter \CHAPTER: Joint Distributions}
     F(x, y) = P(X \leq x, Y \leq y).
     $$
     \item This is true for both discrete and continuous random variables.
-    \item The any set $A \subset \R^2$, the joint cdf can give $P\big((X, Y) \in A\big)$.
+    \item Thus, any set $A \subset \R^2$, the joint cdf can give $P\big((X, Y) \in A\big)$. For continuous random variables:
+    $$
+    P\big((X, Y) \in A\big) = \iint_A f(x, y)\, dy\,dx.
+    $$
   \end{itemize}
   
   \framebreak
@@ -275,9 +399,9 @@ Chapter \CHAPTER: Joint Distributions}
     \item A few properties: 
     \begin{itemize}
       \item $f(x, y) \geq 0$ for all $(x, y) \in \R$ (or the support).
-      \item $\int_{-\infty}^\infty\int_{-\infty}^\infty f(x, y) dxdy = 1$.
+      \item $\int_{-\infty}^\infty\int_{-\infty}^\infty f(x, y) \,dx\,dy = 1$.
       \item For any ``measureable set" $A \subset \R^2$, $P\big((X, Y) \in A\big) = \int\int_A f(x, y) dxdy$
-      \item In particular, $F(x, y) = \int_{-\infty}^x\int_{-\infty}^y f(u, v)dudv$.
+      \item In particular, $F(x, y) = \int_{-\infty}^x\int_{-\infty}^y f(u, v)\,du\,dv$.
     \end{itemize}
     \item From the fundamental theorem of multivariable calculus, it follows that
     $$
@@ -317,23 +441,30 @@ Chapter \CHAPTER: Joint Distributions}
       F_X(x) &= P(X \leq x) \\
       &= P(X \leq x \cap Y \in \R) = P(X \leq x \cap Y < \infty)\\
       &= \lim_{y \rightarrow \infty} F(x, y) \\
-      &= \int_{-\infty}^x\int_{-\infty}^{\infty} f(u, y)dydu.
+      &= \int_{-\infty}^x\int_{-\infty}^{\infty} f(u, y)\,dy\,du.
     \end{align*}
     By taking the derivative of both sides of the equation, we get the \alert{marginal density} of $X$:
     $$
-    f_X(x) = F_{X}'(x) = \int_{-\infty}^\infty f(x, y)dy.
+    f_X(x) = F_{X}'(x) = \int_{-\infty}^\infty f(x, y)\,dy.
     $$
     
     \framebreak
     
     \begin{exampleblock}{Calculating Marginal Densities}
-      Using the same joint distribution as the previous example, find the marginal density of $X$: 
+      Using the same joint distribution as the previous example, find the marginal density of $X$.
+      
+    $$
+    f(x, y) = \frac{12}{7}(x^2 + xy), \quad 0 \leq x \leq 1, \quad 0 \leq y \leq 1.
+    $$
+    
+    \mode<article>{
       \begin{align*}
       f_X(x) &= \int_Y f(x, y) dy \\
       &= \frac{12}{7} \int_{0}^1 (x^2 + xy)dy \\
       &= \frac{12}{7} \Big(x^2y + \frac{x}{2}y^2\Big)\Big|^{1}_{0} \\
       &= \frac{12}{7} \Big(x^2 + \frac{x}{2}\Big)
       \end{align*}
+    }
     \end{exampleblock}
 \end{frame}
 
@@ -344,7 +475,7 @@ Chapter \CHAPTER: Joint Distributions}
     \item This means integrating out any combination of variables that we want.
     \item Example: Let $X$, $Y$, and $Z$ be jointly continuous RVs with pdf $f(x, y, z)$. Then the two-dimensional marginal distribution of $X$ and $Z$ is: 
     $$
-    f_{XZ}(x, z) = \int_{-\infty}^\infty f(x, y, z) dy.
+    f_{XZ}(x, z) = \int_{-\infty}^\infty f(x, y, z) \,dy.
     $$
   \end{itemize}
 \end{frame}

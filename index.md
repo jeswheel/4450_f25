@@ -64,15 +64,16 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 
 * [Homework 2](hw02/hw02.pdf), due Wed Sep 17, 11:59pm.
 [TeX file](hw02/hw02.tex).
-[In class solutions](hw02/HW2discussion.pdf)
+[In class discussion](hw02/HW2discussion.pdf)
 
 
 * [Homework 3](hw03/hw03.pdf), due Wed Sep 24, 11:59pm.
 [TeX file](hw03/hw03.tex).
-[In class solutions](hw03/HW3discussion.pdf).
+[In class discussion](hw03/HW3discussion.pdf).
 
 * [Homework 4](hw04/hw04.pdf), due Wed Oct 1, 11:59pm.
 [TeX file](hw04/hw04.tex).
+[In class discussion](hw04/HW4discussion.pdf).
 
 <!--- 
 

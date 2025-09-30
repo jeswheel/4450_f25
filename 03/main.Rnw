@@ -128,7 +128,7 @@ Chapter \CHAPTER: Joint Distributions}
     $$
     \item We now can get the exact volume by taking the limit:
     $$
-    V = \iint_R f(x, y)\, dA = \lim_{n, m \rightarrow \infty} \sum_{i = 1}^n \sum_{j = 1}^m f(x^*_i, y^*_j) \delta A
+    V = \iint_R f(x, y)\, dA = \lim_{n, m \rightarrow \infty} \sum_{i = 1}^n \sum_{j = 1}^m f(x^*_i, y^*_j) \Delta A
     $$
     \item \emph{Fubini's theorem} gives us the standard approach to calculating these integrals
   \end{itemize}

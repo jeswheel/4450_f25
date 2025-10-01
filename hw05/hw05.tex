@@ -1,0 +1,148 @@
+\documentclass[10pt,twoside]{article}\usepackage[]{graphicx}\usepackage[dvipsnames,svgnames,table]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[marginparsep=1em]{geometry}
+\geometry{lmargin=1.0in,rmargin=1.0in, bmargin=1.2in,  tmargin=1.2in}
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{mathtools}
+            
+%%%%  SHORTCUT COMMANDS  %%%%
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arc}{\rightarrow}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RP}{\mathbb{R}(+)}
+\newcommand{\Rs}{\mathbb{R}^{**}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\PX}{\mathcal{P}(X)}
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\OK{\ding{51}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Answer}{\vspace{2mm}\textbf{\underline{Answer}}\\}
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+
+\newcommand{\stirling}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\lhead{\fancyplain{}{}} 
+\fancyhead[RE,RO]{Math 4450, Fall 2025}
+\fancyfoot[RE,RO]{\thepage}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\begin{flushright}
+\begin{minipage}{.33\textwidth}
+\rightline{YOUR NAME}
+\rightline{\href{mailto:YOUR EMAIL}{YOUR EMAIL}}
+\rightline{\today}
+\end{minipage}
+\end{flushright}
+
+\begin{center}
+{\large{\textbf{Homework 5}}}
+\end{center}
+
+\begin{enumerate}
+
+    \item (1 point) Let $U \sim U(0, 1)$. For some $\lambda > 0$, let $g(x) = -\frac{1}{\lambda} \ln (1-x)$. What is the distribution of $Y = g(U)$?
+
+    \item (1 point) Suppose that $X \sim N\big(1, 2^2\big)$ (i.e., $\sigma^2 = 4$). Find the density of $Y = X^3$.
+
+    \item (2 points) Let $X \sim \text{Exp}(1)$, and $Y = (X - 1)^2$. Find the density function of $Y$. 
+
+    \item (2 points) Consider the following experiment. An individual creates a standard cartesian X-Y plane (meaning we have a standard X-Y coordinate grid), and places their pencil at the point $(-1, 0)$. 
+    Then, they draw a line towards the y-axis at a (uniform) random angle $\Theta$, such that $\Theta \sim U(-\pi/2, \pi/2)$.
+    In doing so, their line will eventually cross the y-axis, at some random point $(0, Y)$. Find the pdf of the random variable $Y$, which represents where the line crosses the y-axis.
+    
+    \begin{itemize}
+      \item (Hint): Draw a picture of what's happening. Try a few different ``random" lines from the point $(-1, 0)$ to the y-axis. Your solution will involve some Trigonometry. 
+    \end{itemize}
+
+    \item (Challenging) Let $X$ follow a Exponential$(\lambda)$ distribution, and denote $\floor{X}$ as the ``floor" of $X$, or the greatest integer not exceeding $X$ (e.g., $\floor{\pi} = 3$). 
+    
+    Now let $Y = X - \floor{X}$. Note that $Y$ is a continuous random variable, that takes on values in $[0, 1)$.
+    \begin{enumerate}
+      \item (1 point) Find the pmf of $\floor{X}$. 
+        \begin{itemize}
+          \item (Hint): Work from first principles, don't try the change of variables formula (though it works, just much harder). Because $\floor{X}$ is discrete, we want to find $P(\floor{X} = k)$ for interger values $k$. What does this mean for $X$?
+          \item (LaTeX Hint): For those wanting to LaTeX, I had to create a new command \texttt{\textbackslash floor\{\}}. How this command is defined can be found in the header of the generating tex file.
+        \end{itemize}
+      \item (2 points) Find the pdf of $Y$. 
+      \begin{itemize}
+        \item (Hint): Consider finding $P(\floor{X} = m, Y \leq t)$, using a similar approach as above. Once that is done, then calculate
+        $$P(Y \leq t) = \sum_{m} P(\floor{X} = m, Y \leq t)$$
+      \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+
+
+\end{document}

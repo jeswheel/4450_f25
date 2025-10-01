@@ -31,7 +31,6 @@ figure
 *.synctex.gz
 *.old
 
-hw05/*
 hw06/*
 hw07/*
 hw08/*

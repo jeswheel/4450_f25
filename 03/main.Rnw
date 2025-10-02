@@ -633,13 +633,14 @@ Chapter \CHAPTER: Joint Distributions}
   $$
   f(x, y) = \begin{cases} \frac{1}{\pi} & x^2 + y^2 \leq 1 \\ 0 & \text{otherwise}\end{cases}
   $$
-  \item Now let $R$ be the random variable denoting the distance of the point from the origin.
-  \item Note that $R \leq r$ if and only if the point lies in a disk of radius $r$. This disk has area $\pi r^2$, and therefore the joint probability is
+  \item For practice defining new random variables, let $R$ be the random variable denoting the distance of the point from the origin.
+  \item Note that $R \leq r$ if and only if the point lies in a disk of radius $r$. This disk has area $\pi r^2$, and therefore because of uniform probability, the joint probability is
   $$
   P(R \leq r) = \frac{\pi r^2}{\pi} = r^2, \quad 0 \leq r \leq 1.
   $$
   \item Taking a derivative, the corresponding density function is 
   $$f_R(r) = 2r, \quad 0 \leq r \leq 1.$$
+  \item Transforming random variables from one coordinate system to another is an important idea, one we will talk more about later.
   
   \framebreak 
   
@@ -678,14 +679,23 @@ Chapter \CHAPTER: Joint Distributions}
     
     \item To see why this is true, consider the case of two RVs, $X, Y$.
     \item From the definition, if they are independent, then $F(x, y) = F_X(x)F_Y(y)$.
-    \item Taking the second mixed partial derivative makes it immediately clear that the joint pdf $f(x, y)$ factors (assuming all densities exist). 
+    \item Taking the second mixed partial derivative makes it immediately clear that the joint pdf $f(x, y)$ factors (assuming all densities exist).
+    
+    \framebreak
+    
     \item Conversely, suppose that the densities factor. Then by definition:
+    
+    
+    \mode<article>{
     \begin{align*}
       F(x, y) &= \int_{-\infty}^x \int_{-\infty}^y f(u, v) dvdu \\
       &= \int_{-\infty}^x \int_{-\infty}^y f_X(u)f_Y(v) dvdu \\
       &= \Big(\int_{-\infty}^x f_X(u) du\Big)\Big(\int_{-\infty}^y f_Y(v) dv\Big) \\
       &= F_X(x)F_Y(y).
     \end{align*}
+    }
+    
+    \framebreak
     
     \item It can also be shown that the definition implies that if $X$ and $Y$ are independent, then
     $$

@@ -227,6 +227,15 @@ Chapter \CHAPTER: Joint Distributions}
   
   \framebreak
   
+  % \begin{exampleblock}{Example}
+  %   Let $X \sim N(\mu, 1)$. Calculate $\frac{d}{dt} \E[e^{tX}]$, or:
+  %   $$
+  %   \frac{d}{dt}\left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{tx} e^{(-(x - \mu)^2/2)}\, dx\right)
+  %   $$
+  % \end{exampleblock}
+  % 
+  % \framebreak
+  
   \begin{itemize}
     \item Similar results hold for interchanging summation, derivatives, and integrals.
     \item For finite sums, changing the order of sums and derivatives is a natural property of derivatives. It's not so simple with infinite sums.
@@ -252,7 +261,7 @@ Chapter \CHAPTER: Joint Distributions}
   
   \begin{itemize}
     \item Like with differentiation, we can always exchange the order of summation and integration, if the sums are finite.
-    \item You will not be asked to verify the conditions above, but I wanted to point out that these operations are theoretically supported when they inevitibly come up in this class. 
+    \item You will not be asked to verify the conditions above, but I wanted to point out that these operations are theoretically supported when they inevitably come up in this class. 
   \end{itemize}
   
   % TODO: Add example 2.4.5, but don't talk about expectation yet. In fact, maybe this needs to move to Chapter~4? 
@@ -312,7 +321,20 @@ Chapter \CHAPTER: Joint Distributions}
     F(x_1, x_2, \ldots, x_n) = P(X_1 \leq x_1, X_2 \leq x_2, \ldots, X_n \leq x_n).
     $$
     
-    \item Like the univariate case, we can also define the pmf and pdf of jointly distributed random variables as well. 
+    \item Like the univariate case, we can also define the pmf and pdf of jointly distributed random variables as well.
+    \item For discrete random variables, the pmf just describes the joint frequencies: $P(X = x_i, Y = y_j)$ for all $i, j$.
+    
+    \framebreak
+    
+    \item For continuous random variables, a joint pdf of $(X, Y)$ is defined as functions $f: \, \R^2 \rightarrow \R$ that satisfy
+    $$
+    F(X, y) = \int_{-\infty}^x \int_{-\infty}^y f(s, y)\, ds\, dt.
+    $$
+    \item The \emph{bivariate}-Fundamental Theorem of Calculus implies:
+    $$
+    \frac{\partial^2 F(x, y)}{\partial x \,\partial y} = f(x, y).
+    $$
+    \item Similar ideas hold for higher-dimensions.
   \end{itemize}
   
 \end{frame}

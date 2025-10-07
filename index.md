@@ -77,6 +77,7 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 
 * [Homework 5](hw05/hw05.pdf), due Fri Oct 10, 11:59pm.
 [TeX file](hw05/hw05.tex).
+[In class discussion](hw05/HW5discussion.pdf).
 
 <!--- 
 

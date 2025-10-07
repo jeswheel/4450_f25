@@ -699,7 +699,7 @@ Chapter \CHAPTER: Joint Distributions}
     
     \item It can also be shown that the definition implies that if $X$ and $Y$ are independent, then
     $$
-    P(X \in A, Y \in B) = P(X \in A)P(X \in B).
+    P(X \in A, Y \in B) = P(X \in A)P(Y \in B).
     $$
     \item Furthermore, if $g$ and $h$ are functions on $\R$, then $Z = g(X)$ and $W = h(Y)$ are also independent.
   \end{itemize}

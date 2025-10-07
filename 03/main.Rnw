@@ -874,7 +874,7 @@ Chapter \CHAPTER: Joint Distributions}
   \item Note that $m(x)$, as defined, is a probability density function. Then, to generate RV with density $f$, we can do the following:
   \begin{itemize}
     \item[Step 1:] Generate $T$ with density $m$.
-    \item[Step 2:] Generate $U \sim U[0, 1]$ independent of $T$. \alert{If} $M(T) \times U \leq f(T)$, then we ``accept" $T$ as a sample $(X = T)$; \alert{otherwise}, we ``reject" and go back to Step 1.
+    \item[Step 2:] Generate $U \sim U[0, 1]$ independent of $T$. \alert{If} $U \leq f(T) / M(T)$, then we ``accept" $T$ as a sample $(X = T)$; \alert{otherwise}, we ``reject" and go back to Step 1.
   \end{itemize}
 \end{itemize}
 
@@ -898,11 +898,55 @@ Chapter \CHAPTER: Joint Distributions}
   
 \end{frame}
 
-\begin{frame}{Rejection sampling}
+\begin{frame}{Rejection sampling: proof sketch}
   \begin{itemize}
-    \item A more formal argument using differentials is given in \citet[Example~D][Figure~3.15]{rice07}.
-    \item In order for the rejection method to be worth-while (computationally efficient), it is important that the algorithm has high-acceptance (good choice of $M$), otherwise you may need a large number of samples because many are being rejected.
+    \item With a little abuse of notation, we'll do a proof sketch that this works.
+    \item Let $I$ be the indicator event such that $I = 1$ if a sample is accepted, $I=0$ otherwise.
+    \item We want the distribution of accepted samples to follow $f(x)$, i.e., $f_{T|I=1}(x | I = 1) = f(x)$.
+  \mode<article>{
+    \item For convenience, let's denote $\bar{M} = \int_a^b M(x) \, dx$, so that $m(x) = M(x) / \bar{M}$. 
+    \item First, using conditional probabilities, we have
+    $$
+    f_X(x) = f_{T | I = 1}(x | I = 1) = \frac{f_{T, I = 1}(x, I = 1)}{P(I = 1)} = \frac{P(I = 1 | T = x)f_T(x)}{P(I = 1)}
+    $$
+    \item Note in the equation above, I switched from $X$ to $T$; this matches our notation previously used, that we simulate a possible sample $T$, and accept if the particular condition is met, in which case, $X = T$.
+    \item $T$ was generated with the standardized function $m$. That is, the density $f_T(x) = m(x)$. Thus, 
+    $$
+    f_X(x) = f_{T|I=1}(x | I = 1) = \frac{P(I = 1 | T = t)m(x)}{P(I = 1)}.
+    $$
+    \item We have an expression for $m(x)$ already, now we want to find $P(I = 1)$ and $P(I = 1 | T = x)$.
+    \begin{align*}
+      P(I = 1) &= \int P(I = 1, T = t) \, dt \\
+               &= \int P(I = 1 | T = t) m(t) \, dt.
+    \end{align*}
+    \item For fixed $T = t$, the probability of accepting the sample (i.e., $I = 1$) is determined by the uniform probability:
+    $$
+    P(I = 1 | T = t) = P\big(M(t) U \leq f(t)\big) = P\big(U \leq f(t) / M(t) \big) = f(t) / M(t).
+    $$
+    \item Thus, 
+      \begin{align*}
+      P(I = 1) &= \int P(I = 1 | T = t) m(t) \, dt \\
+               &= \int \frac{m(t) f(t)}{M(t)} \, dt \\
+               &= \int \frac{M(t) f(t)}{M(t) \bar{M}}\, dt\\
+               &= \frac{1}{\bar{M}} \int f(t) \, dt \\
+               &= \frac{1}{\bar{M}}.
+      \end{align*}
+    \item Therefore, the distribution of the accepted samples is: 
+    \begin{align*}
+      f_{T|I=1}(x | I = 1) &= \frac{P(I = 1 | T = x)f_T(x)}{P(I = 1)} \\
+      &= \bar{M} P(I = 1 | T = x)m(x) \\
+      &= \bar{M} \times \frac{f(x)}{M(x)}\times \frac{M(X)}{\bar{M}} \\
+      &= f(x).
+    \end{align*}
+  }
   \end{itemize}
+  
+
+  
+  % \begin{itemize}
+  %   \item A more formal argument using differentials is given in \citet[Example~D][Figure~3.15]{rice07}.
+  %   \item In order for the rejection method to be worth-while (computationally efficient), it is important that the algorithm has high-acceptance (good choice of $M$), otherwise you may need a large number of samples because many are being rejected.
+  % \end{itemize}
 \end{frame}
 
 \section{Functions of Jointly Distributed Random Variables}
@@ -1012,9 +1056,13 @@ Chapter \CHAPTER: Joint Distributions}
 
 \begin{frame}[allowframebreaks]{Example: Cauchy density}
 
-\begin{itemize}
-  \item Let $X$ and $Y$ be independent, standard normal random variables.
-  \item We wish to find the pdf of $Z = Y / X$.
+\begin{exampleblock}{Cauchy density}
+  Let $X$ and $Y$ be independent, standard normal random variables. Find the pdf of $Z = X / Y$.
+  
+  \mode<article>{
+    \begin{itemize}
+  % \item Let $X$ and $Y$ be independent, standard normal random variables.
+  % \item Find the pdf of $Z = Y / X$.
   \item Using the expression we previously derived for the quotient of independent RVs, we have
   $$
   f_Z(z) = \int_{-\infty}^{\infty} \frac{|x|}{2\pi}e^{-x^2/2}e^{-x^2z^2/2} \, dx.
@@ -1028,6 +1076,14 @@ Chapter \CHAPTER: Joint Distributions}
      &= \frac{1}{\pi(z^2 + 1)}, \quad -\infty < z < \infty.
   \end{align*}
   \item Here, I made the substitution $\lambda = (z^2 + 1)/2$, and the integral was calculated using the fact that the pdf of the exponential distribution integrates to one: $\int_0^\infty \lambda e^{-\lambda x} dx = 1$.
+  \end{itemize}
+  }
+  
+\end{exampleblock}
+
+\framebreak
+
+\begin{itemize}
   \item This density is called the \alert{Cauchy density}.
   \item Like the standard normal, the Cauchy density is symmetric about zero and bell-shaped, but the tails of the Cauchy tend to zero very slowly.
   \item \href{https://www.desmos.com/calculator/tqvayodexb}{Here is a link} showing this comparison.

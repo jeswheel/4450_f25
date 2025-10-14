@@ -114,23 +114,15 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 
 -->
 
-
-<!---
 -------------------
 
-## Midterm project
+## Midterm
 
-* [Information](midterm_project/midterm_project_info.html).
+* [Review](midterm/MidtermReview.pdf).
 
-* [Midterm peer review report instructions](midterm_project/midterm_review.html)
-
-* [2024 midterm projects](midterm_project/index.html)
-
-* You are welcome to browse previous midterm projects. The [2022 midterm projects](http://ionides.github.io/531w22/midterm_project/) and  [2021 midterm projects](http://ionides.github.io/531w21/midterm_project/) have a posted summary of peer review comments. Earlier projects are also available, from [2016](http://ionides.github.io/531w16/midterm_project/), [2018](http://ionides.github.io/531w18/midterm_project/) and [2020](http://ionides.github.io/531w20/midterm_project/).
-
+* [Formula Sheet](midterm/formulaSheet.pdf)
 
 -------------
---->
 
 ## Final Exam
 

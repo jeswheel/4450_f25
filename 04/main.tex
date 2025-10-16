@@ -126,7 +126,9 @@ Chapter \CHAPTER: Expected Values}
   $$
   \sum_{k = 1}^{\infty} k\, q^{k-1} \overset{?}{=} \frac{d}{dq}\Big(\frac{q}{1-q}\Big) = \frac{1}{(1 - q)^2}.
   $$
-  The question is: \textbf{Can we move the derivative inside of the infinite sum?} For this particular case, the answer is \emph{yes}. In more advanced analysis classes, you learn methods for justifying this step rigorously using uniform convergence. Specifically, what we need is for uniform convergence of the partial sums and their derivatives. Fortunately for this class, all of the sums (and integrals) we will consider will be ``well-behaved" and will satisfy these conditions.
+  The question is: \textbf{Can we move the derivative inside of the infinite sum?} For this particular case, the answer is \emph{yes}.
+  For more details, see Slide~21 from Chapter~3. 
+  In this class, all of the sums (and integrals) we will consider will be ``well-behaved" and will satisfy the necessary conditions.
   
   With this sorted out, we can now use our trick to finish the calculation:
   \begin{align*}
@@ -174,13 +176,52 @@ Chapter \CHAPTER: Expected Values}
     % $$
     % E(X) = \sum_{x \in \mathcal{X}}x\, p(x).
     % $$
-    provided that $\int_{x\in \mathcal{X}}xf(x)\, dx < \infty$, otherwise the expectation is undefined. 
+    provided that $\int_{x\in \mathcal{X}}|x|\, f(x)\, dx < \infty$, otherwise the expectation is undefined. 
   \end{block}
 
  \begin{itemize}
     \item As before, this is not the most mathematically precise definition of expectation, but a more complete treatment of the topic is outside the scope of this course \citep[See][]{resnick19}.
     \item We can still think of $E(X)$ as the center of mass of the density.
   \end{itemize}
+
+\framebreak
+
+\begin{exampleblock}{Exponential$(\lambda)$ expectation}
+  Let $X$ have an Exponential$(\lambda)$ density, with $\lambda > 0$. Thus, the pdf of $X$ is given by
+  $$
+  f_X(x) = \frac{1}{\lambda}e^{-x/\lambda}, \quad 0 \leq x < \infty
+  $$
+  Find $E[X]$.
+  \mode<article>{
+  \vspace{2mm}
+  \emph{Solution.}
+  \begin{align*}
+    E[X] &= \int_x x\, f_X(x)\, dx \\
+         &= \int_0^\infty \frac{1}{\lambda} x e^{-x/\lambda}\, dx 
+  \end{align*}
+  \begin{itemize}
+    \item To solve this integral, we can use integration by parts:
+    $$
+    \int u\, dv = uv - \int v\, du.
+    $$
+    \item We let $u = x$, and $dv = \frac{1}{\lambda}e^{-x/\lambda}$.
+    \item Then, $du = dx$, $v = \int \frac{1}{\lambda}e^{-x/\lambda}\, dx = -e^{-x/\lambda}$.
+    \item Plugging this in, we get:
+    \begin{align*}
+      E[X] &= -x e^{-x/\lambda}\big|_0^\infty - \int^\infty_0 -e^{-x/\lambda}\, dx \\
+      &= \int^\infty_0 -e^{-x/\lambda}\, dx \\
+      &= \lambda e^{-x/\lambda}\big|_0^\infty = \lambda.
+    \end{align*}
+  \end{itemize}
+  }
+\end{exampleblock}
+
+\framebreak
+
+\mode<presentation>{
+  \framebreak
+  \emph{Solution.}
+}
 
 \framebreak
 
@@ -201,10 +242,10 @@ Chapter \CHAPTER: Expected Values}
   $$
   E(X) = \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha}e^{-\lambda x}\,dx.
   $$
-  Now we will apply the ``integration by density function" trick: we will re-write the integrand so that it corresponds to the density function of some random variable, and use the fact that the density function must integrate to one. Specifically, note that if we let $\alpha* = \alpha + 1$, then $\alpha = \alpha^* - 1$, and we can express the integral as:
+  Now we will apply the ``integration by density function" trick: we will re-write the integrand so that it corresponds to the density function of some random variable, and use the fact that the density function must integrate to one. Specifically, note that if we let $\alpha^* = \alpha + 1$, then $\alpha = \alpha^* - 1$, and we can express the integral as:
   \begin{align*}
     E(X) &= \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha}e^{-\lambda x}\,dx \\
-         &= \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha* - 1}e^{-\lambda x}\,dx \\
+         &= \int_{0}^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha^* - 1}e^{-\lambda x}\,dx \\
          &= \Big(\frac{\lambda^\alpha}{\Gamma(\alpha)}\Big)\Big(\frac{\Gamma(\alpha^*)}{\lambda^{\alpha^*}}\Big)\int_{0}^\infty \frac{\lambda^{\alpha^*}}{\Gamma(\alpha^*)} x^{\alpha* - 1}e^{-\lambda x}\,dx \\
          &= \Big(\frac{\lambda^\alpha}{\Gamma(\alpha)}\Big)\Big(\frac{\Gamma(\alpha^*)}{\lambda^{\alpha^*}}\Big)
   \end{align*}
@@ -217,6 +258,7 @@ Chapter \CHAPTER: Expected Values}
 \end{exampleblock}
 
 \mode<presentation>{
+  \framebreak
   \emph{Solution.}
 }
 
@@ -253,7 +295,7 @@ Chapter \CHAPTER: Expected Values}
     $$
     E[g(X)] = \int_{x \in \mathcal{X}} g(x)f(x) \, dx.
     $$
-    \item We will justify this for the discrete analog.
+    \item We will justify this for the discrete case.
   \end{itemize}
   
   \framebreak
@@ -309,31 +351,44 @@ Chapter \CHAPTER: Expected Values}
     \item The proof for the continuous case is similar, but does require a measure-theoretic approach to integration.
     \item One important thing to note is that $g\big(E(X)\big)$ is not usually equal to $E\big(g(x)\big)$.
     \item For example, let $Z$ be a standard normal. We know that $E[Z] = 0$, because it's symmetric. However, $P\big(|Z| > 0) = 1$, thus we can readily deduce that $E\big[|Z|\big] \geq 0 = \big|E[Z]\big|$.
-    \item An immediate consequence is that if for all non-negative random variables $X$ that have finite expectation, if $g(x) \leq x$ for some function $g$, then $E[g(X)] \leq E[X]$.
+    \item This idea can be extended to show that if for all non-negative random variables $X$ that have finite expectation, if $g(x) \leq x$ for some function $g$, then $E[g(X)] \leq E[X]$.
   \end{itemize}
   
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Expected value of indicator functions}
   \begin{itemize}
-    \item An interesting example is \alert{indicator} functions.
+    \item Another important example of expectations is \alert{indicator} random variables.
     \item For example, suppose that $X$ is a random variable. Then $Y = 1[X \in A]$ for some $A \subset \mathcal{X}$ is a random variable.
-    \item Example: Let $X$ follow a standard normal distribution, and $A = [-1, 1]$. Then $Y = 1[X \in A]$ is defined as the random variables such that $Y(\omega) = 1$ if $X(\omega) \in A$, and $Y(\omega) = 0$ otherwise.
-    \item Expectations of indicator variables are \alert{probabilities}:
+    
+    \begin{exampleblock}{Indicator Random Variable}
+      Let $X$ follow a standard normal distribution, and $A = [-1, 1]$. Then $Y = 1[X \in A]$ is defined as the random variables such that $Y(\omega) = 1$ if $X(\omega) \in A$, and $Y(\omega) = 0$ otherwise.
+    \end{exampleblock}
+    
+    \framebreak
+    
+    \item Expectations of indicator variables are \alert{probabilities}. Let $Y = 1[X \in A]$. 
     \begin{align*}
     E(Y) &= E\big(1[X \in A]\big) \\
     &= \int_{x \in \mathcal{X}} 1[X \in A]\, f(x) \, dx \\
     & = \int_{x \in A} f(x) \, dx = P(X \in A).
     \end{align*}
-    \item This fact is useful for deriving some important inequalities. 
+    \item This fact is useful for deriving some important inequalities.
+    \item First, we will show that the expectations of interest actually exist.
+    
+    \framebreak
+    
     \item Let $X$ be a continuous random variable with expectation $E(X)$. From our definition, this implies that $\int |x|\, f(x)\,dx < \infty$.
-    \item Now suppose that for some random variable $Y = g(X)$ such that $|Y| \leq |X|$. Then, if $Y$ has a pdf, we can deduce that $\int |y|\, f(x)\,dx < \infty$, and therefore $E[Y]$ exists.
+    \item Now suppose that for some random variable $Y = g(X)$ such that $|Y| \leq |X|$. Then we can deduce that $\int |y|\, f(x)\,dx < \infty$, and therefore $E[Y]$ exists.
     \item Now suppose that $\varphi$ is a non-decreasing, non-negative function, and that for some $a \in \R$, $\varphi(a) > 0$. Then, for all $x \geq a$, $\varphi(x) / \varphi(a) \geq 1$.
+    
+    \framebreak
+    
     \item Define $Y = 1[X \geq a]$. Note that for all possible outcomes $\omega \in \Omega$, 
     $$
     Y = 1[X \geq a] \leq \varphi(X) / \varphi(a) 1[X \geq a] \leq \varphi(X) / \varphi(a).
     $$
-    \item Taking expectations of both sides,
+    \item Taking expectations of everything (which we argued preserves inequalities),
     $$
     E\big(1[X \geq a]\big) = P(X \geq a) \leq \frac{E\big[\varphi(X)\big]}{\varphi(a)} = E\left[\varphi(X) / \varphi(a)\right].
     $$

@@ -980,7 +980,7 @@ $$
   
 \end{frame}
 
-\section{Bias-Variance Tradeoff}
+\subsection{Bias-Variance Tradeoff}
 
 \begin{frame}[allowframebreaks]{Measurement Error}
 
@@ -1042,6 +1042,77 @@ $$
   }
 \end{block}
 
+\end{frame}
+
+\section{Covariance and Correlation}
+
+\begin{frame}[allowframebreaks]{Covariance}
+  \begin{itemize}
+    \item The variance of a random variable is a measure of its variability.
+    \item The \emph{covariance} of two random variables is a measure of their joint-variability. 
+    \item It's also used to measure how closely associated two random variables are.
+  \end{itemize}
+  
+  \begin{block}{Definition: Covariance}
+    If $X$ and $Y$ are jointly distributed random variables with expectations $\mu_X$ and $\mu_Y$, the covariance of $X, Y$ is:
+    $$
+    \Cov(X, Y) = E\big[(X - \mu_x)(Y - \mu_y)\big]
+    $$
+  \end{block}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The covariance is the average value of the product of the deviation of $X$ from it's mean, and $Y$ from it's mean.
+    \item If $X$ and $Y$ are positively associated, we expect that if a value of $X$ is larger than it's mean, then the value of $Y$ is also larger than it's mean.
+    \item In this case, the covariance is positive.
+    \item Example: Suppose $X$ is a random variable representing height of an adult male, and $Y$ is the weight. In this case, we expect heights larger than average will also have weights larger than average, so the covariance is positive.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Calculating Covariance}
+    Let $X$ and $Y$ be random variables. Then
+    $$
+    \Cov(X, Y) = E[XY] - E[X]E[Y].
+    $$
+    
+    \mode<article>{
+    \begin{proof}
+    \begin{itemize}
+      \item Using the notation that $E[X] = \mu_X$ and $E[Y] = \mu_Y$, we have:
+    \end{itemize}
+    \begin{align*}
+      \Cov(X, Y) &= E\big[(X - \mu_X)(Y - \mu_Y)\big] \\
+                 &= E\big[XY - X\mu_Y - Y \mu_X + \mu_X\mu_Y\big] \\
+                 &= E[XY] - \mu_YE[X] - \mu_XE[Y] + \mu_X\mu_Y\\
+                 &= E[XY] - \mu_Y\mu_X - \mu_X\mu_Y + \mu_X\mu_Y\\
+                 &= E[XY] - E[X]E[Y]
+    \end{align*}
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \mode<presentation>{
+    \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item One important example is when $X$ and $Y$ are independent:
+    \item In this case, we have shown that $E[XY] = E[X]E[Y]$.
+    \item Therefore, $\Cov(X, Y) = E[X]E[Y] - E[X]E[Y] = 0$.
+    \item \textbf{however}, the inverse is not true: Just because $\Cov(X, Y) = 0$ does \emph{not} imply $X$ and $Y$ are independent.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Calculating Covariance}
+    Let $(X, Y)$ be jointly defined random variables is joint pdf $f(x, y) = 2x + 2y - 4xy$, for all $0 \leq x, y \leq 1$. Calculate the covariance $\Cov(X, Y)$.
+  \end{exampleblock}
+  
 \end{frame}
 
 % \begin{frame}[allowframebreaks]{}

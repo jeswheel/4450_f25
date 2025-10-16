@@ -672,6 +672,58 @@ $$
 
 \end{frame}
 
+\begin{frame}[allowframebreaks]{Expected value as a predictor}
+
+\begin{itemize}
+  \item One useful property of the expectation is that it serves as a good predictor for the value of a random variable. 
+  \item Suppose $X$ is a random variable with well-defined expectation, and that we want to make a prediction for the value of $X$.
+  \item Denote our predicted value of $X$ as $b$. 
+  \item One common way to measure accuracy using the Mean-Squared Error (MSE), which is defined as:
+  $$
+  \text{MSE}(b) = E\big[(X - b)^2\big].
+  $$
+  \item Here, the closer $b$ is to $X$, the smaller $(X- b)^2$ is. We take the expectation because $X$ is random.
+  \item By this measure, the best predictor would minimize this error.
+\end{itemize}
+
+\begin{block}{Theorem: Expectation and MSE}
+  If $X$ is a random variable, then the value $b$ that minimizes $E\big[(X - b)^2\big]$ is $b = E[X]$:
+  $$
+  \argmin_b E\big[(X - b)^2\big] = E[X].
+  $$
+  
+  \mode<article>{
+  \begin{proof}
+    \begin{align*}
+      E\big[(X - b)^2\big] &= E\big[(X - E(X) + E(X) - b)^2\big] \\
+      &= E\big[(X - E[X]) + (E[X] - b)^2\big] \\
+      &= E\big[(X - E[X])^2\big] + \big(E[X] - b\big)^2 + 2E\big[(X - E[X])(E[X] - b)\big].
+    \end{align*}
+    \begin{itemize}
+      \item Above, we have just expanded the square, and used the fact that both $E[X]$ and $b$ are constants.
+      \item Using this same idea, because $(E[X] - b)$ is just a constant, we can pull it out of the expectation in the last term, leaving $c \times E\big[X - E[X]\big]$ for some constant $c$, but $E\big[X - E[X]\big] = 0$.
+      \item Thus, we have the equality
+      $$
+      E\big[(X - b)^2\big] = E\big[(X - E[X])^2\big] + \big(E[X]-b\big)^2.
+      $$
+      \item As a reminder, we are trying to minimize this quantity with respect to $b$.
+      \item The first term does not involve $b$, so it has no role in the minimization.
+      \item The second term is a quadratic function of $b$, meaning it has a unique global minimum.
+      \item You could take the derivative and set equal to zero at this point, or just notice that if $b = E[X]$, the quadratic function is equal to $0$, which is the smallest it could be.
+      \item Thus, $b = E[X]$ minimizes the MSE.
+    \end{itemize}
+  \end{proof}
+  }
+  
+\end{block}
+
+\mode<presentation>{
+  \emph{Proof:}
+}
+
+\end{frame}
+
+
 \begin{frame}[allowframebreaks]{Some comments on expected values}
 
 \begin{itemize}
@@ -708,17 +760,21 @@ $$
   \begin{block}{Definition: Variance}
     If $X$ is a random variable with expected value $E(X)$, then the \alert{variance} of $X$ is
     $$
-    \Var(X) = E\Big[\big(X - E(x)\big)^2\Big],
+    \Var(X) = E\Big[\big(X - E(X)\big)^2\Big],
     $$
     provided the expectation exists.
   \end{block}
   
+  \framebreak
+  
   \begin{itemize}
+    
+    \item Letting $\mu = E[X]$, we can use the identity $g(x) = (X - \mu)^2$, and our expression for $E\big[g(X)\big]$ to get a way of calculating the variance.
+  
     \item If $X$ is a discrete random variable, then by Theorem~4.1, 
     $$
     \Var(X) = \sum_{i}(x_i - \mu)^2\,p(x_i),
     $$
-    where $\mu = E[X]$.
     \item If $X$ is a continuous random variable, then
     $$
     \Var(X) = \int_{-\infty}^\infty (x- \mu)^2 f(x)\, dx
@@ -733,7 +789,7 @@ $$
   
   \begin{itemize}
     \item The variance is often denoted by $\sigma^2$, and the standard deviation $\sigma$.
-    \item Because $\big(X - E(x)\big)^2 \geq 0$, $\Var(X) \geq 0$.
+    \item Because $\big(X - E(X)\big)^2 \geq 0$, $\Var(X) \geq 0$.
     \item Formally, the variance is the mean of the squared distance between $X$ and $E[X]$. If most values of $X$ are close to the mean, this value is small; and vice-versa if most values of $X$ are far away from $E[X]$.
     \item By this definition, the units for the variance are squared units. 
     \item That is, if $X$ is measured in meters, then the variance is measured in square-meters, and the standard deviation is measured in meters. 
@@ -861,7 +917,7 @@ $$
     $$
     \item For instance, the probability that any arbitrary random variable $X$ will be more than $4\sigma$ away from $E[X]$ is less than $1/16$.
     \item While applicable to all random variables with well-defined variances, it is not the most optimal bound we can acheive.
-    \item For instance, if $X \sim N(\mu, \sigma^2)$, then $P(|X - \mu| > 2\sigma) = 0.05 < 1/4$
+    \item For instance, if $X \sim N(\mu, \sigma^2)$, then $P(|X - \mu| > 1.96\times \sigma) = 0.05 < 1/4$
   \end{itemize}
   
   \begin{block}{Corollary: zero variance}

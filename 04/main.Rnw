@@ -486,7 +486,7 @@ Chapter \CHAPTER: Expected Values}
 \end{itemize}
 
 \begin{block}{Theorem 4.3: Linear combinations}
-  If $X_1, \ldots, X_n$ are jointly distributed random variables with expectations $E(X_i)$, repsectively, and $Y = a + \sum_{i = 1}^n b_i X_i$, then,
+  If $X_1, \ldots, X_n$ are jointly distributed random variables with expectations $E(X_i)$, respectively, and $Y = a + \sum_{i = 1}^n b_i X_i$, then,
   $$
   E(Y) = a + \sum_{i = 1}^n b_i E(X_i).
   $$
@@ -916,7 +916,7 @@ $$
     P\big(|X - \mu| > k\sigma\big)\leq \frac{1}{k^2},
     $$
     \item For instance, the probability that any arbitrary random variable $X$ will be more than $4\sigma$ away from $E[X]$ is less than $1/16$.
-    \item While applicable to all random variables with well-defined variances, it is not the most optimal bound we can acheive.
+    \item While applicable to all random variables with well-defined variances, it is not the most optimal bound we can achieve.
     \item For instance, if $X \sim N(\mu, \sigma^2)$, then $P(|X - \mu| > 1.96\times \sigma) = 0.05 < 1/4$
   \end{itemize}
   

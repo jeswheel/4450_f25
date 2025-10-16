@@ -486,7 +486,7 @@ Chapter \CHAPTER: Expected Values}
 \end{itemize}
 
 \begin{block}{Theorem 4.3: Linear combinations}
-  If $X_1, \ldots, X_n$ are jointly distributed random variables with expectations $E(X_i)$, repsectively, and $Y = a + \sum_{i = 1}^n b_i X_i$, then,
+  If $X_1, \ldots, X_n$ are jointly distributed random variables with expectations $E(X_i)$, respectively, and $Y = a + \sum_{i = 1}^n b_i X_i$, then,
   $$
   E(Y) = a + \sum_{i = 1}^n b_i E(X_i).
   $$
@@ -789,7 +789,7 @@ $$
   
   \begin{itemize}
     \item The variance is often denoted by $\sigma^2$, and the standard deviation $\sigma$.
-    \item Because $\big(X - E(x)\big)^2 \geq 0$, $\Var(X) \geq 0$.
+    \item Because $\big(X - E(X)\big)^2 \geq 0$, $\Var(X) \geq 0$.
     \item Formally, the variance is the mean of the squared distance between $X$ and $E[X]$. If most values of $X$ are close to the mean, this value is small; and vice-versa if most values of $X$ are far away from $E[X]$.
     \item By this definition, the units for the variance are squared units. 
     \item That is, if $X$ is measured in meters, then the variance is measured in square-meters, and the standard deviation is measured in meters. 
@@ -916,8 +916,8 @@ $$
     P\big(|X - \mu| > k\sigma\big)\leq \frac{1}{k^2},
     $$
     \item For instance, the probability that any arbitrary random variable $X$ will be more than $4\sigma$ away from $E[X]$ is less than $1/16$.
-    \item While applicable to all random variables with well-defined variances, it is not the most optimal bound we can acheive.
-    \item For instance, if $X \sim N(\mu, \sigma^2)$, then $P(|X - \mu| > 2\sigma) = 0.05 < 1/4$
+    \item While applicable to all random variables with well-defined variances, it is not the most optimal bound we can achieve.
+    \item For instance, if $X \sim N(\mu, \sigma^2)$, then $P(|X - \mu| > 1.96\times \sigma) = 0.05 < 1/4$
   \end{itemize}
   
   \begin{block}{Corollary: zero variance}

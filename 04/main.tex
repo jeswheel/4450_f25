@@ -1156,11 +1156,14 @@ $$
   
 \end{frame}
 
-\begin{frame}{Covariance Properties}
+\begin{frame}[allowframebreaks]{Covariance Properties}
   \begin{itemize}
     \item Covariance has several useful properties that can help with calculations.
     \item One of theme is that the covariance is \alert{bilinear} operator.
+    \item You can also show that covariance is an inner-product for a particular inner-product space.
   \end{itemize}
+  
+  \framebreak
   
   \begin{block}{Theorem: Bilinear Covariance}
     Let $X_i$, $i = 1, 2, \ldots, n$ and $Y_j$, $j = 1, 2, \ldots, m$ be a collection of random variables, and $a, c, b_i, d_j$ be real numbers for all $i$ and $j$. Then:
@@ -1169,10 +1172,57 @@ $$
     $$
     In particular, 
     % \TODO{Fix below, it's wrong.}
-    $$
-    \Cov(aX + bW, cY + dZ) = ac\Cov(W, Y) + bc\Cov(X, Y) + ad\Cov()
-    $$
+    \begin{align*}
+    \Cov(aX + bW, cY &+ dZ) = ac\, \Cov(X, Y) + ad\, \Cov(X, Z) \\ 
+    &  + bc\, \Cov(W, Y) + bd\, \Cov(W,Z)
+    \end{align*}
   \end{block}
+  
+  % \begin{itemize}
+  %   \item A short proof of the later special case will be a HW problem. 
+  % \end{itemize}
+  
+  \framebreak
+  
+  Additional properties of the covariance include: 
+  
+  \begin{itemize}
+    \item $\Cov(X, X) = \Var(X)$. Therefore,
+    \begin{align*}
+      \Var(X + Y) &= \Cov(X+Y, X+Y) \\
+      &= \Cov(X, X) + 2\, \Cov(X, Y) + \Cov(Y, Y)\\ 
+      &= \Var(X) + \Var(Y) + 2\, \Cov(X, Y)
+    \end{align*}
+    \item More generally, 
+    $$
+    \Var\big(a + \sum_{i = 1}^n b_i X_i\big) = \sum_{i = 1}^n \sum_{j = 1}^n b_ib_j \Cov(X_i, X_j). 
+    $$
+    \item If the $X_i$ are independent, this implies that $\Var\big(\sum_i X_i\big) = \sum_i \Var(X_i)$.
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Variance of Binomial RV}
+    Let $X$ follow a Binomial$(n, p)$ distribution. Calculate $\Var(X)$.
+    
+    \mode<article>{
+      \begin{itemize}
+        \item If we are trying to do this from definition, we need to calculate:
+        $$
+        \Var(X) = \sum_{k = 0}^\infty (k - np)^2 \binom{n}{k}p^k (1 - p)^{n-k}.
+        $$
+        \item Directly calculating this sum is no easy task!
+        \item We instead can use the fact that a binomial random variable can be expressed as the sum of independent Bernoulli$(p)$ random variables.
+        \item Let $X_1, X_2, \ldots, X_n$ be independent Bernoilli$(p)$ random variables. Then $\sum_i X_i \overset{d}{=} X$, and
+        \begin{align*}
+          \Var(X) &= \Var\big(\sum_i X_i\big) \\
+          &= \sum_{i = 1}^n \Var(X_i) \quad \text{(because of independence)} \\
+          &= \sum_{i = 1}^n p(1-p) = np(1-p).
+        \end{align*}
+      \end{itemize}
+    }
+    
+  \end{exampleblock}
   
 \end{frame}
 

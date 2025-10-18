@@ -1224,6 +1224,49 @@ $$
     
   \end{exampleblock}
   
+  \mode<presentation>{
+    \emph{Solution.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Random Walk}
+    A similar example is a \alert{Random Walk}. Suppose we start a random process at $x_0 = 0$, and at each time point $t_i$, we take a random ``step", following a $X_i$ distribution, where $E[X_i] = \mu$ and $\Var(X_i) = \sigma^2$.
+    That is, our position after one step is $S(1) = x_0 + X_1$, and after two steps, $S(2) = x_0 + X_1 + X_2$, and so on. What's the mean and variance of the position after $N$ steps? 
+    
+    \mode<article>{
+      \begin{itemize}
+        \item We let $S(N)$ denote the position after the $N$th step.
+        \item $S(N) = x_0 + \sum_{i= 1}^N X_i$. 
+        \item By linearity of expectation,
+        $$
+        E\big[S(N)\big] = x_0 + \sum_{i = 1}^N E[X_i] = x_0 + n\mu
+        $$
+        \item Because the $X_i$ are independent, 
+        $$
+        \Var\big(S(N)\big) = \sim_{i = 1}^N \Var(X_i) = n\sigma^2.
+        $$
+        \item Thus, we expect our position to be $x_0 + n\mu$, with uncertainty measured by the standard deviation $\sqrt{n}\sigma$.
+        \item If $\mu > 0$, then we will expect that our position will be larger than where we started ($x_0$), particularly when $n$ is large.
+        \item Random walks have found applications in many areas of science.
+        \item A small extension to a random walk is when the time-steps are continuous, and the steps being normally distributed.
+        \item This type of process is known as Brownian motion, named after a Biologist in the 1800's who used a similar idea to describe the spontaneous motion of pollen grains suspended in water. Einstein later explained this as a result of collisions of the grains with randomly moving water molecules.
+        \item Random walks are still a popular model for modeling the evolution of stock-markets over time: short term behavior is generally unpredictable, but long term trends do follow a pattern. 
+      \end{itemize}
+    }
+  \end{exampleblock}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Correlation}
+
+\begin{block}{Definition: Correlation}
+  If $X$ and $Y$ are jointly distributed random variables, and the variances and covariances exist, and the variances are non-zero, then the correlation of $X$ and $Y$ is:
+  $$
+  \Cor{X, Y} = \rho = \frac{\Cov(X, Y)}{\sqrt{\Var(X)\Var(Y)}}.
+  $$
+\end{block}
+
 \end{frame}
 
 % \begin{frame}[allowframebreaks]{}

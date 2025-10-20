@@ -1610,6 +1610,143 @@ $$
     \item The expectation (and consequently the mgf), \emph{doesn't necessarily exist} for particular values of $t$.
     \item In the continuous case, the existence of the expectation depends on how rapidly the tails of the density decrease.
   \end{itemize}
+  
+  \begin{block}{Theorem: MGF Uniqueness}
+    If the moment-generating function exists for $t$ in an open interval containing $0$, it uniquely determines the probability distribution. 
+  \end{block}
+  
+  \begin{itemize}
+    \item We won't prove the theorem above because it does require some technical details regarding Laplace transforms. The implications are that if two random variables have the same mgf in an open interval containing zero, they have the same distribution.
+    \item For some problems, we can find the mgf and then use that to find the unique probability distribution that it corresponds with.
+    \item The name \alert{moment generating function} comes from the fact that it can be used to find moments of a distribution.
+    
+    \begin{block}{Definition: Moments}
+      Let $X$ be a random variable. Then $E[X^r]$ is called the $r$th \alert{moment}, if it exists. 
+    \end{block}
+    
+    \item We have already encountered the first and second moments. Trivially, we have $E[X] =\mu$ is the first moment, and $\Var(X) = E[X^2] - (E[X])^2$ is the difference between the second and first moments.
+    \item The $r$th \alert{central moment} (rather than ordinary moment) are defined as
+    $$
+    E\big[(X - E[X])^r\big].
+    $$
+    \item The variance \emph{is} the second central moment.
+    \item The third central moment is called \alert{skewness}, and is used to measure the asymmetry of a density about its mean; if a density is symmetric about the mean, then the skewness is zero. (HW problem?)
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem: Derivatives of the mgf}
+    If the moment-generating function exists in an open interval containing zero, then the $r$th derivative of $M(t)$ evaluated at $0$ is the $r$th moment:
+    $$
+    M^{(r)}(0) = E(X^r).
+    $$
+    
+    \mode<article>{
+    \begin{proof}
+      \begin{itemize}
+        \item The proof will be done for the continuous case. The discrete case follows in a similar fashion. 
+        \item We first assume that $M(t)$ exists in some neighborhood containing $0$. 
+        \item Thus, by assumption, $E[e^{tX}]$ exists (for that same neighborhood), and by definition of expectation, $\int_X |e^{tx}| f_X(x)\, dx < \infty$.
+        \item This gives us a bounding function to apply our version of the dominated convergence theorem.
+        \item Now consider the first derivative:
+        \begin{align*}
+          \frac{d}{dt} M(t) &= \frac{d}{dt}\int_{-\infty}^\infty e^{tx} f(x)\, dx \\
+           &= \int_{-\infty}^\infty \frac{d}{dt} e^{tx} f(x)\, dx \\
+           &= \int_{-\infty}^\infty x\, e^{tx}f(x)\, dx.
+        \end{align*}
+        \item Here, we swapped the derivative and integral using the dominated convergence theorem.
+        \item Now, we evaluate the derivative $M'(t)$ at $t = 0$, which is in the existing neighborhood.
+        $$
+        M'(0) = \int_{-\infty}^\infty xf(x)\, dx = E[X].
+        $$
+        \item Thus, we have shown that $M^{(r)}(0) = E[X^r]$ for $r = 1$.
+        \item We could proceed by induction, however the same basic argument works for larger $r$. In particular, it's easy to see (here is where you'd apply the induction argument) that
+        $$
+        M^{(r)}(t) = \int_{-\infty}^\infty x^r e^{tx} f(x)\, dx,
+        $$
+        and therefore
+        $$
+        M^{(r)}(0) = \int_{-\infty}^\infty x^r  f(x)\, dx = E[X^r]. 
+        $$
+      \end{itemize}
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item This last theorem is extremely useful for finding moments of random variables.
+    \item Without the theorem, we have to calculate infinite sums or indefinite integrals. Now, we can just find the MGF (often given already), and do some differentiation (easy). 
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Poisson Distribution}
+    Suppose $X$ has a Poisson$(\lambda)$ distribution. Find $E[X]$ and $\Var(X)$. 
+    
+    \mode<article>{
+      \emph{Solution.} To calculate the mean and variance, it would require evaluating the following sums:
+      $$
+      E[X] = \sum_{k = 0}^\infty k \frac{\lambda^k}{k!} e^{-\lambda}, \qquad \Var(X) = \sum_{k - 0}^\infty (k - E[X])^2 \frac{\lambda^k}{k!} e^{-\lambda}.
+      $$
+      
+      \begin{itemize}
+        \item Although we have calculated the first sum before, the second sum remains very challenging to compute.
+        \item Instead of calculating the sum directly, we will use the MGF.
+        \begin{align*}
+          M(t) &= \sum_{k = 0}^\infty e^{tk} \frac{\lambda^k}{k!}e^{-\lambda} \\
+          &= e^{-\lambda} \sum_{k = 0}^\infty \frac{(\lambda e^t)^k}{k!} \\
+          &= e^{-\lambda} e^{\lambda \exp(t)} \\
+          &= e^{\lambda (\exp(t) - 1)}.
+        \end{align*}
+        \item Note that this is true for all $t \in \R$, so our neighborhood containing zero that $M(t)$ is defined on is $\R$.
+        \item Differentiating with respect to $t$, we get:
+        \begin{align*}
+          M'(t)  &= \lambda e^t e^{\lambda(\exp(t) - 1)} \\
+          M''(t) &= \lambda e^t e^{\lambda(\exp(t) - 1)} + \lambda^2 e^{2t}e^{\lambda(\exp(t) - 1)}.
+        \end{align*}
+        \item Therefore, we find by evaluating at $t = 0$,
+        \begin{align*}
+           M'(0) &= E[X] = \lambda \\
+           M''(0) &= E[X^2] = \lambda^2 + \lambda
+        \end{align*}
+        \item From this, we can calculate the variance:
+        $$
+        \Var(X) = E[X^2] - \big[E(X)\big]^2 = \lambda^2 + \lambda - \lambda^2 = \lambda
+        $$
+      \end{itemize}
+    }
+    
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Gamma Distribution}
+    Let $X \sim \text{Gamma}(\alpha, \lambda)$, and find $E[X]$ and $\Var(X)$.
+    
+    \mode<article>{
+    \emph{Solution.} First, recall the pdf of the Gamma distribution:
+    $$
+    f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1}e^{-
+    \lambda x}, \quad x \geq 0.
+    $$
+    \begin{itemize}
+      \item Applying the MGF definition, we have
+      \begin{align*}
+        M(t) = \int_{0}^\infty e^{tx} \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}\, dx
+      \end{align*}
+    \end{itemize}
+    }
+  \end{exampleblock}
+  
 \end{frame}
 
 % \begin{frame}[allowframebreaks]{}

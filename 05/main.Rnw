@@ -45,18 +45,84 @@ Chapter \CHAPTER: Limit theorems}
 
 \section{Convergence Concepts}
 
-\begin{frame}{Introduction}
+\begin{frame}[allowframebreaks]{Introduction}
   \begin{itemize}
-    \item This material comes primarily from \citet[][Chapter~4]{rice07}.
-    \item We will cover the ideas of expected value, variance, as well has higher-order moments.
-    \item This includes topics such as conditional expectation, which is one of the fundamental ideas behind many branches of statistics and machine learning.
-    \item For instance, most regression / prediction algorithms are built with the idea of minimizing some conditional expectation.
+    \item This material comes primarily from \citet[][Chapter~5]{rice07}, but will be supplemented with material from \citet[][Chapter~5]{casella24}.
+    \item In this chapter, we are interested in the convergence of sequences of random variables.
+    \item In particular, we are interested in the convergence of the sample mean, $\bar{X}_n = (X_1 + X_2 + \ldots + X_n) / n$, as the number of samples $n$ grows.
+    \item Because $\bar{X}_n$ is itself a random variable, we have to carefully define what it means for the convergence of a random variable.
+    \item In this class, we are mainly concerned with three types of convergence.
+    \item Because convergence of random variables is a tricky topic, we will treat them in varying amounts of detail.
   \end{itemize}
 \end{frame}
 
-% \begin{frame}[allowframebreaks]{}
-% 
-% \end{frame}
+\begin{frame}[allowframebreaks]{Convergence in Probability}
+  
+  \begin{itemize}
+    \item The first type of convergence is one of the weaker types, and is usually easy(ish) to verify.
+
+  \begin{block}{Definition: Convergence in Probability}
+    A sequence of random variables $X_1, X_2, \ldots$ \alert{converges in probability} to a random variable $X$ if, for every $\epsilon > 0$,
+    $$
+    \lim_{n \rightarrow \infty} P\big(|X_n - X| \geq \epsilon \big) = 0
+    $$
+    or, equivalently,
+    $$
+    \lim_{n \rightarrow \infty} P\big(|X_n - X| < \epsilon\big)= 1.
+    $$
+  \end{block}
+    
+    \item We often use the shorthand $X_n \Plim X$ to denote ``$X_n$ converges in probability to $X$ as $n$ goes to infinity". 
+    \item Note that the $X_i$ in the definition above do \emph{not} need to be independent and identically distributed.
+    \item The distribution of $X_n$ changes as the subscript changes, and each of the convergence concepts we will discuss will describe different ways in which the distribution of $X_n$ converges to some limiting distribution as the subscript becomes large.
+    \item A special case is when the limiting random variable $X$ is a constant.
+  \end{itemize}
+  
+  \begin{block}{Example: The (Weak) Law of Large Numbers}
+    Let $X_1, X_2, \ldots$ be iid random variables with $E[X_i] = \mu$ and $\Var(X_i) = \sigma^2$.
+    Define $\bar{X}_n = (1/n)\sum^{n}_{i = 1} X_i$. Then $\bar{X}_n \Plim \mu$.
+    
+    \mode<article>{
+    \begin{proof}
+    
+      The proof is a straightforward application of Chebychev's Inequality.
+        
+      \begin{itemize}
+        \item We want to show that 
+        $$\lim_{n \rightarrow \infty} P\big(|\bar{X}_n - \mu| \geq \epsilon \big) = 0.$$ 
+        \item For every $\epsilon > 0$, Chebychev's inequality gives us:
+        \begin{align*}
+        P\big(|\bar{X}_n - \mu| \geq \epsilon \big) &= P\big((\bar{X}_n - \mu)^2 \geq \epsilon^2\big) \\
+        &\leq \frac{E\big[(\bar{X}_n - \mu)^2\big]}{\epsilon^2} \\
+        &= \frac{\Var(\bar{X}_n)}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}.
+        \end{align*}
+        \item Thus, taking the limit, we have $\lim_{n \rightarrow \infty} P\big(|\bar{X}_n - \mu| \geq \epsilon \big) = 0$
+      \end{itemize}
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The WLLN is very elegant; under general conditions, the sample mean of independent random variables approaches the population mean as $n \rightarrow \infty$.
+    \item This is also used for proportions, as proportions are just means of indicator random variables.
+    \item The WLLN can also be extended to show that the results hold even if the variance is infinite, the only condition needed is that the expectation is finite. However, the proof in this case is beyond the scope of this course.
+    \item When a sequence of the ``same" sample quantity approaches a constant, we say that the sample quantity is \emph{consistent}.
+  \end{itemize}
+  
+\end{frame}
+
+\section{Test Section}
+
+\begin{frame}[allowframebreaks]{Test Frame}
+
+\end{frame}
 
 \newcommand\acknowledgments{
 \begin{itemize}

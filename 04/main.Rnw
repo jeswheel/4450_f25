@@ -1744,12 +1744,177 @@ $$
         M(t) &= \int_{0}^\infty e^{tx} \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}\, dx \\
              &= \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^\infty x^{\alpha - 1}e^{x(t - \lambda)}\, dx.
       \end{align*}
-      \item We can solve this integral using ``integration. 
+      \item We can solve this integral using ``integration by pdf".
+      \item In particular, we note that the integrand is just the density of a Gamma$(\alpha, \lambda - t)$ distribution without the normalizing constant.
+      \item Since this integrates for $\lambda - t > 0$, as long as $t < \lambda$ (the neighborhood containing $0$), we have
+      $$
+      M(t) = \frac{\lambda^\alpha}{\Gamma(\alpha)} \left(\frac{\Gamma(\alpha)}{(\lambda - t)^\alpha}\right) = \left(\frac{\lambda}{\lambda - t}\right)^\alpha.
+      $$
+      \item What's left now is to differentiate with respect to $t$, and evaluate at $t = 0$, giving:
+      \begin{align*}
+        M'(0) &= E(X) = \frac{\alpha}{\lambda} \\
+        M''(0) &= E(X^2) = \frac{\alpha(\alpha + 1)}{\lambda^2}
+      \end{align*}
+      \item Therefore, we can find the variance as
+      $$
+      \Var(X) = E[X^2] - \big[E(X)\big]^2 =  \frac{\alpha(\alpha + 1)}{\lambda^2} - \frac{\alpha^2}{\lambda^2} = \frac{\alpha}{\lambda^2}.
+      $$
     \end{itemize}
     }
   \end{exampleblock}
   
+  \mode<presentation>{
+  \emph{Solution.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Standard Normal Distribution}
+    Find the mgf of a standard normal distribution.
+    
+    \mode<article>{
+    \emph{Solution}.
+    \begin{itemize}
+      \item First recall the pdf:
+      $$
+      f_X(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}, \quad -\infty < x < \infty.
+      $$
+      \item The mgf is:
+      \begin{align*}
+      M(t) &= \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}} e^{tx} e^{-x^2/2} \, dx \\
+           &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-x^2/2 + tx}\, dx.
+      \end{align*}
+      \item When dealing with normal pdf / integrals, a common strategy is completing the square. That is, we will write:
+      $$
+      \frac{x^2}{2} - tx = \frac{1}{2}(x^2 - 2tx + t^2) - \frac{t^2}{2} = \frac{1}{2}(x - t)^2 - t^2/2.
+      $$
+      \item Thus, the integral can be written as:
+      \begin{align*}
+        M(t) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-(x-t)^2/2+ t^2/2}\, dx \\
+             &= \frac{e^{t^2/2}}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-(x-t)^2/2}\, dx
+      \end{align*}
+      \item The integral can once again be computed using ``integration by density", in this case, it's the integral for the pdf of a $N(t, 1)$ distribution. Therefore:
+      $$
+      M(t) = e^{t^2/2}.
+      $$
+    \end{itemize}
+    }
+    
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution:}
+  }
+  
+  \framebreak
+  
+  \begin{block}{Theorem: MGF of linear transformations}
+    If $X$ is a random variable with mgf $M_X(t)$, and $Y = a + bX$, the $Y$ has the mgf $M_Y(t) = e^{at}M_X(bt)$.
+    
+    \mode<article>{
+      \begin{proof}
+        \begin{align*}
+          M_Y(t) &= E(e^{tY}) \\ 
+                 &= E(e^{t(a + bX)}) \\
+                 &= E(e^{at}e^{tbX}) \\
+                 &= e^{at}E(e^{tbX}) \\
+                 &= e^{at}M_X(bt). 
+        \end{align*}
+      \end{proof}
+    }
+  \end{block}
+  
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: MGF of General Normal Distribution}
+    If $Y$ follows a general normal distribution with mean $\mu$ variance $\sigma^2$, then the distribution of $Y$ is the same as the distribution of $\mu + \sigma X$, where $X$ is a standard normal distribution $(Y \overset{d}{=} \mu + \sigma X)$.
+    
+    By the previous theorem on linear transformations, and uniqueness of the mgf, we have the mgf of $Y$: 
+    $$
+    M_Y(t) = e^{\mu t}M_X(\sigma t) = e^{\mu t}e^{\sigma^2 t^2 / 2}. 
+    $$
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{block}{Theorem: MGF of independent variables}
+    If $X$ and $Y$ are independent random variables with mgf's $M_X$ and $M_Y$, respeictively, and $Z = X + Y$, then $M_Z(t) = M_X(t)M_Y(t)$ is the mgf of $Z$, where the values $t$ are the common interval where both mgf's exist.
+    
+    \mode<article>{
+    \begin{proof}
+      \begin{align*}
+        M_Z(t) &= E(e^{tZ}) \\
+               &= E(e^{tX + tY}) \\
+               &= E(e^{tX}e^{tY}) = E(e^{tX})E(e^{tY}) = M_X(t)M_Y(t). 
+      \end{align*}
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item We extend the idea of the mgf to more than one variable.
+    \item For instance, if $(X, Y)$ are jointly distributed (not-independent), we define the joint mgf as:
+    $$
+    M_{XY}(s, t) = E(e^{sX + tY}).
+    $$
+    \item Similar to the uni-variate case, the joint mgf (if it exists) uniquely determines the joint distribution. Also, the joint mgf can be used to find $E(XY)$ and higher-order moments.
+    \item It can be shown that $X$ and $Y$ are independent if and only if their joint mgf factors into the product of the mgf of the marginal distributions.
+    \item For more than two random variables, e.g., $\bm{X} = (X_1, X_2, \ldots, X_n)^T$, the joint mgf is is 
+    $$
+    M_{\bm{X}}(\bm{t}) = E[e^{\bm{t}^T \bm{X}}].
+    $$
+    \item While the mgf is very useful, the primary limitation is that the mgf may not exist.
+    \item For this reason, we can often consider a similar function known as the \alert{characteristic function}.
+  \end{itemize}
+  
+  \begin{block}{Definition: the characteristic function}
+    If $X$ is a random variable, the \alert{characteristic function} of $X$ is defined to be
+    $$
+    \phi(t) = E(e^{itX}),
+    $$
+    where $i = \sqrt{-1}$. 
+  \end{block}
+  
+  \begin{itemize}
+    \item We won't really use this function in this class, because it requires some experience with complex analysis.
+    \item However, one thing of note is that $|e^{itX}| \leq 1$ for all $t$, and as such the expectation always exists (unlike the mgf).
+    \item This function has many similar properties to the mgf. For instance, it uniquely determines a probability distribution, can be used to find moments, etc. 
+  \end{itemize}
+  
 \end{frame}
+
+\begin{frame}[allowframebreaks]{Final comments}
+  \begin{itemize}
+    \item We're going to skip section 4.6 of \citet{rice07} (might return to this later). 
+    \item However, it's fairly interesting material that discusses approximation methods.
+    \item For instance, suppose we have a random variable $X$, and we only know the mean $\mu_X$ and variance $\sigma^2_X$.
+    \item Now suppose we have $Y = g(X)$, and we want to make inference on $Y$.
+    \item Even with limited information, we can use a Taylor series approximation to get
+    $$
+    Y = g(X) \approx g(\mu_X) + (X - \mu_X)g'(\mu_X),
+    $$
+    and taking expectations, derive $\mu_y \approx g(\mu_X)$ and $\sigma^2_Y \approx \sigma^2_X[g'(\mu_X)]^2$.
+    \item This is sometimes called the propagation of error, and works well if $g$ is well approximated by a linear function near $\mu_X$. 
+    
+  \end{itemize}
+\end{frame}
+
+% TODO: HOMEWORK PROBLEMS
+%  MGF method to show sum of independent Poisson RVs is Poisson (Example E).
+%  MGF method to show that sum of Gamma RVs is Gamma (Example F)
+%  Skewness is zero if symmetric around $0$.
+%  Show Correlation in (-1, 1)
 
 % \begin{frame}[allowframebreaks]{}
 % 

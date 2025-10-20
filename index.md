@@ -33,10 +33,11 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 3. [Chapter 3: Joint Distributions](03/index.html)
 
+4. [Chapter 4: Expected Values](04/index.html)
+
 <!--
 
 
-4. [Linear time series models and the algebra of ARMA models](04/index.html)
 
 5. [Parameter estimation and model identification for ARMA models](05/index.html)
 

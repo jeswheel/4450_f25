@@ -1741,8 +1741,10 @@ $$
     \begin{itemize}
       \item Applying the MGF definition, we have
       \begin{align*}
-        M(t) = \int_{0}^\infty e^{tx} \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}\, dx
+        M(t) &= \int_{0}^\infty e^{tx} \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}\, dx \\
+             &= \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^\infty x^{\alpha - 1}e^{x(t - \lambda)}\, dx.
       \end{align*}
+      \item We can solve this integral using ``integration. 
     \end{itemize}
     }
   \end{exampleblock}

@@ -1244,7 +1244,7 @@ $$
         $$
         \item Because the $X_i$ are independent, 
         $$
-        \Var\big(S(N)\big) = \sim_{i = 1}^N \Var(X_i) = n\sigma^2.
+        \Var\big(S(N)\big) = \sum_{i = 1}^N \Var(X_i) = n\sigma^2.
         $$
         \item Thus, we expect our position to be $x_0 + n\mu$, with uncertainty measured by the standard deviation $\sqrt{n}\sigma$.
         \item If $\mu > 0$, then we will expect that our position will be larger than where we started ($x_0$), particularly when $n$ is large.
@@ -1256,6 +1256,19 @@ $$
     }
   \end{exampleblock}
   
+  \framebreak
+  
+  \begin{itemize}
+    \item When we are interested in multiple random variables, covariance is often expressed as a matrix.
+    \item Let $X_1, X_2, \ldots, X_n$ be random variables, and we denote $\bm{X}$ to be the random (column) vector, $\bm{X} = (X_1, \ldots, X_n)^T$.
+    \item Then, the \alert{variance-covariance} matrix is defined as:
+    $$
+    \Sigma = \Var(\bm{X}) = \Cov(\bm{X}, \bm{X}) = E\big[(\bm{X} - E[\bm{X}])(\bm{X} - E[\bm{X}])^T\big].
+    $$
+    \item In particular, the $(i, j)$th entry $\Sigma_{i, j} = \Cov(X_i, X_j)$.
+    \item $\Sigma$ is a symmetric, positive definite matrix. 
+  \end{itemize}
+  
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Correlation}
@@ -1263,10 +1276,227 @@ $$
 \begin{block}{Definition: Correlation}
   If $X$ and $Y$ are jointly distributed random variables, and the variances and covariances exist, and the variances are non-zero, then the correlation of $X$ and $Y$ is:
   $$
-  \Cor{X, Y} = \rho = \frac{\Cov(X, Y)}{\sqrt{\Var(X)\Var(Y)}}.
+  \Cor(X, Y) = \rho = \frac{\Cov(X, Y)}{\sqrt{\Var(X)\Var(Y)}}.
   $$
 \end{block}
 
+\begin{itemize}
+  \item By how correlation is defined, it is a unit-less measure. 
+  \item Also, $-1 \leq rho \leq 1$ (HW problem)?
+\end{itemize}
+
+\end{frame}
+
+\section{Conditional Expectation}
+
+\begin{frame}[allowframebreaks]{Conditional Expecation}
+
+\begin{itemize}
+  \item The idea of conditional distributions can be extended to conditional expectations.
+  \begin{block}{Definition: Conditional Expectation}
+    Let $X$ and $Y$ be jointly defined random variables. The \alert{conditional expectation} of $Y$ given $X = x$ is
+    $$
+    E[Y | X = x] = \begin{cases} \sum_y y \, p_{Y|X}(y | x) & \text{if } Y|X = x \text{ is discrete} \\ 
+    \int y f_{Y|X}(y | x) \, dy & \text{if } Y|X = x \text{ is continuous}
+    \end{cases}
+    $$
+  \end{block}
+  
+  \item In particular, for some function $h$, we have 
+  $$
+  E[h(Y) | X = x] = \int h(y)\, f_{Y|X}(y | x)\, dy,
+  $$
+  and similar for the discrete case.
+  
+  % TODO: Add conditional expectation example. 
+  
+  \end{itemize}
+  
+  \framebreak
+  
+  
+  \begin{block}{Theorem: Law of total expectation}
+    (also called the tower property or the tower law)
+    $$
+    E(Y) = E\big[E(Y|X)\big].
+    $$
+    
+    \mode<article>{
+    \begin{itemize}
+      \item We will show the desired identity holds for the discrete case, and note that the continuous case is justified in a similar fashion. 
+      \item Note that the outer-expectation is taken with respect to the random variable $X$, and the conditional expectation $E[Y | X = x]$ is a function of $x$. 
+      \item That is, for discrete or continuous random variables, the pmf / pdf used for the expectation is that for the variable $X$, and we can think of the expectation of $Y$ as the expected value of the function $E[Y | X = x]$ for the random variable $X$. 
+    \end{itemize}
+      \begin{align*}
+        E(Y) &= \sum_{y} y\, p_Y(y) \quad (\text{definition})\\
+             &= \sum_{y} y \, \sum_{x} p_{Y|X}(y | x) \, p_X(x) \quad (\text{total prob.}) \\ 
+             &= \sum_{y} \sum_{x} y\, p_{Y|X}(y | x) \, p_X(x)\\ 
+             &= \sum_{x} p_X(x) \sum_{y} y\, p_{Y|X}(y | x) \\ 
+             &= \sum_{x} p_X(x) E[Y | X = x] \\
+             &= E\big[E(Y|X)\big]
+      \end{align*}
+    }
+    
+  \end{block}
+  
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: System Failure}
+    Suppose that in a system, a component and backup unit both have mean lifetimes equal to $\mu$. If the component fails, the system automatically substitutes the backup unit, but there is a probability $p$ that something will go wrong and the backup won't be used correctly.
+    Let $T$ be the total lifetime of the system. Find the expected lifetime of the system.
+    
+    \mode<article>{
+    \emph{Solution}. Let $X$ be an indicator random variable such that $X = 1$ if the substitution of the backup works correctly, and $X=0$ if it does not. Then,
+    $$
+    E[T | X = 1] = 2 \mu, \quad E[T | X = 0] = \mu.
+    $$
+    Using the law of total expectation, we have:
+    $$
+    E[T] = E\big[E(T | X)\big] = E[T | X = 1]P(X = 1) + E[T | X = 0]P(X = 0) = \mu(2 - p).
+    $$
+    }
+    
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Random Sums}
+    Let $N$ be a random variable denoting the number of events, and $X_1, \ldots, X_N$ be the ``size" of the events, which we assume to be independent and have the same mean: $E[X_i] = \mu$. 
+    For example, maybe $N$ is the number of customers entering a store, and $X_i$ is how long customer $i$ spends in the store.
+    Find the expected value of the random sum,
+    $$
+    T = \sum_{i = 1}^N X_i.
+    $$
+    \mode<article>{
+    \emph{Solution.} For any fixed $N = n$, we have 
+    $$
+    E[T | N = n] = E \sum_{i = 1}^n X_i = \sum_{i = 1}^n E[X_i] = n\mu. 
+    $$
+    Using the law of total probability, 
+    $$
+    E[T] = E\big[E(T | N)\big] = E[N \mu] = \mu E[N].
+    $$
+    \begin{itemize}
+      \item This idea of a random sum is a useful model for a variety of situations.
+      \item Following our example, it can be used to model the total amount of time that passes if there are a random number of events, each with random length of time.
+      \item Other examples are useful in business (e.g., insurance): random number of events (insurance claims), each of a random size.
+    \end{itemize}
+    }
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution.}
+  }
+  
+  \framebreak
+  
+  \begin{block}{Theorem: Law of total variance}
+    $$
+    \Var(Y) = \Var\big[E(Y | X)\big] + E\big[\Var(Y | X)\big]. 
+    $$
+    
+    \mode<article>{
+    \begin{proof}
+    
+      \begin{itemize}
+        \item First we explain what the notation above means. First, the variance of $Y$ given $X = x$. Per our previous calculations on variance, we have
+        $$
+        \Var(Y | X = x) = E[Y^2 | X = x] - \big[E(Y | X = x)\big]^2,
+        $$
+        which is defined for all values of $x$. Therefore, just like we did for the conditional expectation, we can define $\Var(Y|X)$ as a random variable by letting $X$ be random. Thus, the following is a random variable,
+        $$
+        \Var(Y|X) = E(Y^2 | X) - \big[E(Y|X)\big]^2
+        $$
+        Using the linearity of expectation, we have
+        $$
+        E\big[\Var(Y | X)\big] = E\big[E(Y^2|X)\big] - E\big[\big(E[Y|X]\big)^2\big].
+        $$
+        \item Similarly, we can write
+        $$
+        \Var\big[E(Y|X)\big] = E\big[\big(E[Y|X]\big)^2\big] - \big[E\big(E[Y |X]\big)\big]^2.
+        $$ 
+        \item Finally, we can use the law of total expectation to write:
+        \begin{align*}
+          \Var(Y) &= E[Y^2] - \big(E[Y]\big)^2 \\
+                  &= E\big[E[Y^2|X]\big] - \big[E\big(E[Y|X]\big)\big]^2
+        \end{align*}
+        \item Combining everything together, we get
+        \begin{align*}
+          \Var(Y) &= E\big[E[Y^2|X]\big] - \big[E\big(E[Y|X]\big)\big]^2 \\
+                  &= E\big[E[Y^2|X]\big] + 0 - \big[E\big(E[Y|X]\big)\big]^2 \\
+                  &= E\big[E[Y^2|X]\big] - E\big[\big(E[Y|X]\big)^2\big] + E\big[\big(E[Y|X]\big)^2\big] - \big[E\big(E[Y|X]\big)\big]^2 \\
+                  &= E\big[\Var(X | Y)] + \Var\big(E[Y|X]\big)
+        \end{align*}
+      \end{itemize}
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Random Sums}
+    Continuing the random sum example from before, let's assume that the $X_i$ have the same variance, $\Var(X_i) = \sigma^2$, and assume that $\Var(N) < \infty$.
+    If $T = \sum_{i = 1}^N X_i$ represents the sum of $N$ elements, then find $\Var(T)$.
+    
+    \mode<article>{
+    \emph{Solution}. By the law of total variance,
+    $$
+    \Var(T) = E\big[\Var(T|N)\big] + \Var\big(E[T | N\big).
+    $$
+    We previously argued that $E[T | N] = N E[X_i] = N\mu$, thus
+    $$
+    \Var\big(E[T | N]\big) = \Var(N\mu) = \mu^2\Var(N).
+    $$
+    Also, because $\Var(T | N = n) = \Var\big(\sum_i X_i\big) = n \Var(X)$, we have the random variable
+    $$
+    \Var(T|N) = N\Var(X) = N\sigma^2,
+    $$
+    and
+    $$
+    E\big[\Var(T|N)\big] = E[\sigma^2 N] = \sigma^2 E[N].
+    $$
+    Putting it together, we have
+    $$
+    \Var(T) = E\big[\Var(T|N)\big] + \Var\big(E[T | N\big) = \sigma^2 E[N] + \mu^2 \Var(N).
+    $$
+    }
+  \end{exampleblock}
+  
+  \mode<presentation>{
+  \emph{Solution.}
+  }
+  
+  \framebreak
+  
+\end{frame}
+
+\subsection{Prediction}
+
+\begin{frame}{Prediciton}
+  \begin{itemize}
+    \item TODO.
+  \end{itemize}
+\end{frame}
+
+\section{Moment Generating Functions}
+
+\begin{frame}{Moment Generating Functions}
+  \begin{itemize}
+    \item TODO. 
+  \end{itemize}
 \end{frame}
 
 % \begin{frame}[allowframebreaks]{}

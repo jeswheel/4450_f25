@@ -1485,17 +1485,130 @@ $$
 
 \subsection{Prediction}
 
-\begin{frame}{Prediciton}
+\begin{frame}[allowframebreaks]{Prediciton}
   \begin{itemize}
-    \item TODO.
+    \item A major topic in statistics is prediction: Can I use information about one variable to make inference on another?
+    \item This is a primary outcome of many disciplines, including machine learning:
+    \begin{itemize}
+      \item How will certain events impact large financial markets?
+      \item What will the impact be of a new medical treatment on health outcomes?
+      \item For AI: given an input question, what's the output that matches our training data? 
+    \end{itemize}
+    \item These are all types of conditional expectations.
   \end{itemize}
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The first case we will consider is where there is a variable $Y$ of interest (which is random), and we take a measurement $X$, which is also random.
+    \begin{itemize}
+      \item For example, suppose we are interested in the volume of a tree, $Y$. This often is difficult to measure exactly, but we can measure the tree diameter $X$ quickly. We want to predict $Y$ given $X$. 
+    \end{itemize}
+    \item First, consider making a prediction $c$ for the variable $Y$. As previously discussed, we may want to minimize
+    \begin{align*}
+      \text{MSE}(c) = E\big[(Y - c)^2\big] = \Var(Y) + (\mu - c)^2
+    \end{align*}
+    where $\mu = E[Y]$.
+    
+    \framebreak 
+    
+    \item The first part of the MSE does not depend on $c$, and we can't control it.
+    \item The second part is minimized when $c = \mu = E[Y]$.
+    \item Now instead of some constant $c$, consider using another variable $X$ to make a prediction. 
+    \item Specifically, we want to predict $Y$ using some function of $X$: $h(X)$.
+    \item We might want to pick the function $h$ such that the MSE $E[(Y - h(X))]^2$ is minimized.
+    
+    \framebreak 
+    
+    \item Using the law of total expectation, we get:
+    $$
+    \text{MSE}(h) = E\big[(Y - h(X))^2\big] = E\Big[E\big((Y - h(X))^2 | X\big)\Big]
+    $$
+    \item The outer expectation is taken with respect to $X$. 
+    \item For every $X = x$, the inner expectation is minimized by setting $h(x) = E[Y | X = x]$.
+    \item Thus, the minimizing function $h$ is equal to:
+    $$
+    h(X) = E[Y|X].
+    $$
+    \item Thus, for some prediction model $Y = h(X; \theta) + \epsilon$, the best predictor function $h$ (in terms of MSE) is chosen such that $h(X; \theta) = E[Y|X]$. In other words, we are just fitting a conditional expectation. 
+  
+  \framebreak
+  
+    \item The practical limitation of the optimal prediction scheme above is that it requires knowing the joint distribution of $Y$ and $X$, which is typically not known.
+    \item For this reason, we generally make some assumptions about the relationship between the variables, or otherwise restrict the family of functions from which $h$ comes from.
+    \item A common approach is to pick the optimal \emph{linear} predictor of $Y$.
+    \item That is, rather than finding the best function $h$ among all functions, we try to find the best function of the form $h(x) = \alpha +\beta x$.
+    \item In this case, $h$ depends on only two parameters, $\theta = (\alpha, \beta)$.
+    
+    \framebreak
+    
+    \item Now we can calculate the best linear predictor analytically:
+    \begin{align*}
+      E\big[(Y - h(X;\, \theta))^2\big] &= E\big[(Y - \alpha - \beta X)^2\big] \\
+      &= \Var\big(Y - \alpha - \beta X\big) + \big[E(Y - \alpha - \beta X)\big]^2 \\
+      &= \Var\big(Y - \beta X\big) + \big[E(Y - \alpha - \beta X)\big]^2
+    \end{align*}
+    \item Notably, $\alpha$ does not impact the first term, so we can select $\alpha$ to minimize the second term.
+    \item Using the linearity of expectation, the second term (prior to squaring it) is equal to
+    $$
+    E(Y - \alpha - \beta X) = \mu_Y - \alpha - \beta \mu_X, 
+    $$
+    \item Thus, if $\alpha = \mu_Y - \beta \mu_X$, then the squared term is zero (which is a global minimum), making it the most optimal choice for $\alpha$.
+    \item For the first term, we can use the properties of variance to calculate
+    $$
+    \Var(Y - \beta X) = \sigma_Y^2 + \beta^2 \sigma^2_X - 2\beta \sigma_{XY}.
+    $$
+    \item This is a quadratic function of $\beta$, and we can find the minimum by taking the derivative with respect to $\beta$ and setting it equal to zero, giving
+    $$
+    \beta = \frac{\sigma_{XY}}{\sigma^2_X} = \frac{\sigma_{XY}}{\sigma^2_X}\frac{\sigma_X\sigma_Y}{\sigma_X\sigma_Y} = \frac{\sigma_{XY}}{\sigma_X\sigma_Y}\frac{\sigma_X\sigma_Y}{\sigma^2_X} = \rho \frac{\sigma_Y}{\sigma_X}.
+    $$
+    \framebreak
+    
+    \item Putting these results together, we get the best estimate of $Y$ to be:
+    $$
+    \hat{Y} = \mu_Y + \frac{\sigma_{XY}}{\sigma^2_X}(X - \mu_X).
+    $$
+    \item The MSE of this predictor is
+    \begin{align*}
+      \text{MSE}(\alpha, \beta) &= E\big[(Y - \alpha - \beta X)^2\big] \\
+      &= \Var\big(Y - \alpha - \beta X\big) + \big[E(Y - \alpha - \beta X)\big]^2 \\
+      &= \Var\big(Y - \beta X\big) \\
+      &= \sigma_Y^2 + \big(\frac{\sigma_{XY}}{\sigma^2_X}\big)^2 \sigma^2_X - 2\big(\frac{\sigma_{XY}}{\sigma^2_X}\big) \sigma_{XY} \\
+      &= \sigma^2_Y - \frac{\sigma^2_{XY}}{\sigma^2_X} \\
+      &= \sigma^2_Y - \rho^2\sigma^2_Y = \sigma^2(1 - \rho^2)
+    \end{align*}
+    
+    \framebreak
+    
+    \item One thing to note is that the best linear predictor for $Y$ given $X$ only depends on the joint distribution of $(X, Y)$ through their means, variances, and covariance.
+    \item Thus, in practice, we don't need the entire joint distribution for a linear predictor.
+    \item Also noteworthy is that the optimal linear predictor of $E[Y|X]$ matches the conditional mean if $Y$ and $X$ are jointly distributed following a bivariate normal distribution \citep[See Example 4.1.1 B,][]{rice07}.
+    \item This idea is later useful to demonstrate that minimizing the MSE for prediction problems is equivalent to performing maximum likelihood estimation under the assumption that the errors are normally distributed (Chapter~8 topic).
+    \item The estimator we derived is also \alert{unbiased}, meaning it's the best linear \emph{unbiased} estimator (BLUE).
+  \end{itemize}
+  
 \end{frame}
 
 \section{Moment Generating Functions}
 
-\begin{frame}{Moment Generating Functions}
+\begin{frame}[allowframebreaks]{Moment Generating Functions}
+
+  \begin{block}{Definition: The Moment-Generating Function}
+    The \alert{moment-generating function} (mgf) of a random variable $X$ is $M(t) = E[e^{tX}]$.
+    If $X$ is discrete, this means
+    $$
+    M(t) = \sum_x e^{tx}\, p(x).
+    $$
+    If $X$ is continuous, then
+    $$
+    M(t) = \int_{-\infty}^\infty e^{tX}\, f(x)\, dx.
+    $$
+  \end{block}
+  
   \begin{itemize}
-    \item TODO. 
+    \item Despite it's appearance, the mgf is a very useful tool that can dramatically simplify certain calculations.
+    \item The expectation (and consequently the mgf), \emph{doesn't necessarily exist} for particular values of $t$.
+    \item In the continuous case, the existence of the expectation depends on how rapidly the tails of the density decrease.
   \end{itemize}
 \end{frame}
 

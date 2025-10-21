@@ -231,10 +231,120 @@ Chapter \CHAPTER: Limit theorems}
 
 \begin{frame}[allowframebreaks]{The Central Limit Theorem}
   \begin{itemize}
-    \item TODO: Add continuity theorem (Rice CH 5.3)
-    \item Add some primer about the CLT
-    \item Prove the CLT. 
+    \item Next we are going to introduce the Central Limit Theorem (CLT).
+    \item The CLT is easily one of the most important theorems across all scientific disciplines, and arguably the most important result to modern science.
+    
+    \vspace{2mm}
+    
+    \begin{quote}
+      ``I know of scarcely anything so apt to impress the imagination as the wonderful form of cosmic order expressed by the [CLT]. The law would have been personified by the Greeks and deified, if they had known of it..." - Sir Francis Galton
+    \end{quote}
+    
+    \item The theory for the CLT was developed over a period of roughly 100 years, done by some of the greatest mathematicians of the 19h and 20th centuries.
+    \item The theorem states that, under very weak conditions, the sum of any sequence of iid random variables (with finite mean and variance) converges to a normal distribution.
+    \item Here, we are going to work towards a proof of a simple (weak) version of the theorem. 
+    
+    % \item TODO: Add continuity theorem (Rice CH 5.3)
+    % \item Add some primer about the CLT
+    % \item Prove the CLT. 
   \end{itemize}
+  
+  \begin{block}{Theorem: Continuity Theorem}
+    Let $X_n$ be a sequence of random variables with cdf $F_n(x)$, and let $X$ be a random variable with cdf $F(x)$.
+    Furthermore, let $M_n(t)$ be the moment generating function of $X_n$, and $M(t)$ the moment generating function of $X$. 
+    
+    If $M_n(t) \rightarrow M(t)$ for all $t$ in an open interval containing zero, then $F_n(X) \rightarrow F(x)$ at all continuity points of $F$. That is, $X_n \dlim X$.
+  \end{block}
+  
+  \begin{itemize}
+    \item Now, we do a brief reminder about Taylor Series and Taylor's Thereom
+  \end{itemize}
+  
+  \begin{block}{Theorem: Taylor Series}
+    If a function $f(x)$ has derivatives of order $k$, that is, $\frac{d^k}{dx^k} f(x)$ exists, then for any constant $a$, the \alert{Taylor Polynomial} of order $k$, centered about $a$, is
+    $$
+    f(x) = \sum_{n = 0}^k \frac{f^{(n)}(a)}{n!}(x - a)^n + R_k(x),
+    $$
+    where $R_k(x) = h_k(x)(x - a)^k$, for some $h_k$ such that $\lim_{x \rightarrow a} h_k(x) = 0$.
+  \end{block}
+  
+  \begin{itemize}
+    \item In particular, it means that we can use a $k$ order polynomial to approximate a differentiable function, and the remainder term $R_k(x)$ goes to zero at a rate smaller than the rate that $(x - a)^k$ goes to zero.
+  \end{itemize}
+  
+  \begin{block}{Theorem: The (classic) Central Limit Theorem}
+    Let $X_1, X_2, \ldots$ be a sequence of independent and identical random variables with mean $E[X_i] = \mu$ and variance $\Var(X_i) = \sigma^2 < \infty$.
+    Assume that the mgf of $X_i$ exists and is defined in a neighborood of zero, and denote the cdf and mgf as $F$ and $M$, respectively. Then,
+    $$
+    \sqrt{n}\big(\bar{X}_n - \mu\big) \dlim N(0, \sigma^2). 
+    $$
+    
+    \mode<article>{
+    \begin{proof}
+      The idea for this proof is tho show that, for some neighborhood around $t = 0$, the mgf of $\sqrt{n}(\bar{X}_n - \mu) / \sigma$ converges to $e^{t^2/2}$, which is the mgf of a $N(0, 1)$ random variable.
+      For simplicity, we will assume that the mgf $M(t)$ exists around a symmetric neighborhood around zero (it could be larger), i.e., it exists if $|t| < h$ for some $h > 0$.
+      
+      Let $Z_i = (X_i - \mu) / \sigma$. Using the properties of mgf, the mgf of $Z_i$, denoted $Z_i$ exists for $|t| < \sigma t$. The exact form of $M_Z(t)$ can be found using the theorem on the mgf of linear transformations of random variables, but is not needed. 
+      Now note that the target RV $\sqrt{n}(\bar{X}_n - \mu) / \sigma$ can be written as:
+      $$
+      \frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} = \frac{1}{\sqrt{n}}\sum_{i = 1}^n Z_i.
+      $$
+      Thus, using the properties of the mgf, we have
+      \begin{align*}
+        M_{\sqrt{n}(\bar{X}_n - \mu) / \sigma}(t) &= M_{\sum_{i = 1}^n Z_i / \sqrt{n}}(t) \\
+        &= M_{\sum_{i = 1}^n Z_i}\big(t/\sqrt{n}\big) \\
+        &= \Big(M_{Z}\big(t/\sqrt{n}\big)\Big)^n.
+      \end{align*}
+      We now do a second order Taylor-Expansion of $M_Z\big(t/\sqrt{n}\big)$ about $0$:
+      \begin{align*}
+      M_Z\big(t/\sqrt{n}\big) &= M_Z(0) + M^{(1)}_Z(0)\frac{(t /\sqrt{n})^1}{1!} + M^{(2)}_Z(0)\frac{(t /\sqrt{n})^2}{2!} + R_2\big(t/\sqrt{n}\big)
+      \end{align*}
+      In particular, we note that $M_Z(0) = E[e^{0X}] = E[1] = 1$, and by how the mgf and $Z$ are defined, we have $M_Z'(0) = E[Z] = 0$, and $M_Z''(0) = E[Z^2] = \Var(Z) = 1$ (since the mean is zero). Therefore
+      \begin{align*}
+      M_Z\big(t/\sqrt{n}\big) &= 1 + \frac{(t/\sqrt{n})^2}{2!} + R_2\big(t/\sqrt{n}\big) \\
+      &= 1 + \frac{t^2}{2n} + R_2\big(t/\sqrt{n}\big)
+      \end{align*}
+      Now by Taylor's theorem, there exists some function $h_2(x)$ such that
+      $$
+      h_2(x) = \frac{R_2\big(t/\sqrt{n}\big)}{(t/\sqrt{n})^2},
+      $$
+      where
+      $$
+      \lim_{t\rightarrow 0} \frac{R_2\big(t/\sqrt{n}\big)}{(t/\sqrt{n})^2} = 0.
+      $$
+      or equivalently,
+      $$
+      \lim_{n\rightarrow\infty} \frac{R_2\big(t/\sqrt{n}\big)}{(t/\sqrt{n})^2} = 0.
+      $$
+      Since $t$ is fixed, (and because the below equality holds when $t=0$), this implies:
+      $$
+      \lim_{n \rightarrow \infty} \frac{R_2\big(t/\sqrt{n}\big)}{(1/\sqrt{n})^2} = \lim_{n\rightarrow \infty} nR_2\big(t/\sqrt{n}\big) = 0.
+      $$
+      Finally, returning to the mgf of $\sqrt{n}\big(\bar{X}_n - \mu\big)$, we take the limit as $n \rightarrow \infty$:
+      \begin{align*}
+        \lim_{n\rightarrow \infty} M_{\sqrt{n}(\bar{X}_n - \mu) / \sigma}(t) &= \lim_{n\rightarrow\infty} \Big(M_{Z}\big(t/\sqrt{n}\big)\Big)^n \\
+        &= \lim_{n\rightarrow \infty} \Big(1 + \frac{t^2}{2n} + R_2\big(t/\sqrt{n}\big)\Big)^n \\
+        &= \lim_{n\rightarrow \infty} \Big(1 + \frac{1}{n}\Big[\frac{t^2}{2} + nR_2\big(t/\sqrt{n}\big)\Big]\Big)^n \\
+        &= \lim_{n\rightarrow \infty} \Big(1 + \frac{a_n}{n}\Big)^n,
+      \end{align*}
+      where $a_n = \frac{t^2}{2} + nR_2\big(t/\sqrt{n}\big)$. Here, we note that $a_n \rightarrow \frac{t^2}{2}$ due to the convergence of $nR_2\big(t/\sqrt{n}\big)\rightarrow 0$, and we can apply the theorem \citep[e.g., Lemma~2.3.14 of][]{casella24} that if $a_n \rightarrow a$, then
+      $$
+      \lim_{n\rightarrow \infty}\Big(1 + \frac{a_n}{n}\Big)^n = e^a.
+      $$
+      Therefore, we get
+      $$
+      \lim_{n\rightarrow \infty} M_{\sqrt{n}(\bar{X}_n - \mu) / \sigma}(t) = e^{t^2/2}.
+      $$
+      Thus, by the continuity theorem,
+      $$
+      \frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} \dlim N(0, 1).
+      $$
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  
 \end{frame}
 
 % TODO: Add Slutsky's theorem

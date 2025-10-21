@@ -103,7 +103,142 @@ Chapter \CHAPTER: Limit theorems}
     
   \end{block}
   
+  \mode<presentation>{
+  \emph{Proof.}
+  }
+  
+  \framebreak
+  
+  \begin{itemize}
+    \item The WLLN is very elegant; under general conditions, the sample mean of independent random variables approaches the population mean as $n \rightarrow \infty$.
+    \item This is also used for proportions, as proportions are just means of indicator random variables.
+    \item The WLLN can also be extended to show that the results hold even if the variance is infinite, the only condition needed is that the expectation is finite. However, the proof in this case is beyond the scope of this course.
+    \item When a sequence of the ``same" sample quantity approaches a constant, we say that the sample quantity is \emph{consistent}.
+  \end{itemize}
+  
+  \framebreak
+  
+  % \begin{exampleblock}{Example: Consistency of sample variance}
+  %   Suppose $X_1, X_2, \ldots$ are sequence of iid random variables with $E[X_i] = \mu$ and $\Var(X_i) = \sigma^2 < \infty$. Define the sample variance as
+  %   $$
+  %   S_n^2 = \frac{1}{n-1} \sum_{i = 1}^n (X_i - \bar{X}_n)^2.
+  %   $$
+  %   Show that $S_n^2 \Plim \sigma^2$.
+  %   
+  %   \mode<article>{
+  %   \begin{proof}
+  %     Once again, we will use the Chebychev inequality. We have
+  %     $$
+  %     P\big(|S_n^2 - \sigma^2| \geq \epsilon\big) \leq \frac{E\big[(S_n^2 - \sigma^2)^2\big]}{\epsilon^2} = \frac{\Var (S_n^2)}{\epsilon^2}.
+  %     $$
+  %     Thus, a sufficient condition that $S_n^2$ converges in probability to $\sigma^2$ is that $\Var(S_n^2) \rightarrow 0$ as $n \rightarrow \infty$. 
+  %   \end{proof}
+  %   }
+  % \end{exampleblock}
+  % 
+  % \mode<presentation>{
+  % \emph{Proof.}
+  % }
+  
+  \begin{itemize}
+    \item A natural extension of the definition of the convergence of probability, is convergence of functions of random variables: $h(X_1), h(X_2), \ldots$. 
+  \end{itemize}
+  
+  \begin{block}{Theorem: Convergence in probability for continuous functions}
+    Let $X_1, X_2, \ldots$ be a sequence of random variables that converges in probability to a random variable $X$, and let $h$ be a continuous function.
+    
+    Then, $h(X_1), h(X_2), \ldots$ converges in probability to $h(X)$. 
+  \end{block}
+  
 \end{frame}
+
+\begin{frame}[allowframebreaks]{Almost sure convergence}
+  \begin{itemize}
+    \item Our next convergence concept is stronger than convergence in probability.
+    
+    \begin{block}{Definition: Almost Sure Convergence}
+      A sequence of random variables $X_1, X_2, \ldots$ converge \alert{almost surely} to a random variable $X$ if, for every $\epsilon > 0$,
+      $$
+      P\big(\lim_{n\rightarrow \infty} |X_n - X| < \epsilon \big) = 1,
+      $$
+      or
+      $$
+      P\big(\lim_{n \rightarrow \infty} X_n = X\big) = 1. 
+      $$
+    \end{block}
+    
+    \item Almost sure convergence is often written as $X_n \overset{a.s.}{\rightarrow} X$.
+    \item It appears similar to convergence in probability, but they are in fact very different. In particular, almost sure convergence is a stronger concept.
+    \item One way to think about this difference is that the probability gives a weight to individual sets.
+    \item For convergence in probability, the set where $|X_n - X| > \epsilon$ can have positive probability, but that probability converges to zero for large $n$. 
+    \item For almost sure convergence, the set where $|X_n - X| > \epsilon$ has probability zero. This doesn't imply that the set $|X_n - X| > \epsilon$ is empty, but it has zero probability.
+    \item Almost sure convergence is very similar to pointwise convergence of a sequence of functions. This is no accident, as random variables \emph{are} functions:
+    $$
+    P\big(\omega \in \Omega: \lim_{n\rightarrow \infty} X_n(\omega) = X(\omega)\big) = 1.
+    $$
+    \item In the equivalent definition above, we see we must have point-wise convergence \alert{almost-everywhere}, except for the possibility that for some set $N \subset \Omega$ such that $P(N) = 0$, we allow $s \in N$ to not converge: $\lim_{n\rightarrow \infty} X_n(s) \neq X(s)$. 
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: Convergence in prob, not a.s.}
+    Let the sample space $\Omega = [0, 1]$, and assign the uniform probability on this interval. Define the sequence of random variables $X_i$ as:
+    % \begin{align*}
+      $X_1(s) = s + 1_{[0, 1]}(s), \, X_2(s) = s + 1_{[0, \frac{1}{2}]}(s),\, X_3(s) = s + 1_{[\frac{1}{2}, 1]}(s), 
+      X_4(s) = s + 1_{[0, \frac{1}{3}]}(s),\, X_5(s) = s + 1_{[\frac{1}{3}, \frac{2}{3}]}(s),\, X_6(s) = s + 1_{[\frac{2}{3}, 1]}(s), \ldots$, and then define $X(s) = s$. We can see that $X_n \Plim X$. However, $X_n$ does not converge almost surely, because there is \alert{no} values $s \in \Omega$ that satisfy $X_n(s) \rightarrow X(s)$. For every $\omega$, the value of $X_n(s)$ alternates between $s$ and $s + 1$ infinitely often. 
+    % \end{align*}
+  \end{exampleblock}
+  
+  \framebreak
+  
+  \begin{block}{Theorem: almost sure convergence implies convergence in probability}
+    If $X_1, X_2, \ldots$ are a sequence of random variables such that $X_n \overset{a.s.}{\rightarrow} X$, for some random variable $X$, then $X_n \Plim X$.
+  \end{block}
+  
+  \begin{itemize}
+    \item The converse of the statement above is false. That is, convergence in probability does not imply almost sure convergence.
+    \item A proof of the theorem above, as well as additional treatment of the connection between almost sure convergence and convergence in probability is found in \citet[][Chatper~6]{resnick19}.
+    \item Note: As stated, the weak-law of large numbers (WLLN) can actually be shown to hold a.s., in which case we call it the strong-law of large numbers (SLLN).
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Convergence in Distribution}
+  \begin{itemize}
+    \item The final form of convergence we will consider in this course is convergence in distribution.
+  \end{itemize}
+  
+  \begin{block}{Definition: Convergence in Distribution}
+    A sequence of random variables $X_1, X_2, \ldots$ \alert{converges in distribution} to a random variable $X$ if
+    $$
+    \lim_{n \rightarrow \infty} F_{X_n}(x) = F_X(x)
+    $$
+    at all points $x$ where $F_X(x)$ is continuous.
+  \end{block}
+  
+  \begin{itemize}
+    \item One way to think about convergence in distribution is that it's really a statement about the long-run behavior of a sequence of random variables, as it's a statement about the CDFs. 
+    \item This is different from the other types of convergence, which are concerned with the random variable itself.
+    \item A quick recap of how the different types of convergence are related:
+    \begin{itemize}
+      \item a.s. convergence $\implies$ convergence in prob $\implies$ convergence in Distribution.
+    \end{itemize}
+    \item In a \emph{few} special scenarios, we can talk about more connections between the types of convergence.
+    \item One such example is convergence in probability to a constant. \citet[Theorem~5.5.13 of][]{casella24} shows that $X_n \Plim a$ for some constant $a$ if and only if $X_n \dlim a$. 
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{The Central Limit Theorem}
+  \begin{itemize}
+    \item TODO: Add continuity theorem (Rice CH 5.3)
+    \item Add some primer about the CLT
+    \item Prove the CLT. 
+  \end{itemize}
+\end{frame}
+
+% TODO: Add Slutsky's theorem
+% TODO: Add Delta Method (1st and 2nd order)
 
 \section{Test Section}
 

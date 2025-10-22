@@ -147,7 +147,7 @@ Chapter \CHAPTER: Limit theorems}
   \begin{block}{Theorem: Convergence in probability for continuous functions}
     Let $X_1, X_2, \ldots$ be a sequence of random variables that converges in probability to a random variable $X$, and let $h$ be a continuous function.
     
-    Then, $h(X_1), h(X_2), \ldots$ converges in probability to $h(X)$. 
+    Then, $h(X_1), h(X_2), \ldots$ converges in probability to $h(X)$.
   \end{block}
   
 \end{frame}
@@ -244,7 +244,6 @@ Chapter \CHAPTER: Limit theorems}
     \item The theorem states that, under very weak conditions, the sum of any sequence of iid random variables (with finite mean and variance) converges to a normal distribution.
     \item Here, we are going to work towards a proof of a simple (weak) version of the theorem. 
     
-    % \item TODO: Add continuity theorem (Rice CH 5.3)
     % \item Add some primer about the CLT
     % \item Prove the CLT. 
   \end{itemize}
@@ -344,7 +343,63 @@ Chapter \CHAPTER: Limit theorems}
     
   \end{block}
   
+  \framebreak
   
+  \begin{itemize}
+    \item One practical implication of the CLT is that, for large $n$, we can approximate
+    $$
+    \bar{X}_n \overset{d}{\approx} N\big(\mu, \sigma^2/n\big),
+    $$
+    if $X_i$ are independent and identically distributed with finite mean and variance.
+    \item In practice, $n\approx 30$ has been found to lead to good approximations, but it depends heavily on the distribution of $X_i$. 
+    \item A further investigation of the CLT proof shows that the convergence towards the normal distribution happens at a rate of $1/\sqrt{n}$.
+    \item If we used a Taylor-series approximation with one additional order, we could derive a more accurate approximation under additional conditions known as the Edgeworth Expansion \citep[See Theorem~19.3 of][]{keener10}.
+    These are less commonly used in practice, because you need finite third moments.
+  \end{itemize}
+  
+  \begin{exampleblock}{Example: Binomial-Normal Approximation}
+    Let $X\sim \text{Binomial}(n, p)$. For any $k \in \{0, 1, \ldots\}$, approximate $P(X\leq k)$.
+    
+    \mode<article>{
+    \begin{itemize}
+      \item Note that if $X$ is binomial distributed, it has the same distribution as the sum of Bernoulli random variables.
+      \item Let $X_1, X_2, \ldots, X_n$ be Bernoulli$(p)$ random variables, and then $X \overset{d}{=} \sum_i X_i$.
+      \item Recall $E[X_i] = p$, $\Var(X_i) = p(1-p)$. 
+      \item By considering $\bar{X}_n = \frac{1}{n}\sum_i X_i$, we can use the CLT to approximate:
+      $$
+      \sqrt{n}\big(\bar{X}_n - p) \overset{d}{\approx} N\big(0, p(1-p)\big).
+      $$
+      \item Therefore,
+      $$
+      \bar{X}_n \overset{d}{\approx} N\big(p, p(1-p)/n\big),
+      $$
+      and
+      $$
+      X \overset{d}{=} \sum_i X_i = n\bar{X}_n \overset{d}{\approx} N\big(np, np(1-p)\big).
+      $$
+      Using this approximation, we have
+      $$
+      P(X \leq k) \approx \Phi\Big(\frac{k - np}{\sqrt{np(1-p)}}\Big).
+      $$
+      \item One thing to note is we can make a fairly simple improvement to this approximation by doing a continuity correction. 
+      \item Specifically, $X$ only takes on real values, so if we approximate it with a continuous distribution $X \overset{d}{\approx} Y$, we generally get a more accurate approximation if we use $P(X \leq k) \approx P(Y \leq k + 0.5)$.
+    \end{itemize}
+    }
+    
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Slutsky's Theorem}
+  \begin{itemize}
+    \item TODO
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Delta-Method}
+  \begin{itemize}
+    \item TODO
+  \end{itemize}
 \end{frame}
 
 % TODO: Add Slutsky's theorem

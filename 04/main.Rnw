@@ -367,12 +367,15 @@ Chapter \CHAPTER: Expected Values}
     
     \framebreak
     
-    \item Expectations of indicator variables are \alert{probabilities}. Let $Y = 1[X \in A]$. 
+    \item Expectations of indicator variables are \alert{probabilities}. Let $Y = 1[X \in A]$. \mode<presentation>{\vspace{3cm}}
+    \mode<article>{
     \begin{align*}
     E(Y) &= E\big(1[X \in A]\big) \\
     &= \int_{x \in \mathcal{X}} 1[X \in A]\, f(x) \, dx \\
     & = \int_{x \in A} f(x) \, dx = P(X \in A).
     \end{align*}
+    }
+    
     \item This fact is useful for deriving some important inequalities.
     \item First, we will show that the expectations of interest actually exist.
     

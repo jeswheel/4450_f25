@@ -1395,7 +1395,7 @@ Chapter \CHAPTER: Joint Distributions}
       \frac{\partial h_2}{\partial r} & \frac{\partial h_2}{\partial r}
       \end{vmatrix} = -\frac{1}{2} - \frac{1}{2} = -1.
       $$
-      \item We need to calculate the support of $(R, V)$. The transformation $g(x_1, x_n)$ maps the set $\{(x_1, x_n):\, 0 < x_1 < x_n < a\}$ onto the set $\{(r, v):\, 0 < r < a, r/2 < v < a-r/2\}$. To see this, note that $0 < x_2 - x_1 < a$, and the lower and upper bounds for $v$ can be found by plugging in $x_1 = h_1(r, v)$ and $x_n = h_2(r, v)$ into the upper and lower inequalities of $0 < x_1 < x_n < a$, respectively.
+      \item We need to calculate the support of $(R, V)$. The transformation $g(x_1, x_n)$ maps the set $\{(x_1, x_n):\, 0 < x_1 < x_n < a\}$ onto the set $\{(r, v):\, 0 < r < a, r/2 < v < a-r/2\}$. To see this, note that $0 < x_n - x_1 < a$, and the lower and upper bounds for $v$ can be found by plugging in $x_1 = h_1(r, v)$ and $x_n = h_2(r, v)$ into the upper and lower inequalities of $0 < x_1 < x_n < a$, respectively.
       \item Thus, we find the joint density of $(R, V)$ as
       \begin{align*}
       f_{R, V}(r, v) &= \frac{n(n-1)\big(h_2(r,v) - h_1(r, v)\big)^{n-2}}{a^n}, \quad 0 < r < a, \,\, r/2 < v < a-r/2\\

@@ -80,6 +80,9 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 [TeX file](hw05/hw05.tex).
 [In class discussion](hw05/HW5discussion.pdf).
 
+* [Homework 6](hw06/hw06.pdf), due Wed Nov 5, 11:59pm.
+[TeX file](hw06/hw06.tex).
+
 <!--- 
 
 * [Participation 4](participation/participation4.html), due Sun Feb 18, 11:59pm.

@@ -425,10 +425,91 @@ Chapter \CHAPTER: Limit theorems}
     \item As we have already discussed, we are often interested in functions of random variables.
     \item This next section gives theorems for the limiting distribution of functions of random variables.
   \end{itemize}
+  
+  \framebreak
+  
+  \begin{block}{Theorem: The Delta-Method}
+    Let $X_n$ be a sequence of random variables that satisfy
+    $$
+    \sqrt{n}\big(X_n - \theta\big) \dlim N(0, \sigma^2),
+    $$
+    where $\theta, \sigma^2 < \infty$.
+    Now suppose that $g$ is a function such that it's first derivative $g'$ exists and $g'(\theta) \neq 0$. 
+    Then,
+    $$
+    \sqrt{n}\big(g(X_n) - g(\theta)\big)\dlim N\big(0, \sigma^2 [g'(\theta)]^2\big).
+    $$
+    
+    \mode<article>{
+    \begin{proof}
+    \begin{itemize}
+      \item For brevity, this will be more of a proof sketch than a formal proof. First, we do a Taylor-series expansion around $X_n = \theta$:
+      $$
+      g(X_n) = g(\theta) + g'(\theta)(X_n - \theta) + \text{Remainder}.
+      $$
+      \item As previously discussed, we have the remainder going to zero as $n \rightarrow \infty$ when considering the function $g(x)$ (not random).
+      \item The statement of the theorem implies that $X_n \plim \theta$ as $n \rightarrow \infty$, and as a consequence, the remainder term also converges to zero in probability. In fact, careful treatment (like was done with the CLT), we have $\sqrt{n}\,\text{Remainder} \plim 0$.
+      \item In particular, the remainder is of the form:
+      $$
+      \text{Remainder} = h(X_n)(X_n - \theta)^2,
+      $$
+      for some function $h$, that satisfies $\lim_{x \rightarrow \theta} h(x) = 0$.
+      \item Since $\sqrt{n}(X_n - \theta)$ has limiting distribution $N(0, \sigma^2)$, we can conclude that $\sqrt{n}(X_n -\theta)^2 = \big(\sqrt{n}(X_n-\theta)\big)^2/\sqrt{n}$ converges in probability to $0 \times Z^2 = 0$. Furthermore, because $h(X_n)$ just converges in probability to a constant $h(\theta)$ (continuous mapping theorem), we can conclude that $\sqrt{n}\text{Remainder}\plim 0$.
+      \item Thus,
+      \begin{align*}
+        g(X_n) - g(\theta) &= g'(\theta)(X_n - \theta) + \text{Remainder} \\
+        \sqrt{n}\big(g(X_n) - g(\theta)\big) &= g'(\theta)\sqrt{n}(X_n - \theta) + \sqrt{n}\,\text{Remainder}
+      \end{align*}
+      \item Our assumption states that $g'(\theta)\sqrt{n}(X_n - \theta) \dlim N\big(0, \sigma^2[g'(\theta)]^2\big)$.
+      \item Thus, by Slutsky's theorem, because $\sqrt{n}\,\text{Remainder} \plim 0$, we have the left hand sign converging to the desired result:
+      $$
+      \sqrt{n}\big(g(X_n) - g(\theta)\big)\dlim N\big(0, \sigma^2 [g'(\theta)]^2\big)
+      $$
+      \item In this proof, note in the Taylor series expansion, the first order term $g'(\theta)(X_n - \theta)$ dominates. 
+      \item However, if $g'(\theta) = 0$, then we run into an issue with this approximation. This leads to the second-order delta method. 
+    \end{itemize}
+      
+    \end{proof}
+    }
+    
+  \end{block}
+  
+  \framebreak
+  
+  \begin{block}{Theorem: Second Order Delta Method}
+    Let $X_n$ be a sequence of random variables that satisfies $\sqrt{n}(X_n - \theta) \dlim N(0, \sigma^2)$. For a given function $g$ such that the first two derivatives of $g$ exist and $g'(x) = 0$, $g''(x) \neq 0$, then
+    $$
+    n\big(g(X_n) - g(\theta)\big)\dlim \sigma^2 \frac{g''(\theta)}{2}\chi^2_1,
+    $$
+    where $\chi^2_1$ is a ``Chi-square" distribution with one degree of freedom.
+    
+    \mode<article>{
+    \begin{proof}
+      This proof is just a simple extension of the first-order delta method, so here we give a sketch. Using a second-order Taylor approximation of $g(x)$, we have:
+      $$
+      g(X_n) = g(\theta) + g'(\theta)(X_n - \theta) + \frac{g''(\theta)}{2}(X_n - \theta)^2 + \text{Remainder}.
+      $$
+      By assumption, $g'(\theta) = 0$, and therefore
+      $$
+      g(X_n) - g(\theta) = \frac{g''(\theta)}{2}(X_n - \theta)^2 + \text{Remainder}.
+      $$
+      As before, we can show that the remainder term converges to zero in probability, at a rate that is faster than $n$. 
+      Because the square of a standard normal is Chi-square with one degree of freedom, we have by the continuous mapping theorem
+      $$
+      \frac{n(X_n - \theta)^2}{\sigma^2} = \left(\frac{\sqrt{n}(X_n - \theta)}{\sigma}\right)^2 \dlim \chi^2_1.
+      $$
+      Therefore, by multiplying both sides of the Taylor-series expansion by $n$, we have
+      $$
+      n\big(g(X_n) - g(\theta)\big) = \frac{g''(\theta)}{2}n(X_n - \theta)^2 + n\,\text{Remainder}\dlim \sigma^2 \frac{g''(\theta)}{2}\chi^2_1
+      $$
+    \end{proof}
+    }
+    
+  \end{block}
+  
 \end{frame}
 
-% TODO: Add Slutsky's theorem
-% TODO: Add Delta Method (1st and 2nd order)
+% TODO: Add examples of CLT (statistical practice), Delta method, and second-order delta-method.
 
 \section{Test Section}
 

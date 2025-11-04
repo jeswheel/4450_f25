@@ -392,13 +392,38 @@ Chapter \CHAPTER: Limit theorems}
 
 \begin{frame}[allowframebreaks]{Slutsky's Theorem}
   \begin{itemize}
-    \item TODO
+    \item The following theorem is useful for our notes and supporting other ideas we will cover. However, we won't discuss the proof because it relies on other convergence concepts we don't cover in this class
   \end{itemize}
+  
+  \begin{block}{Theorem: Slutsky's Theorem}
+    If $X_n \dlim X$ and $Y_n \plim a$ for some random variable $X$ and constant $a$, then
+    \begin{enumerate}
+      \item $Y_nX_n \dlim aX$.
+      \item $X_n + Y_n \dlim X + a$. 
+    \end{enumerate}
+  \end{block}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Example: CLT with estimated variance}
+    (HW problem)? Suppose that $X_i$ are iid $N(\mu, \sigma^2)$ random variables.
+    By the CLT, we have
+    $$
+    \frac{\sqrt{n}\big(\bar{X}_n - \mu\big)}{\sigma} \dlim N(0, 1).
+    $$
+    The problem with this theorem in practice is that we assume $\sigma$ is known, which is often not practical. If $S^2_n$ is our estimate of the variance, and $S_n^2 \plim \sigma^2$, then it can be shown that $\sigma / S_n \plim 1$. Thus, by Slutsky's Threom:
+    $$
+    \frac{\sqrt{n}\big(\bar{X}_n - \mu\big)}{S_n} = \frac{\sigma}{S_n}\frac{\sqrt{n}\big(\bar{X}_n - \mu\big)}{\sigma} \dlim N(0, 1)
+    $$
+  \end{exampleblock}
+  
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Delta-Method}
   \begin{itemize}
-    \item TODO
+    \item The CLT is useful for determining the limiting distribution of a random variable (particularly, sums of iid random variables).
+    \item As we have already discussed, we are often interested in functions of random variables.
+    \item This next section gives theorems for the limiting distribution of functions of random variables.
   \end{itemize}
 \end{frame}
 

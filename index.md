@@ -83,6 +83,9 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 * [Homework 6](hw06/hw06.pdf), due Wed Nov 5, 11:59pm.
 [TeX file](hw06/hw06.tex).
 
+* [Homework 7](hw07/hw07.pdf), due Wed Nov 12, 11:59pm.
+[TeX file](hw07/hw07.tex).
+
 <!--- 
 
 * [Participation 4](participation/participation4.html), due Sun Feb 18, 11:59pm.

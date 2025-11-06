@@ -1,0 +1,179 @@
+\documentclass[10pt,twoside]{article}\usepackage[]{graphicx}\usepackage[dvipsnames,svgnames,table]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[marginparsep=1em]{geometry}
+\geometry{lmargin=1.0in,rmargin=1.0in, bmargin=1.2in,  tmargin=1.2in}
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{mathtools}
+            
+%%%%  SHORTCUT COMMANDS  %%%%
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\arc}{\rightarrow}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RP}{\mathbb{R}(+)}
+\newcommand{\Rs}{\mathbb{R}^{**}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\PX}{\mathcal{P}(X)}
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\OK{\ding{51}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Answer}{\vspace{2mm}\textbf{\underline{Answer}}\\}
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand\var[1]{\mathrm{Var}\left[{#1}\right]}
+\newcommand\myvar{\mathrm{Var}}
+\newcommand\Var{\myvar}
+
+
+\newcommand{\stirling}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\lhead{\fancyplain{}{}} 
+\fancyhead[RE,RO]{Math 4450, Fall 2025}
+\fancyfoot[RE,RO]{\thepage}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\begin{flushright}
+\begin{minipage}{.33\textwidth}
+\rightline{YOUR NAME}
+\rightline{\href{mailto:YOUR EMAIL}{YOUR EMAIL}}
+\rightline{\today}
+\end{minipage}
+\end{flushright}
+
+\begin{center}
+{\large{\textbf{Homework 7}}}
+\end{center}
+
+\begin{enumerate}
+
+    \item \label{prob:cdf}(1 point) Suppose that $X$ is a discrete random variable, with cdf given by Table~\ref{tab:cdf}. Find $E[X]$ and $\Var(X)$.
+    \begin{table}[ht]
+    \centering
+    \begin{tabular}{cr}\hline
+    $x$ & $F(x)$ \\\hline
+    0 & 0 \\
+    1 & .1 \\
+    2 & .3 \\
+    3 & .7 \\
+    4 & .8 \\
+    5 & 1.0\\\hline
+    \end{tabular}
+    \caption{\label{tab:cdf}The cdf for $X$ in Problem~\ref{prob:cdf}}
+    \end{table}
+
+    \item (1 point) Suppose that $X$ follows a Poisson$(\lambda)$ distribution. Find $E\big[1 / (X + 1)\big]$.
+
+    \item (1 point) Let $X$ have a Gamma$(\alpha, \lambda)$ distribution. For those values of $\alpha$ and $\lambda$ for which it is defined, find $E[1/X]$.
+
+    % \item Find the density of the minimum of $n$ independent Weibull random variables, each of which has the density
+    % $$
+    % f(t) = \beta \alpha^{-\beta} t^{\beta - 1}e^{-(t/\alpha)^\beta}
+    % $$
+
+    \item (1 point) Suppose we have $n$ independent and identical samples from a population, denoted $X_1, X_2, \ldots, X_n$. Let $E[X_i] = \mu$ (which we assume exists, and is the same for all $i$).
+      \begin{enumerate}
+        \item Calculate the expected value of $\bar{X}_n$, the sample mean
+    $$
+    \bar{X}_n = \frac{1}{n} \sum_{i = 1}^n X_i
+    $$
+        \item Is $\bar{X}_n$ an \emph{unbiased} estimator of $\mu$? If not, find values of $a$ and $b$ such that the linear transformation such that $a\bar{X}_n + b$ is an unbiased estimate of $\mu$.
+      \end{enumerate}
+
+    \item (2 point) Using the same setup as above, suppose now that the variance of the population is also finite, i.e., $\Var(X_i) = \sigma^2 < \infty$.
+      \begin{enumerate}
+        \item Consider calculating the average squared deviance $Y$
+        $$
+        Y = \frac{1}{n}\sum_{i = 1}^n (X_i - \bar{X}_n)^2. 
+        $$
+        What is $E[Y]?$
+        
+        \item Is $Y$ an \emph{unbiased} estimator of $\sigma^2$? If not, find values of $a$ and $b$ such that the linear transformation $aY + b$ is an unbiased estimate of $\sigma^2$.
+      \end{enumerate}
+    
+    \item (1 points) Let $X$ be an exponential$(\lambda)$ random variable, which has standard deviation $\sigma = 1/\lambda$. 
+    Find 
+    $$
+    P\big(|X - E[X]| > k\sigma),
+    $$
+    for $k = 2, 3, 4$, and compare the results to the bounds from Chebyshev's inequality. 
+    
+    
+    \item (2 points) Suppose a child randomly types the letters Q W E R T Y on a keyboard 1000 times.
+    \begin{enumerate}
+      \item What is the expected number of times that the sequence QQQQ appears (counting overlaps)?
+      \item Can you provide an upper bound on the probability that the sequence QQQQ appears more than $n$ times? How many times $n$ for it to happen would you be surprised? 
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

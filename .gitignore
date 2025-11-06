@@ -31,8 +31,6 @@ figure
 *.synctex.gz
 *.old
 
-hw07/*
-hw08/*
 *-concordance.tex
 
 hw01Sol.*

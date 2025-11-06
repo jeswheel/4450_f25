@@ -1171,7 +1171,7 @@ $$
   \begin{block}{Theorem: Bilinear Covariance}
     Let $X_i$, $i = 1, 2, \ldots, n$ and $Y_j$, $j = 1, 2, \ldots, m$ be a collection of random variables, and $a, c, b_i, d_j$ be real numbers for all $i$ and $j$. Then:
     $$
-    \Cov\big(a + \sum_{i=1}^n b_i X_i, c + \sum_{j = 1}^m d_j Y_i\big) = \sum^n_{i = 1}\sum^m_{j = 1} b_i d_j \Cov(X_i, Y_j).
+    \Cov\big(a + \sum_{i=1}^n b_i X_i, c + \sum_{j = 1}^m d_j Y_j\big) = \sum^n_{i = 1}\sum^m_{j = 1} b_i d_j \Cov(X_i, Y_j).
     $$
     In particular, 
     \begin{align*}

@@ -67,7 +67,6 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 [TeX file](hw02/hw02.tex).
 [In class discussion](hw02/HW2discussion.pdf)
 
-
 * [Homework 3](hw03/hw03.pdf), due Wed Sep 24, 11:59pm.
 [TeX file](hw03/hw03.tex).
 [In class discussion](hw03/HW3discussion.pdf).
@@ -85,6 +84,7 @@ Please read the [grading rubric](rubric_homework.html) before submitting homewor
 
 * [Homework 7](hw07/hw07.pdf), due Wed Nov 12, 11:59pm.
 [TeX file](hw07/hw07.tex).
+[In class discussion](hw07/hw7discussion.pdf).
 
 <!--- 
 

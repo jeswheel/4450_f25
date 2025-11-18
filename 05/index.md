@@ -6,14 +6,14 @@ output: html_document
 
 ----------------------
 
-| &nbsp;          | &nbsp;                          |
+| &nbsp;           | &nbsp;                          |
 |:-----------------------|:------------------------:|
-| Lecture slides  | [pdf](slides.pdf) |
-| Lecture notes   | [pdf](notes.pdf) |
+| Lecture slides   | [pdf](slides.pdf) |
+| Annotated slides | [pdf](slidesAnnotated.pdf) |
+| Lecture notes    | [pdf](notes.pdf) |
 ----------------------
 
 <!--
-| Annotated slides | [pdf](slides-annotated.pdf) |
 -->
 
 

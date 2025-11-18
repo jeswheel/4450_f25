@@ -1,5 +1,5 @@
 ---
-title: "Mathematical Statistics I<br>Math 4450.<br>Chapter 1: Probability"
+title: "Mathematical Statistics I<br>Math 4450.<br>Chapter 5: Limit Theorems"
 author: "Jesse Wheeler"
 output: html_document
 ---
@@ -21,7 +21,7 @@ output: html_document
 
 [Back to course homepage](../index.html)  
 [Acknowledgements](../acknowledge.html)  
-[Source code for these notes](http://github.com/jeswheel/4450_f25/tree/main/01/)
+[Source code for these notes](http://github.com/jeswheel/4450_f25/tree/main/05/)
 
 
 ----------------------

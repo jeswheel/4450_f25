@@ -35,11 +35,12 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 4. [Chapter 4: Expected Values](04/index.html)
 
+5. [Chapter 5: Limit Theorems](05/index.html)
+
 <!--
 
 
 
-5. [Parameter estimation and model identification for ARMA models](05/index.html)
 
 6. [Extending the ARMA model: Seasonality, integration and trend](06/index.html)
 

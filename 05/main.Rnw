@@ -49,7 +49,7 @@ Chapter \CHAPTER: Limit theorems}
   \begin{itemize}
     \item This material comes primarily from \citet[][Chapter~5]{rice07}, but will be supplemented with material from \citet[][Chapter~5]{casella24}.
     \item In this chapter, we are interested in the convergence of sequences of random variables.
-    \item In particular, we are interested in the convergence of the sample mean, $\bar{X}_n = (X_1 + X_2 + \ldots + X_n) / n$, as the number of samples $n$ grows.
+    \item For instance, we are interested in the convergence of the sample mean, $\bar{X}_n = (X_1 + X_2 + \ldots + X_n) / n$, as the number of samples $n$ grows.
     \item Because $\bar{X}_n$ is itself a random variable, we have to carefully define what it means for the convergence of a random variable.
     \item In this class, we are mainly concerned with three types of convergence.
     \item Because convergence of random variables is a tricky topic, we will treat them in varying amounts of detail.
@@ -510,12 +510,6 @@ Chapter \CHAPTER: Limit theorems}
 \end{frame}
 
 % TODO: Add examples of CLT (statistical practice), Delta method, and second-order delta-method.
-
-\section{Test Section}
-
-\begin{frame}[allowframebreaks]{Test Frame}
-
-\end{frame}
 
 \newcommand\acknowledgments{
 \begin{itemize}

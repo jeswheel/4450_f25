@@ -122,6 +122,86 @@ Chapter \CHAPTER: Distributions Derived from the Normal Distribution}
     \frac{1}{\sqrt{2\pi}} = \frac{(1/2)^{(1/2)}}{\Gamma(1/2)} = \frac{\lambda^\alpha}{\Gamma(\alpha)}
     $$
   \end{itemize}
+  \begin{alertblock}{MGF of $\chi^2_1$}
+    We previously derived the MGF of a Gamma$(\alpha, \lambda)$ distribution: $M(t) = \big(\lambda / (\lambda - t)\big)^\alpha$. Thus, the MGF of a Chi-square(1) distribution is
+    $$
+    M(t) = (1 - 2t)^{-1/2}, \quad t < 1/2.
+    $$
+  \end{alertblock}
+  
+  \framebreak
+  
+  \begin{block}{Definition}
+    If $U_1, U_2, \ldots, U_n$ are $n$ independent $\chi^2_1$ random variables, then
+    $$
+    V = U_1 + U_2 + \ldots + U_n
+    $$
+    then the distribution of $V$ is called the Chi-square distribution with $n$ degrees of freedom, denoted $\chi^2_n$. 
+  \end{block}
+  
+  \begin{itemize}
+    \item There are a few different ways of deriving the pdf of a $\chi^2_n$ random variable. Here, we will use the MGF uniqueness theorem.
+    \item Let $M_i(t)$ denote the MGF of $U_i$, where $U_i \sim \chi^2_1$. Then, due to independence,
+    \begin{align*}
+      M_V(t) = M_{\sum_{i} U_i}(t) = \prod_{i = 1}^n M_i(t) = \big(M_t(t)\big)^n = (1 - 2t)^{-n/2}
+    \end{align*}
+    \item Compare this to the Gamma MGF: $M(t) = \big(\lambda / (\lambda - t)\big)^\alpha$. Then, setting $\lambda = 1/2$, $\alpha = n/2$, we see that $V$ has a Gamma$(n/2, 1/2)$ distribution.
+    \item Thus, the pdf of $V$ is given by: 
+    $$
+    f_V(v) = \frac{1}{2^{n/2}\Gamma(n/2)}v^{(n/2) - 1}e^{-v/2}.
+    $$
+    \item The expected value and variance of the $\chi^2_n$ distribution can easily be found then by using the fact that it is a special case of a Gamma distribution.
+  \end{itemize}
+  
+\end{frame}
+
+\section{The $t$ and $F$ distributions}
+
+\begin{frame}[allowframebreaks]{The Student's $t$ distributions}
+  \begin{block}{The Student's $t$ distribution}
+    If $Z \sim N(0, 1)$ and $U \sim \chi^2_n$, and $Z$ and $U$ are independent, then the distribution of $T$, where
+    $$
+    T = \frac{Z}{\sqrt{U / n}},
+    $$
+    is called the Student's $t$ distribution (or simply the $t$ distribution) with $n$ degrees of freedom, which is often denoted $t_{n}$
+  \end{block}
+  
+  \begin{itemize}
+    \item Students often forget the make sure that $Z$ and $U$ in the definition of the $t$ distribution are independent.
+    \item The $t$ distribution is the distribution used to perform the famed ``$t$-test".
+  \end{itemize}
+  
+  \framebreak
+  
+  \begin{alertblock}{The density of the $t_n$ distribution}
+    The pdf of the $t$ distribution with $n$ degrees of freedom is:
+    $$
+    f(t) = \frac{\Gamma\big((n + 1) / 2\big)}{\sqrt{n\pi}\Gamma(n/2)}\Big(1 + \frac{t^2}{n}\Big)^{-(n+1)/2}
+    $$
+  \end{alertblock}
+  
+  \begin{itemize}
+    \item The derivation of the pdf of a $t$ distribution is a good practice exercise.
+    \item Recall it is defined as the ratio of two independent random variables; in Chapter~3, we derived a formula for computing densities of random variables of this form.
+    \item Note that $f(t) = f(-t)$, and so $f$ is symmetric about zero.
+    \item It also has a bell-curve shape similar to a normal distribution.
+    \framebreak
+    \item You can see as $n\rightarrow \infty$, the $t_n$ distribution converges to the standard normal (e.g., use Slutsky's theorem, good practice).
+  \end{itemize}
+  
+\begin{figure}[ht]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{tmp/figure/tDistFig-1} 
+
+}
+
+
+\end{knitrout}
+\end{figure}
+ 
+  
 \end{frame}
 
 % TODO: Add examples of CLT (statistical practice), Delta method, and second-order delta-method.

@@ -204,6 +204,148 @@ Chapter \CHAPTER: Distributions Derived from the Normal Distribution}
   
 \end{frame}
 
+\begin{frame}[allowframebreaks]{The $F$ distributions}
+  
+\end{frame}
+
+\section{Sampling Distributions}
+
+\begin{frame}[allowframebreaks]{The sample mean}
+
+\begin{itemize}
+  \item In what follows, we'll assume that we are taking samples $X_1, X_2, \ldots, X_n$ from a larger population.
+  \item These samples can be repeated experiments, or repeated observations. However, we will assume in general that the samples are independent and identically distributed, unless stated otherwise.
+  \item \alert{For the remainder of the chapter}, we will also assume $X_i \sim N(\mu, \sigma^2)$ for all $i$.
+
+\framebreak
+
+  \item As a reminder from earlier chapters, linear combinations of independent normal random variables are also normally distributed. Thus, if $X_1, X_2, \ldots, X_n$ are iid normal, then $\bar{X}_n$ is also normally distributed.
+\end{itemize}
+
+\begin{alertblock}{Sampling distribution of the mean}
+  If $X_i$ are iid $N(\mu, \sigma^2)$, then $\bar{X}_n$ is normal, with
+  $$
+  E\Big[1/n \sum_i X_i\Big] = (1/n)\sum_i \mu = \mu,
+  $$
+  $$
+  \Var\big(1/n \sum_i X_i\big) = 1/n^2 \sum_i \sigma^2 = \sigma^2 / n.
+  $$
+  Thus, 
+  $\bar{X}_n \sim N(\mu, \sigma^2/n).$
+\end{alertblock}
+
+\framebreak
+
+\begin{block}{Lemma~\CHAPTER.1: Independent Normal RVs}
+  Let $X$ and $Y$ be normally distributed random variables.
+  Then $X$ and $Y$ are independent, \alert{if and only if}
+  $$
+  \Cov(X, Y) = 0.
+  $$
+\end{block}
+
+\begin{itemize}
+  \item The above statement can be proved using the factorization theorem, and considering the MGF or pdf of a bivariate normal distribution. 
+  \item Recall that for most distributions, independence implies $\Cov(X, Y) = 0$, but not the other way around.
+  \item It turns out that the normal distribution is the only distribution that has this property.
+\end{itemize}
+
+\framebreak
+
+\begin{block}{Theorem~\CHAPTER.1: Independence of Deviations}
+  Let $X_1, \ldots, X_n$ be iid $N(\mu, \sigma^2)$ random variables.
+  Then, $\bar{X}_n$ is independent of the vector of random variables called the \emph{deviations}, $\big(X_i - \bar{X}_n\big)_{i = 1}^n$.
+  
+  \mode<article>{
+    \begin{proof}
+      First, note that $\bar{X}_n$ is normally distributed. 
+      Using Lemma~\CHAPTER.1, all we need to do is argue that the deviations are normally distributed, and that the covariance between $\bar{X}_n$ and $X_i - \bar{X}_n$ is zero.
+      Because $\bar{X}_n$ and $X_i$ are both normally distributed, then for all $i$, $X_i - \bar{X}_n$ is just a linear combination of normally distributed random variables, and as a result is also normally distributed.
+      Using the bilinearity of covariance,
+      \begin{align*}
+        \Cov(\bar{X_n}, X_i - \bar{X_n}) &= \Cov(\bar{X_n}, X_i) - \Cov(\bar{X}_n, \bar{X}_n) \\
+        &= \Cov\big(\sum_{j = 1}^n \frac{1}{n}X_j, X_i\big) - \Cov\big(\sum_{i = 1}^n \frac{1}{n}X_i, \sum_{j = 1}^n \frac{1}{n}X_j\big) \\
+        &= \frac{1}{n}\Cov(X_i, X_i) - \sum^n_{i = 1}\sum^n_{j = 1}\frac{1}{n^2} \Cov(X_i, X_j) \\
+        &= \frac{\sigma^2}{n} - \frac{1}{n^2}\sum^n_{i = j} \Cov(X_i, X_j) \\
+        &= \frac{\sigma^2}{n} - \frac{1}{n^2}(n\sigma^2) = 0.
+      \end{align*}
+      Thus, by Lemma~\CHAPTER.1, $\bar{X}_n$ is independent of $X_i - \bar{X_n}$ for all $i$. 
+    \end{proof}
+  }
+  
+\end{block}
+
+\mode<presentation>{
+  \emph{Proof.}
+}
+
+\framebreak
+
+\begin{block}{Corollary~\CHAPTER.1}
+  If the $X_i$ are iid $N(\mu, \sigma^2)$, then $\bar{X}_n$ is independent of the sample variance $S^2$, defined by
+  $$
+  S^2 = \frac{1}{n - 1}\sum_{i = 1}^n (X_i - \bar{X}_n)^2.
+  $$
+  
+  \mode<article>{
+    \begin{proof}
+      First recall from one of our homework problems that $S^2$ is an unbiased estimate of $\sigma^2$: $E[S^2] = \sigma^2$ (Note that this does not require the assumption that the $X_i$ are normally distributed, just that they are independent and identically distributed with finite variance $\Var(X_i) = \sigma^2 < \infty$.)
+      
+      From Theorem~\CHAPTER.1, if the $X_i$ are normally distributed, then $\bar{X}_n$ is independent of the vector $\big(X_i - \bar{X}_n\big)_{i = 1}^n$. Because $S^2$ is just a function of $\big(X_i - \bar{X}_n\big)_{i = 1}^n$, we can immediate conclude that $\bar{X_n}$ is independent of $S^2$. 
+    \end{proof}
+  }
+  
+\end{block}
+
+\framebreak
+
+\begin{block}{Theorem~\CHAPTER.2}
+  If the $X_i$ are iid normal, then $(n - 1)S^2 / \sigma^2$ has a chi-square distribution with $n-1$ degrees of freedom.
+  
+  \mode<article>{
+  \begin{proof}
+    First recall how we defined the $\chi^2_n$ distribution. First, if we square a standard normal $Z \sim N(0, 1)$, then $Z^2 \sim \chi^2_1$.
+    Then, the sum of $n$ $\chi^2_1$ random variables is how we define a $\chi^2_n$ random variable, i.e., if $Z_i \overset{iid}{\sim} N(0, 1)$, then $Z_1^2 + \ldots + Z_n^2 \sim \chi^2_n$.
+    Thus, because $E[X_i] = \mu$, $\Var(X_i) = \sigma^2$ for all $i$,
+    $$
+    \Big(\frac{X_i - \mu}{\sigma}\Big) \sim N(0, 1), 
+    $$
+    and therefore
+    $$
+    \frac{1}{\sigma^2} \sum_{i = 1}^n (X_i - \mu)^2 = \sum_{i = 1}^n \Big(\frac{X_i - \mu}{\sigma}\Big)^2 \sim \chi^2_n.
+    $$
+    Now we will expand this same sum by adding and subtracting $\bar{X}_n$:
+    $$
+    \frac{1}{\sigma^2} \sum_{i = 1}^n (X_i - \mu)^2 = \frac{1}{\sigma^2} \sum_{i = 1}^n \big((X_i - \bar{X}_n) + (\bar{X}_n - \mu)\big)^2.
+    $$
+    From above, we already know this entire expression results in a random variable with a $\chi^2_n$ distribution. We can now manipulate the right hand side to get the distribution of $(n-1)S^2 / \sigma$, which was our original goal.
+    We will now expand the square, and note that $\sum_{i = 1}^n (X_i - \bar{X}) = 0$ to simplify:
+    \begin{align*}
+    \frac{1}{\sigma^2} \sum_{i = 1}^n (X_i - \mu)^2 &= \frac{1}{\sigma^2}\sum_{i = 1}^n (X_i - \bar{X}_n)^2 + \Big(\frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}}\Big)^2 \\
+    V &= (n-1)S^2/\sigma^2 + U,
+    \end{align*}
+    where $U\sim \chi^2_1$, since it is the result of squaring a standard normal random variable, and $V \sim \chi^2_n$. 
+    Importantly, $U$ is a function of $\bar{X}_n$, which was shown to be independent of $S^2$ in Corollary~\CHAPTER.1.
+    As a result, we can use the identity for the MGF of the sum of independent random variables: $M_V(t) = M_{(n-1)S^2/\sigma^2} M_{U}(t)$.
+    For the values of $t$ for which it is defined, we can then solve for the MGF of $(n-1)S^2/\sigma^2$, which uniquely determines the distribution of the random variable.
+    As a reminder, the MGF of a $\chi^2_n$ random variable is $M(t) = (1 - 2t)^{-n/2}$. Thus,
+    \begin{align*}
+      M_{(n-1)S^2/\sigma^2} &= M_V(t) / M_U(t) \\
+      &= \frac{(1 - 2t)^{-n/2}}{(1-2t)^{-1/2}} \\
+      &= (1-2t)^{-(n-1)/2},
+    \end{align*}
+    which is the MGF of a $\chi^2_{n-1}$ random variable.
+  \end{proof}
+  }
+  
+\end{block}
+
+\end{frame}
+
+\begin{frame}{The sample variance}
+
+\end{frame}
+
 % TODO: Add examples of CLT (statistical practice), Delta method, and second-order delta-method.
 
 \newcommand\acknowledgments{

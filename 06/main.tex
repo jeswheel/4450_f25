@@ -340,17 +340,58 @@ Chapter \CHAPTER: Distributions Derived from the Normal Distribution}
   
 \end{block}
 
+\mode<presentation>{
+\emph{Proof.}
+}
+
+\framebreak
+
+\begin{block}{Theorem~\CHAPTER.3: $t$ distribution}
+  Let $X_i$ be iid Normal$(\mu, \sigma^2)$ random variables, and let $\bar{X}_n$ and $S^2$ denote the sample mean and variance, respectively. Then,
+  $$
+  \frac{\bar{X}_n - \mu}{S / \sqrt{n}} \sim t_{n - 1}.
+  $$
+  
+  \mode<article>{
+  \begin{proof}
+    The proof is straightforward application of Theorem~\CHAPTER.2, and the definition of the $t$ distribution with $n$ degrees of freedom. We will rewrite the expression as follows: 
+    \begin{align*}
+       \frac{\bar{X}_n - \mu}{S / \sqrt{n}} &= \frac{\Big(\frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}}\Big)}{\sqrt{S^2}/\sigma^2}
+    \end{align*}
+    The numerator is a $N(0, 1)$ random variable. By Corollary~\CHAPTER.1, the numerator is independent of the denominator.
+    The denominator is a the square root of an independent random variable with $\chi^2_{n-1}$, divided by its degrees of freedom $(n - 1)$:
+    $$
+    \frac{(n-1)S^2}{\sigma^2(n-1)}. 
+    $$
+    By the definition of the $t$ distribution, the ratio has a $t_{n-1}$ distribution.
+  \end{proof}
+  }
+  
+\end{block}
+
+\mode<article>{
+\emph{Proof.}
+}
+
 \end{frame}
 
-\begin{frame}{The sample variance}
-
+\begin{frame}[allowframebreaks]{Final Comments}
+  \begin{itemize}
+    \item The identity in Theorem~\CHAPTER.3 provides the theoretical justification for a one-sample $t$-test. The justification for a two-sample $t$-test is derived in a similar way.
+    \item Theorem~\CHAPTER.3 relies on the $X_i$ coming from a normal population, then this distribution is exact. The normal distribution arises in a large number of real-world applications.
+    \item In practice, however, the $t$-test is often used even when the samples $X_i$ do not come from a normal distribution.
+    \item The justification of this practice can heuristically be justified by the central limit theorem: Even if the $X_i$ are not normally distributed, $\bar{X}_n - \mu$ will be approximately normally distributed, with even relatively small $n$.
+    \item Note, however, that the limiting distribution of the statistic in Theorem~\CHAPTER.3 is normal, not $t$. This can be shown with Slutsky's Theorem, noting that $S_n^2 \plim \sigma^2$ (see CLT example in Chapter~5 slides.)
+    \item In practice, the $t$ distribution is often used because it has heavier tails than the normal distribution, and thus leads to conservative estimates of the distribution of the statistic in Theorem~\CHAPTER.3. Simulation studies suggest this approximation is quite good, even when there are large deviations from normality.
+  \end{itemize}
 \end{frame}
+
 
 % TODO: Add examples of CLT (statistical practice), Delta method, and second-order delta-method.
 
 \newcommand\acknowledgments{
 \begin{itemize}
-\item   Compiled on {\today} using \Rlanguage version 4.5.2.
+\item   Compiled on {\today} using \Rlanguage version 4.5.1.
 \item   \parbox[t]{0.75\textwidth}{Licensed under the \link{http://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons Attribution-NonCommercial license}.
     Please share and remix non-commercially, mentioning its origin.}
     \parbox[c]{1.5cm}{\includegraphics[height=12pt]{../cc-by-nc}}

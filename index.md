@@ -37,16 +37,9 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 5. [Chapter 5: Limit Theorems](05/index.html)
 
+6. [Chapter 6: Distributions Derived from the Normal Distribution](06/index.html)
+
 <!--
-
-
-
-
-6. [Extending the ARMA model: Seasonality, integration and trend](06/index.html)
-
-7. [Introduction to time series analysis in the frequency domain](07/index.html)
-
-8. [Smoothing in the time and frequency domains](08/index.html)
 
 -->
 

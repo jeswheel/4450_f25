@@ -12,6 +12,10 @@ output: html_document
 | Annotated slides | [pdf](slidesAnnotated.pdf) |
 | Lecture notes    | [pdf](notes.pdf) |
 | Dec 2 Lecture    | [Zoom Recording](https://isu.zoom.us/rec/play/NFh7nETDEMl27WfMCg5b4XQiTBZhAaHeLNhZgm4shBJFIm3KW9_lrDnsndifpW9j23s8wm5WZWH4K7f7.WaHJ28dWemGgOtI6) |
+|
+
+<iframe width="560" height="315" src="https://isu.zoom.us/rec/play/NFh7nETDEMl27WfMCg5b4XQiTBZhAaHeLNhZgm4shBJFIm3KW9_lrDnsndifpW9j23s8wm5WZWH4K7f7.WaHJ28dWemGgOtI6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ----------------------
 
 <!--

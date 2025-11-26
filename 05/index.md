@@ -11,6 +11,7 @@ output: html_document
 | Lecture slides   | [pdf](slides.pdf) |
 | Annotated slides | [pdf](slidesAnnotated.pdf) |
 | Lecture notes    | [pdf](notes.pdf) |
+| Dec 2 Lecture    | [Zoom Recording](https://isu.zoom.us/rec/play/NFh7nETDEMl27WfMCg5b4XQiTBZhAaHeLNhZgm4shBJFIm3KW9_lrDnsndifpW9j23s8wm5WZWH4K7f7.WaHJ28dWemGgOtI6) |
 ----------------------
 
 <!--

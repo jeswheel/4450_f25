@@ -10,10 +10,10 @@ output: html_document
 |:-----------------------|:------------------------:|
 | Lecture slides   | [pdf](slides.pdf) |
 | Lecture notes    | [pdf](notes.pdf) |
+| Annotated slides | [pdf](slidesAnnotated.pdf) |
 ----------------------
 
 <!--
-| Annotated slides | [pdf](slidesAnnotated.pdf) |
 -->
 
 

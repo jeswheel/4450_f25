@@ -407,6 +407,34 @@ pivot_longer(
   \end{itemize}
 \end{frame}
 
+\begin{frame}[allowframebreaks]{The $F$ distributions (ommited earlier)}
+  \begin{itemize}
+    \item The $F$ distribution is often used as the null-distribution for hypothesis test.
+    \item Used regularly in ANOVA, testing overall significance in a multiple regression model, and comparing population variances.
+  \end{itemize}
+  \begin{block}{Definition: $F$-distribution}
+    Let $U$ and $V$ be independent chi-square random variables with $m$ and $n$ degrees of freedom, respectively. The distribution of
+    $$
+    W = \frac{U/m}{V/n}
+    $$
+    is called the $F$ distribution with $m$ and $n$ degrees of freedom, denoted $F_{m,n}$.
+  \end{block}
+  
+  \framebreak
+  
+  \begin{exampleblock}{Density of the $F$ distribution}
+    If $W \sim F_{m, n}$, then the density of $W$ is given by 
+    $$
+    f(w) = \frac{\Gamma\big((m + n) / 2\big)}{\Gamma(m / 2)\Gamma(n / 2)}\Big(\frac{m}{n}\Big)^{m / 2}w^{m/2 - 1}\Big(1 + \frac{m}{n}w\Big)^{-(m+n)/2}.
+    $$
+  \end{exampleblock}
+  \begin{itemize}
+    \item Note that $W$ is just the ratio of two independent random variables, so this can be derived using results from Chapter~3 on the density of the ratio of two independent random variables. This is a good practice exercise.
+    \item It can be shown that the square of a $t_n$ random variable follows an $F_{1, n}$ distribution.
+  \end{itemize}
+  
+\end{frame}
+
 
 % TODO: Add examples of CLT (statistical practice), Delta method, and second-order delta-method.
 

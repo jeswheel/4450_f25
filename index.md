@@ -26,8 +26,9 @@ Tentatively, we will plan on covering the material in Chapters 1-6 in Math 4450,
 
 ## Class notes
 
-1. [Chapter 1: Probability](01/index.html)
+- [Final Exam Review Session](examReview/Dec9Review.pdf)
 
+1. [Chapter 1: Probability](01/index.html)
 
 2. [Chapter 2: Random Variables](02/index.html)
 
